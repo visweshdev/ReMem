@@ -96,3 +96,13 @@ def test_vector_store_backends_match_the_builtin_ranking(backend, embedder):
     other.ingest(facts)
     q = "Which region does payments deploy to?"
     assert [c.fact_id for c in other.candidates(q, k=3)[0]] == [c.fact_id for c in ref.candidates(q, k=3)[0]]
+
+
+def test_library_supersedes_state_facts_but_keeps_preferences(embedder):
+    m = ReMem(None, embedder=embedder)
+    a = m.add("Alice lives in Paris.", entity="alice", attribute="city")
+    b = m.add("Alice lives in Berlin.", entity="alice", attribute="city")
+    p1 = m.add("Alice likes chess.", entity="alice", attribute="hobby", role="preference")
+    p2 = m.add("Alice likes hiking.", entity="alice", attribute="hobby", role="preference")
+    assert m.inspect(a)["state"] == "INVALIDATED" and m.inspect(a)["superseded_by"] == b
+    assert m.inspect(p1)["state"] == "ACTIVE" and m.inspect(p2)["state"] == "ACTIVE"

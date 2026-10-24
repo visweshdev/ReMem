@@ -47,7 +47,10 @@ def default_config(top_k: int = 5, budget_tokens: int | None = None) -> SystemCo
         outcome_feedback=True,
         pool_size=30,
         utility=UtilityConfig(kind="heuristic", explore_c=0.5),
-        contradiction=ContradictionConfig(enabled=True, conf_half_life_days=120.0),
+        # two "state" facts with the same (entity, attribute) and different values: the newer replaces the older.
+        # Store multi-valued things (likes, dependencies) with role="preference" or "note" to keep them all.
+        contradiction=ContradictionConfig(enabled=True, conf_half_life_days=120.0, exclusive_roles=("state",),
+                                          learn_schema=True),
         retention=RetentionConfig(mode="adaptive"),
         selection=SelectionConfig(mode="cost_aware", top_k=top_k, budget_tokens=budget_tokens, p_floor=0.12, guard_top=3,
                                   min_sim=0.1),
@@ -127,6 +130,15 @@ class ReMem:
                     fh.write(json.dumps(asdict(fact)) + "\n")
             self._maybe_save()
             return fid
+
+    def add_conversation(self, text: str, *, extractor: Any = None, when: float | None = None) -> list[str]:
+        """Extract facts from raw conversation text and store them. `extractor` is any object with
+        `extract(text) -> list[ExtractedFact]` (e.g. remem.extract.LLMFactExtractor); defaults to the
+        dependency-free SentenceSplitter, which stores each sentence as a note."""
+        from remem.extract import SentenceSplitter
+        ex = extractor or SentenceSplitter()
+        return [self.add(f.text, entity=f.entity, attribute=f.attribute, role=f.role, when=when)
+                for f in ex.extract(text)]
 
     def _ingest(self, fact: StoredFact) -> None:
         self._facts[fact.fact_id] = fact

@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import hashlib
 import math
+import os
 import re
 from collections import Counter
 
@@ -31,13 +32,44 @@ def content_tokens(text: str) -> list[str]:
     return [t for t in tokenize(text) if t not in STOPWORDS]
 
 
-def count_tokens(text: str) -> int:
-    """Cheap, deterministic token-count proxy (words + punctuation marks).
+_TOKEN_COUNTER = None   # optional real tokenizer, see set_tokenizer()
 
-    Used for budgets and cost accounting everywhere in remem. It is a proxy for
-    a real BPE tokenizer: relative costs are right, absolute numbers are not.
+
+def set_tokenizer(name: str | None) -> None:
+    """Choose how tokens are counted for budgets and cost accounting.
+
+    None / "proxy"        words + punctuation (default; deterministic, no dependency)
+    "tiktoken"            tiktoken cl100k_base (pip install tiktoken)
+    "tiktoken:<encoding>" a specific tiktoken encoding, e.g. "tiktoken:o200k_base"
+
+    Also read from the REMEM_TOKENIZER environment variable at import time. Set it before storing memories:
+    token counts are computed when a memory is stored.
     """
+    global _TOKEN_COUNTER
+    if not name or name == "proxy":
+        _TOKEN_COUNTER = None
+        return
+    if name.startswith("tiktoken"):
+        import tiktoken
+        enc = tiktoken.get_encoding(name.split(":", 1)[1] if ":" in name else "cl100k_base")
+        _TOKEN_COUNTER = lambda text: len(enc.encode(text))  # noqa: E731
+        return
+    raise ValueError(f"unknown tokenizer {name!r}; use 'proxy' or 'tiktoken[:encoding]'")
+
+
+def count_tokens(text: str) -> int:
+    """Token count used for budgets and cost accounting everywhere in remem.
+
+    Default is a cheap deterministic proxy (words + punctuation): relative costs are right, absolute numbers
+    are not. Call set_tokenizer("tiktoken") for real BPE counts.
+    """
+    if _TOKEN_COUNTER is not None:
+        return _TOKEN_COUNTER(text)
     return len(re.findall(r"\w+|[^\w\s]", text))
+
+
+if os.environ.get("REMEM_TOKENIZER"):
+    set_tokenizer(os.environ["REMEM_TOKENIZER"])
 
 
 def _stable_hash(token: str) -> int:

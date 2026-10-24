@@ -43,6 +43,8 @@ class AttributionConfig:
 class ContradictionConfig:
     enabled: bool = False
     exclusive_attributes: tuple[str, ...] = ()   # attribute_keys with a single valid value
+    exclusive_roles: tuple[str, ...] = ()        # facts where BOTH have one of these roles supersede on key match
+                                                 # (library default: ("state",); benchmark: off)
     update_cues: tuple[str, ...] = (
         "migrated", "changed", "switched", "replaced", "longer", "moved", "updated",
     )

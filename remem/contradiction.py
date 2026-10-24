@@ -101,7 +101,8 @@ class ContradictionDetector:
         ov, nv = self._value_tokens(old.original_text), self._value_tokens(new.original_text)
         if not (nv - ov) or not (ov - nv):
             return None               # same value restated (or nothing value-like differs): reconfirmation
-        exclusive = self.is_exclusive(key[1])
+        exclusive = self.is_exclusive(key[1]) or (
+            old.semantic_role in self.cfg.exclusive_roles and new.semantic_role in self.cfg.exclusive_roles)
         if exclusive:                 # declared single-valued: same key + different value is enough
             return Conflict(old.fact_id, new.fact_id, "exclusive", self.text_sim(old.original_text, new.original_text))
         has_cue = bool(set(content_tokens(new.original_text)) & self._cue_tokens)
