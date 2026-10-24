@@ -1,0 +1,243 @@
+{
+ "counts": {
+  "A_vector": {
+   "distractor": {
+    "irrelevant_retrieved": 251,
+    "fail_despite_gold": 211,
+    "gold_pooled_not_selected": 110,
+    "success_without_memory": 54,
+    "gold_not_in_pool": 93
+   },
+   "long_horizon": {
+    "gold_pooled_not_selected": 136,
+    "irrelevant_retrieved": 290,
+    "fail_despite_gold": 258,
+    "success_without_memory": 37
+   },
+   "contradiction": {
+    "gold_pooled_not_selected": 104,
+    "irrelevant_retrieved": 243,
+    "success_without_memory": 22,
+    "fail_despite_gold": 617,
+    "outdated_preferred": 509
+   },
+   "rare_critical": {
+    "fail_despite_gold": 264,
+    "irrelevant_retrieved": 288,
+    "gold_pooled_not_selected": 122,
+    "success_without_memory": 18
+   },
+   "useless_frequent": {
+    "irrelevant_retrieved": 274,
+    "fail_despite_gold": 254,
+    "gold_pooled_not_selected": 81,
+    "success_without_memory": 22,
+    "gold_not_in_pool": 19
+   },
+   "budget_tight": {
+    "gold_pooled_not_selected": 628,
+    "utility_demoted_gold": 30,
+    "success_without_memory": 106,
+    "irrelevant_retrieved": 237,
+    "gold_not_in_pool": 129,
+    "fail_despite_gold": 111
+   },
+   "state_change": {
+    "irrelevant_retrieved": 221,
+    "fail_despite_gold": 775,
+    "gold_pooled_not_selected": 116,
+    "outdated_preferred": 717,
+    "success_without_memory": 19,
+    "gold_not_in_pool": 5
+   },
+   "distractor_norecur": {
+    "irrelevant_retrieved": 56,
+    "fail_despite_gold": 36,
+    "gold_not_in_pool": 35,
+    "success_without_memory": 16,
+    "gold_pooled_not_selected": 48
+   },
+   "budget_medium": {
+    "gold_pooled_not_selected": 602,
+    "irrelevant_retrieved": 344,
+    "success_without_memory": 115,
+    "fail_despite_gold": 186,
+    "gold_not_in_pool": 30
+   }
+  },
+  "B_static": {
+   "distractor": {
+    "irrelevant_retrieved": 251,
+    "fail_despite_gold": 211,
+    "gold_pooled_not_selected": 111,
+    "success_without_memory": 54,
+    "gold_not_in_pool": 93,
+    "utility_demoted_gold": 1
+   },
+   "long_horizon": {
+    "gold_pooled_not_selected": 138,
+    "irrelevant_retrieved": 290,
+    "fail_despite_gold": 258,
+    "success_without_memory": 38,
+    "utility_demoted_gold": 2
+   },
+   "contradiction": {
+    "gold_pooled_not_selected": 96,
+    "irrelevant_retrieved": 243,
+    "success_without_memory": 22,
+    "fail_despite_gold": 493,
+    "outdated_preferred": 376,
+    "utility_demoted_gold": 2
+   },
+   "rare_critical": {
+    "fail_despite_gold": 264,
+    "irrelevant_retrieved": 288,
+    "gold_pooled_not_selected": 122,
+    "success_without_memory": 18
+   },
+   "useless_frequent": {
+    "irrelevant_retrieved": 274,
+    "fail_despite_gold": 254,
+    "gold_pooled_not_selected": 81,
+    "success_without_memory": 22,
+    "gold_not_in_pool": 19
+   },
+   "budget_tight": {
+    "gold_pooled_not_selected": 628,
+    "utility_demoted_gold": 30,
+    "success_without_memory": 106,
+    "irrelevant_retrieved": 237,
+    "gold_not_in_pool": 129,
+    "fail_despite_gold": 111
+   },
+   "state_change": {
+    "irrelevant_retrieved": 220,
+    "fail_despite_gold": 559,
+    "gold_pooled_not_selected": 109,
+    "outdated_preferred": 491,
+    "success_without_memory": 19,
+    "utility_demoted_gold": 4,
+    "gold_not_in_pool": 5
+   },
+   "distractor_norecur": {
+    "irrelevant_retrieved": 56,
+    "fail_despite_gold": 36,
+    "gold_not_in_pool": 35,
+    "success_without_memory": 16,
+    "gold_pooled_not_selected": 48,
+    "utility_demoted_gold": 1
+   },
+   "budget_medium": {
+    "gold_pooled_not_selected": 602,
+    "irrelevant_retrieved": 345,
+    "success_without_memory": 115,
+    "fail_despite_gold": 186,
+    "gold_not_in_pool": 30
+   }
+  },
+  "C_remem": {
+   "distractor": {
+    "irrelevant_retrieved": 237,
+    "fail_despite_gold": 213,
+    "gold_pooled_not_selected": 34,
+    "utility_demoted_gold": 3,
+    "success_without_memory": 35,
+    "gold_not_in_pool": 93
+   },
+   "long_horizon": {
+    "gold_pooled_not_selected": 47,
+    "irrelevant_retrieved": 264,
+    "fail_despite_gold": 256,
+    "success_without_memory": 13,
+    "utility_demoted_gold": 5
+   },
+   "contradiction": {
+    "gold_pooled_not_selected": 82,
+    "irrelevant_retrieved": 233,
+    "success_without_memory": 16,
+    "fail_despite_gold": 219,
+    "utility_demoted_gold": 6
+   },
+   "rare_critical": {
+    "fail_despite_gold": 238,
+    "irrelevant_retrieved": 249,
+    "gold_pooled_not_selected": 63,
+    "success_without_memory": 13
+   },
+   "useless_frequent": {
+    "irrelevant_retrieved": 244,
+    "fail_despite_gold": 225,
+    "gold_pooled_not_selected": 80,
+    "success_without_memory": 23,
+    "utility_demoted_gold": 24,
+    "gold_not_in_pool": 19
+   },
+   "budget_tight": {
+    "gold_pooled_not_selected": 464,
+    "utility_demoted_gold": 17,
+    "success_without_memory": 78,
+    "irrelevant_retrieved": 213,
+    "gold_not_in_pool": 129,
+    "fail_despite_gold": 113
+   },
+   "state_change": {
+    "irrelevant_retrieved": 204,
+    "fail_despite_gold": 190,
+    "gold_pooled_not_selected": 78,
+    "success_without_memory": 17,
+    "utility_demoted_gold": 15,
+    "gold_not_in_pool": 5
+   },
+   "distractor_norecur": {
+    "irrelevant_retrieved": 56,
+    "fail_despite_gold": 37,
+    "gold_not_in_pool": 35,
+    "success_without_memory": 16,
+    "gold_pooled_not_selected": 46
+   },
+   "budget_medium": {
+    "gold_pooled_not_selected": 296,
+    "irrelevant_retrieved": 231,
+    "success_without_memory": 69,
+    "fail_despite_gold": 160,
+    "gold_not_in_pool": 30,
+    "utility_demoted_gold": 1
+   }
+  }
+ },
+ "n_tasks": {
+  "A_vector": {
+   "distractor": 1500,
+   "long_horizon": 1600,
+   "contradiction": 1500,
+   "rare_critical": 1580,
+   "useless_frequent": 1500,
+   "budget_tight": 1500,
+   "state_change": 1500,
+   "distractor_norecur": 350,
+   "budget_medium": 1500
+  },
+  "B_static": {
+   "distractor": 1500,
+   "long_horizon": 1600,
+   "contradiction": 1500,
+   "rare_critical": 1580,
+   "useless_frequent": 1500,
+   "budget_tight": 1500,
+   "state_change": 1500,
+   "distractor_norecur": 350,
+   "budget_medium": 1500
+  },
+  "C_remem": {
+   "distractor": 1500,
+   "long_horizon": 1600,
+   "contradiction": 1500,
+   "rare_critical": 1580,
+   "useless_frequent": 1500,
+   "budget_tight": 1500,
+   "state_change": 1500,
+   "distractor_norecur": 350,
+   "budget_medium": 1500
+  }
+ }
+}

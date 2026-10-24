@@ -1,0 +1,103 @@
+# System definitions compared in the benchmark. `extends:` merges over the named parent.
+# All systems share: the same embedder, the same candidate pool per query (replayed from the
+# backend), the same token accounting, the same agent. They differ only in the fields below.
+systems:
+  _base:
+    backend: vector
+    pool_size: 20
+    ranker: sim                 # sim | static | heuristic | learned
+    outcome_feedback: false
+    selection: {mode: rank_pack, top_k: 5}
+    contradiction:
+      enabled: false
+      # single-valued attribute keys of the (assumed) schema; the cue path works without them
+      exclusive_attributes: [region, owner, api_version, oncall, approver]
+      conf_half_life_days: 0.0
+    retention: {mode: none}
+    attribution: {method: signals}
+    utility:
+      kind: heuristic
+      feature_groups: [static, history, outcome, contradiction]
+      explore_c: 0.0
+
+  # ── baselines ───────────────────────────────────────────────────────────────
+  A_vector:           {extends: _base}
+  B_static:           {extends: _base, ranker: static}
+
+  # ── proposed system ─────────────────────────────────────────────────────────
+  C_remem:
+    extends: _base
+    ranker: learned
+    outcome_feedback: true
+    # guard_top: 3 chosen on DEV seeds: cuts 'utility pushed out a top-5-similar gold' by ~60% at no cost in success/tokens
+    selection: {mode: cost_aware, top_k: 5, p_floor: 0.12, guard_top: 3}
+    contradiction: {enabled: true, conf_half_life_days: 120.0}
+    retention: {mode: adaptive}
+    attribution: {method: signals}
+    utility:
+      kind: learned
+      model_path: results/models/utility_full.json
+      explore_c: 0.5
+
+  # ── cumulative ablation (each row adds one component to the row above) ──────
+  abl0_base:          {extends: A_vector}
+  abl1_temporal:      {extends: _base, ranker: static}
+  abl2_utility_heuristic:
+    extends: _base
+    ranker: heuristic
+    utility: {kind: heuristic, feature_groups: [static, history]}
+  abl3_learned_model:
+    extends: _base
+    ranker: learned
+    utility: {kind: learned, feature_groups: [static, history], model_path: results/models/utility_static.json}
+  abl4_outcome_feedback:
+    extends: abl3_learned_model
+    outcome_feedback: true
+    utility: {model_path: results/models/utility_full.json, explore_c: 0.5}
+  abl5_retention:
+    extends: abl4_outcome_feedback
+    retention: {mode: adaptive}
+  abl6_contradiction:
+    extends: abl5_retention
+    contradiction: {enabled: true, conf_half_life_days: 120.0}
+  abl7_cost_aware:
+    extends: abl6_contradiction
+    selection: {mode: cost_aware, top_k: 5, p_floor: 0.12}
+
+  # ── leave-one-out from the full system ──────────────────────────────────────
+  loo_no_feedback:      {extends: C_remem, outcome_feedback: false}
+  loo_no_contradiction: {extends: C_remem, contradiction: {enabled: false}}
+  loo_no_retention:     {extends: C_remem, retention: {mode: none}}
+  loo_no_cost_aware:    {extends: C_remem, selection: {mode: rank_pack}}
+  loo_heuristic_utility:
+    extends: C_remem
+    ranker: heuristic
+    utility: {kind: heuristic, explore_c: 0.5}
+  loo_no_exclusive_schema:
+    extends: C_remem
+    contradiction: {exclusive_attributes: []}
+
+  # ── attribution-method comparison (same system, different credit assignment) ─
+  attr_presence:        {extends: C_remem, attribution: {method: presence}}
+  attr_signals_loo:     {extends: C_remem, attribution: {method: signals_loo}}
+  attr_usage_only:      {extends: C_remem, attribution: {ignore_outcome: true}}   # feedback ignores success/failure
+
+  # ── new in ReMem: safeguards, exploration, schema learning, cheaper credit assignment ──
+  loo_no_guard:         {extends: C_remem, selection: {guard_top: 0}}
+  new_thompson:         {extends: C_remem, utility: {explore_mode: thompson}}   # explore_c stays 0.5 (dev sweep: worse than UCB at 0.1/0.25/0.5)
+  schema_learned:       {extends: C_remem, contradiction: {exclusive_attributes: [], learn_schema: true}}
+  attr_signals_loo_ambiguous: {extends: C_remem, attribution: {method: signals_loo, loo_policy: ambiguous}}
+
+  # ── retention controls ──────────────────────────────────────────────────────
+  ret_frequency_prune:  {extends: C_remem, retention: {mode: frequency_prune}}
+
+  # ── trace collection for the learned model (heuristic ranker, exploration) ──
+  collect:
+    extends: _base
+    ranker: heuristic
+    outcome_feedback: true
+    collect_exploration: 2
+    selection: {mode: rank_pack, top_k: 5}
+    contradiction: {enabled: true, conf_half_life_days: 120.0}
+    retention: {mode: adaptive}
+    utility: {kind: heuristic, explore_c: 0.5}

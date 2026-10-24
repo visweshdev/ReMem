@@ -1,0 +1,4247 @@
+{
+ "distractor": {
+  "A_vector": [
+   {
+    "n_tasks": 25,
+    "n_memories": 121,
+    "states": {
+     "ACTIVE": 121,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1144,
+    "total_tokens": 1144
+   },
+   {
+    "n_tasks": 50,
+    "n_memories": 128,
+    "states": {
+     "ACTIVE": 128,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1209,
+    "total_tokens": 1209
+   },
+   {
+    "n_tasks": 75,
+    "n_memories": 132,
+    "states": {
+     "ACTIVE": 132,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1246,
+    "total_tokens": 1246
+   },
+   {
+    "n_tasks": 100,
+    "n_memories": 138,
+    "states": {
+     "ACTIVE": 138,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1296,
+    "total_tokens": 1296
+   },
+   {
+    "n_tasks": 125,
+    "n_memories": 147,
+    "states": {
+     "ACTIVE": 147,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1379,
+    "total_tokens": 1379
+   },
+   {
+    "n_tasks": 150,
+    "n_memories": 152,
+    "states": {
+     "ACTIVE": 152,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1425,
+    "total_tokens": 1425
+   },
+   {
+    "n_tasks": 175,
+    "n_memories": 169,
+    "states": {
+     "ACTIVE": 169,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1579,
+    "total_tokens": 1579
+   },
+   {
+    "n_tasks": 200,
+    "n_memories": 180,
+    "states": {
+     "ACTIVE": 180,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1676,
+    "total_tokens": 1676
+   },
+   {
+    "n_tasks": 225,
+    "n_memories": 185,
+    "states": {
+     "ACTIVE": 185,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1722,
+    "total_tokens": 1722
+   },
+   {
+    "n_tasks": 250,
+    "n_memories": 193,
+    "states": {
+     "ACTIVE": 193,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1795,
+    "total_tokens": 1795
+   },
+   {
+    "n_tasks": 275,
+    "n_memories": 205,
+    "states": {
+     "ACTIVE": 205,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1902,
+    "total_tokens": 1902
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 212,
+    "states": {
+     "ACTIVE": 212,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1966,
+    "total_tokens": 1966
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 212,
+    "states": {
+     "ACTIVE": 212,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1966,
+    "total_tokens": 1966
+   }
+  ],
+  "C_remem": [
+   {
+    "n_tasks": 25,
+    "n_memories": 121,
+    "states": {
+     "ACTIVE": 121,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1144,
+    "total_tokens": 1144
+   },
+   {
+    "n_tasks": 50,
+    "n_memories": 128,
+    "states": {
+     "ACTIVE": 127,
+     "LOW_VALUE": 1,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1209,
+    "total_tokens": 1209
+   },
+   {
+    "n_tasks": 75,
+    "n_memories": 132,
+    "states": {
+     "ACTIVE": 131,
+     "LOW_VALUE": 1,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1246,
+    "total_tokens": 1246
+   },
+   {
+    "n_tasks": 100,
+    "n_memories": 138,
+    "states": {
+     "ACTIVE": 134,
+     "LOW_VALUE": 4,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1296,
+    "total_tokens": 1296
+   },
+   {
+    "n_tasks": 125,
+    "n_memories": 147,
+    "states": {
+     "ACTIVE": 143,
+     "LOW_VALUE": 4,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1379,
+    "total_tokens": 1379
+   },
+   {
+    "n_tasks": 150,
+    "n_memories": 152,
+    "states": {
+     "ACTIVE": 147,
+     "LOW_VALUE": 5,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1425,
+    "total_tokens": 1425
+   },
+   {
+    "n_tasks": 175,
+    "n_memories": 169,
+    "states": {
+     "ACTIVE": 164,
+     "LOW_VALUE": 5,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1579,
+    "total_tokens": 1579
+   },
+   {
+    "n_tasks": 200,
+    "n_memories": 180,
+    "states": {
+     "ACTIVE": 174,
+     "LOW_VALUE": 6,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1676,
+    "total_tokens": 1676
+   },
+   {
+    "n_tasks": 225,
+    "n_memories": 185,
+    "states": {
+     "ACTIVE": 179,
+     "LOW_VALUE": 6,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1722,
+    "total_tokens": 1722
+   },
+   {
+    "n_tasks": 250,
+    "n_memories": 193,
+    "states": {
+     "ACTIVE": 187,
+     "LOW_VALUE": 6,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1795,
+    "total_tokens": 1795
+   },
+   {
+    "n_tasks": 275,
+    "n_memories": 205,
+    "states": {
+     "ACTIVE": 199,
+     "LOW_VALUE": 6,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1902,
+    "total_tokens": 1902
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 212,
+    "states": {
+     "ACTIVE": 206,
+     "LOW_VALUE": 5,
+     "COMPRESSED": 1,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1957,
+    "total_tokens": 1966
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 212,
+    "states": {
+     "ACTIVE": 206,
+     "LOW_VALUE": 5,
+     "COMPRESSED": 1,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1957,
+    "total_tokens": 1966
+   }
+  ],
+  "ret_frequency_prune": [
+   {
+    "n_tasks": 25,
+    "n_memories": 121,
+    "states": {
+     "ACTIVE": 121,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1144,
+    "total_tokens": 1144
+   },
+   {
+    "n_tasks": 50,
+    "n_memories": 128,
+    "states": {
+     "ACTIVE": 128,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1209,
+    "total_tokens": 1209
+   },
+   {
+    "n_tasks": 75,
+    "n_memories": 132,
+    "states": {
+     "ACTIVE": 132,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1246,
+    "total_tokens": 1246
+   },
+   {
+    "n_tasks": 100,
+    "n_memories": 138,
+    "states": {
+     "ACTIVE": 138,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1296,
+    "total_tokens": 1296
+   },
+   {
+    "n_tasks": 125,
+    "n_memories": 147,
+    "states": {
+     "ACTIVE": 147,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1379,
+    "total_tokens": 1379
+   },
+   {
+    "n_tasks": 150,
+    "n_memories": 152,
+    "states": {
+     "ACTIVE": 86,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 66,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 877,
+    "total_tokens": 1425
+   },
+   {
+    "n_tasks": 175,
+    "n_memories": 169,
+    "states": {
+     "ACTIVE": 94,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 75,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 949,
+    "total_tokens": 1579
+   },
+   {
+    "n_tasks": 200,
+    "n_memories": 180,
+    "states": {
+     "ACTIVE": 98,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 82,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 981,
+    "total_tokens": 1676
+   },
+   {
+    "n_tasks": 225,
+    "n_memories": 185,
+    "states": {
+     "ACTIVE": 99,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 86,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 990,
+    "total_tokens": 1722
+   },
+   {
+    "n_tasks": 250,
+    "n_memories": 193,
+    "states": {
+     "ACTIVE": 101,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 92,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1013,
+    "total_tokens": 1795
+   },
+   {
+    "n_tasks": 275,
+    "n_memories": 205,
+    "states": {
+     "ACTIVE": 104,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 101,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1037,
+    "total_tokens": 1902
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 212,
+    "states": {
+     "ACTIVE": 90,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 122,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 863,
+    "total_tokens": 1966
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 212,
+    "states": {
+     "ACTIVE": 90,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 122,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 863,
+    "total_tokens": 1966
+   }
+  ]
+ },
+ "long_horizon": {
+  "A_vector": [
+   {
+    "n_tasks": 25,
+    "n_memories": 171,
+    "states": {
+     "ACTIVE": 171,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1541,
+    "total_tokens": 1541
+   },
+   {
+    "n_tasks": 50,
+    "n_memories": 197,
+    "states": {
+     "ACTIVE": 197,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1788,
+    "total_tokens": 1788
+   },
+   {
+    "n_tasks": 75,
+    "n_memories": 213,
+    "states": {
+     "ACTIVE": 213,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1930,
+    "total_tokens": 1930
+   },
+   {
+    "n_tasks": 100,
+    "n_memories": 238,
+    "states": {
+     "ACTIVE": 238,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2161,
+    "total_tokens": 2161
+   },
+   {
+    "n_tasks": 125,
+    "n_memories": 251,
+    "states": {
+     "ACTIVE": 251,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2279,
+    "total_tokens": 2279
+   },
+   {
+    "n_tasks": 150,
+    "n_memories": 271,
+    "states": {
+     "ACTIVE": 271,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2448,
+    "total_tokens": 2448
+   },
+   {
+    "n_tasks": 175,
+    "n_memories": 292,
+    "states": {
+     "ACTIVE": 292,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2645,
+    "total_tokens": 2645
+   },
+   {
+    "n_tasks": 200,
+    "n_memories": 305,
+    "states": {
+     "ACTIVE": 305,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2766,
+    "total_tokens": 2766
+   },
+   {
+    "n_tasks": 225,
+    "n_memories": 324,
+    "states": {
+     "ACTIVE": 324,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2933,
+    "total_tokens": 2933
+   },
+   {
+    "n_tasks": 250,
+    "n_memories": 331,
+    "states": {
+     "ACTIVE": 331,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2997,
+    "total_tokens": 2997
+   },
+   {
+    "n_tasks": 275,
+    "n_memories": 346,
+    "states": {
+     "ACTIVE": 346,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 3140,
+    "total_tokens": 3140
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 366,
+    "states": {
+     "ACTIVE": 366,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 3328,
+    "total_tokens": 3328
+   },
+   {
+    "n_tasks": 320,
+    "n_memories": 376,
+    "states": {
+     "ACTIVE": 376,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 3424,
+    "total_tokens": 3424
+   }
+  ],
+  "C_remem": [
+   {
+    "n_tasks": 25,
+    "n_memories": 171,
+    "states": {
+     "ACTIVE": 171,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1541,
+    "total_tokens": 1541
+   },
+   {
+    "n_tasks": 50,
+    "n_memories": 197,
+    "states": {
+     "ACTIVE": 196,
+     "LOW_VALUE": 1,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1788,
+    "total_tokens": 1788
+   },
+   {
+    "n_tasks": 75,
+    "n_memories": 213,
+    "states": {
+     "ACTIVE": 211,
+     "LOW_VALUE": 2,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1930,
+    "total_tokens": 1930
+   },
+   {
+    "n_tasks": 100,
+    "n_memories": 238,
+    "states": {
+     "ACTIVE": 235,
+     "LOW_VALUE": 3,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2161,
+    "total_tokens": 2161
+   },
+   {
+    "n_tasks": 125,
+    "n_memories": 251,
+    "states": {
+     "ACTIVE": 247,
+     "LOW_VALUE": 3,
+     "COMPRESSED": 1,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2271,
+    "total_tokens": 2279
+   },
+   {
+    "n_tasks": 150,
+    "n_memories": 271,
+    "states": {
+     "ACTIVE": 267,
+     "LOW_VALUE": 3,
+     "COMPRESSED": 1,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2440,
+    "total_tokens": 2448
+   },
+   {
+    "n_tasks": 175,
+    "n_memories": 292,
+    "states": {
+     "ACTIVE": 287,
+     "LOW_VALUE": 4,
+     "COMPRESSED": 1,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2637,
+    "total_tokens": 2645
+   },
+   {
+    "n_tasks": 200,
+    "n_memories": 305,
+    "states": {
+     "ACTIVE": 300,
+     "LOW_VALUE": 4,
+     "COMPRESSED": 1,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2758,
+    "total_tokens": 2766
+   },
+   {
+    "n_tasks": 225,
+    "n_memories": 324,
+    "states": {
+     "ACTIVE": 319,
+     "LOW_VALUE": 4,
+     "COMPRESSED": 1,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2925,
+    "total_tokens": 2933
+   },
+   {
+    "n_tasks": 250,
+    "n_memories": 331,
+    "states": {
+     "ACTIVE": 326,
+     "LOW_VALUE": 3,
+     "COMPRESSED": 2,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2980,
+    "total_tokens": 2997
+   },
+   {
+    "n_tasks": 275,
+    "n_memories": 346,
+    "states": {
+     "ACTIVE": 340,
+     "LOW_VALUE": 4,
+     "COMPRESSED": 1,
+     "ARCHIVED": 1,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 3116,
+    "total_tokens": 3140
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 366,
+    "states": {
+     "ACTIVE": 360,
+     "LOW_VALUE": 4,
+     "COMPRESSED": 1,
+     "ARCHIVED": 1,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 3304,
+    "total_tokens": 3328
+   },
+   {
+    "n_tasks": 320,
+    "n_memories": 376,
+    "states": {
+     "ACTIVE": 370,
+     "LOW_VALUE": 4,
+     "COMPRESSED": 1,
+     "ARCHIVED": 1,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 3400,
+    "total_tokens": 3424
+   }
+  ],
+  "ret_frequency_prune": [
+   {
+    "n_tasks": 25,
+    "n_memories": 171,
+    "states": {
+     "ACTIVE": 171,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1541,
+    "total_tokens": 1541
+   },
+   {
+    "n_tasks": 50,
+    "n_memories": 197,
+    "states": {
+     "ACTIVE": 197,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1788,
+    "total_tokens": 1788
+   },
+   {
+    "n_tasks": 75,
+    "n_memories": 213,
+    "states": {
+     "ACTIVE": 213,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1930,
+    "total_tokens": 1930
+   },
+   {
+    "n_tasks": 100,
+    "n_memories": 238,
+    "states": {
+     "ACTIVE": 238,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2161,
+    "total_tokens": 2161
+   },
+   {
+    "n_tasks": 125,
+    "n_memories": 251,
+    "states": {
+     "ACTIVE": 251,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2279,
+    "total_tokens": 2279
+   },
+   {
+    "n_tasks": 150,
+    "n_memories": 271,
+    "states": {
+     "ACTIVE": 155,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 116,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1401,
+    "total_tokens": 2448
+   },
+   {
+    "n_tasks": 175,
+    "n_memories": 292,
+    "states": {
+     "ACTIVE": 161,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 131,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1459,
+    "total_tokens": 2645
+   },
+   {
+    "n_tasks": 200,
+    "n_memories": 305,
+    "states": {
+     "ACTIVE": 148,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 157,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1333,
+    "total_tokens": 2766
+   },
+   {
+    "n_tasks": 225,
+    "n_memories": 324,
+    "states": {
+     "ACTIVE": 151,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 173,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1358,
+    "total_tokens": 2933
+   },
+   {
+    "n_tasks": 250,
+    "n_memories": 331,
+    "states": {
+     "ACTIVE": 133,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 198,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1191,
+    "total_tokens": 2997
+   },
+   {
+    "n_tasks": 275,
+    "n_memories": 346,
+    "states": {
+     "ACTIVE": 135,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 211,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1216,
+    "total_tokens": 3140
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 366,
+    "states": {
+     "ACTIVE": 131,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 235,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1200,
+    "total_tokens": 3328
+   },
+   {
+    "n_tasks": 320,
+    "n_memories": 376,
+    "states": {
+     "ACTIVE": 120,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 256,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1099,
+    "total_tokens": 3424
+   }
+  ]
+ },
+ "contradiction": {
+  "A_vector": [
+   {
+    "n_tasks": 25,
+    "n_memories": 102,
+    "states": {
+     "ACTIVE": 102,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 862,
+    "total_tokens": 862
+   },
+   {
+    "n_tasks": 50,
+    "n_memories": 114,
+    "states": {
+     "ACTIVE": 114,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 963,
+    "total_tokens": 963
+   },
+   {
+    "n_tasks": 75,
+    "n_memories": 118,
+    "states": {
+     "ACTIVE": 118,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 998,
+    "total_tokens": 998
+   },
+   {
+    "n_tasks": 100,
+    "n_memories": 122,
+    "states": {
+     "ACTIVE": 122,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1038,
+    "total_tokens": 1038
+   },
+   {
+    "n_tasks": 125,
+    "n_memories": 127,
+    "states": {
+     "ACTIVE": 127,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1080,
+    "total_tokens": 1080
+   },
+   {
+    "n_tasks": 150,
+    "n_memories": 137,
+    "states": {
+     "ACTIVE": 137,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1175,
+    "total_tokens": 1175
+   },
+   {
+    "n_tasks": 175,
+    "n_memories": 147,
+    "states": {
+     "ACTIVE": 147,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1258,
+    "total_tokens": 1258
+   },
+   {
+    "n_tasks": 200,
+    "n_memories": 153,
+    "states": {
+     "ACTIVE": 153,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1311,
+    "total_tokens": 1311
+   },
+   {
+    "n_tasks": 225,
+    "n_memories": 159,
+    "states": {
+     "ACTIVE": 159,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1369,
+    "total_tokens": 1369
+   },
+   {
+    "n_tasks": 250,
+    "n_memories": 165,
+    "states": {
+     "ACTIVE": 165,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1425,
+    "total_tokens": 1425
+   },
+   {
+    "n_tasks": 275,
+    "n_memories": 172,
+    "states": {
+     "ACTIVE": 172,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1483,
+    "total_tokens": 1483
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 175,
+    "states": {
+     "ACTIVE": 175,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1510,
+    "total_tokens": 1510
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 175,
+    "states": {
+     "ACTIVE": 175,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1510,
+    "total_tokens": 1510
+   }
+  ],
+  "C_remem": [
+   {
+    "n_tasks": 25,
+    "n_memories": 102,
+    "states": {
+     "ACTIVE": 101,
+     "LOW_VALUE": 1,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 862,
+    "total_tokens": 862
+   },
+   {
+    "n_tasks": 50,
+    "n_memories": 114,
+    "states": {
+     "ACTIVE": 111,
+     "LOW_VALUE": 1,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 2
+    },
+    "served_tokens": 951,
+    "total_tokens": 963
+   },
+   {
+    "n_tasks": 75,
+    "n_memories": 118,
+    "states": {
+     "ACTIVE": 114,
+     "LOW_VALUE": 1,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 3
+    },
+    "served_tokens": 979,
+    "total_tokens": 998
+   },
+   {
+    "n_tasks": 100,
+    "n_memories": 122,
+    "states": {
+     "ACTIVE": 117,
+     "LOW_VALUE": 1,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 4
+    },
+    "served_tokens": 1012,
+    "total_tokens": 1038
+   },
+   {
+    "n_tasks": 125,
+    "n_memories": 127,
+    "states": {
+     "ACTIVE": 122,
+     "LOW_VALUE": 1,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 4
+    },
+    "served_tokens": 1054,
+    "total_tokens": 1080
+   },
+   {
+    "n_tasks": 150,
+    "n_memories": 137,
+    "states": {
+     "ACTIVE": 128,
+     "LOW_VALUE": 2,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 7
+    },
+    "served_tokens": 1125,
+    "total_tokens": 1175
+   },
+   {
+    "n_tasks": 175,
+    "n_memories": 147,
+    "states": {
+     "ACTIVE": 137,
+     "LOW_VALUE": 2,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 8
+    },
+    "served_tokens": 1202,
+    "total_tokens": 1258
+   },
+   {
+    "n_tasks": 200,
+    "n_memories": 153,
+    "states": {
+     "ACTIVE": 141,
+     "LOW_VALUE": 2,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 10
+    },
+    "served_tokens": 1242,
+    "total_tokens": 1311
+   },
+   {
+    "n_tasks": 225,
+    "n_memories": 159,
+    "states": {
+     "ACTIVE": 147,
+     "LOW_VALUE": 2,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 10
+    },
+    "served_tokens": 1300,
+    "total_tokens": 1369
+   },
+   {
+    "n_tasks": 250,
+    "n_memories": 165,
+    "states": {
+     "ACTIVE": 153,
+     "LOW_VALUE": 2,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 10
+    },
+    "served_tokens": 1356,
+    "total_tokens": 1425
+   },
+   {
+    "n_tasks": 275,
+    "n_memories": 172,
+    "states": {
+     "ACTIVE": 160,
+     "LOW_VALUE": 2,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 10
+    },
+    "served_tokens": 1414,
+    "total_tokens": 1483
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 175,
+    "states": {
+     "ACTIVE": 163,
+     "LOW_VALUE": 2,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 10
+    },
+    "served_tokens": 1441,
+    "total_tokens": 1510
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 175,
+    "states": {
+     "ACTIVE": 163,
+     "LOW_VALUE": 2,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 10
+    },
+    "served_tokens": 1441,
+    "total_tokens": 1510
+   }
+  ],
+  "ret_frequency_prune": [
+   {
+    "n_tasks": 25,
+    "n_memories": 102,
+    "states": {
+     "ACTIVE": 102,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 862,
+    "total_tokens": 862
+   },
+   {
+    "n_tasks": 50,
+    "n_memories": 114,
+    "states": {
+     "ACTIVE": 112,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 2
+    },
+    "served_tokens": 951,
+    "total_tokens": 963
+   },
+   {
+    "n_tasks": 75,
+    "n_memories": 118,
+    "states": {
+     "ACTIVE": 115,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 3
+    },
+    "served_tokens": 979,
+    "total_tokens": 998
+   },
+   {
+    "n_tasks": 100,
+    "n_memories": 122,
+    "states": {
+     "ACTIVE": 118,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 4
+    },
+    "served_tokens": 1012,
+    "total_tokens": 1038
+   },
+   {
+    "n_tasks": 125,
+    "n_memories": 127,
+    "states": {
+     "ACTIVE": 123,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 4
+    },
+    "served_tokens": 1054,
+    "total_tokens": 1080
+   },
+   {
+    "n_tasks": 150,
+    "n_memories": 137,
+    "states": {
+     "ACTIVE": 73,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 57,
+     "INVALIDATED": 7
+    },
+    "served_tokens": 635,
+    "total_tokens": 1175
+   },
+   {
+    "n_tasks": 175,
+    "n_memories": 147,
+    "states": {
+     "ACTIVE": 76,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 63,
+     "INVALIDATED": 8
+    },
+    "served_tokens": 663,
+    "total_tokens": 1258
+   },
+   {
+    "n_tasks": 200,
+    "n_memories": 153,
+    "states": {
+     "ACTIVE": 69,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 74,
+     "INVALIDATED": 10
+    },
+    "served_tokens": 612,
+    "total_tokens": 1311
+   },
+   {
+    "n_tasks": 225,
+    "n_memories": 159,
+    "states": {
+     "ACTIVE": 72,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 77,
+     "INVALIDATED": 10
+    },
+    "served_tokens": 648,
+    "total_tokens": 1369
+   },
+   {
+    "n_tasks": 250,
+    "n_memories": 165,
+    "states": {
+     "ACTIVE": 75,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 80,
+     "INVALIDATED": 10
+    },
+    "served_tokens": 674,
+    "total_tokens": 1425
+   },
+   {
+    "n_tasks": 275,
+    "n_memories": 172,
+    "states": {
+     "ACTIVE": 77,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 85,
+     "INVALIDATED": 10
+    },
+    "served_tokens": 690,
+    "total_tokens": 1483
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 175,
+    "states": {
+     "ACTIVE": 67,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 98,
+     "INVALIDATED": 10
+    },
+    "served_tokens": 614,
+    "total_tokens": 1510
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 175,
+    "states": {
+     "ACTIVE": 67,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 98,
+     "INVALIDATED": 10
+    },
+    "served_tokens": 614,
+    "total_tokens": 1510
+   }
+  ]
+ },
+ "rare_critical": {
+  "A_vector": [
+   {
+    "n_tasks": 25,
+    "n_memories": 136,
+    "states": {
+     "ACTIVE": 136,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1149,
+    "total_tokens": 1149
+   },
+   {
+    "n_tasks": 50,
+    "n_memories": 139,
+    "states": {
+     "ACTIVE": 139,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1177,
+    "total_tokens": 1177
+   },
+   {
+    "n_tasks": 75,
+    "n_memories": 145,
+    "states": {
+     "ACTIVE": 145,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1231,
+    "total_tokens": 1231
+   },
+   {
+    "n_tasks": 100,
+    "n_memories": 151,
+    "states": {
+     "ACTIVE": 151,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1285,
+    "total_tokens": 1285
+   },
+   {
+    "n_tasks": 125,
+    "n_memories": 154,
+    "states": {
+     "ACTIVE": 154,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1312,
+    "total_tokens": 1312
+   },
+   {
+    "n_tasks": 150,
+    "n_memories": 157,
+    "states": {
+     "ACTIVE": 157,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1340,
+    "total_tokens": 1340
+   },
+   {
+    "n_tasks": 175,
+    "n_memories": 164,
+    "states": {
+     "ACTIVE": 164,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1406,
+    "total_tokens": 1406
+   },
+   {
+    "n_tasks": 200,
+    "n_memories": 168,
+    "states": {
+     "ACTIVE": 168,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1441,
+    "total_tokens": 1441
+   },
+   {
+    "n_tasks": 225,
+    "n_memories": 174,
+    "states": {
+     "ACTIVE": 174,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1501,
+    "total_tokens": 1501
+   },
+   {
+    "n_tasks": 250,
+    "n_memories": 179,
+    "states": {
+     "ACTIVE": 179,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1547,
+    "total_tokens": 1547
+   },
+   {
+    "n_tasks": 275,
+    "n_memories": 185,
+    "states": {
+     "ACTIVE": 185,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1603,
+    "total_tokens": 1603
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 186,
+    "states": {
+     "ACTIVE": 186,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1611,
+    "total_tokens": 1611
+   },
+   {
+    "n_tasks": 316,
+    "n_memories": 193,
+    "states": {
+     "ACTIVE": 193,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1676,
+    "total_tokens": 1676
+   }
+  ],
+  "C_remem": [
+   {
+    "n_tasks": 25,
+    "n_memories": 136,
+    "states": {
+     "ACTIVE": 136,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1149,
+    "total_tokens": 1149
+   },
+   {
+    "n_tasks": 50,
+    "n_memories": 139,
+    "states": {
+     "ACTIVE": 138,
+     "LOW_VALUE": 1,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1177,
+    "total_tokens": 1177
+   },
+   {
+    "n_tasks": 75,
+    "n_memories": 145,
+    "states": {
+     "ACTIVE": 142,
+     "LOW_VALUE": 3,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1231,
+    "total_tokens": 1231
+   },
+   {
+    "n_tasks": 100,
+    "n_memories": 151,
+    "states": {
+     "ACTIVE": 148,
+     "LOW_VALUE": 3,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1285,
+    "total_tokens": 1285
+   },
+   {
+    "n_tasks": 125,
+    "n_memories": 154,
+    "states": {
+     "ACTIVE": 151,
+     "LOW_VALUE": 3,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1312,
+    "total_tokens": 1312
+   },
+   {
+    "n_tasks": 150,
+    "n_memories": 157,
+    "states": {
+     "ACTIVE": 152,
+     "LOW_VALUE": 3,
+     "COMPRESSED": 2,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1329,
+    "total_tokens": 1340
+   },
+   {
+    "n_tasks": 175,
+    "n_memories": 164,
+    "states": {
+     "ACTIVE": 158,
+     "LOW_VALUE": 4,
+     "COMPRESSED": 2,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1395,
+    "total_tokens": 1406
+   },
+   {
+    "n_tasks": 200,
+    "n_memories": 168,
+    "states": {
+     "ACTIVE": 160,
+     "LOW_VALUE": 6,
+     "COMPRESSED": 2,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1430,
+    "total_tokens": 1441
+   },
+   {
+    "n_tasks": 225,
+    "n_memories": 174,
+    "states": {
+     "ACTIVE": 164,
+     "LOW_VALUE": 8,
+     "COMPRESSED": 1,
+     "ARCHIVED": 1,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1482,
+    "total_tokens": 1501
+   },
+   {
+    "n_tasks": 250,
+    "n_memories": 179,
+    "states": {
+     "ACTIVE": 168,
+     "LOW_VALUE": 9,
+     "COMPRESSED": 0,
+     "ARCHIVED": 2,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1523,
+    "total_tokens": 1547
+   },
+   {
+    "n_tasks": 275,
+    "n_memories": 185,
+    "states": {
+     "ACTIVE": 174,
+     "LOW_VALUE": 9,
+     "COMPRESSED": 0,
+     "ARCHIVED": 2,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1579,
+    "total_tokens": 1603
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 186,
+    "states": {
+     "ACTIVE": 174,
+     "LOW_VALUE": 10,
+     "COMPRESSED": 0,
+     "ARCHIVED": 2,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1587,
+    "total_tokens": 1611
+   },
+   {
+    "n_tasks": 316,
+    "n_memories": 193,
+    "states": {
+     "ACTIVE": 183,
+     "LOW_VALUE": 8,
+     "COMPRESSED": 1,
+     "ARCHIVED": 1,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1657,
+    "total_tokens": 1676
+   }
+  ],
+  "ret_frequency_prune": [
+   {
+    "n_tasks": 25,
+    "n_memories": 136,
+    "states": {
+     "ACTIVE": 136,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1149,
+    "total_tokens": 1149
+   },
+   {
+    "n_tasks": 50,
+    "n_memories": 139,
+    "states": {
+     "ACTIVE": 139,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1177,
+    "total_tokens": 1177
+   },
+   {
+    "n_tasks": 75,
+    "n_memories": 145,
+    "states": {
+     "ACTIVE": 145,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1231,
+    "total_tokens": 1231
+   },
+   {
+    "n_tasks": 100,
+    "n_memories": 151,
+    "states": {
+     "ACTIVE": 151,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1285,
+    "total_tokens": 1285
+   },
+   {
+    "n_tasks": 125,
+    "n_memories": 154,
+    "states": {
+     "ACTIVE": 154,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1312,
+    "total_tokens": 1312
+   },
+   {
+    "n_tasks": 150,
+    "n_memories": 157,
+    "states": {
+     "ACTIVE": 78,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 79,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 682,
+    "total_tokens": 1340
+   },
+   {
+    "n_tasks": 175,
+    "n_memories": 164,
+    "states": {
+     "ACTIVE": 80,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 84,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 698,
+    "total_tokens": 1406
+   },
+   {
+    "n_tasks": 200,
+    "n_memories": 168,
+    "states": {
+     "ACTIVE": 82,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 86,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 713,
+    "total_tokens": 1441
+   },
+   {
+    "n_tasks": 225,
+    "n_memories": 174,
+    "states": {
+     "ACTIVE": 82,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 92,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 719,
+    "total_tokens": 1501
+   },
+   {
+    "n_tasks": 250,
+    "n_memories": 179,
+    "states": {
+     "ACTIVE": 81,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 98,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 711,
+    "total_tokens": 1547
+   },
+   {
+    "n_tasks": 275,
+    "n_memories": 185,
+    "states": {
+     "ACTIVE": 84,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 101,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 740,
+    "total_tokens": 1603
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 186,
+    "states": {
+     "ACTIVE": 67,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 119,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 598,
+    "total_tokens": 1611
+   },
+   {
+    "n_tasks": 316,
+    "n_memories": 193,
+    "states": {
+     "ACTIVE": 70,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 123,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 625,
+    "total_tokens": 1676
+   }
+  ]
+ },
+ "useless_frequent": {
+  "A_vector": [
+   {
+    "n_tasks": 25,
+    "n_memories": 100,
+    "states": {
+     "ACTIVE": 100,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 955,
+    "total_tokens": 955
+   },
+   {
+    "n_tasks": 50,
+    "n_memories": 106,
+    "states": {
+     "ACTIVE": 106,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1009,
+    "total_tokens": 1009
+   },
+   {
+    "n_tasks": 75,
+    "n_memories": 109,
+    "states": {
+     "ACTIVE": 109,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1035,
+    "total_tokens": 1035
+   },
+   {
+    "n_tasks": 100,
+    "n_memories": 111,
+    "states": {
+     "ACTIVE": 111,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1053,
+    "total_tokens": 1053
+   },
+   {
+    "n_tasks": 125,
+    "n_memories": 124,
+    "states": {
+     "ACTIVE": 124,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1176,
+    "total_tokens": 1176
+   },
+   {
+    "n_tasks": 150,
+    "n_memories": 131,
+    "states": {
+     "ACTIVE": 131,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1239,
+    "total_tokens": 1239
+   },
+   {
+    "n_tasks": 175,
+    "n_memories": 133,
+    "states": {
+     "ACTIVE": 133,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1259,
+    "total_tokens": 1259
+   },
+   {
+    "n_tasks": 200,
+    "n_memories": 136,
+    "states": {
+     "ACTIVE": 136,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1284,
+    "total_tokens": 1284
+   },
+   {
+    "n_tasks": 225,
+    "n_memories": 143,
+    "states": {
+     "ACTIVE": 143,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1346,
+    "total_tokens": 1346
+   },
+   {
+    "n_tasks": 250,
+    "n_memories": 144,
+    "states": {
+     "ACTIVE": 144,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1356,
+    "total_tokens": 1356
+   },
+   {
+    "n_tasks": 275,
+    "n_memories": 147,
+    "states": {
+     "ACTIVE": 147,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1381,
+    "total_tokens": 1381
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 147,
+    "states": {
+     "ACTIVE": 147,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1381,
+    "total_tokens": 1381
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 147,
+    "states": {
+     "ACTIVE": 147,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1381,
+    "total_tokens": 1381
+   }
+  ],
+  "C_remem": [
+   {
+    "n_tasks": 25,
+    "n_memories": 100,
+    "states": {
+     "ACTIVE": 100,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 955,
+    "total_tokens": 955
+   },
+   {
+    "n_tasks": 50,
+    "n_memories": 106,
+    "states": {
+     "ACTIVE": 104,
+     "LOW_VALUE": 2,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1009,
+    "total_tokens": 1009
+   },
+   {
+    "n_tasks": 75,
+    "n_memories": 109,
+    "states": {
+     "ACTIVE": 107,
+     "LOW_VALUE": 2,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1035,
+    "total_tokens": 1035
+   },
+   {
+    "n_tasks": 100,
+    "n_memories": 111,
+    "states": {
+     "ACTIVE": 108,
+     "LOW_VALUE": 3,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1053,
+    "total_tokens": 1053
+   },
+   {
+    "n_tasks": 125,
+    "n_memories": 124,
+    "states": {
+     "ACTIVE": 122,
+     "LOW_VALUE": 2,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1176,
+    "total_tokens": 1176
+   },
+   {
+    "n_tasks": 150,
+    "n_memories": 131,
+    "states": {
+     "ACTIVE": 128,
+     "LOW_VALUE": 3,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1239,
+    "total_tokens": 1239
+   },
+   {
+    "n_tasks": 175,
+    "n_memories": 133,
+    "states": {
+     "ACTIVE": 130,
+     "LOW_VALUE": 3,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1259,
+    "total_tokens": 1259
+   },
+   {
+    "n_tasks": 200,
+    "n_memories": 136,
+    "states": {
+     "ACTIVE": 133,
+     "LOW_VALUE": 3,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1284,
+    "total_tokens": 1284
+   },
+   {
+    "n_tasks": 225,
+    "n_memories": 143,
+    "states": {
+     "ACTIVE": 141,
+     "LOW_VALUE": 2,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1346,
+    "total_tokens": 1346
+   },
+   {
+    "n_tasks": 250,
+    "n_memories": 144,
+    "states": {
+     "ACTIVE": 142,
+     "LOW_VALUE": 2,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1356,
+    "total_tokens": 1356
+   },
+   {
+    "n_tasks": 275,
+    "n_memories": 147,
+    "states": {
+     "ACTIVE": 144,
+     "LOW_VALUE": 3,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1381,
+    "total_tokens": 1381
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 147,
+    "states": {
+     "ACTIVE": 144,
+     "LOW_VALUE": 3,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1381,
+    "total_tokens": 1381
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 147,
+    "states": {
+     "ACTIVE": 144,
+     "LOW_VALUE": 3,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1381,
+    "total_tokens": 1381
+   }
+  ],
+  "ret_frequency_prune": [
+   {
+    "n_tasks": 25,
+    "n_memories": 100,
+    "states": {
+     "ACTIVE": 100,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 955,
+    "total_tokens": 955
+   },
+   {
+    "n_tasks": 50,
+    "n_memories": 106,
+    "states": {
+     "ACTIVE": 106,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1009,
+    "total_tokens": 1009
+   },
+   {
+    "n_tasks": 75,
+    "n_memories": 109,
+    "states": {
+     "ACTIVE": 109,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1035,
+    "total_tokens": 1035
+   },
+   {
+    "n_tasks": 100,
+    "n_memories": 111,
+    "states": {
+     "ACTIVE": 111,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1053,
+    "total_tokens": 1053
+   },
+   {
+    "n_tasks": 125,
+    "n_memories": 124,
+    "states": {
+     "ACTIVE": 124,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1176,
+    "total_tokens": 1176
+   },
+   {
+    "n_tasks": 150,
+    "n_memories": 131,
+    "states": {
+     "ACTIVE": 78,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 53,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 737,
+    "total_tokens": 1239
+   },
+   {
+    "n_tasks": 175,
+    "n_memories": 133,
+    "states": {
+     "ACTIVE": 76,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 57,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 719,
+    "total_tokens": 1259
+   },
+   {
+    "n_tasks": 200,
+    "n_memories": 136,
+    "states": {
+     "ACTIVE": 73,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 63,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 690,
+    "total_tokens": 1284
+   },
+   {
+    "n_tasks": 225,
+    "n_memories": 143,
+    "states": {
+     "ACTIVE": 77,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 66,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 726,
+    "total_tokens": 1346
+   },
+   {
+    "n_tasks": 250,
+    "n_memories": 144,
+    "states": {
+     "ACTIVE": 76,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 68,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 718,
+    "total_tokens": 1356
+   },
+   {
+    "n_tasks": 275,
+    "n_memories": 147,
+    "states": {
+     "ACTIVE": 66,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 81,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 620,
+    "total_tokens": 1381
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 147,
+    "states": {
+     "ACTIVE": 55,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 92,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 527,
+    "total_tokens": 1381
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 147,
+    "states": {
+     "ACTIVE": 55,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 92,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 527,
+    "total_tokens": 1381
+   }
+  ]
+ },
+ "budget_tight": {
+  "A_vector": [
+   {
+    "n_tasks": 25,
+    "n_memories": 101,
+    "states": {
+     "ACTIVE": 101,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1632,
+    "total_tokens": 1632
+   },
+   {
+    "n_tasks": 50,
+    "n_memories": 106,
+    "states": {
+     "ACTIVE": 106,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1682,
+    "total_tokens": 1682
+   },
+   {
+    "n_tasks": 75,
+    "n_memories": 111,
+    "states": {
+     "ACTIVE": 111,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1726,
+    "total_tokens": 1726
+   },
+   {
+    "n_tasks": 100,
+    "n_memories": 122,
+    "states": {
+     "ACTIVE": 122,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1824,
+    "total_tokens": 1824
+   },
+   {
+    "n_tasks": 125,
+    "n_memories": 126,
+    "states": {
+     "ACTIVE": 126,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1861,
+    "total_tokens": 1861
+   },
+   {
+    "n_tasks": 150,
+    "n_memories": 131,
+    "states": {
+     "ACTIVE": 131,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1906,
+    "total_tokens": 1906
+   },
+   {
+    "n_tasks": 175,
+    "n_memories": 137,
+    "states": {
+     "ACTIVE": 137,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1965,
+    "total_tokens": 1965
+   },
+   {
+    "n_tasks": 200,
+    "n_memories": 142,
+    "states": {
+     "ACTIVE": 142,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2012,
+    "total_tokens": 2012
+   },
+   {
+    "n_tasks": 225,
+    "n_memories": 149,
+    "states": {
+     "ACTIVE": 149,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2076,
+    "total_tokens": 2076
+   },
+   {
+    "n_tasks": 250,
+    "n_memories": 150,
+    "states": {
+     "ACTIVE": 150,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2086,
+    "total_tokens": 2086
+   },
+   {
+    "n_tasks": 275,
+    "n_memories": 160,
+    "states": {
+     "ACTIVE": 160,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2178,
+    "total_tokens": 2178
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 166,
+    "states": {
+     "ACTIVE": 166,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2234,
+    "total_tokens": 2234
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 166,
+    "states": {
+     "ACTIVE": 166,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2234,
+    "total_tokens": 2234
+   }
+  ],
+  "C_remem": [
+   {
+    "n_tasks": 25,
+    "n_memories": 101,
+    "states": {
+     "ACTIVE": 101,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1632,
+    "total_tokens": 1632
+   },
+   {
+    "n_tasks": 50,
+    "n_memories": 106,
+    "states": {
+     "ACTIVE": 106,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1682,
+    "total_tokens": 1682
+   },
+   {
+    "n_tasks": 75,
+    "n_memories": 111,
+    "states": {
+     "ACTIVE": 111,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1726,
+    "total_tokens": 1726
+   },
+   {
+    "n_tasks": 100,
+    "n_memories": 122,
+    "states": {
+     "ACTIVE": 122,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1824,
+    "total_tokens": 1824
+   },
+   {
+    "n_tasks": 125,
+    "n_memories": 126,
+    "states": {
+     "ACTIVE": 123,
+     "LOW_VALUE": 3,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1861,
+    "total_tokens": 1861
+   },
+   {
+    "n_tasks": 150,
+    "n_memories": 131,
+    "states": {
+     "ACTIVE": 126,
+     "LOW_VALUE": 5,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1906,
+    "total_tokens": 1906
+   },
+   {
+    "n_tasks": 175,
+    "n_memories": 137,
+    "states": {
+     "ACTIVE": 131,
+     "LOW_VALUE": 5,
+     "COMPRESSED": 1,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1962,
+    "total_tokens": 1965
+   },
+   {
+    "n_tasks": 200,
+    "n_memories": 142,
+    "states": {
+     "ACTIVE": 135,
+     "LOW_VALUE": 5,
+     "COMPRESSED": 2,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2001,
+    "total_tokens": 2012
+   },
+   {
+    "n_tasks": 225,
+    "n_memories": 149,
+    "states": {
+     "ACTIVE": 140,
+     "LOW_VALUE": 7,
+     "COMPRESSED": 1,
+     "ARCHIVED": 1,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2062,
+    "total_tokens": 2076
+   },
+   {
+    "n_tasks": 250,
+    "n_memories": 150,
+    "states": {
+     "ACTIVE": 140,
+     "LOW_VALUE": 8,
+     "COMPRESSED": 1,
+     "ARCHIVED": 1,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2072,
+    "total_tokens": 2086
+   },
+   {
+    "n_tasks": 275,
+    "n_memories": 160,
+    "states": {
+     "ACTIVE": 151,
+     "LOW_VALUE": 7,
+     "COMPRESSED": 0,
+     "ARCHIVED": 2,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2158,
+    "total_tokens": 2178
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 166,
+    "states": {
+     "ACTIVE": 157,
+     "LOW_VALUE": 7,
+     "COMPRESSED": 0,
+     "ARCHIVED": 2,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2214,
+    "total_tokens": 2234
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 166,
+    "states": {
+     "ACTIVE": 157,
+     "LOW_VALUE": 7,
+     "COMPRESSED": 0,
+     "ARCHIVED": 2,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2214,
+    "total_tokens": 2234
+   }
+  ],
+  "ret_frequency_prune": [
+   {
+    "n_tasks": 25,
+    "n_memories": 101,
+    "states": {
+     "ACTIVE": 101,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1632,
+    "total_tokens": 1632
+   },
+   {
+    "n_tasks": 50,
+    "n_memories": 106,
+    "states": {
+     "ACTIVE": 106,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1682,
+    "total_tokens": 1682
+   },
+   {
+    "n_tasks": 75,
+    "n_memories": 111,
+    "states": {
+     "ACTIVE": 111,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1726,
+    "total_tokens": 1726
+   },
+   {
+    "n_tasks": 100,
+    "n_memories": 122,
+    "states": {
+     "ACTIVE": 122,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1824,
+    "total_tokens": 1824
+   },
+   {
+    "n_tasks": 125,
+    "n_memories": 126,
+    "states": {
+     "ACTIVE": 126,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1861,
+    "total_tokens": 1861
+   },
+   {
+    "n_tasks": 150,
+    "n_memories": 131,
+    "states": {
+     "ACTIVE": 84,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 47,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 847,
+    "total_tokens": 1906
+   },
+   {
+    "n_tasks": 175,
+    "n_memories": 137,
+    "states": {
+     "ACTIVE": 85,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 52,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 861,
+    "total_tokens": 1965
+   },
+   {
+    "n_tasks": 200,
+    "n_memories": 142,
+    "states": {
+     "ACTIVE": 85,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 57,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 858,
+    "total_tokens": 2012
+   },
+   {
+    "n_tasks": 225,
+    "n_memories": 149,
+    "states": {
+     "ACTIVE": 87,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 62,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 878,
+    "total_tokens": 2076
+   },
+   {
+    "n_tasks": 250,
+    "n_memories": 150,
+    "states": {
+     "ACTIVE": 77,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 73,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 790,
+    "total_tokens": 2086
+   },
+   {
+    "n_tasks": 275,
+    "n_memories": 160,
+    "states": {
+     "ACTIVE": 83,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 77,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 845,
+    "total_tokens": 2178
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 166,
+    "states": {
+     "ACTIVE": 65,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 101,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 680,
+    "total_tokens": 2234
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 166,
+    "states": {
+     "ACTIVE": 65,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 101,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 680,
+    "total_tokens": 2234
+   }
+  ]
+ },
+ "state_change": {
+  "A_vector": [
+   {
+    "n_tasks": 25,
+    "n_memories": 101,
+    "states": {
+     "ACTIVE": 101,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 841,
+    "total_tokens": 841
+   },
+   {
+    "n_tasks": 50,
+    "n_memories": 113,
+    "states": {
+     "ACTIVE": 113,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 957,
+    "total_tokens": 957
+   },
+   {
+    "n_tasks": 75,
+    "n_memories": 122,
+    "states": {
+     "ACTIVE": 122,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1034,
+    "total_tokens": 1034
+   },
+   {
+    "n_tasks": 100,
+    "n_memories": 129,
+    "states": {
+     "ACTIVE": 129,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1102,
+    "total_tokens": 1102
+   },
+   {
+    "n_tasks": 125,
+    "n_memories": 134,
+    "states": {
+     "ACTIVE": 134,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1146,
+    "total_tokens": 1146
+   },
+   {
+    "n_tasks": 150,
+    "n_memories": 144,
+    "states": {
+     "ACTIVE": 144,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1240,
+    "total_tokens": 1240
+   },
+   {
+    "n_tasks": 175,
+    "n_memories": 154,
+    "states": {
+     "ACTIVE": 154,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1338,
+    "total_tokens": 1338
+   },
+   {
+    "n_tasks": 200,
+    "n_memories": 167,
+    "states": {
+     "ACTIVE": 167,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1442,
+    "total_tokens": 1442
+   },
+   {
+    "n_tasks": 225,
+    "n_memories": 174,
+    "states": {
+     "ACTIVE": 174,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1515,
+    "total_tokens": 1515
+   },
+   {
+    "n_tasks": 250,
+    "n_memories": 178,
+    "states": {
+     "ACTIVE": 178,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1550,
+    "total_tokens": 1550
+   },
+   {
+    "n_tasks": 275,
+    "n_memories": 186,
+    "states": {
+     "ACTIVE": 186,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1623,
+    "total_tokens": 1623
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 188,
+    "states": {
+     "ACTIVE": 188,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1644,
+    "total_tokens": 1644
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 188,
+    "states": {
+     "ACTIVE": 188,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1644,
+    "total_tokens": 1644
+   }
+  ],
+  "C_remem": [
+   {
+    "n_tasks": 25,
+    "n_memories": 101,
+    "states": {
+     "ACTIVE": 99,
+     "LOW_VALUE": 1,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 1
+    },
+    "served_tokens": 835,
+    "total_tokens": 841
+   },
+   {
+    "n_tasks": 50,
+    "n_memories": 113,
+    "states": {
+     "ACTIVE": 104,
+     "LOW_VALUE": 2,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 7
+    },
+    "served_tokens": 892,
+    "total_tokens": 957
+   },
+   {
+    "n_tasks": 75,
+    "n_memories": 122,
+    "states": {
+     "ACTIVE": 110,
+     "LOW_VALUE": 4,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 8
+    },
+    "served_tokens": 963,
+    "total_tokens": 1034
+   },
+   {
+    "n_tasks": 100,
+    "n_memories": 129,
+    "states": {
+     "ACTIVE": 116,
+     "LOW_VALUE": 4,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 9
+    },
+    "served_tokens": 1025,
+    "total_tokens": 1102
+   },
+   {
+    "n_tasks": 125,
+    "n_memories": 134,
+    "states": {
+     "ACTIVE": 119,
+     "LOW_VALUE": 4,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 11
+    },
+    "served_tokens": 1051,
+    "total_tokens": 1146
+   },
+   {
+    "n_tasks": 150,
+    "n_memories": 144,
+    "states": {
+     "ACTIVE": 126,
+     "LOW_VALUE": 4,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 14
+    },
+    "served_tokens": 1115,
+    "total_tokens": 1240
+   },
+   {
+    "n_tasks": 175,
+    "n_memories": 154,
+    "states": {
+     "ACTIVE": 130,
+     "LOW_VALUE": 5,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 19
+    },
+    "served_tokens": 1167,
+    "total_tokens": 1338
+   },
+   {
+    "n_tasks": 200,
+    "n_memories": 167,
+    "states": {
+     "ACTIVE": 140,
+     "LOW_VALUE": 5,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 22
+    },
+    "served_tokens": 1247,
+    "total_tokens": 1442
+   },
+   {
+    "n_tasks": 225,
+    "n_memories": 174,
+    "states": {
+     "ACTIVE": 144,
+     "LOW_VALUE": 5,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 25
+    },
+    "served_tokens": 1291,
+    "total_tokens": 1515
+   },
+   {
+    "n_tasks": 250,
+    "n_memories": 178,
+    "states": {
+     "ACTIVE": 148,
+     "LOW_VALUE": 5,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 25
+    },
+    "served_tokens": 1326,
+    "total_tokens": 1550
+   },
+   {
+    "n_tasks": 275,
+    "n_memories": 186,
+    "states": {
+     "ACTIVE": 155,
+     "LOW_VALUE": 5,
+     "COMPRESSED": 1,
+     "ARCHIVED": 0,
+     "INVALIDATED": 25
+    },
+    "served_tokens": 1396,
+    "total_tokens": 1623
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 188,
+    "states": {
+     "ACTIVE": 157,
+     "LOW_VALUE": 5,
+     "COMPRESSED": 1,
+     "ARCHIVED": 0,
+     "INVALIDATED": 25
+    },
+    "served_tokens": 1417,
+    "total_tokens": 1644
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 188,
+    "states": {
+     "ACTIVE": 157,
+     "LOW_VALUE": 5,
+     "COMPRESSED": 1,
+     "ARCHIVED": 0,
+     "INVALIDATED": 25
+    },
+    "served_tokens": 1417,
+    "total_tokens": 1644
+   }
+  ],
+  "ret_frequency_prune": [
+   {
+    "n_tasks": 25,
+    "n_memories": 101,
+    "states": {
+     "ACTIVE": 100,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 1
+    },
+    "served_tokens": 835,
+    "total_tokens": 841
+   },
+   {
+    "n_tasks": 50,
+    "n_memories": 113,
+    "states": {
+     "ACTIVE": 106,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 7
+    },
+    "served_tokens": 892,
+    "total_tokens": 957
+   },
+   {
+    "n_tasks": 75,
+    "n_memories": 122,
+    "states": {
+     "ACTIVE": 114,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 8
+    },
+    "served_tokens": 963,
+    "total_tokens": 1034
+   },
+   {
+    "n_tasks": 100,
+    "n_memories": 129,
+    "states": {
+     "ACTIVE": 120,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 9
+    },
+    "served_tokens": 1025,
+    "total_tokens": 1102
+   },
+   {
+    "n_tasks": 125,
+    "n_memories": 134,
+    "states": {
+     "ACTIVE": 123,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 11
+    },
+    "served_tokens": 1051,
+    "total_tokens": 1146
+   },
+   {
+    "n_tasks": 150,
+    "n_memories": 144,
+    "states": {
+     "ACTIVE": 85,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 45,
+     "INVALIDATED": 14
+    },
+    "served_tokens": 756,
+    "total_tokens": 1240
+   },
+   {
+    "n_tasks": 175,
+    "n_memories": 154,
+    "states": {
+     "ACTIVE": 75,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 60,
+     "INVALIDATED": 19
+    },
+    "served_tokens": 674,
+    "total_tokens": 1338
+   },
+   {
+    "n_tasks": 200,
+    "n_memories": 167,
+    "states": {
+     "ACTIVE": 78,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 67,
+     "INVALIDATED": 22
+    },
+    "served_tokens": 696,
+    "total_tokens": 1442
+   },
+   {
+    "n_tasks": 225,
+    "n_memories": 174,
+    "states": {
+     "ACTIVE": 77,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 72,
+     "INVALIDATED": 25
+    },
+    "served_tokens": 696,
+    "total_tokens": 1515
+   },
+   {
+    "n_tasks": 250,
+    "n_memories": 178,
+    "states": {
+     "ACTIVE": 73,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 80,
+     "INVALIDATED": 25
+    },
+    "served_tokens": 659,
+    "total_tokens": 1550
+   },
+   {
+    "n_tasks": 275,
+    "n_memories": 186,
+    "states": {
+     "ACTIVE": 80,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 81,
+     "INVALIDATED": 25
+    },
+    "served_tokens": 721,
+    "total_tokens": 1623
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 188,
+    "states": {
+     "ACTIVE": 64,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 99,
+     "INVALIDATED": 25
+    },
+    "served_tokens": 589,
+    "total_tokens": 1644
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 188,
+    "states": {
+     "ACTIVE": 64,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 99,
+     "INVALIDATED": 25
+    },
+    "served_tokens": 589,
+    "total_tokens": 1644
+   }
+  ]
+ },
+ "distractor_norecur": {
+  "A_vector": [
+   {
+    "n_tasks": 25,
+    "n_memories": 244,
+    "states": {
+     "ACTIVE": 244,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2886,
+    "total_tokens": 2886
+   },
+   {
+    "n_tasks": 50,
+    "n_memories": 281,
+    "states": {
+     "ACTIVE": 281,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 3225,
+    "total_tokens": 3225
+   },
+   {
+    "n_tasks": 70,
+    "n_memories": 310,
+    "states": {
+     "ACTIVE": 310,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 3494,
+    "total_tokens": 3494
+   }
+  ],
+  "C_remem": [
+   {
+    "n_tasks": 25,
+    "n_memories": 244,
+    "states": {
+     "ACTIVE": 244,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2886,
+    "total_tokens": 2886
+   },
+   {
+    "n_tasks": 50,
+    "n_memories": 281,
+    "states": {
+     "ACTIVE": 281,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 3225,
+    "total_tokens": 3225
+   },
+   {
+    "n_tasks": 70,
+    "n_memories": 310,
+    "states": {
+     "ACTIVE": 310,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 3494,
+    "total_tokens": 3494
+   }
+  ],
+  "ret_frequency_prune": [
+   {
+    "n_tasks": 25,
+    "n_memories": 244,
+    "states": {
+     "ACTIVE": 244,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2886,
+    "total_tokens": 2886
+   },
+   {
+    "n_tasks": 50,
+    "n_memories": 281,
+    "states": {
+     "ACTIVE": 281,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 3225,
+    "total_tokens": 3225
+   },
+   {
+    "n_tasks": 70,
+    "n_memories": 310,
+    "states": {
+     "ACTIVE": 310,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 3494,
+    "total_tokens": 3494
+   }
+  ]
+ },
+ "budget_medium": {
+  "A_vector": [
+   {
+    "n_tasks": 25,
+    "n_memories": 103,
+    "states": {
+     "ACTIVE": 103,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1781,
+    "total_tokens": 1781
+   },
+   {
+    "n_tasks": 50,
+    "n_memories": 108,
+    "states": {
+     "ACTIVE": 108,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1825,
+    "total_tokens": 1825
+   },
+   {
+    "n_tasks": 75,
+    "n_memories": 110,
+    "states": {
+     "ACTIVE": 110,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1842,
+    "total_tokens": 1842
+   },
+   {
+    "n_tasks": 100,
+    "n_memories": 118,
+    "states": {
+     "ACTIVE": 118,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1914,
+    "total_tokens": 1914
+   },
+   {
+    "n_tasks": 125,
+    "n_memories": 123,
+    "states": {
+     "ACTIVE": 123,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1956,
+    "total_tokens": 1956
+   },
+   {
+    "n_tasks": 150,
+    "n_memories": 129,
+    "states": {
+     "ACTIVE": 129,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2010,
+    "total_tokens": 2010
+   },
+   {
+    "n_tasks": 175,
+    "n_memories": 134,
+    "states": {
+     "ACTIVE": 134,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2057,
+    "total_tokens": 2057
+   },
+   {
+    "n_tasks": 200,
+    "n_memories": 141,
+    "states": {
+     "ACTIVE": 141,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2122,
+    "total_tokens": 2122
+   },
+   {
+    "n_tasks": 225,
+    "n_memories": 149,
+    "states": {
+     "ACTIVE": 149,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2193,
+    "total_tokens": 2193
+   },
+   {
+    "n_tasks": 250,
+    "n_memories": 153,
+    "states": {
+     "ACTIVE": 153,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2233,
+    "total_tokens": 2233
+   },
+   {
+    "n_tasks": 275,
+    "n_memories": 161,
+    "states": {
+     "ACTIVE": 161,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2304,
+    "total_tokens": 2304
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 164,
+    "states": {
+     "ACTIVE": 164,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2329,
+    "total_tokens": 2329
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 164,
+    "states": {
+     "ACTIVE": 164,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2329,
+    "total_tokens": 2329
+   }
+  ],
+  "C_remem": [
+   {
+    "n_tasks": 25,
+    "n_memories": 103,
+    "states": {
+     "ACTIVE": 103,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1781,
+    "total_tokens": 1781
+   },
+   {
+    "n_tasks": 50,
+    "n_memories": 108,
+    "states": {
+     "ACTIVE": 108,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1825,
+    "total_tokens": 1825
+   },
+   {
+    "n_tasks": 75,
+    "n_memories": 110,
+    "states": {
+     "ACTIVE": 107,
+     "LOW_VALUE": 3,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1842,
+    "total_tokens": 1842
+   },
+   {
+    "n_tasks": 100,
+    "n_memories": 118,
+    "states": {
+     "ACTIVE": 111,
+     "LOW_VALUE": 7,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1914,
+    "total_tokens": 1914
+   },
+   {
+    "n_tasks": 125,
+    "n_memories": 123,
+    "states": {
+     "ACTIVE": 110,
+     "LOW_VALUE": 13,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1956,
+    "total_tokens": 1956
+   },
+   {
+    "n_tasks": 150,
+    "n_memories": 129,
+    "states": {
+     "ACTIVE": 116,
+     "LOW_VALUE": 11,
+     "COMPRESSED": 2,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1995,
+    "total_tokens": 2010
+   },
+   {
+    "n_tasks": 175,
+    "n_memories": 134,
+    "states": {
+     "ACTIVE": 120,
+     "LOW_VALUE": 12,
+     "COMPRESSED": 2,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2042,
+    "total_tokens": 2057
+   },
+   {
+    "n_tasks": 200,
+    "n_memories": 141,
+    "states": {
+     "ACTIVE": 127,
+     "LOW_VALUE": 11,
+     "COMPRESSED": 3,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2100,
+    "total_tokens": 2122
+   },
+   {
+    "n_tasks": 225,
+    "n_memories": 149,
+    "states": {
+     "ACTIVE": 134,
+     "LOW_VALUE": 11,
+     "COMPRESSED": 2,
+     "ARCHIVED": 2,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2155,
+    "total_tokens": 2193
+   },
+   {
+    "n_tasks": 250,
+    "n_memories": 153,
+    "states": {
+     "ACTIVE": 138,
+     "LOW_VALUE": 11,
+     "COMPRESSED": 2,
+     "ARCHIVED": 2,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2195,
+    "total_tokens": 2233
+   },
+   {
+    "n_tasks": 275,
+    "n_memories": 161,
+    "states": {
+     "ACTIVE": 145,
+     "LOW_VALUE": 12,
+     "COMPRESSED": 2,
+     "ARCHIVED": 2,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2266,
+    "total_tokens": 2304
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 164,
+    "states": {
+     "ACTIVE": 148,
+     "LOW_VALUE": 11,
+     "COMPRESSED": 3,
+     "ARCHIVED": 2,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2276,
+    "total_tokens": 2329
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 164,
+    "states": {
+     "ACTIVE": 148,
+     "LOW_VALUE": 11,
+     "COMPRESSED": 3,
+     "ARCHIVED": 2,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 2276,
+    "total_tokens": 2329
+   }
+  ],
+  "ret_frequency_prune": [
+   {
+    "n_tasks": 25,
+    "n_memories": 103,
+    "states": {
+     "ACTIVE": 103,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1781,
+    "total_tokens": 1781
+   },
+   {
+    "n_tasks": 50,
+    "n_memories": 108,
+    "states": {
+     "ACTIVE": 108,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1825,
+    "total_tokens": 1825
+   },
+   {
+    "n_tasks": 75,
+    "n_memories": 110,
+    "states": {
+     "ACTIVE": 110,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1842,
+    "total_tokens": 1842
+   },
+   {
+    "n_tasks": 100,
+    "n_memories": 118,
+    "states": {
+     "ACTIVE": 118,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1914,
+    "total_tokens": 1914
+   },
+   {
+    "n_tasks": 125,
+    "n_memories": 123,
+    "states": {
+     "ACTIVE": 123,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 0,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1956,
+    "total_tokens": 1956
+   },
+   {
+    "n_tasks": 150,
+    "n_memories": 129,
+    "states": {
+     "ACTIVE": 83,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 46,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 925,
+    "total_tokens": 2010
+   },
+   {
+    "n_tasks": 175,
+    "n_memories": 134,
+    "states": {
+     "ACTIVE": 83,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 51,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 925,
+    "total_tokens": 2057
+   },
+   {
+    "n_tasks": 200,
+    "n_memories": 141,
+    "states": {
+     "ACTIVE": 85,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 56,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 946,
+    "total_tokens": 2122
+   },
+   {
+    "n_tasks": 225,
+    "n_memories": 149,
+    "states": {
+     "ACTIVE": 91,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 58,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 1000,
+    "total_tokens": 2193
+   },
+   {
+    "n_tasks": 250,
+    "n_memories": 153,
+    "states": {
+     "ACTIVE": 87,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 66,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 968,
+    "total_tokens": 2233
+   },
+   {
+    "n_tasks": 275,
+    "n_memories": 161,
+    "states": {
+     "ACTIVE": 90,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 71,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 997,
+    "total_tokens": 2304
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 164,
+    "states": {
+     "ACTIVE": 80,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 84,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 866,
+    "total_tokens": 2329
+   },
+   {
+    "n_tasks": 300,
+    "n_memories": 164,
+    "states": {
+     "ACTIVE": 80,
+     "LOW_VALUE": 0,
+     "COMPRESSED": 0,
+     "ARCHIVED": 84,
+     "INVALIDATED": 0
+    },
+    "served_tokens": 866,
+    "total_tokens": 2329
+   }
+  ]
+ }
+}

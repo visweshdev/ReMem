@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "remem"
+version = "0.1.0"
+description = "Outcome-aware adaptive memory for long-horizon AI agents: utility learned from use, supersession, retention and token-budgeted retrieval"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Viswesh Kesarla", email = "visweshkesarla@gmail.com" }]
+keywords = ["llm", "agents", "memory", "retrieval", "rag"]
+dependencies = ["numpy>=1.26", "pyyaml>=6.0", "matplotlib>=3.7"]
+
+[project.optional-dependencies]
+llm = ["openai>=1.50"]   # only for remem.llm (real-model adapters)
+dev = ["pytest>=8.0"]
+
+[tool.setuptools.packages.find]
+include = ["remem*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
