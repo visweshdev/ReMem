@@ -151,3 +151,13 @@ def test_ambiguous_only_loo_replays_just_the_uncertain_memories():
     full = Attributor(AttributionConfig(method="signals_loo", loo_policy="all"))
     full.attribute(ctx, tr, True, replay)
     assert full.extra_agent_calls == 3
+
+
+def test_guard_never_serves_unrelated_memories_in_a_tiny_store(embedder):
+    from remem import ReMem
+    m = ReMem(None, embedder=embedder)
+    m.add("The payments service is hosted in region eu-west-1.", entity="payments", attribute="region")
+    m.add("Team lunch moved to Thursday.")
+    m.add("The billing service is hosted in region us-east-1.", entity="billing", attribute="region")
+    texts = [h.text for h in m.search("Which region does payments deploy to?").items]
+    assert texts[0].startswith("The payments") and not any("lunch" in t for t in texts)

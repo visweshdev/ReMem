@@ -90,9 +90,11 @@ class SelectionConfig:
     min_items: int = 1
     p_floor: float = 0.12                # cost_aware: drop candidates with calibrated p below this
     cost_lambda: float = 0.0             # cost_aware: penalty per 100 tokens subtracted from p
+    min_sim: float = 0.0                 # candidates below this similarity are never served (0 = off)
     guard_top: int = 0                   # always serve the top-m most similar candidates unless there is evidence they are useless
     guard_min_evidence: int = 3          # exposures in this task class before 'useless' evidence counts
     guard_rate: float = 0.2              # class contribution rate below which a guarded candidate is dropped
+    guard_min_rel_sim: float = 0.5       # only guard candidates with sim >= this fraction of the best candidate's sim
 
 
 @dataclass

@@ -9,8 +9,8 @@
     "gold_not_in_pool": 93
    },
    "long_horizon": {
-    "gold_pooled_not_selected": 136,
     "irrelevant_retrieved": 290,
+    "gold_pooled_not_selected": 136,
     "fail_despite_gold": 258,
     "success_without_memory": 37
    },
@@ -22,8 +22,8 @@
     "outdated_preferred": 509
    },
    "rare_critical": {
-    "fail_despite_gold": 264,
     "irrelevant_retrieved": 288,
+    "fail_despite_gold": 264,
     "gold_pooled_not_selected": 122,
     "success_without_memory": 18
    },
@@ -75,8 +75,8 @@
     "utility_demoted_gold": 1
    },
    "long_horizon": {
-    "gold_pooled_not_selected": 138,
     "irrelevant_retrieved": 290,
+    "gold_pooled_not_selected": 138,
     "fail_despite_gold": 258,
     "success_without_memory": 38,
     "utility_demoted_gold": 2
@@ -90,8 +90,8 @@
     "utility_demoted_gold": 2
    },
    "rare_critical": {
-    "fail_despite_gold": 264,
     "irrelevant_retrieved": 288,
+    "fail_despite_gold": 264,
     "gold_pooled_not_selected": 122,
     "success_without_memory": 18
    },
@@ -145,8 +145,8 @@
     "gold_not_in_pool": 93
    },
    "long_horizon": {
-    "gold_pooled_not_selected": 47,
     "irrelevant_retrieved": 264,
+    "gold_pooled_not_selected": 47,
     "fail_despite_gold": 256,
     "success_without_memory": 13,
     "utility_demoted_gold": 5
@@ -159,8 +159,8 @@
     "utility_demoted_gold": 6
    },
    "rare_critical": {
-    "fail_despite_gold": 238,
     "irrelevant_retrieved": 249,
+    "fail_despite_gold": 238,
     "gold_pooled_not_selected": 63,
     "success_without_memory": 13
    },
@@ -184,8 +184,8 @@
     "irrelevant_retrieved": 204,
     "fail_despite_gold": 190,
     "gold_pooled_not_selected": 78,
-    "success_without_memory": 17,
     "utility_demoted_gold": 15,
+    "success_without_memory": 17,
     "gold_not_in_pool": 5
    },
    "distractor_norecur": {

@@ -65,7 +65,8 @@ def row(rec: MemoryRecord) -> str:
             f"{rec.original_text[:58]}")
 
 
-def show(rec: MemoryRecord, led: MemoryLedger, out=sys.stdout) -> None:
+def show(rec: MemoryRecord, led: MemoryLedger, out=None) -> None:
+    out = sys.stdout if out is None else out      # resolve at call time, not import time
     w = lambda s="": print(s, file=out)  # noqa: E731
     w(f"Memory            {rec.fact_id}")
     w(f"Content           {rec.original_text}")

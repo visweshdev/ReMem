@@ -132,6 +132,8 @@ class ReMemSystem:
             if cfg.contradiction.enabled and cfg.contradiction.as_of_validity:
                 if not ContradictionDetector.valid_at(rec, ref):
                     continue
+            if cfg.selection.min_sim > 0 and cand.sim < cfg.selection.min_sim:
+                continue                                    # not about this query at all
             eff = self.retention.effective_state(rec, task_class)
             if eff == MemState.ARCHIVED:
                 continue
@@ -217,7 +219,11 @@ class ReMemSystem:
         if sel.guard_top <= 0 or not scored:
             return selected
         u = self.cfg.utility
-        guarded = sorted(scored, key=lambda s: (-s.cand.sim, s.cand.base_rank, s.cand.fact_id))[: sel.guard_top]
+        best_sim = max(s.cand.sim for s in scored)
+        if best_sim <= 0:
+            return selected
+        guarded = [s for s in sorted(scored, key=lambda s: (-s.cand.sim, s.cand.base_rank, s.cand.fact_id))[: sel.guard_top]
+                   if s.cand.sim >= sel.guard_min_rel_sim * best_sim]      # never guard junk that merely ranks top-m
         guarded_ids = {g.cand.fact_id for g in guarded}
         out = list(selected)
         have = {s.cand.fact_id for s in out}
