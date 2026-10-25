@@ -30,6 +30,7 @@ NAMES = {
     "loo_no_guard": "full - similarity guard", "new_thompson": "full, Thompson sampling instead of UCB",
     "schema_learned": "full, learned single-valued schema (none given)",
     "attr_signals_loo_ambiguous": "attribution: signals + LOO on ambiguous only",
+    "rmm_style": "RMM-style reranker (citation reward, REINFORCE; our reimplementation)",
 }
 COLORS = {"A_vector": "#8c8c8c", "B_static": "#f58518", "C_remem": "#54a24b",
           "ret_frequency_prune": "#e45756"}
@@ -78,7 +79,7 @@ def write_all(out: Path, agg: dict, curves: dict, growth: dict, calib: dict, fa:
             continue
         md.append(f"\n## Main comparison, reader mode `{mode}` (mean over headline families)\n")
         md.append(_table(["System"] + [c[0] for c in core_cols],
-                         _sys_rows(main, ["A_vector", "B_static", "C_remem"],
+                         _sys_rows(main, ["A_vector", "B_static", "rmm_style", "C_remem"],
                                    "HEADLINE", core_cols)))
         md.append(f"\n### Task success % per family, reader mode `{mode}`\n")
         rows = []

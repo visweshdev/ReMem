@@ -74,12 +74,12 @@
    "supersedes": [],
    "contradictions": 0,
    "n_pooled": 118,
-   "n_retrieved": 42,
+   "n_retrieved": 36,
    "n_credited": 0.0,
    "n_wasted": 17,
    "n_blamed": 4.0,
    "n_success_ctx": 17,
-   "n_fail_ctx": 25,
+   "n_fail_ctx": 19,
    "last_retrieved_step": 300,
    "last_credit_step": null,
    "last_updated_step": 300,
@@ -145,24 +145,6 @@
      "utility": 0.5999283860824535
     },
     {
-     "step": 36,
-     "kind": "GUARDED",
-     "detail": "served by similarity guard (class=owner)",
-     "utility": null
-    },
-    {
-     "step": 36,
-     "kind": "RETRIEVED",
-     "detail": "task=35 class=owner sim=0.29 rank#2 [class_rate=-1.23, post_std=-1.14, contrib_rate=+0.96]",
-     "utility": 0.2349941920434073
-    },
-    {
-     "step": 38,
-     "kind": "RETRIEVED",
-     "detail": "task=37 class=owner sim=0.29 rank#2 [class_rate=-1.23, post_std=-1.14, contrib_rate=+0.96]",
-     "utility": 0.2675384570128536
-    },
-    {
      "step": 46,
      "kind": "GUARDED",
      "detail": "served by similarity guard (class=owner)",
@@ -172,49 +154,31 @@
      "step": 46,
      "kind": "RETRIEVED",
      "detail": "task=45 class=owner sim=0.29 rank#2 [class_rate=-1.23, post_std=-1.14, contrib_rate=+0.96]",
-     "utility": 0.2919483470056718
-    },
-    {
-     "step": 52,
-     "kind": "RETRIEVED",
-     "detail": "task=51 class=owner sim=0.29 rank#2 [class_rate=-1.23, post_std=-1.14, contrib_rate=+0.96]",
-     "utility": 0.26007029735489307
+     "utility": 0.25380256157427716
     },
     {
      "step": 54,
      "kind": "RETRIEVED",
      "detail": "task=53 class=owner sim=0.36 rank#2 [class_rate=-1.23, post_std=-1.14, contrib_rate=+0.96]",
-     "utility": 0.3109427814745336
+     "utility": 0.29388621454559294
     },
     {
      "step": 55,
      "kind": "RETRIEVED",
      "detail": "task=54 class=owner sim=0.36 rank#2 [class_rate=-1.23, post_std=-1.14, contrib_rate=+0.96]",
-     "utility": 0.3142891308374397
-    },
-    {
-     "step": 56,
-     "kind": "RETRIEVED",
-     "detail": "task=55 class=owner sim=0.29 rank#2 [class_rate=-1.23, post_std=-1.14, contrib_rate=+0.96]",
-     "utility": 0.2741918052734096
-    },
-    {
-     "step": 57,
-     "kind": "RETRIEVED",
-     "detail": "task=56 class=owner sim=0.29 rank#2 [class_rate=-1.23, post_std=-1.14, contrib_rate=+0.96]",
-     "utility": 0.2744521678965506
+     "utility": 0.3134413526077424
     },
     {
      "step": 58,
      "kind": "RETRIEVED",
      "detail": "task=57 class=owner sim=0.36 rank#1 [class_rate=-1.23, post_std=-1.14, contrib_rate=+0.96]",
-     "utility": 0.41809320845739484
+     "utility": 0.40889835289607424
     },
     {
      "step": 59,
      "kind": "RETRIEVED",
      "detail": "task=58 class=owner sim=0.36 rank#2 [class_rate=-1.23, post_std=-1.14, contrib_rate=+0.96]",
-     "utility": 0.3158153507198736
+     "utility": 0.3143948327274755
     },
     {
      "step": 59,
@@ -232,7 +196,7 @@
      "step": 60,
      "kind": "RETRIEVED",
      "detail": "task=59 class=owner sim=0.29 rank#2 [class_rate=-1.23, post_std=-1.14, contrib_rate=+0.96]",
-     "utility": 0.3193173883632225
+     "utility": 0.31911751935675936
     },
     {
      "step": 64,
@@ -244,19 +208,19 @@
      "step": 64,
      "kind": "RETRIEVED",
      "detail": "task=63 class=owner sim=0.29 rank#2 [class_rate=-1.23, post_std=-1.14, contrib_rate=+0.96]",
-     "utility": 0.31107543622736333
+     "utility": 0.310763573893389
     },
     {
      "step": 64,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=63 credit=0.00",
-     "utility": 0.31107543622736333
+     "utility": 0.310763573893389
     },
     {
      "step": 67,
      "kind": "RETRIEVED",
      "detail": "task=66 class=owner sim=0.36 rank#1 [class_rate=-1.69, contrib_rate=+1.30, post_std=-0.71]",
-     "utility": 0.28721490405509265
+     "utility": 0.2868300498487616
     },
     {
      "step": 67,
@@ -265,22 +229,10 @@
      "utility": null
     },
     {
-     "step": 70,
-     "kind": "GUARDED",
-     "detail": "served by similarity guard (class=owner)",
-     "utility": null
-    },
-    {
-     "step": 70,
-     "kind": "RETRIEVED",
-     "detail": "task=69 class=owner sim=0.29 rank#2 [class_rate=-1.69, contrib_rate=+1.30, post_std=-0.71]",
-     "utility": 0.1879992829242932
-    },
-    {
      "step": 72,
      "kind": "RETRIEVED",
      "detail": "task=71 class=owner sim=0.36 rank#2 [class_rate=-1.69, contrib_rate=+1.30, post_std=-0.71]",
-     "utility": 0.21806222492589553
+     "utility": 0.21228182951667085
     },
     {
      "step": 74,
@@ -292,13 +244,13 @@
      "step": 74,
      "kind": "RETRIEVED",
      "detail": "task=73 class=owner sim=0.29 rank#2 [class_rate=-1.69, contrib_rate=+1.30, post_std=-0.71]",
-     "utility": 0.21818784434051575
+     "utility": 0.2183366771543492
     },
     {
      "step": 75,
      "kind": "RETRIEVED",
      "detail": "task=74 class=owner sim=0.36 rank#2 [class_rate=-1.69, contrib_rate=+1.30, post_std=-0.71]",
-     "utility": 0.22033218767586532
+     "utility": 0.22039368804602227
     },
     {
      "step": 77,
@@ -310,205 +262,205 @@
      "step": 77,
      "kind": "RETRIEVED",
      "detail": "task=76 class=owner sim=0.29 rank#2 [class_rate=-1.69, contrib_rate=+1.30, post_std=-0.71]",
-     "utility": 0.21825803203161312
+     "utility": 0.21824616052884038
     },
     {
      "step": 77,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=76 credit=0.00",
-     "utility": 0.21825803203161312
+     "utility": 0.21824616052884038
     },
     {
      "step": 78,
      "kind": "RETRIEVED",
      "detail": "task=77 class=owner sim=0.36 rank#2 [class_rate=-1.96, contrib_rate=+1.55, waste_rate=-1.08]",
-     "utility": 0.18273655284045404
+     "utility": 0.18267571774886465
     },
     {
      "step": 102,
      "kind": "RETRIEVED",
      "detail": "task=101 class=owner sim=0.36 rank#1 [class_rate=-1.96, contrib_rate=+1.55, waste_rate=-1.08]",
-     "utility": 0.20577718734444223
+     "utility": 0.20565759907379536
     },
     {
      "step": 144,
      "kind": "RETRIEVED",
      "detail": "task=143 class=owner sim=0.36 rank#1 [class_rate=-1.96, contrib_rate=+1.55, waste_rate=-1.08]",
-     "utility": 0.187327251051977
+     "utility": 0.18718425763847132
     },
     {
      "step": 144,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=143 credit=0.00",
-     "utility": 0.187327251051977
+     "utility": 0.18718425763847132
     },
     {
      "step": 145,
      "kind": "RETRIEVED",
      "detail": "task=144 class=owner sim=0.36 rank#1 [class_rate=-2.14, contrib_rate=+1.74, waste_rate=-1.44]",
-     "utility": 0.228003646513177
+     "utility": 0.22777745618114625
     },
     {
      "step": 145,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=144 credit=0.00",
-     "utility": 0.228003646513177
+     "utility": 0.22777745618114625
     },
     {
      "step": 152,
      "kind": "RETRIEVED",
      "detail": "task=151 class=owner sim=0.36 rank#1 [class_rate=-2.26, contrib_rate=+1.88, waste_rate=-1.71]",
-     "utility": 0.2050308986143431
+     "utility": 0.2047926964712474
     },
     {
      "step": 152,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=151 credit=0.00",
-     "utility": 0.2050308986143431
+     "utility": 0.2047926964712474
     },
     {
      "step": 165,
      "kind": "RETRIEVED",
      "detail": "task=164 class=owner sim=0.36 rank#1 [class_rate=-2.35, contrib_rate=+2.00, waste_rate=-1.90]",
-     "utility": 0.19004666493678882
+     "utility": 0.18979753165210175
     },
     {
      "step": 165,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=164 credit=0.00",
-     "utility": 0.19004666493678882
+     "utility": 0.18979753165210175
     },
     {
      "step": 166,
      "kind": "RETRIEVED",
      "detail": "task=165 class=owner sim=0.36 rank#1 [class_rate=-2.41, contrib_rate=+2.09, waste_rate=-2.06]",
-     "utility": 0.21320838175399479
+     "utility": 0.21289881172836783
     },
     {
      "step": 166,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=165 credit=0.00",
-     "utility": 0.21320838175399479
+     "utility": 0.21289881172836783
     },
     {
      "step": 181,
      "kind": "RETRIEVED",
      "detail": "task=180 class=owner sim=0.36 rank#1 [class_rate=-2.46, waste_rate=-2.18, contrib_rate=+2.17]",
-     "utility": 0.1860222879381808
+     "utility": 0.18573089756182734
     },
     {
      "step": 181,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=180 credit=0.00",
-     "utility": 0.1860222879381808
+     "utility": 0.18573089756182734
     },
     {
      "step": 199,
      "kind": "RETRIEVED",
      "detail": "task=198 class=owner sim=0.36 rank#1 [class_rate=-2.50, waste_rate=-2.28, contrib_rate=+2.24]",
-     "utility": 0.1827364796387272
+     "utility": 0.1824314647398812
     },
     {
      "step": 199,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=198 credit=0.00",
-     "utility": 0.1827364796387272
+     "utility": 0.1824314647398812
     },
     {
      "step": 204,
      "kind": "RETRIEVED",
      "detail": "task=203 class=owner sim=0.36 rank#1 [class_rate=-2.53, waste_rate=-2.36, contrib_rate=+2.30]",
-     "utility": 0.20939772397821704
+     "utility": 0.2090308794249639
     },
     {
      "step": 204,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=203 credit=0.00",
-     "utility": 0.20939772397821704
+     "utility": 0.2090308794249639
     },
     {
      "step": 216,
      "kind": "RETRIEVED",
      "detail": "task=215 class=owner sim=0.36 rank#1 [class_rate=-2.56, waste_rate=-2.43, contrib_rate=+2.35]",
-     "utility": 0.19755906307282617
+     "utility": 0.19719727609583704
     },
     {
      "step": 216,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=215 credit=0.00",
-     "utility": 0.19755906307282617
+     "utility": 0.19719727609583704
     },
     {
      "step": 224,
      "kind": "RETRIEVED",
      "detail": "task=223 class=owner sim=0.36 rank#1 [class_rate=-2.58, waste_rate=-2.49, contrib_rate=+2.39]",
-     "utility": 0.20862669459463157
+     "utility": 0.20823305914189266
     },
     {
      "step": 252,
      "kind": "RETRIEVED",
      "detail": "task=251 class=owner sim=0.36 rank#1 [class_rate=-2.58, waste_rate=-2.49, contrib_rate=+2.39]",
-     "utility": 0.17547359660892106
+     "utility": 0.175132980793187
     },
     {
      "step": 252,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=251 credit=0.00",
-     "utility": 0.17547359660892106
+     "utility": 0.175132980793187
     },
     {
      "step": 286,
      "kind": "RETRIEVED",
      "detail": "task=285 class=owner sim=0.36 rank#1 [class_rate=-2.59, waste_rate=-2.55, contrib_rate=+2.43]",
-     "utility": 0.17083693525918076
+     "utility": 0.17049669636275033
     },
     {
      "step": 286,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=285 credit=0.00",
-     "utility": 0.17083693525918076
+     "utility": 0.17049669636275033
     },
     {
      "step": 290,
      "kind": "RETRIEVED",
      "detail": "task=289 class=owner sim=0.36 rank#1 [class_rate=-2.61, waste_rate=-2.59, contrib_rate=+2.46]",
-     "utility": 0.22462668815248307
+     "utility": 0.22417975134813653
     },
     {
      "step": 290,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=289 credit=0.00",
-     "utility": 0.22462668815248307
+     "utility": 0.22417975134813653
     },
     {
      "step": 292,
      "kind": "RETRIEVED",
      "detail": "task=291 class=owner sim=0.29 rank#2 [waste_rate=-2.63, class_rate=-2.62, contrib_rate=+2.49]",
-     "utility": 0.16172235083422112
+     "utility": 0.16138726194754327
     },
     {
      "step": 292,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=291 credit=0.00",
-     "utility": 0.16172235083422112
+     "utility": 0.16138726194754327
     },
     {
      "step": 296,
      "kind": "RETRIEVED",
      "detail": "task=295 class=owner sim=0.36 rank#1 [waste_rate=-2.67, class_rate=-2.63, contrib_rate=+2.52]",
-     "utility": 0.23117577995141853
+     "utility": 0.23070555819241692
     },
     {
      "step": 296,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=295 credit=0.00",
-     "utility": 0.23117577995141853
+     "utility": 0.23070555819241692
     },
     {
      "step": 300,
      "kind": "RETRIEVED",
      "detail": "task=299 class=owner sim=0.36 rank#2 [waste_rate=-2.70, class_rate=-2.64, contrib_rate=+2.54]",
-     "utility": 0.16182065715988994
+     "utility": 0.16147624116361128
     },
     {
      "step": 300,
@@ -518,7 +470,7 @@
     }
    ],
    "last_reason": "sim=0.36 rank#2 [waste_rate=-2.70, class_rate=-2.64, contrib_rate=+2.54]",
-   "last_utility": 0.1391191669397568
+   "last_utility": 0.13877475094347813
   },
   {
    "fact_id": "fact_00013",
@@ -649,12 +601,12 @@
    "supersedes": [],
    "contradictions": 0,
    "n_pooled": 132,
-   "n_retrieved": 52,
+   "n_retrieved": 57,
    "n_credited": 0.0,
    "n_wasted": 32,
    "n_blamed": 5.0,
    "n_success_ctx": 32,
-   "n_fail_ctx": 20,
+   "n_fail_ctx": 25,
    "last_retrieved_step": 300,
    "last_credit_step": null,
    "last_updated_step": 300,
@@ -724,34 +676,64 @@
      "utility": 0.30836785929562593
     },
     {
+     "step": 36,
+     "kind": "RETRIEVED",
+     "detail": "task=35 class=owner sim=0.29 rank#5 [post_std=-1.14, contrib_rate=+0.96, class_rate=-0.86]",
+     "utility": 0.25751217217254596
+    },
+    {
+     "step": 38,
+     "kind": "RETRIEVED",
+     "detail": "task=37 class=owner sim=0.29 rank#5 [post_std=-1.14, contrib_rate=+0.96, class_rate=-0.86]",
+     "utility": 0.2674089846234717
+    },
+    {
      "step": 46,
      "kind": "RETRIEVED",
      "detail": "task=45 class=owner sim=0.36 rank#1 [post_std=-1.14, contrib_rate=+0.96, class_rate=-0.86]",
-     "utility": 0.4584716793935323
+     "utility": 0.48520109382616605
+    },
+    {
+     "step": 52,
+     "kind": "RETRIEVED",
+     "detail": "task=51 class=owner sim=0.29 rank#5 [post_std=-1.14, contrib_rate=+0.96, class_rate=-0.86]",
+     "utility": 0.2599448873894118
     },
     {
      "step": 54,
      "kind": "RETRIEVED",
      "detail": "task=53 class=owner sim=0.36 rank#5 [post_std=-1.14, contrib_rate=+0.96, class_rate=-0.86]",
-     "utility": 0.293743171741473
+     "utility": 0.31079158676217944
     },
     {
      "step": 55,
      "kind": "RETRIEVED",
      "detail": "task=54 class=owner sim=0.36 rank#5 [post_std=-1.14, contrib_rate=+0.96, class_rate=-0.86]",
-     "utility": 0.31328900552728234
+     "utility": 0.3141363951785768
+    },
+    {
+     "step": 56,
+     "kind": "RETRIEVED",
+     "detail": "task=55 class=owner sim=0.29 rank#5 [post_std=-1.14, contrib_rate=+0.96, class_rate=-0.86]",
+     "utility": 0.2740587940289486
+    },
+    {
+     "step": 57,
+     "kind": "RETRIEVED",
+     "detail": "task=56 class=owner sim=0.29 rank#5 [post_std=-1.14, contrib_rate=+0.96, class_rate=-0.86]",
+     "utility": 0.27431901970681516
     },
     {
      "step": 58,
      "kind": "RETRIEVED",
      "detail": "task=57 class=owner sim=0.45 rank#0 [rank_inv=+1.76, post_std=-1.14, contrib_rate=+0.96]",
-     "utility": 0.8182857060698367
+     "utility": 0.8262520474133895
     },
     {
      "step": 59,
      "kind": "RETRIEVED",
      "detail": "task=58 class=owner sim=0.36 rank#5 [post_std=-1.14, contrib_rate=+0.96, class_rate=-0.86]",
-     "utility": 0.3142420487064339
+     "utility": 0.3156619186180112
     },
     {
      "step": 59,
@@ -763,31 +745,31 @@
      "step": 60,
      "kind": "RETRIEVED",
      "detail": "task=59 class=owner sim=0.36 rank#1 [post_std=-1.14, contrib_rate=+0.96, class_rate=-0.86]",
-     "utility": 0.5233718655330701
+     "utility": 0.5236440003725793
     },
     {
      "step": 64,
      "kind": "RETRIEVED",
      "detail": "task=63 class=owner sim=0.36 rank#1 [post_std=-1.14, contrib_rate=+0.96, class_rate=-0.86]",
-     "utility": 0.5118866251061283
+     "utility": 0.5123193073171228
     },
     {
      "step": 64,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=63 credit=0.00",
-     "utility": 0.5118866251061283
+     "utility": 0.5123193073171228
     },
     {
      "step": 66,
      "kind": "RETRIEVED",
      "detail": "task=65 class=owner sim=0.36 rank#5 [class_rate=-1.48, contrib_rate=+1.30, post_std=-0.71]",
-     "utility": 0.1955694568174447
+     "utility": 0.1958179807784349
     },
     {
      "step": 67,
      "kind": "RETRIEVED",
      "detail": "task=66 class=owner sim=0.45 rank#0 [rank_inv=+1.76, class_rate=-1.48, contrib_rate=+1.30]",
-     "utility": 0.6523032990912858
+     "utility": 0.6529484618246233
     },
     {
      "step": 67,
@@ -799,37 +781,37 @@
      "step": 68,
      "kind": "RETRIEVED",
      "detail": "task=67 class=owner sim=0.36 rank#5 [class_rate=-1.48, contrib_rate=+1.30, post_std=-0.71]",
-     "utility": 0.19973240162965994
+     "utility": 0.19959069811634333
     },
     {
      "step": 68,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=67 credit=0.00",
-     "utility": 0.19973240162965994
+     "utility": 0.19959069811634333
     },
     {
      "step": 74,
      "kind": "RETRIEVED",
      "detail": "task=73 class=owner sim=0.36 rank#1 [class_rate=-1.83, contrib_rate=+1.55, waste_rate=-1.08]",
-     "utility": 0.2628996681795781
+     "utility": 0.2627985927836164
     },
     {
      "step": 77,
      "kind": "RETRIEVED",
      "detail": "task=76 class=owner sim=0.36 rank#1 [class_rate=-1.83, contrib_rate=+1.55, waste_rate=-1.08]",
-     "utility": 0.27065449965769794
+     "utility": 0.2706362694747026
     },
     {
      "step": 77,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=76 credit=0.00",
-     "utility": 0.27065449965769794
+     "utility": 0.2706362694747026
     },
     {
      "step": 87,
      "kind": "RETRIEVED",
      "detail": "task=86 class=owner sim=0.36 rank#1 [class_rate=-2.06, contrib_rate=+1.74, waste_rate=-1.44]",
-     "utility": 0.22587918751923133
+     "utility": 0.22592444690645622
     },
     {
      "step": 87,
@@ -841,367 +823,367 @@
      "step": 102,
      "kind": "RETRIEVED",
      "detail": "task=101 class=owner sim=0.45 rank#0 [class_rate=-2.06, rank_inv=+1.76, contrib_rate=+1.74]",
-     "utility": 0.47939498915883627
+     "utility": 0.47885693941518814
     },
     {
      "step": 122,
      "kind": "RETRIEVED",
      "detail": "task=121 class=owner sim=0.36 rank#1 [class_rate=-2.06, contrib_rate=+1.74, waste_rate=-1.44]",
-     "utility": 0.21102637389944462
+     "utility": 0.2108065083731351
     },
     {
      "step": 122,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=121 credit=0.00",
-     "utility": 0.21102637389944462
+     "utility": 0.2108065083731351
     },
     {
      "step": 130,
      "kind": "RETRIEVED",
      "detail": "task=129 class=owner sim=0.45 rank#0 [class_rate=-2.20, contrib_rate=+1.88, rank_inv=+1.76]",
-     "utility": 0.4839508233321211
+     "utility": 0.48365208534345483
     },
     {
      "step": 130,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=129 credit=0.00",
-     "utility": 0.4839508233321211
+     "utility": 0.48365208534345483
     },
     {
      "step": 133,
      "kind": "RETRIEVED",
      "detail": "task=132 class=owner sim=0.36 rank#1 [class_rate=-2.31, contrib_rate=+2.00, waste_rate=-1.90]",
-     "utility": 0.22401032268072188
+     "utility": 0.22388939728985308
     },
     {
      "step": 133,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=132 credit=0.00",
-     "utility": 0.22401032268072188
+     "utility": 0.22388939728985308
     },
     {
      "step": 144,
      "kind": "RETRIEVED",
      "detail": "task=143 class=owner sim=0.45 rank#0 [class_rate=-2.38, contrib_rate=+2.09, waste_rate=-2.06]",
-     "utility": 0.46406495853695173
+     "utility": 0.463946631864142
     },
     {
      "step": 144,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=143 credit=0.00",
-     "utility": 0.46406495853695173
+     "utility": 0.463946631864142
     },
     {
      "step": 145,
      "kind": "RETRIEVED",
      "detail": "task=144 class=owner sim=0.45 rank#0 [class_rate=-2.44, waste_rate=-2.18, contrib_rate=+2.17]",
-     "utility": 0.5042913975078321
+     "utility": 0.5042438233756897
     },
     {
      "step": 145,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=144 credit=0.00",
-     "utility": 0.5042913975078321
+     "utility": 0.5042438233756897
     },
     {
      "step": 152,
      "kind": "RETRIEVED",
      "detail": "task=151 class=owner sim=0.45 rank#0 [class_rate=-2.48, waste_rate=-2.28, contrib_rate=+2.24]",
-     "utility": 0.4844475272011903
+     "utility": 0.4844634103228651
     },
     {
      "step": 152,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=151 credit=0.00",
-     "utility": 0.4844475272011903
+     "utility": 0.4844634103228651
     },
     {
      "step": 165,
      "kind": "RETRIEVED",
      "detail": "task=164 class=owner sim=0.45 rank#0 [class_rate=-2.52, waste_rate=-2.36, contrib_rate=+2.30]",
-     "utility": 0.46844764366853303
+     "utility": 0.4685181371192919
     },
     {
      "step": 165,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=164 credit=0.00",
-     "utility": 0.46844764366853303
+     "utility": 0.4685181371192919
     },
     {
      "step": 166,
      "kind": "RETRIEVED",
      "detail": "task=165 class=owner sim=0.45 rank#0 [class_rate=-2.54, waste_rate=-2.43, contrib_rate=+2.35]",
-     "utility": 0.5192403813359114
+     "utility": 0.5193606131404789
     },
     {
      "step": 166,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=165 credit=0.00",
-     "utility": 0.5192403813359114
+     "utility": 0.5193606131404789
     },
     {
      "step": 179,
      "kind": "RETRIEVED",
      "detail": "task=178 class=owner sim=0.36 rank#1 [class_rate=-2.57, waste_rate=-2.49, contrib_rate=+2.39]",
-     "utility": 0.20834787546867015
+     "utility": 0.20844361119711713
     },
     {
      "step": 179,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=178 credit=0.00",
-     "utility": 0.20834787546867015
+     "utility": 0.20844361119711713
     },
     {
      "step": 181,
      "kind": "RETRIEVED",
      "detail": "task=180 class=owner sim=0.45 rank#0 [class_rate=-2.58, waste_rate=-2.55, contrib_rate=+2.43]",
-     "utility": 0.5267440459801274
+     "utility": 0.5269441546009067
     },
     {
      "step": 181,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=180 credit=0.00",
-     "utility": 0.5267440459801274
+     "utility": 0.5269441546009067
     },
     {
      "step": 182,
      "kind": "RETRIEVED",
      "detail": "task=181 class=owner sim=0.36 rank#1 [class_rate=-2.60, waste_rate=-2.59, contrib_rate=+2.46]",
-     "utility": 0.24339228602957433
+     "utility": 0.24355062595036767
     },
     {
      "step": 182,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=181 credit=0.00",
-     "utility": 0.24339228602957433
+     "utility": 0.24355062595036767
     },
     {
      "step": 199,
      "kind": "RETRIEVED",
      "detail": "task=198 class=owner sim=0.45 rank#0 [waste_rate=-2.63, class_rate=-2.61, contrib_rate=+2.49]",
-     "utility": 0.48393109925785227
+     "utility": 0.48419090710583085
     },
     {
      "step": 199,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=198 credit=0.00",
-     "utility": 0.48393109925785227
+     "utility": 0.48419090710583085
     },
     {
      "step": 202,
      "kind": "RETRIEVED",
      "detail": "task=201 class=owner sim=0.36 rank#1 [waste_rate=-2.67, class_rate=-2.62, contrib_rate=+2.52]",
-     "utility": 0.24435534523046343
+     "utility": 0.2445526490418257
     },
     {
      "step": 202,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=201 credit=0.00",
-     "utility": 0.24435534523046343
+     "utility": 0.2445526490418257
     },
     {
      "step": 204,
      "kind": "RETRIEVED",
      "detail": "task=203 class=owner sim=0.45 rank#0 [waste_rate=-2.70, class_rate=-2.63, contrib_rate=+2.54]",
-     "utility": 0.5484791818581473
+     "utility": 0.5487873775842814
     },
     {
      "step": 204,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=203 credit=0.00",
-     "utility": 0.5484791818581473
+     "utility": 0.5487873775842814
     },
     {
      "step": 210,
      "kind": "RETRIEVED",
      "detail": "task=209 class=owner sim=0.36 rank#1 [waste_rate=-2.73, class_rate=-2.64, contrib_rate=+2.57]",
-     "utility": 0.24236082630068775
+     "utility": 0.2425869043363301
     },
     {
      "step": 210,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=209 credit=0.00",
-     "utility": 0.24236082630068775
+     "utility": 0.2425869043363301
     },
     {
      "step": 212,
      "kind": "RETRIEVED",
      "detail": "task=211 class=owner sim=0.36 rank#1 [waste_rate=-2.76, class_rate=-2.65, contrib_rate=+2.59]",
-     "utility": 0.2566875902284332
+     "utility": 0.2569369317202543
     },
     {
      "step": 212,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=211 credit=0.00",
-     "utility": 0.2566875902284332
+     "utility": 0.2569369317202543
     },
     {
      "step": 216,
      "kind": "RETRIEVED",
      "detail": "task=215 class=owner sim=0.45 rank#0 [waste_rate=-2.78, class_rate=-2.65, contrib_rate=+2.61]",
-     "utility": 0.5541529244025096
+     "utility": 0.55451202837029
     },
     {
      "step": 216,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=215 credit=0.00",
-     "utility": 0.5541529244025096
+     "utility": 0.55451202837029
     },
     {
      "step": 224,
      "kind": "RETRIEVED",
      "detail": "task=223 class=owner sim=0.45 rank#0 [waste_rate=-2.80, class_rate=-2.66, contrib_rate=+2.62]",
-     "utility": 0.5429279476404475
+     "utility": 0.5433011344913165
     },
     {
      "step": 238,
      "kind": "RETRIEVED",
      "detail": "task=237 class=owner sim=0.36 rank#1 [waste_rate=-2.80, class_rate=-2.66, contrib_rate=+2.62]",
-     "utility": 0.2312268995566341
+     "utility": 0.23148471642234986
     },
     {
      "step": 238,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=237 credit=0.00",
-     "utility": 0.2312268995566341
+     "utility": 0.23148471642234986
     },
     {
      "step": 249,
      "kind": "RETRIEVED",
      "detail": "task=248 class=owner sim=0.36 rank#1 [waste_rate=-2.82, class_rate=-2.66, contrib_rate=+2.64]",
-     "utility": 0.24062886519732476
+     "utility": 0.24090252270592025
     },
     {
      "step": 251,
      "kind": "RETRIEVED",
      "detail": "task=250 class=owner sim=0.36 rank#1 [waste_rate=-2.82, class_rate=-2.66, contrib_rate=+2.64]",
-     "utility": 0.2654117091302709
+     "utility": 0.265712778621584
     },
     {
      "step": 251,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=250 credit=0.00",
-     "utility": 0.2654117091302709
+     "utility": 0.265712778621584
     },
     {
      "step": 252,
      "kind": "RETRIEVED",
      "detail": "task=251 class=owner sim=0.45 rank#0 [waste_rate=-2.84, class_rate=-2.67, contrib_rate=+2.65]",
-     "utility": 0.5784741315470423
+     "utility": 0.5788803344985928
     },
     {
      "step": 252,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=251 credit=0.00",
-     "utility": 0.5784741315470423
+     "utility": 0.5788803344985928
     },
     {
      "step": 264,
      "kind": "RETRIEVED",
      "detail": "task=263 class=owner sim=0.36 rank#1 [waste_rate=-2.86, class_rate=-2.67, contrib_rate=+2.67]",
-     "utility": 0.2430294694878389
+     "utility": 0.24332256380122258
     },
     {
      "step": 264,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=263 credit=0.00",
-     "utility": 0.2430294694878389
+     "utility": 0.24332256380122258
     },
     {
      "step": 268,
      "kind": "RETRIEVED",
      "detail": "task=267 class=owner sim=0.36 rank#1 [waste_rate=-2.87, contrib_rate=+2.68, class_rate=-2.68]",
-     "utility": 0.26690575585281434
+     "utility": 0.26722461924820495
     },
     {
      "step": 268,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=267 credit=0.00",
-     "utility": 0.26690575585281434
+     "utility": 0.26722461924820495
     },
     {
      "step": 269,
      "kind": "RETRIEVED",
      "detail": "task=268 class=owner sim=0.36 rank#5 [waste_rate=-2.89, contrib_rate=+2.69, class_rate=-2.68]",
-     "utility": 0.13895864242606973
+     "utility": 0.1391439150190954
     },
     {
      "step": 270,
      "kind": "RETRIEVED",
      "detail": "task=269 class=owner sim=0.36 rank#1 [waste_rate=-2.89, contrib_rate=+2.69, class_rate=-2.68]",
-     "utility": 0.2788144636546023
+     "utility": 0.2791506485550661
     },
     {
      "step": 270,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=269 credit=0.00",
-     "utility": 0.2788144636546023
+     "utility": 0.2791506485550661
     },
     {
      "step": 285,
      "kind": "RETRIEVED",
      "detail": "task=284 class=owner sim=0.36 rank#1 [waste_rate=-2.90, contrib_rate=+2.70, class_rate=-2.68]",
-     "utility": 0.2424949442780505
+     "utility": 0.24280187044247048
     },
     {
      "step": 285,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=284 credit=0.00",
-     "utility": 0.2424949442780505
+     "utility": 0.24280187044247048
     },
     {
      "step": 286,
      "kind": "RETRIEVED",
      "detail": "task=285 class=owner sim=0.45 rank#0 [waste_rate=-2.92, contrib_rate=+2.71, class_rate=-2.68]",
-     "utility": 0.5945746050515848
+     "utility": 0.5950035796175006
     },
     {
      "step": 286,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=285 credit=0.00",
-     "utility": 0.5945746050515848
+     "utility": 0.5950035796175006
     },
     {
      "step": 290,
      "kind": "RETRIEVED",
      "detail": "task=289 class=owner sim=0.45 rank#0 [waste_rate=-2.93, contrib_rate=+2.72, class_rate=-2.69]",
-     "utility": 0.5851856451742196
+     "utility": 0.5856192977921509
     },
     {
      "step": 290,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=289 credit=0.00",
-     "utility": 0.5851856451742196
+     "utility": 0.5856192977921509
     },
     {
      "step": 292,
      "kind": "RETRIEVED",
      "detail": "task=291 class=owner sim=0.36 rank#1 [waste_rate=-2.94, contrib_rate=+2.73, class_rate=-2.69]",
-     "utility": 0.2841966528639497
+     "utility": 0.2845470736570776
     },
     {
      "step": 292,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=291 credit=0.00",
-     "utility": 0.2841966528639497
+     "utility": 0.2845470736570776
     },
     {
      "step": 296,
      "kind": "RETRIEVED",
      "detail": "task=295 class=owner sim=0.45 rank#0 [waste_rate=-2.95, contrib_rate=+2.74, class_rate=-2.69]",
-     "utility": 0.5903506360497235
+     "utility": 0.590785962957285
     },
     {
      "step": 296,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=295 credit=0.00",
-     "utility": 0.5903506360497235
+     "utility": 0.590785962957285
     },
     {
      "step": 300,
      "kind": "RETRIEVED",
      "detail": "task=299 class=owner sim=0.36 rank#5 [waste_rate=-2.96, contrib_rate=+2.75, class_rate=-2.69]",
-     "utility": 0.13938030410716165
+     "utility": 0.13957710421268174
     },
     {
      "step": 300,
@@ -1211,7 +1193,7 @@
     }
    ],
    "last_reason": "sim=0.36 rank#5 [waste_rate=-2.96, contrib_rate=+2.75, class_rate=-2.69]",
-   "last_utility": 0.12587200514661617
+   "last_utility": 0.12606880525213626
   },
   {
    "fact_id": "fact_00024",

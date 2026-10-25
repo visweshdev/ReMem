@@ -7,3 +7,4 @@ results/traces/
 bench.log
 *.tmp
 .DS_Store
+results/records/

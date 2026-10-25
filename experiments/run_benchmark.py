@@ -16,6 +16,13 @@ Nothing is hard-coded: every number in RESULTS.md and the plots is computed from
 
 from __future__ import annotations
 
+import os
+
+# one BLAS thread per process: the benchmark parallelises across processes, and per-process thread pools
+# sized to every core make small matrix operations thrash (measured: >10x slower with 6+ workers)
+for _v in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "NUMEXPR_NUM_THREADS"):
+    os.environ.setdefault(_v, "1")
+
 import argparse
 import gzip
 import json
@@ -51,7 +58,7 @@ ABLATION = [
     "abl0_base", "abl1_temporal", "abl2_utility_heuristic", "abl3_learned_model", "abl4_outcome_feedback",
     "abl5_retention", "abl6_contradiction", "abl7_cost_aware",
     "loo_no_feedback", "loo_no_contradiction", "loo_no_retention", "loo_no_cost_aware", "loo_heuristic_utility",
-    "loo_no_exclusive_schema", "attr_presence", "attr_signals_loo", "attr_usage_only", "ret_frequency_prune",
+    "loo_no_exclusive_schema", "attr_presence", "attr_signals_loo", "attr_usage_only", "rmm_style", "ret_frequency_prune",
 ]
 NEW = ["loo_no_guard", "new_thompson", "schema_learned", "attr_signals_loo_ambiguous"]
 CORE = ["A_vector", "B_static", "C_remem"]
@@ -62,6 +69,34 @@ CURVE_BINS = 10
 
 
 # ── worker ─────────────────────────────────────────────────────────────────────
+
+def code_fingerprint() -> str:
+    """Hash of everything that can change a job's result: library code, system configs, trained models."""
+    import hashlib
+    h = hashlib.sha1()
+    paths = sorted((ROOT / "remem").rglob("*.py")) + [ROOT / "configs" / "systems.yaml"]
+    paths += sorted((ROOT / "results" / "models").glob("*.json"))
+    for p in paths:
+        h.update(p.relative_to(ROOT).as_posix().encode())
+        h.update(p.read_bytes())
+    return h.hexdigest()[:16]
+
+
+def run_job_cached(job: dict[str, Any]) -> list[dict[str, Any]]:
+    """run_job with an on-disk result cache, so an interrupted benchmark resumes where it stopped."""
+    import hashlib
+    key_src = {k: v for k, v in job.items() if k not in ("out_dir", "cache")}
+    key = hashlib.sha1(json.dumps(key_src, sort_keys=True, default=str).encode()).hexdigest()[:20]
+    path = Path(job["cache"]).parent / "jobs" / job["fingerprint"] / f"{key}.json"
+    if path.exists():
+        return json.loads(path.read_text(encoding="utf-8"))
+    rows = run_job(job)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_suffix(".tmp")
+    tmp.write_text(json.dumps(rows, default=float), encoding="utf-8")
+    tmp.replace(path)
+    return rows
+
 
 def run_job(job: dict[str, Any]) -> list[dict[str, Any]]:
     """Run all requested systems on one (family, seed, reader mode, perturbation) world."""
@@ -315,7 +350,10 @@ def main() -> None:
 
     rows: list[dict] = []
     with ProcessPoolExecutor(max_workers=args.workers) as ex:
-        for i, res in enumerate(ex.map(run_job, jobs), 1):
+        fingerprint = code_fingerprint()
+        for j in jobs:
+            j["fingerprint"] = fingerprint
+        for i, res in enumerate(ex.map(run_job_cached, jobs), 1):
             rows.extend(res)
             if i % 10 == 0 or i == len(jobs):
                 log.info("%d/%d jobs done (%.0fs)", i, len(jobs), time.time() - t0)

@@ -25,6 +25,8 @@ class UtilityConfig:
     class_shrink: float = 4.0            # pseudo-count pulling per-class rate toward the global rate
     recency_tau_days: float = 30.0
     rank_weight: float = 0.0             # extra weight of base-rank in heuristic
+    rmm_lr: float = 1e-2                 # ranker "rmm": REINFORCE learning rate (RMM-style baseline)
+    rmm_tau: float = 0.05                # ranker "rmm": softmax / Gumbel temperature
 
 
 @dataclass

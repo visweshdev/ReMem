@@ -7,80 +7,82 @@ All numbers are means over test seeds with 95% t-intervals (±). Success etc. in
 
 | System | Task success % | Gold recall % | Context precision % | Tokens/task | Latency ms |
 |---|---:|---:|---:|---:|---:|
-| A  flat vector (similarity only) | 64.6 ±6.1 | 85.9 ±5.4 | 18.2 ±1.3 | 47.806 ±1.062 | 0.868 ±0.029 |
-| B  flat vector + static score (recency, confidence) | 68.0 ±7.0 | 86.0 ±5.3 | 18.2 ±1.3 | 47.797 ±1.039 | 2.189 ±0.050 |
-| C  ReMem (full) | 77.9 ±4.4 | 90.0 ±3.7 | 21.6 ±1.4 | 38.213 ±1.862 | 3.063 ±0.072 |
+| A  flat vector (similarity only) | 62.6 ±2.4 | 81.5 ±2.6 | 17.3 ±0.6 | 47.338 ±0.826 | 1.650 ±0.054 |
+| B  flat vector + static score (recency, confidence) | 65.9 ±2.4 | 81.7 ±2.6 | 17.3 ±0.6 | 47.357 ±0.827 | 3.469 ±0.097 |
+| RMM-style reranker (citation reward, REINFORCE; our reimplementation) | 63.1 ±1.9 | 80.7 ±2.4 | 17.1 ±0.5 | 44.513 ±0.959 | 6.544 ±0.170 |
+| C  ReMem (full) | 76.4 ±1.8 | 87.7 ±2.1 | 21.5 ±0.7 | 37.824 ±0.983 | 4.692 ±0.134 |
 
 ### Task success % per family, reader mode `first`
 
 | System | distractor | long_horizon | contradiction | rare_critical | useless_frequent | budget_tight | state_change | distractor_norecur | budget_medium |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| A  flat vector (similarity only) | 76.0 ±8.8 | 77.7 ±7.4 | 53.4 ±15.5 | 76.7 ±6.9 | 77.9 ±7.0 | 49.3 ±18.9 | 41.5 ±10.2 | 70.6 ±10.2 | 53.2 ±17.7 |
-| B  flat vector + static score (recency, confidence) | 75.9 ±9.0 | 77.6 ±7.4 | 62.2 ±16.5 | 76.7 ±6.9 | 77.9 ±7.0 | 49.3 ±18.9 | 56.4 ±9.2 | 70.6 ±11.3 | 53.2 ±17.7 |
-| C  ReMem (full) | 79.7 ±7.6 | 81.9 ±3.7 | 81.0 ±7.3 | 81.8 ±5.5 | 79.9 ±5.2 | 58.3 ±12.0 | 82.9 ±4.9 | 70.9 ±9.9 | 72.2 ±10.0 |
+| A  flat vector (similarity only) | 73.5 ±3.3 | 73.5 ±4.2 | 52.6 ±6.0 | 74.9 ±3.2 | 76.0 ±3.1 | 41.0 ±7.1 | 46.6 ±5.1 | 68.8 ±3.2 | 47.2 ±7.1 |
+| B  flat vector + static score (recency, confidence) | 73.5 ±3.3 | 73.5 ±4.2 | 63.3 ±5.1 | 74.9 ±3.2 | 75.8 ±3.2 | 41.0 ±7.2 | 59.3 ±4.7 | 68.7 ±3.4 | 47.4 ±7.1 |
+| C  ReMem (full) | 79.3 ±2.5 | 79.9 ±3.8 | 82.4 ±2.0 | 81.6 ±2.3 | 79.9 ±1.9 | 49.5 ±7.8 | 82.0 ±2.5 | 68.7 ±3.2 | 67.0 ±5.0 |
 
 ## Main comparison, reader mode `latest` (mean over headline families)
 
 | System | Task success % | Gold recall % | Context precision % | Tokens/task | Latency ms |
 |---|---:|---:|---:|---:|---:|
-| A  flat vector (similarity only) | 74.0 ±5.4 | 85.9 ±5.4 | 18.2 ±1.3 | 47.806 ±1.062 | 0.865 ±0.032 |
-| B  flat vector + static score (recency, confidence) | 74.1 ±5.3 | 86.0 ±5.3 | 18.2 ±1.3 | 47.797 ±1.039 | 2.173 ±0.041 |
-| C  ReMem (full) | 77.9 ±4.4 | 90.0 ±3.7 | 21.6 ±1.4 | 38.213 ±1.862 | 3.093 ±0.048 |
+| A  flat vector (similarity only) | 70.7 ±2.1 | 81.5 ±2.6 | 17.3 ±0.6 | 47.338 ±0.826 | 1.652 ±0.068 |
+| B  flat vector + static score (recency, confidence) | 70.8 ±2.1 | 81.7 ±2.6 | 17.3 ±0.6 | 47.357 ±0.827 | 3.431 ±0.104 |
+| RMM-style reranker (citation reward, REINFORCE; our reimplementation) | 70.7 ±1.9 | 81.8 ±2.5 | 17.4 ±0.5 | 44.604 ±0.945 | 6.553 ±0.145 |
+| C  ReMem (full) | 76.4 ±1.8 | 87.7 ±2.1 | 21.5 ±0.7 | 37.824 ±0.983 | 4.744 ±0.136 |
 
 ### Task success % per family, reader mode `latest`
 
 | System | distractor | long_horizon | contradiction | rare_critical | useless_frequent | budget_tight | state_change | distractor_norecur | budget_medium |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| A  flat vector (similarity only) | 76.0 ±8.8 | 77.7 ±7.4 | 79.9 ±5.1 | 76.7 ±6.9 | 77.9 ±7.0 | 49.3 ±18.9 | 80.3 ±5.1 | 70.6 ±10.2 | 53.2 ±17.7 |
-| B  flat vector + static score (recency, confidence) | 75.9 ±9.0 | 77.6 ±7.4 | 80.2 ±5.4 | 76.7 ±6.9 | 77.9 ±7.0 | 49.3 ±18.9 | 80.7 ±5.0 | 70.6 ±11.3 | 53.2 ±17.7 |
-| C  ReMem (full) | 79.7 ±7.6 | 81.9 ±3.7 | 81.0 ±7.3 | 81.8 ±5.5 | 79.9 ±5.2 | 58.3 ±12.0 | 82.9 ±4.9 | 70.9 ±9.9 | 72.2 ±10.0 |
+| A  flat vector (similarity only) | 73.5 ±3.3 | 73.5 ±4.2 | 77.2 ±3.0 | 74.9 ±3.2 | 76.0 ±3.1 | 41.0 ±7.1 | 79.0 ±3.0 | 68.8 ±3.2 | 47.2 ±7.1 |
+| B  flat vector + static score (recency, confidence) | 73.5 ±3.3 | 73.5 ±4.2 | 77.4 ±3.0 | 74.9 ±3.2 | 75.8 ±3.2 | 41.0 ±7.2 | 79.8 ±1.9 | 68.7 ±3.4 | 47.4 ±7.1 |
+| C  ReMem (full) | 79.3 ±2.5 | 79.9 ±3.8 | 82.4 ±2.0 | 81.6 ±2.3 | 79.9 ±1.9 | 49.5 ±7.8 | 82.0 ±2.5 | 68.7 ±3.2 | 67.0 ±5.0 |
 
 ## Cumulative ablation (reader `first`, headline families)
 
 | System | Task success % | Task success, 2nd half % | Gold recall % | Context precision % | Tokens/task | Latency ms |
 |---|---:|---:|---:|---:|---:|---:|
-| flat vector (baseline) | 64.6 ±6.1 | 60.4 ±10.1 | 85.9 ±5.4 | 18.2 ±1.3 | 47.806 ±1.062 | 0.883 ±0.021 |
-| + temporal relevance | 68.0 ±7.0 | 65.1 ±10.5 | 86.0 ±5.3 | 18.2 ±1.3 | 47.797 ±1.039 | 2.216 ±0.056 |
-| + utility score (heuristic, retrieval-history) | 66.3 ±6.8 | 62.2 ±9.8 | 85.4 ±6.1 | 18.1 ±1.5 | 47.340 ±0.845 | 2.258 ±0.014 |
-| + learned utility model | 63.1 ±5.8 | 58.7 ±9.4 | 80.0 ±6.6 | 16.9 ±1.6 | 47.065 ±0.862 | 2.514 ±0.028 |
-| + outcome feedback | 67.8 ±6.0 | 64.6 ±9.4 | 86.2 ±5.0 | 18.4 ±0.9 | 43.177 ±0.800 | 2.777 ±0.090 |
-| + adaptive retention | 68.1 ±5.8 | 65.0 ±9.4 | 86.7 ±4.6 | 18.5 ±0.7 | 41.921 ±0.918 | 2.751 ±0.089 |
-| + contradiction handling | 76.2 ±4.1 | 76.5 ±6.2 | 90.1 ±2.6 | 19.2 ±0.4 | 42.026 ±0.774 | 3.116 ±0.052 |
-| + cost-aware selection (= full without similarity guard) | 77.5 ±4.1 | 78.2 ±6.6 | 89.1 ±3.8 | 21.7 ±1.8 | 37.674 ±2.165 | 3.246 ±0.047 |
+| flat vector (baseline) | 62.6 ±2.4 | 59.4 ±3.2 | 81.5 ±2.6 | 17.3 ±0.6 | 47.338 ±0.826 | 1.665 ±0.091 |
+| + temporal relevance | 65.9 ±2.4 | 63.9 ±3.2 | 81.7 ±2.6 | 17.3 ±0.6 | 47.357 ±0.827 | 3.381 ±0.092 |
+| + utility score (heuristic, retrieval-history) | 64.0 ±2.4 | 60.9 ±3.2 | 80.6 ±2.8 | 17.1 ±0.6 | 47.082 ±0.797 | 3.522 ±0.132 |
+| + learned utility model | 60.5 ±2.3 | 57.1 ±3.0 | 75.3 ±3.0 | 15.9 ±0.7 | 46.911 ±0.740 | 3.931 ±0.074 |
+| + outcome feedback | 66.3 ±2.2 | 63.9 ±2.7 | 84.4 ±2.1 | 18.0 ±0.5 | 43.367 ±0.794 | 4.304 ±0.102 |
+| + adaptive retention | 66.7 ±2.0 | 64.6 ±2.5 | 85.0 ±2.1 | 18.1 ±0.5 | 42.229 ±0.843 | 4.336 ±0.087 |
+| + contradiction handling | 73.9 ±1.8 | 74.8 ±1.9 | 87.7 ±2.0 | 18.7 ±0.4 | 42.346 ±0.803 | 4.635 ±0.095 |
+| + cost-aware selection (= full without similarity guard) | 75.8 ±1.7 | 77.3 ±2.0 | 86.9 ±2.1 | 21.4 ±0.7 | 37.601 ±0.976 | 4.795 ±0.107 |
 
 Per-family task success % for the same rows:
 
 | System | distractor | long_horizon | contradiction | rare_critical | useless_frequent | budget_tight | state_change |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| flat vector (baseline) | 76.0 ±8.8 | 77.7 ±7.4 | 53.4 ±15.5 | 76.7 ±6.9 | 77.9 ±7.0 | 49.3 ±18.9 | 41.5 ±10.2 |
-| + temporal relevance | 75.9 ±9.0 | 77.6 ±7.4 | 62.2 ±16.5 | 76.7 ±6.9 | 77.9 ±7.0 | 49.3 ±18.9 | 56.4 ±9.2 |
-| + utility score (heuristic, retrieval-history) | 75.7 ±9.1 | 74.9 ±12.4 | 58.2 ±14.5 | 76.7 ±6.9 | 77.8 ±6.9 | 49.3 ±18.9 | 51.3 ±6.2 |
-| + learned utility model | 72.4 ±8.1 | 72.8 ±12.1 | 54.0 ±15.0 | 77.8 ±6.1 | 75.7 ±6.4 | 46.5 ±21.8 | 42.6 ±9.2 |
-| + outcome feedback | 76.7 ±7.8 | 79.2 ±1.6 | 55.1 ±16.6 | 79.1 ±4.5 | 76.6 ±7.5 | 62.1 ±6.4 | 45.7 ±10.9 |
-| + adaptive retention | 76.7 ±7.8 | 79.0 ±1.4 | 55.2 ±16.6 | 79.0 ±4.5 | 77.3 ±7.1 | 63.9 ±6.6 | 45.9 ±10.2 |
-| + contradiction handling | 76.7 ±7.8 | 79.0 ±1.4 | 77.9 ±5.8 | 79.0 ±4.5 | 77.3 ±7.1 | 63.9 ±6.6 | 79.3 ±3.7 |
-| + cost-aware selection (= full without similarity guard) | 77.5 ±8.0 | 81.7 ±1.9 | 80.3 ±6.5 | 81.3 ±5.2 | 79.1 ±6.9 | 59.1 ±11.0 | 83.6 ±4.4 |
+| flat vector (baseline) | 73.5 ±3.3 | 73.5 ±4.2 | 52.6 ±6.0 | 74.9 ±3.2 | 76.0 ±3.1 | 41.0 ±7.1 | 46.6 ±5.1 |
+| + temporal relevance | 73.5 ±3.3 | 73.5 ±4.2 | 63.3 ±5.1 | 74.9 ±3.2 | 75.8 ±3.2 | 41.0 ±7.2 | 59.3 ±4.7 |
+| + utility score (heuristic, retrieval-history) | 73.0 ±3.5 | 72.2 ±4.8 | 57.3 ±4.9 | 74.6 ±3.3 | 75.2 ±4.0 | 41.0 ±7.2 | 54.7 ±4.3 |
+| + learned utility model | 69.2 ±3.8 | 69.9 ±5.0 | 51.7 ±6.0 | 75.0 ±2.9 | 72.3 ±4.8 | 38.0 ±7.6 | 47.1 ±4.9 |
+| + outcome feedback | 76.4 ±2.4 | 77.0 ±3.7 | 56.0 ±5.5 | 77.8 ±1.8 | 77.0 ±2.4 | 50.0 ±7.8 | 49.6 ±4.6 |
+| + adaptive retention | 76.2 ±2.4 | 77.0 ±3.8 | 56.6 ±5.5 | 77.8 ±1.8 | 77.4 ±2.3 | 52.6 ±7.7 | 49.6 ±4.6 |
+| + contradiction handling | 76.2 ±2.4 | 77.0 ±3.8 | 78.8 ±1.9 | 77.8 ±1.8 | 77.4 ±2.3 | 52.6 ±7.7 | 77.4 ±2.0 |
+| + cost-aware selection (= full without similarity guard) | 78.4 ±2.9 | 79.0 ±4.1 | 82.4 ±2.0 | 80.8 ±2.3 | 79.3 ±2.4 | 49.0 ±7.4 | 81.8 ±2.7 |
 
 ## Leave-one-out from the full system (reader `first`)
 
 | System | Task success % | Task success, 2nd half % | Gold recall % | Context precision % | Tokens/task | Latency ms |
 |---|---:|---:|---:|---:|---:|---:|
-| C  ReMem (full) | 77.9 ±4.4 | 78.8 ±7.0 | 90.0 ±3.7 | 21.6 ±1.4 | 38.213 ±1.862 | 3.063 ±0.072 |
-| full - outcome feedback | 73.3 ±5.2 | 72.6 ±8.2 | 86.1 ±5.2 | 17.9 ±1.1 | 47.349 ±0.930 | 3.293 ±0.078 |
-| full - contradiction handling | 69.1 ±6.8 | 66.0 ±10.6 | 88.0 ±4.9 | 20.5 ±1.4 | 38.904 ±2.023 | 3.130 ±0.042 |
-| full - adaptive retention | 76.6 ±4.8 | 76.9 ±7.8 | 89.1 ±4.9 | 20.2 ±1.5 | 41.092 ±1.251 | 3.337 ±0.112 |
-| full - cost-aware selection | 76.3 ±4.3 | 76.8 ±7.0 | 90.4 ±3.3 | 19.3 ±0.7 | 42.143 ±0.778 | 3.264 ±0.052 |
-| full, heuristic instead of learned utility | 78.8 ±3.9 | 79.9 ±6.6 | 92.0 ±2.4 | 21.4 ±0.9 | 39.386 ±1.955 | 2.965 ±0.062 |
-| full, no exclusive-attribute schema (cue path only) | 77.2 ±4.5 | 78.1 ±7.2 | 89.7 ±3.9 | 21.4 ±1.5 | 38.276 ±1.957 | 3.346 ±0.094 |
+| C  ReMem (full) | 76.4 ±1.8 | 77.9 ±2.1 | 87.7 ±2.1 | 21.5 ±0.7 | 37.824 ±0.983 | 4.692 ±0.134 |
+| full - outcome feedback | 69.9 ±2.1 | 70.1 ±2.5 | 81.6 ±2.8 | 17.0 ±0.6 | 46.977 ±0.754 | 4.803 ±0.099 |
+| full - contradiction handling | 68.3 ±2.3 | 66.4 ±3.0 | 85.9 ±2.3 | 20.4 ±0.7 | 38.723 ±1.045 | 4.563 ±0.090 |
+| full - adaptive retention | 75.0 ±1.9 | 76.0 ±2.2 | 87.1 ±2.2 | 20.1 ±0.5 | 40.760 ±0.803 | 4.875 ±0.118 |
+| full - cost-aware selection | 74.3 ±1.7 | 75.5 ±1.9 | 88.3 ±2.0 | 18.8 ±0.4 | 42.451 ±0.804 | 4.866 ±0.112 |
+| full, heuristic instead of learned utility | 76.8 ±1.6 | 79.0 ±1.9 | 89.7 ±1.9 | 21.0 ±0.5 | 39.558 ±0.990 | 4.399 ±0.119 |
+| full, no exclusive-attribute schema (cue path only) | 75.6 ±1.8 | 77.2 ±2.1 | 87.5 ±2.2 | 21.3 ±0.7 | 37.987 ±0.997 | 5.029 ±0.089 |
 
 ## Credit-assignment methods (same system, reader `first`)
 
 | Attribution | Task success % | Credit precision | Credit recall | Extra agent calls/task |
 |---|---:|---:|---:|---:|
-| attribution: presence (equal credit) | 73.3 ±5.3 | 0.197 ±0.009 | 1.000 ±0.000 | 0.000 ±0.000 |
-| attribution: usage signals only (outcome ignored) | 79.5 ±4.0 | 0.497 ±0.042 | 1.000 ±0.000 | 0.000 ±0.000 |
-| C  ReMem (full) | 77.9 ±4.4 | 0.477 ±0.041 | 1.000 ±0.000 | 0.000 ±0.000 |
-| attribution: signals + leave-one-out | 84.0 ±4.1 | 1.000 ±0.000 | 0.824 ±0.021 | 2.399 ±0.179 |
+| attribution: presence (equal credit) | 69.8 ±2.2 | 0.192 ±0.004 | 1.000 ±0.000 | 0.000 ±0.000 |
+| attribution: usage signals only (outcome ignored) | 78.4 ±1.5 | 0.521 ±0.024 | 1.000 ±0.000 | 0.000 ±0.000 |
+| C  ReMem (full) | 76.4 ±1.8 | 0.487 ±0.022 | 1.000 ±0.000 | 0.000 ±0.000 |
+| attribution: signals + leave-one-out | 82.4 ±1.7 | 1.000 ±0.000 | 0.818 ±0.009 | 2.340 ±0.082 |
 
 Credit precision/recall are measured against hidden gold on successful tasks.
 
@@ -89,9 +91,9 @@ Credit precision/recall are measured against hidden gold on successful tasks.
 
 | System | AUC of system score | AUC of similarity alone | Brier | ECE |
 |---|---:|---:|---:|---:|
-| A  flat vector (similarity only) | 0.897 ±0.036 | 0.897 ±0.036 | 0.149 ±0.010 | 0.339 ±0.009 |
-| C  ReMem (full) | 0.960 ±0.014 | 0.903 ±0.035 | 0.069 ±0.014 | 0.153 ±0.018 |
-| full, heuristic instead of learned utility | 0.964 ±0.007 | 0.902 ±0.035 | 0.093 ±0.018 | 0.217 ±0.027 |
+| A  flat vector (similarity only) | 0.871 ±0.016 | 0.871 ±0.016 | 0.150 ±0.003 | 0.338 ±0.004 |
+| C  ReMem (full) | 0.954 ±0.007 | 0.876 ±0.016 | 0.067 ±0.005 | 0.150 ±0.007 |
+| full, heuristic instead of learned utility | 0.958 ±0.005 | 0.875 ±0.016 | 0.092 ±0.006 | 0.218 ±0.009 |
 
 Brier/ECE are only meaningful for systems whose score is a probability (the learned model).
 
@@ -100,10 +102,10 @@ Brier/ECE are only meaningful for systems whose score is a probability (the lear
 
 | System | Task success % | Success on dormant-critical % | Success on shown-critical % | ARCHIVED | COMPRESSED |
 |---|---:|---:|---:|---:|---:|
-| A  flat vector (similarity only) | 76.7 ±6.9 | 80.0 ±13.9 | 75.0 ±24.5 | 0.000 ±0.000 | 0.000 ±0.000 |
-| C  ReMem (full) | 81.8 ±5.5 | 80.0 ±13.9 | 75.0 ±24.5 | 0.200 ±0.555 | 0.600 ±0.680 |
-| full - adaptive retention | 81.1 ±5.2 | 80.0 ±13.9 | 75.0 ±24.5 | 0.000 ±0.000 | 0.000 ±0.000 |
-| retention: frequency prune (control) | 77.8 ±5.5 | 7.5 ±13.9 | 22.5 ±13.0 | 120.000 ±2.634 | 0.000 ±0.000 |
+| A  flat vector (similarity only) | 74.9 ±3.2 | 81.7 ±8.2 | 74.2 ±8.5 | 0.000 ±0.000 | 0.000 ±0.000 |
+| C  ReMem (full) | 81.6 ±2.3 | 81.7 ±8.2 | 73.3 ±8.2 | 0.267 ±0.329 | 0.600 ±0.408 |
+| full - adaptive retention | 80.5 ±2.2 | 81.7 ±8.2 | 74.2 ±8.5 | 0.000 ±0.000 | 0.000 ±0.000 |
+| retention: frequency prune (control) | 77.4 ±2.2 | 8.3 ±5.0 | 33.3 ±8.1 | 118.200 ±3.447 | 0.000 ±0.000 |
 
 ## Contradiction handling audit (family `contradiction` and `state_change`)
 
@@ -112,46 +114,46 @@ Brier/ECE are only meaningful for systems whose score is a probability (the lear
 
 | System | Task success % | Success on historical % | Stale-in-context task rate % | False invalidations | Missed invalidations |
 |---|---:|---:|---:|---:|---:|
-| A  flat vector (similarity only) | 53.4 ±15.5 | – | 40.3 ±14.8 | 0.000 ±0.000 | 0.000 ±0.000 |
-| B  flat vector + static score (recency, confidence) | 62.2 ±16.5 | – | 40.3 ±14.8 | 0.000 ±0.000 | 0.000 ±0.000 |
-| C  ReMem (full) | 81.0 ±7.3 | – | 0.0 ±0.0 | 0.000 ±0.000 | 0.000 ±0.000 |
-| full - contradiction handling | 55.5 ±17.6 | – | 40.5 ±15.0 | 0.000 ±0.000 | 0.000 ±0.000 |
-| full, no exclusive-attribute schema (cue path only) | 79.8 ±6.7 | – | 2.8 ±1.8 | 0.000 ±0.000 | 1.200 ±1.360 |
+| A  flat vector (similarity only) | 52.6 ±6.0 | – | 38.6 ±6.4 | 0.000 ±0.000 | 0.000 ±0.000 |
+| B  flat vector + static score (recency, confidence) | 63.3 ±5.1 | – | 38.6 ±6.4 | 0.000 ±0.000 | 0.000 ±0.000 |
+| C  ReMem (full) | 82.4 ±2.0 | – | 0.0 ±0.0 | 0.000 ±0.000 | 0.000 ±0.000 |
+| full - contradiction handling | 57.8 ±6.0 | – | 40.6 ±6.7 | 0.000 ±0.000 | 0.000 ±0.000 |
+| full, no exclusive-attribute schema (cue path only) | 81.1 ±1.9 | – | 2.7 ±0.8 | 0.000 ±0.000 | 0.733 ±0.442 |
 
 `state_change`:
 
 | System | Task success % | Success on historical % | Stale-in-context task rate % | False invalidations | Missed invalidations |
 |---|---:|---:|---:|---:|---:|
-| A  flat vector (similarity only) | 41.5 ±10.2 | 47.8 ±16.8 | 56.5 ±11.0 | 0.000 ±0.000 | 0.000 ±0.000 |
-| B  flat vector + static score (recency, confidence) | 56.4 ±9.2 | 40.9 ±19.5 | 56.9 ±10.9 | 0.000 ±0.000 | 0.000 ±0.000 |
-| C  ReMem (full) | 82.9 ±4.9 | 79.6 ±12.6 | 0.0 ±0.0 | 0.000 ±0.000 | 0.000 ±0.000 |
-| full - contradiction handling | 46.5 ±11.5 | 43.4 ±23.4 | 55.1 ±10.0 | 0.000 ±0.000 | 0.000 ±0.000 |
-| full, no exclusive-attribute schema (cue path only) | 79.1 ±5.0 | 76.5 ±16.7 | 5.9 ±2.3 | 0.000 ±0.000 | 1.400 ±2.720 |
+| A  flat vector (similarity only) | 46.6 ±5.1 | 48.1 ±7.6 | 53.6 ±7.5 | 0.000 ±0.000 | 0.000 ±0.000 |
+| B  flat vector + static score (recency, confidence) | 59.3 ±4.7 | 42.9 ±6.5 | 55.2 ±6.5 | 0.000 ±0.000 | 0.000 ±0.000 |
+| C  ReMem (full) | 82.0 ±2.5 | 78.6 ±4.8 | 0.0 ±0.0 | 0.000 ±0.000 | 0.000 ±0.000 |
+| full - contradiction handling | 50.4 ±5.1 | 44.9 ±8.7 | 53.0 ±7.5 | 0.000 ±0.000 | 0.000 ±0.000 |
+| full, no exclusive-attribute schema (cue path only) | 78.2 ±2.7 | 75.7 ±6.5 | 7.8 ±2.6 | 0.000 ±0.000 | 2.600 ±1.084 |
 
 ## Memory growth at end of stream (reader `first`, headline families)
 
 | System | Memories | ACTIVE | LOW_VALUE | COMPRESSED | ARCHIVED | INVALIDATED | Served tokens / total |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| A  flat vector (similarity only) | 207.200 ±1.383 | 207.200 ±1.383 | 0.000 ±0.000 | 0.000 ±0.000 | 0.000 ±0.000 | 0.000 ±0.000 | 1986.714 ±30.606 |
-| C  ReMem (full) | 207.200 ±1.383 | 196.714 ±1.835 | 5.600 ±1.103 | 0.400 ±0.291 | 0.343 ±0.269 | 4.143 ±0.947 | 1942.086 ±31.399 |
-| retention: frequency prune (control) | 207.200 ±1.383 | 76.829 ±2.324 | 0.000 ±0.000 | 0.000 ±0.000 | 126.229 ±2.908 | 4.143 ±0.947 | 720.057 ±17.954 |
+| A  flat vector (similarity only) | 207.152 ±0.609 | 207.152 ±0.609 | 0.000 ±0.000 | 0.000 ±0.000 | 0.000 ±0.000 | 0.000 ±0.000 | 1996.114 ±11.468 |
+| C  ReMem (full) | 207.152 ±0.609 | 196.190 ±0.613 | 6.038 ±0.526 | 0.610 ±0.195 | 0.410 ±0.149 | 3.905 ±0.417 | 1951.171 ±10.673 |
+| retention: frequency prune (control) | 207.152 ±0.609 | 78.029 ±1.520 | 0.000 ±0.000 | 0.000 ±0.000 | 125.219 ±1.412 | 3.905 ±0.417 | 731.400 ±14.341 |
 
 ## Paired differences over seeds (headline families)
 
 | Reader | Metric | Difference | Mean ± 95% CI |
 |---|---:|---:|---:|
-| first | task_success | C_remem - A_vector | +13.3 ±2.4 pp |
-| first | task_success | C_remem - B_static | +9.9 ±3.0 pp |
-| first | task_success | B_static - A_vector | +3.4 ±1.8 pp |
-| first | tokens_per_task | C_remem - A_vector | -9.6 ±2.2 tok |
-| first | tokens_per_task | C_remem - B_static | -9.6 ±2.1 tok |
-| first | tokens_per_task | B_static - A_vector | -0.0 ±0.2 tok |
-| latest | task_success | C_remem - A_vector | +4.0 ±1.6 pp |
-| latest | task_success | C_remem - B_static | +3.9 ±1.7 pp |
+| first | task_success | C_remem - A_vector | +13.8 ±1.8 pp |
+| first | task_success | C_remem - B_static | +10.5 ±1.8 pp |
+| first | task_success | B_static - A_vector | +3.3 ±0.9 pp |
+| first | tokens_per_task | C_remem - A_vector | -9.5 ±0.9 tok |
+| first | tokens_per_task | C_remem - B_static | -9.5 ±0.9 tok |
+| first | tokens_per_task | B_static - A_vector | +0.0 ±0.1 tok |
+| latest | task_success | C_remem - A_vector | +5.6 ±1.2 pp |
+| latest | task_success | C_remem - B_static | +5.5 ±1.3 pp |
 | latest | task_success | B_static - A_vector | +0.1 ±0.2 pp |
-| latest | tokens_per_task | C_remem - A_vector | -9.6 ±2.2 tok |
-| latest | tokens_per_task | C_remem - B_static | -9.6 ±2.1 tok |
-| latest | tokens_per_task | B_static - A_vector | -0.0 ±0.2 tok |
+| latest | tokens_per_task | C_remem - A_vector | -9.5 ±0.9 tok |
+| latest | tokens_per_task | C_remem - B_static | -9.5 ±0.9 tok |
+| latest | tokens_per_task | B_static - A_vector | +0.0 ±0.1 tok |
 
 ## New in ReMem (reader `first`)
 
@@ -159,10 +161,10 @@ Brier/ECE are only meaningful for systems whose score is a probability (the lear
 
 | System | Task success % | Gold recall % | Tasks where utility pushed out a top-5-similar gold % | Context precision % | Tokens/task |
 |---|---:|---:|---:|---:|---:|
-| A  flat vector (similarity only) | 64.6 ±6.1 | 85.9 ±5.4 | 0.3 ±0.5 | 18.2 ±1.3 | 47.806 ±1.062 |
-| full - similarity guard | 77.5 ±4.1 | 89.1 ±3.8 | 2.0 ±1.6 | 21.7 ±1.8 | 37.674 ±2.165 |
-| C  ReMem (full) | 77.9 ±4.4 | 90.0 ±3.7 | 0.7 ±0.8 | 21.6 ±1.4 | 38.213 ±1.862 |
-| full, Thompson sampling instead of UCB | 76.3 ±3.7 | 89.3 ±4.2 | 1.0 ±0.8 | 19.9 ±0.8 | 40.351 ±1.156 |
+| A  flat vector (similarity only) | 62.6 ±2.4 | 81.5 ±2.6 | 0.4 ±0.3 | 17.3 ±0.6 | 47.338 ±0.826 |
+| full - similarity guard | 75.8 ±1.7 | 86.9 ±2.1 | 2.0 ±0.6 | 21.4 ±0.7 | 37.601 ±0.976 |
+| C  ReMem (full) | 76.4 ±1.8 | 87.7 ±2.1 | 0.7 ±0.2 | 21.5 ±0.7 | 37.824 ±0.983 |
+| full, Thompson sampling instead of UCB | 74.7 ±1.8 | 87.6 ±2.1 | 0.9 ±0.3 | 19.5 ±0.5 | 40.845 ±0.853 |
 
 ### Learned single-valued-attribute schema (none given vs given vs learned)
 
@@ -171,65 +173,65 @@ Brier/ECE are only meaningful for systems whose score is a probability (the lear
 
 | System | Task success % | Stale-in-context task rate % | Missed invalidations | False invalidations |
 |---|---:|---:|---:|---:|
-| A  flat vector (similarity only) | 53.4 ±15.5 | 40.3 ±14.8 | 0.000 ±0.000 | 0.000 ±0.000 |
-| C  ReMem (full) | 81.0 ±7.3 | 0.0 ±0.0 | 0.000 ±0.000 | 0.000 ±0.000 |
-| full, no exclusive-attribute schema (cue path only) | 79.8 ±6.7 | 2.8 ±1.8 | 1.200 ±1.360 | 0.000 ±0.000 |
-| full, learned single-valued schema (none given) | 80.3 ±7.0 | 1.6 ±1.0 | 0.600 ±0.680 | 0.000 ±0.000 |
+| A  flat vector (similarity only) | 52.6 ±6.0 | 38.6 ±6.4 | 0.000 ±0.000 | 0.000 ±0.000 |
+| C  ReMem (full) | 82.4 ±2.0 | 0.0 ±0.0 | 0.000 ±0.000 | 0.000 ±0.000 |
+| full, no exclusive-attribute schema (cue path only) | 81.1 ±1.9 | 2.7 ±0.8 | 0.733 ±0.442 | 0.000 ±0.000 |
+| full, learned single-valued schema (none given) | 81.6 ±2.0 | 1.7 ±0.5 | 0.267 ±0.254 | 0.000 ±0.000 |
 
 `state_change`, explicit update wording present (default worlds):
 
 | System | Task success % | Stale-in-context task rate % | Missed invalidations | False invalidations |
 |---|---:|---:|---:|---:|
-| A  flat vector (similarity only) | 41.5 ±10.2 | 56.5 ±11.0 | 0.000 ±0.000 | 0.000 ±0.000 |
-| C  ReMem (full) | 82.9 ±4.9 | 0.0 ±0.0 | 0.000 ±0.000 | 0.000 ±0.000 |
-| full, no exclusive-attribute schema (cue path only) | 79.1 ±5.0 | 5.9 ±2.3 | 1.400 ±2.720 | 0.000 ±0.000 |
-| full, learned single-valued schema (none given) | 81.7 ±5.8 | 2.4 ±2.1 | 0.200 ±0.555 | 0.000 ±0.000 |
+| A  flat vector (similarity only) | 46.6 ±5.1 | 53.6 ±7.5 | 0.000 ±0.000 | 0.000 ±0.000 |
+| C  ReMem (full) | 82.0 ±2.5 | 0.0 ±0.0 | 0.000 ±0.000 | 0.000 ±0.000 |
+| full, no exclusive-attribute schema (cue path only) | 78.2 ±2.7 | 7.8 ±2.6 | 2.600 ±1.084 | 0.000 ±0.000 |
+| full, learned single-valued schema (none given) | 80.2 ±2.9 | 3.2 ±1.2 | 0.467 ±0.507 | 0.000 ±0.000 |
 
 `contradiction`, no explicit update wording (cue path useless):
 
 | System | Task success % | Stale-in-context task rate % | Missed invalidations | False invalidations |
 |---|---:|---:|---:|---:|
-| A  flat vector (similarity only) | 49.7 ±13.7 | 40.9 ±16.1 | 0.000 ±0.000 | 0.000 ±0.000 |
-| C  ReMem (full) | 77.0 ±15.8 | 0.0 ±0.0 | 0.000 ±0.000 | 0.000 ±0.000 |
-| full, no exclusive-attribute schema (cue path only) | 76.9 ±11.5 | 5.3 ±2.7 | 1.800 ±1.619 | 0.000 ±0.000 |
-| full, learned single-valued schema (none given) | 77.4 ±10.4 | 4.2 ±2.5 | 0.400 ±0.680 | 0.000 ±0.000 |
+| A  flat vector (similarity only) | 52.3 ±6.0 | 37.8 ±6.6 | 0.000 ±0.000 | 0.000 ±0.000 |
+| C  ReMem (full) | 80.2 ±4.1 | 0.0 ±0.0 | 0.000 ±0.000 | 0.000 ±0.000 |
+| full, no exclusive-attribute schema (cue path only) | 79.2 ±3.1 | 5.9 ±1.6 | 1.667 ±0.774 | 0.000 ±0.000 |
+| full, learned single-valued schema (none given) | 79.6 ±2.8 | 4.5 ±1.6 | 0.733 ±0.677 | 0.000 ±0.000 |
 
 `state_change`, no explicit update wording (cue path useless):
 
 | System | Task success % | Stale-in-context task rate % | Missed invalidations | False invalidations |
 |---|---:|---:|---:|---:|
-| A  flat vector (similarity only) | 44.0 ±10.3 | 58.9 ±12.2 | 0.000 ±0.000 | 0.000 ±0.000 |
-| C  ReMem (full) | 84.1 ±5.4 | 0.0 ±0.0 | 0.000 ±0.000 | 0.000 ±0.000 |
-| full, no exclusive-attribute schema (cue path only) | 79.1 ±6.4 | 11.4 ±2.8 | 5.200 ±1.360 | 0.000 ±0.000 |
-| full, learned single-valued schema (none given) | 82.6 ±5.4 | 2.6 ±1.5 | 0.200 ±0.555 | 0.000 ±0.000 |
+| A  flat vector (similarity only) | 47.0 ±5.6 | 54.7 ±8.2 | 0.000 ±0.000 | 0.000 ±0.000 |
+| C  ReMem (full) | 82.3 ±2.6 | 0.0 ±0.0 | 0.000 ±0.000 | 0.000 ±0.000 |
+| full, no exclusive-attribute schema (cue path only) | 77.3 ±3.0 | 11.2 ±1.8 | 5.067 ±0.739 | 0.000 ±0.000 |
+| full, learned single-valued schema (none given) | 79.8 ±3.1 | 4.5 ±1.6 | 1.200 ±0.731 | 0.000 ±0.000 |
 
 ### Cheaper leave-one-out credit assignment
 
 | Attribution | Task success % | Credit precision | Credit recall | Extra agent calls/task |
 |---|---:|---:|---:|---:|
-| C  ReMem (full) | 77.9 ±4.4 | 0.477 ±0.041 | 1.000 ±0.000 | 0.000 ±0.000 |
-| attribution: signals + LOO on ambiguous only | 83.7 ±4.1 | 0.987 ±0.004 | 0.968 ±0.007 | 0.429 ±0.073 |
-| attribution: signals + leave-one-out | 84.0 ±4.1 | 1.000 ±0.000 | 0.824 ±0.021 | 2.399 ±0.179 |
+| C  ReMem (full) | 76.4 ±1.8 | 0.487 ±0.022 | 1.000 ±0.000 | 0.000 ±0.000 |
+| attribution: signals + LOO on ambiguous only | 82.4 ±1.4 | 0.985 ±0.002 | 0.963 ±0.004 | 0.411 ±0.031 |
+| attribution: signals + leave-one-out | 82.4 ±1.7 | 1.000 ±0.000 | 0.818 ±0.009 | 2.340 ±0.082 |
 
 ## Sensitivity (reader `first`, headline families unless noted; task success %)
 
 | Perturbation | System | Task success % |
 |---|---:|---:|
-| distraction_0.0 | A  flat vector (similarity only) | 75.2 ±5.7 |
-| distraction_0.0 | B  flat vector + static score (recency, confidence) | 79.0 ±5.9 |
-| distraction_0.0 | C  ReMem (full) | 89.3 ±2.5 |
-| distraction_0.1 | A  flat vector (similarity only) | 52.4 ±4.3 |
-| distraction_0.1 | B  flat vector + static score (recency, confidence) | 55.4 ±5.4 |
-| distraction_0.1 | C  ReMem (full) | 65.5 ±4.5 |
-| extraction_noise_0.2 | A  flat vector (similarity only) | 48.5 ±3.9 |
-| extraction_noise_0.2 | B  flat vector + static score (recency, confidence) | 59.2 ±8.6 |
-| extraction_noise_0.2 | C  ReMem (full) | 71.6 ±8.4 |
-| feedback_noise_0.1 | A  flat vector (similarity only) | 64.6 ±6.1 |
-| feedback_noise_0.1 | B  flat vector + static score (recency, confidence) | 68.0 ±7.0 |
-| feedback_noise_0.1 | C  ReMem (full) | 78.0 ±4.1 |
-| feedback_noise_0.2 | A  flat vector (similarity only) | 64.6 ±6.1 |
-| feedback_noise_0.2 | B  flat vector + static score (recency, confidence) | 68.0 ±7.0 |
-| feedback_noise_0.2 | C  ReMem (full) | 78.3 ±4.6 |
+| distraction_0.0 | A  flat vector (similarity only) | 73.8 ±2.4 |
+| distraction_0.0 | B  flat vector + static score (recency, confidence) | 77.5 ±2.1 |
+| distraction_0.0 | C  ReMem (full) | 88.1 ±1.6 |
+| distraction_0.1 | A  flat vector (similarity only) | 51.6 ±1.6 |
+| distraction_0.1 | B  flat vector + static score (recency, confidence) | 54.5 ±1.7 |
+| distraction_0.1 | C  ReMem (full) | 64.6 ±1.4 |
+| extraction_noise_0.2 | A  flat vector (similarity only) | 48.7 ±4.6 |
+| extraction_noise_0.2 | B  flat vector + static score (recency, confidence) | 55.9 ±4.6 |
+| extraction_noise_0.2 | C  ReMem (full) | 70.4 ±4.1 |
+| feedback_noise_0.1 | A  flat vector (similarity only) | 62.6 ±2.4 |
+| feedback_noise_0.1 | B  flat vector + static score (recency, confidence) | 65.9 ±2.4 |
+| feedback_noise_0.1 | C  ReMem (full) | 76.5 ±1.4 |
+| feedback_noise_0.2 | A  flat vector (similarity only) | 62.6 ±2.4 |
+| feedback_noise_0.2 | B  flat vector + static score (recency, confidence) | 65.9 ±2.4 |
+| feedback_noise_0.2 | C  ReMem (full) | 76.9 ±1.4 |
 
 `feedback_noise_x`: the environment flips the success signal with probability x. `distraction_x`: per-irrelevant-item distraction probability of the agent (default 0.05). `extraction_noise_0.2`: the extractor misses the attribute key for 20% of facts (families contradiction and state_change only).
 

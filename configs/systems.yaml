@@ -88,6 +88,13 @@ systems:
   schema_learned:       {extends: C_remem, contradiction: {exclusive_attributes: [], learn_schema: true}}
   attr_signals_loo_ambiguous: {extends: C_remem, attribution: {method: signals_loo, loo_policy: ambiguous}}
 
+  # ── RMM-style baseline (reimplementation of arXiv 2503.08026 §6; citation reward, REINFORCE reranker) ──
+  rmm_style:
+    extends: _base
+    ranker: rmm
+    outcome_feedback: false
+    utility: {rmm_lr: 0.001, rmm_tau: 0.02}   # chosen on DEV seeds by experiments/tune_rmm.py
+
   # ── retention controls ──────────────────────────────────────────────────────
   ret_frequency_prune:  {extends: C_remem, retention: {mode: frequency_prune}}
 

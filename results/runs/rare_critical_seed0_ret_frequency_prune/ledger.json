@@ -22902,23 +22902,19 @@
    "supersedes": [],
    "contradictions": 0,
    "n_pooled": 59,
-   "n_retrieved": 5,
+   "n_retrieved": 4,
    "n_credited": 0.5,
-   "n_wasted": 3,
+   "n_wasted": 2,
    "n_blamed": 0.0,
-   "n_success_ctx": 4,
+   "n_success_ctx": 3,
    "n_fail_ctx": 1,
-   "last_retrieved_step": 305,
+   "last_retrieved_step": 73,
    "last_credit_step": 65,
-   "last_updated_step": 305,
+   "last_updated_step": 73,
    "classes": {
     "api_version": {
      "n_ctx": 3,
      "credit": 0.5
-    },
-    "approver": {
-     "n_ctx": 1,
-     "credit": 0.0
     }
    },
    "events": [
@@ -22975,27 +22971,9 @@
      "kind": "NO_CONTRIBUTION",
      "detail": "task=72 credit=0.00",
      "utility": 0.23630818198167378
-    },
-    {
-     "step": 305,
-     "kind": "GUARDED",
-     "detail": "served by similarity guard (class=approver)",
-     "utility": null
-    },
-    {
-     "step": 305,
-     "kind": "RETRIEVED",
-     "detail": "task=304 class=approver sim=0.19 rank#3 [contrib_rate=+0.81, post_std=-0.79, class_rate=-0.72]",
-     "utility": 0.18029180573614412
-    },
-    {
-     "step": 305,
-     "kind": "NO_CONTRIBUTION",
-     "detail": "task=304 credit=0.00",
-     "utility": 0.18029180573614412
     }
    ],
-   "last_reason": "sim=0.19 rank#3 [contrib_rate=+0.81, post_std=-0.79, class_rate=-0.72]",
+   "last_reason": "sim=0.21 rank#17 [post_std=-1.14, waste_rate=+0.86, rank_inv=-0.44]",
    "last_utility": 0.10775574855189449
   },
   {
@@ -24034,16 +24012,21 @@
    "supersedes": [],
    "contradictions": 0,
    "n_pooled": 1,
-   "n_retrieved": 0,
-   "n_credited": 0.0,
+   "n_retrieved": 1,
+   "n_credited": 0.5,
    "n_wasted": 0,
    "n_blamed": 0.0,
-   "n_success_ctx": 0,
+   "n_success_ctx": 1,
    "n_fail_ctx": 0,
-   "last_retrieved_step": null,
-   "last_credit_step": null,
+   "last_retrieved_step": 305,
+   "last_credit_step": 305,
    "last_updated_step": 315,
-   "classes": {},
+   "classes": {
+    "approver": {
+     "n_ctx": 1,
+     "credit": 0.5
+    }
+   },
    "events": [
     {
      "step": 165,
@@ -24052,13 +24035,31 @@
      "utility": null
     },
     {
+     "step": 305,
+     "kind": "RETRIEVED",
+     "detail": "task=304 class=approver sim=0.19 rank#6 [waste_rate=+2.23, post_std=-1.72, retr_recency=-0.71]",
+     "utility": 0.3253446085599391
+    },
+    {
+     "step": 305,
+     "kind": "USED",
+     "detail": "task=304 cited=True used=False necessary=None",
+     "utility": null
+    },
+    {
+     "step": 305,
+     "kind": "CREDITED",
+     "detail": "credit=0.50 -> contribution rate 0.300",
+     "utility": 0.3253446085599391
+    },
+    {
      "step": 315,
      "kind": "STATE_CHANGE",
-     "detail": "ACTIVE -> ARCHIVED: frequency prune: 0<2 retrievals in 150 tasks",
+     "detail": "ACTIVE -> ARCHIVED: frequency prune: 1<2 retrievals in 150 tasks",
      "utility": 0.22852002490475368
     }
    ],
-   "last_reason": "",
+   "last_reason": "sim=0.19 rank#6 [waste_rate=+2.23, post_std=-1.72, retr_recency=-0.71]",
    "last_utility": 0.22852002490475368
   },
   {
@@ -24332,23 +24333,19 @@
    "supersedes": [],
    "contradictions": 0,
    "n_pooled": 28,
-   "n_retrieved": 2,
-   "n_credited": 0.5,
+   "n_retrieved": 1,
+   "n_credited": 0.0,
    "n_wasted": 1,
    "n_blamed": 0.0,
-   "n_success_ctx": 2,
+   "n_success_ctx": 1,
    "n_fail_ctx": 0,
-   "last_retrieved_step": 305,
-   "last_credit_step": 305,
-   "last_updated_step": 305,
+   "last_retrieved_step": 207,
+   "last_credit_step": null,
+   "last_updated_step": 207,
    "classes": {
     "api_version": {
      "n_ctx": 1,
      "credit": 0.0
-    },
-    "approver": {
-     "n_ctx": 1,
-     "credit": 0.5
     }
    },
    "events": [
@@ -24369,33 +24366,9 @@
      "kind": "NO_CONTRIBUTION",
      "detail": "task=206 credit=0.00",
      "utility": 0.2244217288251594
-    },
-    {
-     "step": 305,
-     "kind": "GUARDED",
-     "detail": "served by similarity guard (class=approver)",
-     "utility": null
-    },
-    {
-     "step": 305,
-     "kind": "RETRIEVED",
-     "detail": "task=304 class=approver sim=0.19 rank#4 [post_std=-1.14, contrib_rate=+0.96, class_rate=-0.86]",
-     "utility": 0.185970123479236
-    },
-    {
-     "step": 305,
-     "kind": "USED",
-     "detail": "task=304 cited=True used=False necessary=None",
-     "utility": null
-    },
-    {
-     "step": 305,
-     "kind": "CREDITED",
-     "detail": "credit=0.50 -> contribution rate 0.250",
-     "utility": 0.185970123479236
     }
    ],
-   "last_reason": "sim=0.19 rank#4 [post_std=-1.14, contrib_rate=+0.96, class_rate=-0.86]",
+   "last_reason": "sim=0.21 rank#19 [waste_rate=+2.23, post_std=-1.72, retr_recency=-0.71]",
    "last_utility": 0.10432046538646339
   },
   {

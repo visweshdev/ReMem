@@ -133,18 +133,18 @@
    "supersedes": [],
    "contradictions": 0,
    "n_pooled": 24,
-   "n_retrieved": 6,
+   "n_retrieved": 4,
    "n_credited": 1.5,
-   "n_wasted": 3,
+   "n_wasted": 2,
    "n_blamed": 0.0,
-   "n_success_ctx": 5,
-   "n_fail_ctx": 1,
+   "n_success_ctx": 4,
+   "n_fail_ctx": 0,
    "last_retrieved_step": 65,
    "last_credit_step": 65,
    "last_updated_step": 65,
    "classes": {
     "owner": {
-     "n_ctx": 5,
+     "n_ctx": 4,
      "credit": 1.5
     }
    },
@@ -198,36 +198,6 @@
      "utility": 0.3620942650054787
     },
     {
-     "step": 36,
-     "kind": "GUARDED",
-     "detail": "served by similarity guard (class=owner)",
-     "utility": null
-    },
-    {
-     "step": 36,
-     "kind": "RETRIEVED",
-     "detail": "task=35 class=owner sim=0.36 rank#2 [post_std=-1.07, sim_gap=-0.23, rank_inv=+0.20]",
-     "utility": 0.27918850801489264
-    },
-    {
-     "step": 53,
-     "kind": "GUARDED",
-     "detail": "served by similarity guard (class=owner)",
-     "utility": null
-    },
-    {
-     "step": 53,
-     "kind": "RETRIEVED",
-     "detail": "task=52 class=owner sim=0.36 rank#2 [post_std=-1.07, sim_gap=-0.23, rank_inv=+0.20]",
-     "utility": 0.25522796539992765
-    },
-    {
-     "step": 53,
-     "kind": "NO_CONTRIBUTION",
-     "detail": "task=52 credit=0.00",
-     "utility": 0.25522796539992765
-    },
-    {
      "step": 65,
      "kind": "GUARDED",
      "detail": "served by similarity guard (class=owner)",
@@ -236,8 +206,8 @@
     {
      "step": 65,
      "kind": "RETRIEVED",
-     "detail": "task=64 class=owner sim=0.36 rank#2 [post_std=-0.77, waste_rate=-0.52, contrib_rate=+0.44]",
-     "utility": 0.21537343439790343
+     "detail": "task=64 class=owner sim=0.36 rank#2 [post_std=-1.07, retr_recency=-0.27, rank_inv=+0.20]",
+     "utility": 0.24212412396473695
     },
     {
      "step": 65,
@@ -248,12 +218,12 @@
     {
      "step": 65,
      "kind": "CREDITED",
-     "detail": "credit=0.50 -> contribution rate 0.278",
-     "utility": 0.21537343439790343
+     "detail": "credit=0.50 -> contribution rate 0.312",
+     "utility": 0.24212412396473695
     }
    ],
-   "last_reason": "sim=0.36 rank#2 [post_std=-0.77, waste_rate=-0.52, contrib_rate=+0.44]",
-   "last_utility": 0.14320465074920022
+   "last_reason": "sim=0.36 rank#2 [post_std=-1.07, retr_recency=-0.27, rank_inv=+0.20]",
+   "last_utility": 0.16226455333974446
   },
   {
    "fact_id": "fact_00017",
@@ -739,12 +709,12 @@
    "supersedes": [],
    "contradictions": 0,
    "n_pooled": 13,
-   "n_retrieved": 4,
+   "n_retrieved": 5,
    "n_credited": 2.0,
    "n_wasted": 0,
    "n_blamed": 0.0,
    "n_success_ctx": 3,
-   "n_fail_ctx": 1,
+   "n_fail_ctx": 2,
    "last_retrieved_step": 65,
    "last_credit_step": 65,
    "last_updated_step": 65,
@@ -786,10 +756,16 @@
      "utility": 0.4626691685520814
     },
     {
+     "step": 36,
+     "kind": "RETRIEVED",
+     "detail": "task=35 class=owner sim=0.36 rank#10 [waste_rate=+2.23, post_std=-1.59, class_rate=+0.45]",
+     "utility": 0.5677515164361221
+    },
+    {
      "step": 60,
      "kind": "RETRIEVED",
      "detail": "task=59 class=owner sim=0.36 rank#13 [waste_rate=+2.23, post_std=-1.59, class_rate=+0.45]",
-     "utility": 0.5061142857014793
+     "utility": 0.5215359361969016
     },
     {
      "step": 60,
@@ -801,13 +777,13 @@
      "step": 60,
      "kind": "CREDITED",
      "detail": "credit=0.50 -> contribution rate 0.333",
-     "utility": 0.5061142857014793
+     "utility": 0.5215359361969016
     },
     {
      "step": 65,
      "kind": "RETRIEVED",
      "detail": "task=64 class=owner sim=0.36 rank#11 [waste_rate=+2.23, post_std=-1.42, class_rate=+0.90]",
-     "utility": 0.655215256601821
+     "utility": 0.6575026997873241
     },
     {
      "step": 65,
@@ -819,11 +795,11 @@
      "step": 65,
      "kind": "CREDITED",
      "detail": "credit=1.00 -> contribution rate 0.429",
-     "utility": 0.655215256601821
+     "utility": 0.6575026997873241
     }
    ],
    "last_reason": "sim=0.36 rank#11 [waste_rate=+2.23, post_std=-1.42, class_rate=+0.90]",
-   "last_utility": 0.5661281759643462
+   "last_utility": 0.5684156191498493
   },
   {
    "fact_id": "fact_00044",
@@ -6582,18 +6558,18 @@
    "supersedes": [],
    "contradictions": 0,
    "n_pooled": 6,
-   "n_retrieved": 1,
+   "n_retrieved": 2,
    "n_credited": 1.0,
-   "n_wasted": 0,
+   "n_wasted": 1,
    "n_blamed": 0.0,
-   "n_success_ctx": 1,
+   "n_success_ctx": 2,
    "n_fail_ctx": 0,
-   "last_retrieved_step": 26,
+   "last_retrieved_step": 53,
    "last_credit_step": 26,
-   "last_updated_step": 26,
+   "last_updated_step": 53,
    "classes": {
     "owner": {
-     "n_ctx": 1,
+     "n_ctx": 2,
      "credit": 1.0
     }
    },
@@ -6621,10 +6597,22 @@
      "kind": "CREDITED",
      "detail": "credit=1.00 -> contribution rate 0.400",
      "utility": 0.9176303760566182
+    },
+    {
+     "step": 53,
+     "kind": "RETRIEVED",
+     "detail": "task=52 class=owner sim=0.36 rank#18 [waste_rate=+2.23, class_rate=+2.13, post_std=-1.84]",
+     "utility": 0.574982961554886
+    },
+    {
+     "step": 53,
+     "kind": "NO_CONTRIBUTION",
+     "detail": "task=52 credit=0.00",
+     "utility": 0.574982961554886
     }
    ],
-   "last_reason": "sim=0.64 rank#0 [waste_rate=+2.23, rank_inv=+1.76, post_std=-1.72]",
-   "last_utility": 0.4700536739731985
+   "last_reason": "sim=0.36 rank#18 [waste_rate=+2.23, class_rate=+2.13, post_std=-1.84]",
+   "last_utility": 0.21312690908063725
   },
   {
    "fact_id": "fact_00066",
@@ -9295,18 +9283,18 @@
    "supersedes": [],
    "contradictions": 0,
    "n_pooled": 24,
-   "n_retrieved": 6,
+   "n_retrieved": 5,
    "n_credited": 1.5,
-   "n_wasted": 3,
+   "n_wasted": 2,
    "n_blamed": 0.0,
-   "n_success_ctx": 5,
+   "n_success_ctx": 4,
    "n_fail_ctx": 1,
    "last_retrieved_step": 65,
    "last_credit_step": 65,
    "last_updated_step": 65,
    "classes": {
     "owner": {
-     "n_ctx": 5,
+     "n_ctx": 4,
      "credit": 1.5
     }
    },
@@ -9366,24 +9354,6 @@
      "utility": 0.35773536837360925
     },
     {
-     "step": 53,
-     "kind": "GUARDED",
-     "detail": "served by similarity guard (class=owner)",
-     "utility": null
-    },
-    {
-     "step": 53,
-     "kind": "RETRIEVED",
-     "detail": "task=52 class=owner sim=0.36 rank#1 [post_std=-1.07, rank_inv=+0.59, sim_gap=-0.23]",
-     "utility": 0.32154939185053666
-    },
-    {
-     "step": 53,
-     "kind": "NO_CONTRIBUTION",
-     "detail": "task=52 credit=0.00",
-     "utility": 0.32154939185053666
-    },
-    {
      "step": 65,
      "kind": "GUARDED",
      "detail": "served by similarity guard (class=owner)",
@@ -9392,8 +9362,8 @@
     {
      "step": 65,
      "kind": "RETRIEVED",
-     "detail": "task=64 class=owner sim=0.36 rank#1 [post_std=-0.77, rank_inv=+0.59, waste_rate=-0.52]",
-     "utility": 0.27251107239747924
+     "detail": "task=64 class=owner sim=0.36 rank#1 [post_std=-1.07, rank_inv=+0.59, retr_recency=-0.22]",
+     "utility": 0.3147354301758646
     },
     {
      "step": 65,
@@ -9404,12 +9374,12 @@
     {
      "step": 65,
      "kind": "CREDITED",
-     "detail": "credit=0.50 -> contribution rate 0.278",
-     "utility": 0.27251107239747924
+     "detail": "credit=0.50 -> contribution rate 0.312",
+     "utility": 0.3147354301758646
     }
    ],
-   "last_reason": "sim=0.36 rank#1 [post_std=-0.77, rank_inv=+0.59, waste_rate=-0.52]",
-   "last_utility": 0.20034228874877602
+   "last_reason": "sim=0.36 rank#1 [post_std=-1.07, rank_inv=+0.59, retr_recency=-0.22]",
+   "last_utility": 0.23487585955087212
   },
   {
    "fact_id": "fact_00004",
@@ -10212,18 +10182,18 @@
    "supersedes": [],
    "contradictions": 0,
    "n_pooled": 15,
-   "n_retrieved": 3,
+   "n_retrieved": 4,
    "n_credited": 0.5,
-   "n_wasted": 1,
+   "n_wasted": 2,
    "n_blamed": 0.0,
-   "n_success_ctx": 2,
+   "n_success_ctx": 3,
    "n_fail_ctx": 1,
    "last_retrieved_step": 55,
    "last_credit_step": 49,
    "last_updated_step": 55,
    "classes": {
     "owner": {
-     "n_ctx": 2,
+     "n_ctx": 3,
      "credit": 0.5
     }
    },
@@ -10259,20 +10229,32 @@
      "utility": 0.412064577551333
     },
     {
+     "step": 53,
+     "kind": "RETRIEVED",
+     "detail": "task=52 class=owner sim=0.36 rank#8 [waste_rate=+2.23, post_std=-1.59, class_rate=+0.45]",
+     "utility": 0.5798922839954217
+    },
+    {
+     "step": 53,
+     "kind": "NO_CONTRIBUTION",
+     "detail": "task=52 credit=0.00",
+     "utility": 0.5798922839954217
+    },
+    {
      "step": 55,
      "kind": "RETRIEVED",
-     "detail": "task=54 class=owner sim=0.29 rank#19 [waste_rate=+2.23, post_std=-1.59, rank_inv=-0.46]",
-     "utility": 0.5591783720725687
+     "detail": "task=54 class=owner sim=0.29 rank#19 [post_std=-1.14, waste_rate=+0.86, rank_inv=-0.46]",
+     "utility": 0.2942775183663986
     },
     {
      "step": 55,
      "kind": "NO_CONTRIBUTION",
      "detail": "task=54 credit=0.00",
-     "utility": 0.5591783720725687
+     "utility": 0.2942775183663986
     }
    ],
-   "last_reason": "sim=0.29 rank#19 [waste_rate=+2.23, post_std=-1.59, rank_inv=-0.46]",
-   "last_utility": 0.21624092581405613
+   "last_reason": "sim=0.29 rank#19 [post_std=-1.14, waste_rate=+0.86, rank_inv=-0.46]",
+   "last_utility": 0.12998892975684093
   },
   {
    "fact_id": "fact_00024",

@@ -4,27 +4,27 @@ Counts are per-task tags over all test seeds, reader mode `first`; a task may ca
 
 | Category | A  flat vector (similarity only) | B  flat vector + static score (recency, confidence) | C  ReMem (full) |
 |---|---:|---:|---:|
-| `gold_not_in_pool` | 311 (2.5%) | 311 (2.5%) | 311 (2.5%) |
-| `gold_pooled_not_selected` | 1947 (15.5%) | 1935 (15.4%) | 1190 (9.5%) |
-| `utility_demoted_gold` | 30 (0.2%) | 40 (0.3%) | 71 (0.6%) |
+| `gold_not_in_pool` | 1184 (3.1%) | 1184 (3.1%) | 1184 (3.1%) |
+| `gold_pooled_not_selected` | 7445 (19.8%) | 7388 (19.7%) | 4248 (11.3%) |
+| `utility_demoted_gold` | 240 (0.6%) | 275 (0.7%) | 274 (0.7%) |
 | `useful_filtered` | 0 (0.0%) | 0 (0.0%) | 0 (0.0%) |
-| `irrelevant_retrieved` | 2204 (17.6%) | 2204 (17.6%) | 1931 (15.4%) |
-| `outdated_preferred` | 1226 (9.8%) | 867 (6.9%) | 0 (0.0%) |
-| `success_without_memory` | 409 (3.3%) | 410 (3.3%) | 280 (2.2%) |
-| `fail_despite_gold` | 2712 (21.6%) | 2372 (18.9%) | 1651 (13.2%) |
+| `irrelevant_retrieved` | 6952 (18.5%) | 6947 (18.5%) | 6054 (16.1%) |
+| `outdated_preferred` | 3244 (8.6%) | 2211 (5.9%) | 0 (0.0%) |
+| `success_without_memory` | 1643 (4.4%) | 1641 (4.4%) | 1000 (2.7%) |
+| `fail_despite_gold` | 7686 (20.4%) | 6688 (17.8%) | 4972 (13.2%) |
 
 ## Per family (D ReMem)
 
 | Category | budget_medium | budget_tight | contradiction | distractor | distractor_norecur | long_horizon | rare_critical | state_change | useless_frequent |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| `gold_not_in_pool` | 30 | 129 | 0 | 93 | 35 | 0 | 0 | 5 | 19 |
-| `gold_pooled_not_selected` | 296 | 464 | 82 | 34 | 46 | 47 | 63 | 78 | 80 |
-| `utility_demoted_gold` | 1 | 17 | 6 | 3 | 0 | 5 | 0 | 15 | 24 |
+| `gold_not_in_pool` | 251 | 469 | 18 | 203 | 98 | 4 | 45 | 60 | 36 |
+| `gold_pooled_not_selected` | 928 | 1926 | 155 | 206 | 143 | 329 | 146 | 207 | 208 |
+| `utility_demoted_gold` | 47 | 69 | 22 | 26 | 6 | 39 | 10 | 22 | 33 |
 | `useful_filtered` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| `irrelevant_retrieved` | 231 | 213 | 233 | 237 | 56 | 264 | 249 | 204 | 244 |
+| `irrelevant_retrieved` | 797 | 695 | 684 | 721 | 185 | 791 | 758 | 648 | 775 |
 | `outdated_preferred` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| `success_without_memory` | 69 | 78 | 16 | 35 | 16 | 13 | 13 | 17 | 23 |
-| `fail_despite_gold` | 160 | 113 | 219 | 213 | 37 | 256 | 238 | 190 | 225 |
+| `success_without_memory` | 192 | 364 | 39 | 109 | 46 | 94 | 33 | 56 | 67 |
+| `fail_despite_gold` | 517 | 259 | 659 | 634 | 134 | 726 | 714 | 600 | 729 |
 
 ## Examples: C  ReMem (full)
 

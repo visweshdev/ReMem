@@ -14,6 +14,13 @@ Test seeds are never touched here.
 
 from __future__ import annotations
 
+import os
+
+# one BLAS thread per process: the benchmark parallelises across processes, and per-process thread pools
+# sized to every core make small matrix operations thrash (measured: >10x slower with 6+ workers)
+for _v in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "NUMEXPR_NUM_THREADS"):
+    os.environ.setdefault(_v, "1")
+
 import argparse
 import json
 import logging

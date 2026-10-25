@@ -68,11 +68,16 @@ class ReMemSystem:
         self.detector = ContradictionDetector(cfg.contradiction, self.ledger, self._text_sim)
         self.retention = RetentionPolicy(cfg.retention, self.ledger, cfg.utility.prior_a, cfg.utility.prior_b)
         self._emb_cache: dict[str, list[float]] = {}
+        self.rmm = None
+        self._rmm_pending: dict[int, tuple] = {}
+        if cfg.ranker == "rmm":
+            from remem.baselines.rmm import RMMReranker
+            self.rmm = RMMReranker(embedder.dim, lr=cfg.utility.rmm_lr, tau=cfg.utility.rmm_tau, seed=seed)
 
     # ── construction helpers ───────────────────────────────────────────────────
     def _build_ranker(self):
         c = self.cfg
-        if c.ranker == "sim":
+        if c.ranker in ("sim", "rmm"):
             return None
         if c.ranker == "static":
             return HeuristicUtility(("static",), 0.0, 0.0)
@@ -171,6 +176,16 @@ class ReMemSystem:
             ))
         # rank by the model's ordering score; ties by backend rank then id (deterministic)
         scored.sort(key=lambda s: (-s.utility, s.cand.base_rank, s.cand.fact_id))
+        if self.rmm is not None and scored:
+            import numpy as np
+            q = np.asarray(self._emb(query))
+            M = np.asarray([self._emb(sc.cand.text) for sc in scored])
+            order = self.rmm.sample_order(self.rmm.scores(q, M))
+            pos = {i: r for r, i in enumerate(order)}
+            for i, sc in enumerate(scored):
+                sc.utility = -float(pos[i])                  # sampled order becomes the ranking
+            self._rmm_pending[task_id] = (q, M, [sc.cand.fact_id for sc in scored])
+            scored.sort(key=lambda s: -s.utility)
         selected = select(scored, cfg.selection)
         selected = self._apply_guard(scored, selected, task_class)
 
@@ -264,6 +279,12 @@ class ReMemSystem:
         replay: Callable[[list[ScoredCandidate]], bool] | None = None,
     ) -> dict[str, Attribution]:
         cfg = self.cfg
+        if self.rmm is not None and ctx.task_id in self._rmm_pending:
+            q, M, ids = self._rmm_pending.pop(ctx.task_id)
+            idx = {fid: i for i, fid in enumerate(ids)}
+            sel = [idx[s.cand.fact_id] for s in ctx.selected if s.cand.fact_id in idx]
+            cited = set(trace.cited_ids)
+            self.rmm.update(q, M, sel, [1.0 if ids[i] in cited else -1.0 for i in sel])   # citation reward only
         if not cfg.outcome_feedback or not ctx.selected:
             return {}
         led = self.ledger

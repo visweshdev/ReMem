@@ -10,7 +10,7 @@ from __future__ import annotations
 
 TRAIN_SEEDS = (100, 101, 102, 103)
 DEV_SEEDS = (200, 201)
-TEST_SEEDS = (0, 1, 2, 3, 4)
+TEST_SEEDS = tuple(range(15))
 
 #: families used to collect training traces (budget_tight covers the budget regime; test uses budget_tight too
 #: but with different worlds)

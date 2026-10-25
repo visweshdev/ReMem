@@ -13,41 +13,120 @@ vector index is built in; any backend implementing `remem.backends.base.Backend`
 
 ## What it adds to a retrieve-by-similarity memory
 
-| Gap in a retrieve-by-similarity memory | ReMem's mechanism | Measured effect (this benchmark, 5 test seeds) |
+| Gap in a retrieve-by-similarity memory | ReMem's mechanism | Measured effect (this benchmark, 15 test seeds) |
 |---|---|---|
-| similarity is the only signal; look-alikes that never help keep winning | per-memory outcome ledger + utility model (transparent heuristic or learned logistic regression) | +13.3 pp task success over similarity-only retrieval, −9.6 tokens/task |
-| replaced facts stay retrievable | supersession with validity intervals, `as_of` queries, outcome-triggered invalidation | stale-fact-in-context 40–57% → 0%; historical queries keep working |
-| no safe way to retire or shrink memory | explicit state machine `ACTIVE → LOW_VALUE → COMPRESSED → ARCHIVED`, `INVALIDATED`; nothing deleted | safe for rarely-needed memories where frequency pruning destroys them (80% → 7.5% success) |
-| context cost ignored | expected-utility knapsack under a token budget | −9.6 tokens/task; +1.6 pp from this step alone |
-| correct memories sometimes pushed out by the utility layer | similarity guard | targeted failure 2.0% → 0.7% of tasks; **no change in success** |
-| single-valued attributes must be declared by hand | schema learned from outcome evidence | recovers most of the gap when no schema is given |
-| credit assignment is cheap but imprecise | leave-one-out only on ambiguous memories | 83.7% vs 77.9% success for 0.43 extra agent calls/task |
-| simulated agent only | OpenAI-compatible agent + embedder adapters | **unverified**: tested against fake clients only |
+| similarity is the only signal; look-alikes that never help keep winning | per-memory outcome ledger + utility model (transparent heuristic or learned logistic regression) | +13.8 pp task success over similarity-only retrieval, −9.5 tokens/task |
+| replaced facts stay retrievable | supersession with validity intervals, `as_of` queries, outcome-triggered invalidation | stale-fact-in-context 39–54% of tasks → 0%; historical queries keep working |
+| no safe way to retire or shrink memory | explicit state machine `ACTIVE → LOW_VALUE → COMPRESSED → ARCHIVED`, `INVALIDATED`; nothing deleted | safe for rarely-needed memories where frequency pruning destroys them (82% → 8% success) |
+| context cost ignored | expected-utility knapsack under a token budget | −9.5 tokens/task; +2.1 pp from this step alone |
+| correct memories sometimes pushed out by the utility layer | similarity guard | targeted failure 2.0% → 0.7% of tasks; success change within noise |
+| single-valued attributes must be declared by hand | schema learned from outcome evidence | recovers about half the gap when no schema is given |
+| credit assignment is cheap but imprecise | leave-one-out only on ambiguous memories | 82.4% vs 76.4% success for 0.41 extra agent calls/task |
+| citation-feedback prior art (RMM) | RMM-style reranker reimplemented as a baseline | within noise of plain similarity here (63.1% vs 62.6%) |
+| no way to plug into agents | Python API, MCP server, LangChain retriever, HTML dashboard | tested end to end (MCP over the real protocol) |
 
 ## Quickstart
 
 ```bash
-pip install .            # Python 3.10+; dependencies: numpy, pyyaml, matplotlib
-python examples/quickstart.py
+pip install .                       # core: numpy, pyyaml, matplotlib
+pip install ".[all]"                # optional extras: mcp, sentence-transformers, faiss, chroma, tiktoken, openai
+python examples/quickstart.py       # 2-second demo: supersession, demotion, credit
 ```
+
+### Python API
 
 ```python
-from remem.backends import StoredFact, VectorBackend
-from remem.system import ReMemSystem, IngestedFact
-from remem.types import AgentTrace, Outcome
+from remem import ReMem
 
-backend = VectorBackend(embedder)                  # any Backend: returns candidates for a query
-memory = ReMemSystem(config, embedder)             # configs/systems.yaml or remem.config dataclasses
+mem = ReMem("~/.remem/myproject")                    # persistent; reloads automatically
+mem.add("The billing service exposes API version v1.", entity="billing", attribute="api_version")
+mem.add("The billing service exposes API version v2.", entity="billing", attribute="api_version")  # supersedes v1
 
-backend.ingest([fact]); memory.ingest(IngestedFact(...))          # 1. store
-pool, _ = backend.candidates(question, k=20)                      # 2. over-fetch candidates
-ctx = memory.retrieve(task_id, question, pool, task_class="api", now=t)   # 3. ReMem ranks + selects
-# ... your agent answers using [s.text for s in ctx.selected] ...
-memory.observe(ctx, AgentTrace(answer, cited_ids, tool_args), Outcome(success))  # 4. feedback
+hits = mem.search("Which API version does billing expose?", task="api")
+for h in hits.items:
+    print(h.id, h.score, h.text)                     # only the v2 fact is served
+# ... your agent acts on hits.items ...
+mem.feedback(hits.search_id, success=True, used_ids=[hits.items[0].id])   # closes the loop
+
+mem.inspect(hits.items[0].id)                        # state, credit, lifecycle, supersession links
+mem.search("...", as_of=some_unix_time)              # ask about the past: superseded facts come back
 ```
 
-[`examples/quickstart.py`](examples/quickstart.py) is the runnable version: a fact that is superseded by a migration stops being
-served, a look-alike note that never helps is demoted to `LOW_VALUE`, and the current fact accumulates credit.
+Facts with the same `entity` + `attribute` and role `"state"` (the default) replace each other; store multi-valued things
+(likes, dependencies) with `role="preference"` or `"note"` to keep them all. `mem.add_conversation(raw_text, extractor=...)` turns a
+transcript into facts (see *Fact extraction* below).
+
+### As an MCP server (Claude Code, Claude Desktop, any MCP client)
+
+```bash
+pip install ".[mcp]"
+claude mcp add remem -- remem-mcp            # Claude Code
+```
+
+Claude Desktop, `claude_desktop_config.json`:
+
+```json
+{"mcpServers": {"remem": {"command": "remem-mcp", "env": {"REMEM_PATH": "C:/Users/you/.remem/work", "REMEM_EMBEDDER": "sentence-transformers"}}}}
+```
+
+Tools: `remember`, `recall`, `feedback`, `inspect`, `list_memories`, `stats`. The tool descriptions tell the agent to call `feedback` after
+using a `recall` result. **If the agent never calls it, ranking stays similarity-only.** Environment: `REMEM_PATH` (store directory,
+default `~/.remem/default`), `REMEM_EMBEDDER` (`hash` default, or `sentence-transformers`), `REMEM_ST_MODEL`.
+
+### Embeddings and vector stores
+
+```python
+from remem import ReMem
+from remem.embedders import SentenceTransformerEmbedder      # pip install sentence-transformers
+from remem.backends import FaissBackend, ChromaBackend        # pip install faiss-cpu / chromadb
+
+emb = SentenceTransformerEmbedder("all-MiniLM-L6-v2")
+mem = ReMem("~/.remem/app", embedder=emb, backend=FaissBackend(emb))
+```
+
+The built-in hash embedder (`remem.offline.ConceptHashEmbedder`) exists for tests and the synthetic benchmark; use a real model in practice.
+`remem.llm.OpenAIEmbedder` wraps any OpenAI-compatible embeddings endpoint. Any object with `ingest(facts)` and `candidates(query, k)`
+works as a backend.
+
+### Fact extraction
+
+```python
+from openai import OpenAI
+from remem.extract import LLMFactExtractor
+mem.add_conversation(transcript, extractor=LLMFactExtractor(OpenAI(), model="gpt-4o-mini"))
+```
+
+Without an extractor, `add_conversation` stores each sentence as a note (no automatic supersession). The LLM extractor is tested against a
+fake client only; its extraction quality with a real model has not been measured here.
+
+### LangChain
+
+```python
+from remem.integrations.langchain import ReMemRetriever      # pip install langchain-core
+retriever = ReMemRetriever(memory=mem, k=5, task="support")
+docs = retriever.invoke("Which plan is the customer on?")
+retriever.feedback(success=True, used_ids=[docs[0].metadata["id"]])
+```
+
+### Dashboard, inspector, tokenizer
+
+```bash
+python -m remem.viz.dashboard ~/.remem/myproject -o memory.html          # self-contained HTML; open in a browser
+python -m remem.viz.ledger_cli ~/.remem/myproject/ledger.json --list --state LOW_VALUE
+```
+
+Token budgets use a word+punctuation proxy by default; `remem.offline.set_tokenizer("tiktoken")` (or `REMEM_TOKENIZER=tiktoken`) switches
+to real BPE counts.
+
+### Running with a real LLM or on LongMemEval (needs your API key / data)
+
+```bash
+OPENAI_API_KEY=... python experiments/run_llm_agent.py --model <chat-model>                  # synthetic tasks, real LLM agent
+python experiments/run_longmemeval.py --data longmemeval_s_cleaned.json --embedder st       # retrieval recall, no LLM needed
+python experiments/run_longmemeval.py --data ... --qa --model <chat-model>                  # + answers for the official judge
+```
+
+Neither has been run in this repository: no API key was available and the dataset download was blocked from the development machine.
 
 ## Contents
 1. [Problem](#1-problem) · 2. [Architecture](#2-architecture) · 3. [Utility model](#3-memory-utility-model) · 4. [Outcome feedback and credit assignment](#4-outcome-feedback-and-credit-assignment) · 5. [Adaptive retention](#5-adaptive-retention) · 6. [Contradiction and staleness](#6-contradiction-and-staleness) · 7. [Cost-aware retrieval](#7-cost-aware-retrieval) · 8. [Additional mechanisms](#8-additional-mechanisms) · 9. [Evaluation methodology](#9-evaluation-methodology) · 10. [Results](#10-results) · 11. [Limitations](#11-limitations-read-these) · 12. [Failure analysis](#12-failure-analysis) · 13. [Future work](#13-future-work) · [Related work](docs/RELATED_WORK.md)
@@ -89,6 +168,12 @@ flowchart LR
 | `eval/` | seeded world generator, simulated agent, runner, metrics, failure analysis, report |
 | `llm.py` | OpenAI-compatible agent and embedder adapters (unverified, see §8) |
 | `viz/ledger_cli.py` | developer inspector |
+| `api.py` | `ReMem`: the high-level, persistent API (`add`, `search`, `feedback`, `inspect`, `add_conversation`) |
+| `mcp_server.py` | MCP server (`remem-mcp`) exposing remember / recall / feedback / inspect |
+| `embedders.py`, `backends/stores.py` | sentence-transformers embeddings; FAISS and Chroma backends |
+| `extract.py`, `integrations/langchain.py` | LLM fact extraction; LangChain retriever |
+| `baselines/rmm.py` | RMM-style reranker used as a comparison baseline (reimplementation) |
+| `viz/dashboard.py` | self-contained HTML dashboard |
 
 ## 3. Memory utility model
 
@@ -163,209 +248,229 @@ Each was tested and measured; results (including those that did not help) are in
   history cannot help.
 * **Agent.** A deterministic *simulated* reader with position-biased (`first`) and timestamp-aware (`latest`) modes, distraction
   proportional to irrelevant context, chance-level guessing and noisy self-citation. Everything is reported for both modes.
-* **Seeds.** Train 100–103 (fit utility model), dev 200–201 (sanity checks and choosing `guard_top`), **test 0–4 (all reported numbers)**.
+* **Seeds.** Train 100–103 (fit utility model), dev 200–201 (sanity checks, choosing `guard_top`, tuning the RMM-style baseline), **test 0–14 (all reported numbers)**.
   Means with 95% t-intervals over seeds; paired differences over seeds. The whole pipeline is deterministic.
 
 ```bash
 python -m pip install -r requirements.txt
-python -m pytest tests -q                      # 57 tests, a few seconds
+python -m pytest tests -q                      # 77 tests, under a minute
 python experiments/run_benchmark.py --quick    # smoke run
-python experiments/run_benchmark.py            # full protocol; trains the model if missing (~2 min, 12 workers)
+python experiments/run_benchmark.py            # full protocol, 15 seeds; trains the model if missing (~20 min, 12 workers; resumable)
 python experiments/demo_ranking.py             # "more similar vs more useful" demonstration
 python -m remem.viz.ledger_cli results/runs/distractor_seed0_C_remem/ledger.json --list --state LOW_VALUE
 ```
 
 ## 10. Results
 
-5 test seeds, mean ± 95% t-interval, simulated agent, offline hash embedder. Full generated tables:
+**15 test seeds**, mean ± 95% t-interval, simulated agent, offline hash embedder. Full generated tables:
 [`results/RESULTS.md`](results/RESULTS.md); aggregates: `results/{baseline,static,remem,ablation,new_features,sensitivity}.json`; plots: `results/plots/`.
 
 ### Headline (mean over 7 core families)
 
-| System | Task success % (reader `first`) | (`latest`) | Gold recall % | Context precision % | Tokens/task | Latency ms |
-|---|---:|---:|---:|---:|---:|---:|
-| A flat vector, similarity only | 64.6 ± 6.1 | 74.0 ± 5.4 | 85.9 | 18.2 | 47.8 | 0.7 |
-| B flat vector + static score | 68.0 ± 7.0 | 74.1 ± 5.3 | 86.0 | 18.2 | 47.8 | 1.2 |
-| **C ReMem** | **77.9 ± 4.4** | **77.9 ± 4.4** | 90.0 | 21.6 | **38.2** | 1.6 |
+| System | Task success % (reader `first`) | (`latest`) | Gold recall % | Context precision % | Tokens/task |
+|---|---:|---:|---:|---:|---:|
+| A flat vector, similarity only | 62.6 ± 2.4 | 70.7 ± 2.1 | 81.5 | 17.3 | 47.3 |
+| B flat vector + static score | 65.9 ± 2.4 | 70.8 ± 2.1 | 81.7 | 17.3 | 47.4 |
+| RMM-style reranker (our reimplementation, see below) | 63.1 ± 1.9 | 70.7 ± 1.9 | 80.7 | 17.1 | 44.5 |
+| **C ReMem** | **76.4 ± 1.8** | **76.4 ± 1.8** | 87.7 | 21.5 | **37.8** |
 
-Paired over seeds: C − A = **+13.3 ± 2.4 pp** (`first`), **+4.0 ± 1.6 pp** (`latest`); C − B = +9.9 ± 3.0 / +3.9 ± 1.7 pp; tokens −9.6 ± 2.2 per
-task. The ReMem layer adds ≈ 1 ms per query over the static-score variant.
+Paired over seeds: C − A = **+13.8 ± 1.8 pp** (`first`), **+5.6 ± 1.2 pp** (`latest`); C − B = +10.5 ± 1.8 / +5.5 ± 1.3 pp; tokens −9.5 ± 0.9 per
+task. The ReMem layer adds a few milliseconds per query (Python; see `results/RESULTS.md` for latency).
 
 **Read the `first`/`latest` gap before the headline.** A timestamp-aware reader already copes with most stale facts, so the gain
-shrinks from 13.3 to 4.0 pp. Most of the `first`-reader gain is contradiction handling.
+shrinks from 13.8 to 5.6 pp. Most of the `first`-reader gain is contradiction handling.
 
 ### Per family (task success %, reader `first`)
 
 | System | distractor | long_horizon | contradiction | rare_critical | useless_frequent | budget_tight | state_change | *distractor_norecur (control)* |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| A similarity only | 76.0 | 77.7 | 53.4 | 76.7 | 77.9 | 49.3 | 41.5 | 70.6 |
-| B + static score | 75.9 | 77.6 | 62.2 | 76.7 | 77.9 | 49.3 | 56.4 | 70.6 |
-| **C ReMem** | 79.7 | 81.9 | 81.0 | 81.8 | 79.9 | 58.3 | 82.9 | **70.9** |
+| A similarity only | 73.5 | 73.5 | 52.6 | 74.9 | 76.0 | 41.0 | 46.6 | 68.8 |
+| B + static score | 73.5 | 73.5 | 63.3 | 74.9 | 75.8 | 41.0 | 59.3 | 68.7 |
+| **C ReMem** | 79.3 | 79.9 | 82.4 | 81.6 | 79.9 | 49.5 | 82.0 | **68.7** |
 
-Per-family intervals are wide (±3.7 to ±19 pp with 5 seeds); on `distractor`, `rare_critical`, `useless_frequent` and `budget_tight` ReMem's
-interval overlaps the baselines'. On the control, where history cannot help, **ReMem gives no gain (70.9 vs 70.6)**. `budget_tight` is capped
-for every system by long gold facts whose diluted similarity ranks them ~10th and whose 44 tokens nearly fill the 45-token budget.
+With 15 seeds the per-family intervals are ±2 to ±8 pp, and ReMem is ahead of similarity-only on every core family. On the control,
+where per-memory history cannot help, **ReMem gives no gain (68.7 vs 68.8)**. `budget_tight` stays low for every system because long gold
+facts rank poorly on similarity and nearly fill the 45-token budget.
 
 ### Cumulative ablation (reader `first`, core families)
 
 | System | Task success % | Tokens/task | Gold recall % |
 |---|---:|---:|---:|
-| flat vector baseline | 64.6 ± 6.1 | 47.8 | 85.9 |
-| + temporal relevance | 68.0 ± 7.0 | 47.8 | 86.0 |
-| + utility score (heuristic, retrieval-history features) | 66.3 ± 6.8 | 47.3 | 85.4 |
-| + learned utility model (static + retrieval-history features) | **63.1 ± 5.8** | 47.1 | 80.0 |
-| + outcome feedback | 67.8 ± 6.0 | 43.2 | 86.2 |
-| + adaptive retention | 68.1 ± 5.8 | 41.9 | 86.7 |
-| + contradiction handling | 76.2 ± 4.1 | 42.0 | 90.1 |
-| + cost-aware selection (= full without similarity guard) | 77.5 ± 4.1 | 37.7 | 89.1 |
+| flat vector baseline | 62.6 ± 2.4 | 47.3 | 81.5 |
+| + temporal relevance | 65.9 ± 2.4 | 47.4 | 81.7 |
+| + utility score (heuristic, retrieval-history features) | 64.0 ± 2.4 | 47.1 | 80.6 |
+| + learned utility model (static + retrieval-history features) | **60.5 ± 2.3** | 46.9 | 75.3 |
+| + outcome feedback | 66.3 ± 2.2 | 43.4 | 84.4 |
+| + adaptive retention | 66.7 ± 2.0 | 42.2 | 85.0 |
+| + contradiction handling | 73.9 ± 1.8 | 42.3 | 87.7 |
+| + cost-aware selection (= full without similarity guard) | 75.8 ± 1.7 | 37.6 | 86.9 |
 
-* **Retrieval frequency is not usefulness: measured.** Retrieval-history features, heuristic or learned, *lower* success (66.3, 63.1): in
+* **Retrieval frequency is not usefulness: measured.** Retrieval-history features, heuristic or learned, *lower* success (64.0, 60.5): in
   training traces frequently retrieved memories are mostly useful, so the model learns "frequent ⇒ useful", and look-alike traps are frequent too.
-* Outcome-derived signals repair this (+4.7 pp, −3.9 tokens). **Contradiction handling is the largest single step (+8.1 pp)**, concentrated in
-  the two families with updates. Leave-one-out from the full system agrees: removing contradiction handling −8.8 pp, outcome feedback −4.6,
-  cost-aware selection −1.6, adaptive retention −1.3 (not significant); removing the similarity guard changes success by +0.4 in the other
-  direction (within noise).
-* **The learned model does not beat the transparent heuristic.** Full system with the heuristic utility: 78.8 ± 3.9 (learned 77.9 ± 4.4); AUC
-  0.964 vs 0.960. The learned model's advantage is calibration (Brier 0.069 vs 0.093, ECE 0.153 vs 0.217), which matters for the cost-aware
-  threshold, not ranking. AUC over considered candidates is 0.960 vs 0.903 for similarity alone.
+* Outcome-derived signals repair this (+5.8 pp, −3.5 tokens). **Contradiction handling is the largest single step (+7.2 pp)**, concentrated in
+  the two families with updates. Leave-one-out from the full system agrees: removing contradiction handling −8.1 pp, outcome feedback −6.5,
+  cost-aware selection −2.1, adaptive retention −1.4; removing the similarity guard changes success by −0.6 (within noise).
+* **The learned model does not beat the transparent heuristic.** Full system with the heuristic utility: 76.8 ± 1.6 (learned 76.4 ± 1.8); AUC
+  0.958 vs 0.954. The learned model's advantage is calibration (Brier 0.067 vs 0.092, ECE 0.150 vs 0.218), which matters for the cost-aware
+  threshold, not ranking. AUC over considered candidates is 0.954 vs 0.876 for similarity alone.
 
 ### Credit assignment (same system, different attribution; reader `first`)
 
 | Attribution | Task success % | Credit precision | Credit recall | Extra agent calls/task |
 |---|---:|---:|---:|---:|
-| presence (equal credit to everything in context) | 73.3 ± 5.3 | 0.20 | 1.00 | 0 |
-| usage signals only, **outcome ignored** | 79.5 ± 4.0 | 0.50 | 1.00 | 0 |
-| **signals (default)** | 77.9 ± 4.4 | 0.48 | 1.00 | 0 |
-| signals + leave-one-out, all memories | 84.0 ± 4.1 | 1.00 | 0.82 | 2.40 |
-| **signals + leave-one-out, ambiguous only** | **83.7 ± 4.1** | 0.99 | 0.97 | **0.43** |
+| presence (equal credit to everything in context) | 69.8 ± 2.2 | 0.19 | 1.00 | 0 |
+| usage signals only, **outcome ignored** | 78.4 ± 1.5 | 0.52 | 1.00 | 0 |
+| **signals (default)** | 76.4 ± 1.8 | 0.49 | 1.00 | 0 |
+| signals + leave-one-out, all memories | 82.4 ± 1.7 | 1.00 | 0.82 | 2.34 |
+| **signals + leave-one-out, ambiguous only** | **82.4 ± 1.4** | 0.99 | 0.96 | **0.41** |
 
-Equal credit is worse than signal-based credit (73.3 vs 77.9). **Honest caveat on the name:** crediting purely from citation/value use while
-ignoring success/failure scores the same as the default (79.5 vs 77.9, within noise): the benefit here comes from *usage* signals; the success
-bit gates credit and drives blame and outcome-triggered invalidation, but we could not show it adds measurable accuracy. Flipping 10% or 20% of
-outcome labels leaves ReMem at 78.0 / 78.3, consistent with that.
+Equal credit is worse than signal-based credit (69.8 vs 76.4). Ambiguous-only leave-one-out matches full leave-one-out for 82% fewer extra
+agent calls. **Honest caveat on the name:** crediting purely from citation/value use while *ignoring* success/failure scores slightly *higher* than
+the default (78.4 vs 76.4, overlapping intervals). In this benchmark the benefit comes from *usage* signals; the success bit gates credit and drives
+blame and outcome-triggered invalidation, but we could not show it adds accuracy. Flipping 10% or 20% of outcome labels leaves ReMem at 76.5 / 76.9,
+consistent with that.
+
+### Comparison with an RMM-style reranker
+
+RMM ([arXiv 2503.08026](https://arxiv.org/abs/2503.08026)) learns a reranker from the LLM's citations with REINFORCE. `remem/baselines/rmm.py`
+reimplements its §6 (residual linear embedding adaptation, Gumbel sampling, +1/−1 citation reward); it is **not the authors' code**, its gradient
+is verified numerically, and its learning rate and temperature were tuned on dev seeds. Here it scores **63.1%, within noise of plain similarity
+(62.6%)**, and on dev seeds more learning made it worse. This says the RMM-style mechanism did not help *in this synthetic setting with hash
+embeddings and ~300 tasks per world*; it says nothing about RMM as published (different data, real embeddings, Gemini, plus its Prospective
+Reflection component, which is not reimplemented). Details: [`docs/RELATED_WORK.md`](docs/RELATED_WORK.md).
 
 ### Retention (`rare_critical`, reader `first`)
 
 | System | Overall % | Dormant-critical % | Shown-elsewhere critical % | memories ARCHIVED |
 |---|---:|---:|---:|---:|
-| A similarity only (no retention) | 76.7 | 80.0 ± 13.9 | 75.0 ± 24.5 | 0 |
-| C ReMem (adaptive retention) | 81.8 | 80.0 ± 13.9 | 75.0 ± 24.5 | 0.2 |
-| **frequency-prune control** | 77.8 | **7.5 ± 13.9** | **22.5 ± 13.0** | **120.0** |
+| A similarity only (no retention) | 74.9 | 81.7 ± 8.2 | 74.2 ± 8.5 | 0 |
+| C ReMem (adaptive retention) | 81.6 | 81.7 ± 8.2 | 73.3 ± 8.2 | 0.3 |
+| **frequency-prune control** | 77.4 | **8.3 ± 5.0** | **33.3 ± 8.1** | **118.2** |
 
-Frequency pruning archives about 58% of memory and destroys the rarely needed ones; the exposure/outcome-based policy leaves them untouched.
-Critical tasks are few (8 + 8 per world), so intervals are wide. Adaptive retention itself engages rarely in these worlds (on average 5.6 LOW_VALUE,
-0.4 COMPRESSED, 0.3 ARCHIVED of 207) and saves about 2% of eligible tokens; **no accuracy benefit is claimed.**
+Frequency pruning archives about 60% of memory and destroys the rarely needed ones; the exposure/outcome-based policy leaves them untouched.
+Adaptive retention itself engages rarely in these worlds (on average 6.0 LOW_VALUE, 0.6 COMPRESSED, 0.4 ARCHIVED of 207) and saves about 2% of
+eligible tokens; **no accuracy benefit is claimed**.
 
 ### Contradiction and state change (reader `first`)
 
-ReMem removes stale-memory-in-context events (`contradiction` 40.3% → 0.0% of tasks; `state_change` 56.5% → 0.0%), with **0 false invalidations**
+ReMem removes stale-memory-in-context events (`contradiction` 38.6% → 0.0% of tasks; `state_change` 53.6% → 0.0%), with **0 false invalidations**
 (multi-valued `depends_on` facts are never superseded), and **0 missed** given the single-valued-attribute schema. Historical (`as_of`) queries:
-79.6% vs 47.8% for similarity-only. With 20% of facts losing their attribute key (imperfect extraction) ReMem still reaches 71.6% vs 48.5% for
-similarity-only (static score: 59.2%) on the two update families.
+78.6% vs 48.1% for similarity-only. With 20% of facts losing their attribute key (imperfect extraction) ReMem still reaches 70.4% vs 48.7% for
+similarity-only (static score: 55.9%) on the two update families.
 
-**Learned schema (none given), 5 seeds.** Stale-in-context task rate / missed invalidations / success:
+**Learned schema (none given), 15 seeds.** Stale-in-context task rate / missed invalidations per world / success:
 
 | Setting | no schema | learned schema | schema given |
 |---|---:|---:|---:|
-| `state_change`, explicit update wording | 5.9% / 1.4 / 79.1 | 2.4% / 0.2 / 81.7 | 0.0% / 0 / 82.9 |
-| `state_change`, **no** update wording | 11.4% / 5.2 / 79.1 | 2.6% / 0.2 / 82.6 | 0.0% / 0 / 84.1 |
-| `contradiction`, explicit wording | 2.8% / 1.2 / 79.8 | 1.6% / 0.6 / 80.3 | 0.0% / 0 / 81.0 |
-| `contradiction`, no wording | 5.3% / 1.8 / 76.9 | 4.2% / 0.4 / 77.4 | 0.0% / 0 / 77.0 |
+| `state_change`, explicit update wording | 7.8% / 2.6 / 78.2 | 3.2% / 0.5 / 80.2 | 0.0% / 0 / 82.0 |
+| `state_change`, **no** update wording | 11.2% / 5.1 / 77.3 | 4.5% / 1.2 / 79.8 | 0.0% / 0 / 82.3 |
+| `contradiction`, explicit wording | 2.7% / 0.7 / 81.1 | 1.7% / 0.3 / 81.6 | 0.0% / 0 / 82.4 |
+| `contradiction`, no wording | 5.9% / 1.7 / 79.2 | 4.5% / 0.7 / 79.6 | 0.0% / 0 / 80.2 |
 
-Learning recovers most of the gap where it is largest (`state_change` without wording: +3.5 pp, 96% of the missed invalidations removed) and is
-within noise on `contradiction`. It never produced a false invalidation.
+Learning recovers about half of the gap to a hand-written schema where the gap is largest (`state_change` without wording: +2.5 pp, 76% of the missed
+invalidations removed), and is within noise on `contradiction`. It never produced a false invalidation.
 
 ### Guard and exploration (core families, reader `first`)
 
 | System | Task success % | Tasks where utility pushed out a top-5-similar gold % | Tokens/task |
 |---|---:|---:|---:|
-| A similarity only | 64.6 | 0.3 | 47.8 |
-| full without guard | 77.5 ± 4.1 | **2.0** | 37.7 |
-| **C ReMem (guard_top=3)** | 77.9 ± 4.4 | **0.7** | 38.2 |
-| full with Thompson instead of UCB | 76.3 ± 3.7 | 1.0 | 40.4 |
+| A similarity only | 62.6 | 0.4 | 47.3 |
+| full without guard | 75.8 ± 1.7 | **2.0** | 37.6 |
+| **C ReMem (guard_top=3)** | 76.4 ± 1.8 | **0.7** | 37.8 |
+| full with Thompson instead of UCB | 74.7 ± 1.8 | 0.9 | 40.8 |
 
-The guard does what it was built for (that failure drops by ~65%) but **does not improve task success**: the memory it swaps in is as often a
-look-alike as the correct one. Thompson sampling is worse than UCB (−1.6 pp, +2.1 tokens/task).
+The guard does what it was built for (that failure drops by ~65%); its effect on task success (+0.6 pp) is within noise. Thompson sampling is worse
+than UCB (−1.7 pp, +3 tokens/task).
 
 ### Robustness (core families, `first`)
 
 | Perturbation | A | B | C |
 |---|---:|---:|---:|
-| none | 64.6 | 68.0 | 77.9 |
-| agent not distracted by irrelevant context (0 per item) | 75.2 | 79.0 | 89.3 |
-| agent twice as distractible (0.10 per item) | 52.4 | 55.4 | 65.5 |
-| 20% of outcome labels flipped | 64.6 | 68.0 | 78.3 |
+| none | 62.6 | 65.9 | 76.4 |
+| agent not distracted by irrelevant context (0 per item) | 73.8 | 77.5 | 88.1 |
+| agent twice as distractible (0.10 per item) | 51.6 | 54.5 | 64.6 |
+| 20% of outcome labels flipped | 62.6 | 65.9 | 76.9 |
 
-The absolute level moves a lot with the assumed cost of wasted context; ReMem's lead over similarity-only does not (+14.1 / +13.1 pp).
+The absolute level moves a lot with the assumed cost of wasted context; ReMem's lead over similarity-only does not (+14.3 / +13.0 pp).
 
 ### Ranking demonstration and lifecycle
 
 `python experiments/demo_ranking.py` writes `results/demo_ranking.md`: tasks where a look-alike with higher similarity is **not** served while a
-lower-similarity gold memory is (104 such tasks in the first test world), with both memories' similarity, outcome history and utility components.
-`python -m remem.viz.ledger_cli <ledger.json> --id <fact_id>` shows content, utility, retrieval and outcome history, state, contradictions, last
-update, why it was retrieved, and a lifecycle line such as `CREATED -> RETRIEVED -> NO_CONTRIBUTION ... [RETRIEVED x12, NO_CONTRIBUTION x9] ; STATE_CHANGE: ACTIVE -> LOW_VALUE ; utility 0.58 -> 0.31 (DOWN)`.
-Per-feature "utility components" in these explanations come from a regression with correlated features, so individual component signs can be
-large and opposite (e.g. `contrib_rate` −2 against `class_rate` +3); read them as a decomposition of the score, not as independent effects.
+lower-similarity gold memory is (104 such tasks in the first test world). `python -m remem.viz.dashboard <store>` renders every memory's state,
+credit, supersession links and lifecycle as a self-contained HTML page; `python -m remem.viz.ledger_cli` is the terminal equivalent. Per-feature
+"utility components" come from a regression with correlated features, so individual component signs can be large and opposite; read them as a
+decomposition of the score, not as independent effects.
 
 ## 11. Limitations (read these)
 
-* **No real-LLM and no public-benchmark evidence.** No LoCoMo/LongMemEval-style run was possible (no model endpoints or data available);
-  **no number in this repository is from such a benchmark.** The reader is deterministic and simulated; its distraction strength
-  (0.05 per irrelevant item) and chance-guessing are assumptions, and the cost-aware gain depends on "wasted context hurts". The LLM adapters are
-  untested against a live model.
-* **Offline hash embedder.** Hash embeddings with a hand-written synonym lexicon replace a trained embedding model; retrieval quality under real
-  embeddings may differ. About 2.5% of gold facts are never retrieved at all (the embedder has no stemming).
-* **Only a flat vector backend is built in.** An earlier version also compared against a hierarchical-memory backend; that backend and every
-  comparison against it were removed from this repository, so no claim here concerns any hierarchical memory system.
+* **No real-LLM and no public-benchmark evidence yet.** The LLM agent and LongMemEval runners exist (`experiments/run_llm_agent.py`,
+  `experiments/run_longmemeval.py`) but were not run: no API key was available and the dataset download was blocked from the development machine.
+  **No number in this repository is from a public benchmark or a real LLM.** The reader is deterministic and simulated; its distraction strength
+  (0.05 per irrelevant item) and chance-guessing are assumptions, and the cost-aware gain depends on "wasted context hurts".
+* **On LongMemEval-style data, expect little from ReMem.** Each question there has its own history and is asked once, so per-memory feedback never
+  accumulates, and raw turns carry no entity/attribute keys for supersession (without LLM extraction). This is the same situation as the
+  `distractor_norecur` control, where ReMem shows no gain.
+* **Offline hash embedder in the benchmark.** Hash embeddings with a hand-written synonym lexicon replace a trained embedding model; about 3% of gold
+  facts are never retrieved at all (the embedder has no stemming). Real embeddings are supported (`SentenceTransformerEmbedder`) but the benchmark
+  numbers do not use them.
+* **Only flat vector stores are built in** (numpy, FAISS, Chroma). An earlier version also compared against a hierarchical-memory backend; that
+  backend and every comparison against it were removed, so no claim here concerns any hierarchical memory system.
 * **Synthetic, author-designed tasks.** They exercise the mechanisms and some (traps, repeated pairs) favour per-memory history by construction; the
   control family and the negative results are included for that reason. Gains require *recurring* queries.
-* **Extraction is assumed.** The detector uses `entities`, `attribute_keys` and `semantic_role` fields as an LLM extractor would emit; here they
-  come from the generator (noise sensitivity above). The single-valued schema is configuration unless learned (§8.3).
-* **Feedback only on shown memories** (bandit feedback); exploration is a heuristic; memories never shown never get labels.
-* **Credit assignment is not causal.** Default credit precision is only 0.48; leave-one-out fixes it at a cost of extra agent calls (0.43–2.40/task).
+* **Extraction is assumed in the benchmark.** The detector uses `entities`, `attribute_keys` and `semantic_role` fields as an LLM extractor would emit;
+  there they come from the generator (noise sensitivity above). `LLMFactExtractor` exists but its quality with a real model is unmeasured.
+* **Library supersession rule.** Through `ReMem.add`, two `"state"` facts with the same entity and attribute replace each other; a multi-valued
+  attribute stored as `"state"` would lose values. Store those as `"preference"` or `"note"`.
+* **Feedback only on shown memories** (bandit feedback); exploration is a heuristic; memories never shown never get labels. In the MCP server, learning
+  only happens if the agent actually calls `feedback`.
+* **Credit assignment is not causal.** Default credit precision is only 0.49; leave-one-out fixes it at a cost of extra agent calls (0.41–2.34/task).
 * **The learned model does not beat the heuristic**; it was trained on observed labels from a heuristic policy and deployed under another (distribution shift).
 * **Several mechanisms did not help or are within noise:** retention (accuracy), similarity guard (success), Thompson sampling (worse), outcome gating
-  (usage-only matches it).
-* **Statistics.** 5 seeds; most per-family differences are not individually significant. Tokens are a word+punctuation proxy.
-* **Process disclosure.** Hyper-parameters were set a priori. Dev seeds were used for sanity checks, for fixing defects found by unit tests (detector
-  false positives, an LOO discount equal to the threshold, trap invalidation by the outcome path), for raising critical tasks per world from 6+6 to 8+8,
-  and for choosing `guard_top=3` and rejecting Thompson sampling. The test seeds were run several times as the code changed; the reported numbers are
-  from the final run only.
+  (usage-only matches it), and the RMM-style reranker (within noise of similarity; our reimplementation, not the authors' code).
+* **Statistics.** 15 seeds, t-intervals over seeds; worlds come from one author-written generator, so seeds are not independent real-world samples.
+  Tokens are a word+punctuation proxy by default (`set_tokenizer("tiktoken")` for real counts).
+* **Process disclosure.** Hyper-parameters were set a priori, except those chosen on dev seeds: `guard_top=3`, rejecting Thompson sampling, and the
+  RMM-style baseline's learning rate and temperature. Dev seeds were also used for fixing defects found by unit tests (detector false positives, an LOO
+  discount equal to the threshold, trap invalidation by the outcome path) and for raising critical tasks per world from 6+6 to 8+8. The test seeds were run
+  several times as the code changed; the reported numbers are from the final run only.
 
 ## 12. Failure analysis
 
-[`results/failure_analysis.md`](results/failure_analysis.md) (+ `failures.jsonl`): per-task tags, all test seeds, reader `first`.
+[`results/failure_analysis.md`](results/failure_analysis.md) (+ `failures.jsonl`): per-task tags, all 15 test seeds, reader `first`.
 
 | Category | A similarity only | C ReMem |
 |---|---:|---:|
-| `gold_not_in_pool` (backend never offered it) | 2.5% | 2.5% |
-| `gold_pooled_not_selected` | 15.5% | 9.5% |
-| `utility_demoted_gold` (top-5 by similarity, pushed out) | 0.2% | 0.6% |
+| `gold_not_in_pool` (backend never offered it) | 3.1% | 3.1% |
+| `gold_pooled_not_selected` | 19.8% | 11.3% |
+| `utility_demoted_gold` (top-5 by similarity, pushed out) | 0.6% | 0.7% |
 | `useful_filtered` (archived/invalidated although needed) | 0 | 0 |
-| `irrelevant_retrieved` (failed + distracted) | 17.6% | 15.4% |
-| `outdated_preferred` | 9.8% | **0.0%** |
-| `success_without_memory` (lucky guess) | 3.3% | 2.2% |
-| `fail_despite_gold` (all gold served, still failed) | 21.6% | 13.2% |
+| `irrelevant_retrieved` (failed + distracted) | 18.5% | 16.1% |
+| `outdated_preferred` | 8.6% | **0.0%** |
+| `success_without_memory` (lucky guess) | 4.4% | 2.7% |
+| `fail_despite_gold` (all gold served, still failed) | 20.4% | 13.2% |
 
-What the system still gets wrong: (1) it demotes correct memories slightly more often than the baseline (0.6% vs 0.2%, down from 2.0% without the
-guard); (2) irrelevant context still causes 15% of failures; (3) 2.5% of gold facts are never in the pool, a limitation of the offline embedder;
-(4) about one task in eight fails with every needed memory present, because the simulated agent can be distracted.
+What the system still gets wrong: (1) the utility layer still pushes out a highly similar correct memory in 0.7% of tasks (2.0% without the guard);
+(2) irrelevant context still causes 16% of failures; (3) 3.1% of gold facts are never in the pool, a limitation of the offline embedder; (4) about one task
+in eight fails with every needed memory present, because the simulated agent can be distracted.
 
 ## 13. Future work
 
-Run the layer against real LLM agents and public memory benchmarks with a task-success signal; replace the simulated reader with an LLM and measure how
-well self-citation tracks real dependence; proper off-policy correction for the learned model; add backends for other memory systems; verify the
-related-work claims against the original papers ([`docs/RELATED_WORK.md`](docs/RELATED_WORK.md)).
+Run the LLM-agent and LongMemEval runners with a real model and the real data (both are ready; see Quickstart); measure how well an LLM's
+self-citations track real dependence; evaluate `LLMFactExtractor` quality; let per-memory utility generalise to unseen memories (the RMM idea of
+adapting the embedding space, combined with ReMem's outcome gating); off-policy correction for the learned model; more backends (Qdrant, pgvector).
 
 ## Repository map
 
 ```
-remem/         the library                      configs/systems.yaml   every compared system
-experiments/   run_benchmark.py, train_utility.py, demo_ranking.py, run_llm_agent.py
-tests/         57 tests                          examples/   quickstart.py
-.github/       CI: tests on Python 3.10-3.13 + benchmark smoke run
-results/       RESULTS.md, failure_analysis.md, *.json, plots/, runs/<…>/ledger.json, models/, records/
-docs/          DESIGN.md (design note), RELATED_WORK.md
+remem/                 the library: api.py (ReMem), mcp_server.py, system.py, ledger, utility, attribution, contradiction, retention, selection
+remem/backends/        numpy vector, FAISS, Chroma            remem/embedders.py   sentence-transformers
+remem/extract.py       fact extraction                         remem/integrations/  LangChain retriever
+remem/baselines/       RMM-style reranker (reimplementation)  remem/viz/           dashboard (HTML), ledger_cli
+remem/eval/            synthetic worlds, simulated agent, runner, metrics, failure analysis, report
+experiments/           run_benchmark.py, train_utility.py, tune_rmm.py, demo_ranking.py, run_llm_agent.py, run_longmemeval.py
+examples/quickstart.py configs/systems.yaml (every compared system)      tests/ (77 tests)
+results/               RESULTS.md, failure_analysis.md, *.json, plots/, runs/<…>/ledger.json, models/, records/
+docs/                  DESIGN.md, RELATED_WORK.md                .github/workflows/  CI
 ```
 
 License: MIT (see `LICENSE`). © 2026 Viswesh Kesarla.
