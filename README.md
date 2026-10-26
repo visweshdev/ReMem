@@ -1,111 +1,154 @@
-# ReMem: outcome-aware adaptive memory for long-horizon AI agents
+<p align="center">
+  <img src="docs/img/banner.svg" alt="ReMem: memory for AI agents that learns what actually helps" width="100%">
+</p>
 
-ReMem is a memory layer that learns **which memories actually help an agent succeed**, and uses that to decide what to
-retrieve, what to keep, what to supersede, and how much context to spend. It sits on top of a retrieval backend (a flat
-vector index is built in; any backend implementing `remem.backends.base.Backend` can be plugged in).
+<p align="center">
+  <img alt="Python 3.10+" src="https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white">
+  <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-2f7d5b">
+  <img alt="85 tests" src="https://img.shields.io/badge/tests-85%20passing-2f7d5b">
+  <img alt="MCP server" src="https://img.shields.io/badge/MCP-server-6b4fbb">
+  <img alt="LangChain retriever" src="https://img.shields.io/badge/LangChain-retriever-1c3c3c">
+  <img alt="Runs locally" src="https://img.shields.io/badge/runs-100%25%20local-555">
+</p>
 
-> **Status: research prototype.** The headline numbers come from a *synthetic, controlled benchmark with a simulated agent*. They hold
-> with a real embedding model (+10.2 pp). With a real (small, local) LLM as the agent, **the gain disappears** (within noise), and on the
-> public LongMemEval benchmark, where questions never repeat, ReMem behaves like plain similarity search. See [§10](#with-a-real-llm-free-local-qwen253b)
-> and [§11 Limitations](#11-limitations-read-these).
->
-> **Novelty:** citation-based feedback on retrieval is prior art (RMM, arXiv 2503.08026, refines retrieval with online RL from the LLM's cited
-> evidence), and Zep and Mem0's graph variant already keep superseded facts as invalid instead of deleting them. ReMem's contribution is the
-> combination plus a controlled evaluation, not any single idea. See [docs/RELATED_WORK.md](docs/RELATED_WORK.md).
+<p align="center">
+  <a href="#quickstart">Quickstart</a> ·
+  <a href="#how-it-works">How it works</a> ·
+  <a href="#results-at-a-glance">Results</a> ·
+  <a href="#use-it-with-claude-mcp">MCP</a> ·
+  <a href="#11-limitations-read-these">Limitations</a> ·
+  <a href="docs/DESIGN.md">Design</a>
+</p>
 
-![demo: add, search, feedback, better results](docs/img/demo.gif)
+Most agent memories retrieve whatever *sounds* most similar to the question. That breaks in two everyday ways: a look-alike
+note that never helps keeps winning, and a fact that was replaced last week is served right next to its replacement.
 
-*The real output of [`examples/basic_api.py`](examples/basic_api.py): an outdated fact is retired when a newer one arrives, and a
-look-alike note that never helps is demoted after a few rounds of feedback.*
+**ReMem is a memory layer that learns from outcomes.** After each task you tell it whether the task worked and which
+memories helped. It uses that to rank what helps higher, retire what was replaced, demote what never helps, and spend fewer
+tokens. Nothing is ever deleted, and every decision can be inspected.
 
-![task success: similarity only 62.6%, RMM-style 63.1%, static score 65.9%, ReMem 76.4%](docs/img/results.png)
+<p align="center">
+  <img src="docs/img/demo.gif" alt="Terminal demo: an outdated fact is retired and a useless look-alike note is demoted after feedback" width="100%">
+</p>
+<p align="center"><sub>Real output of <a href="examples/basic_api.py"><code>examples/basic_api.py</code></a>: the outdated fact is retired, and the note that never helps is demoted to <code>LOW_VALUE</code>.</sub></p>
 
-## What it adds to a retrieve-by-similarity memory
-
-| Gap in a retrieve-by-similarity memory | ReMem's mechanism | Measured effect (this benchmark, 15 test seeds) |
-|---|---|---|
-| similarity is the only signal; look-alikes that never help keep winning | per-memory outcome ledger + utility model (transparent heuristic or learned logistic regression) | +13.8 pp task success over similarity-only retrieval, −9.5 tokens/task |
-| replaced facts stay retrievable | supersession with validity intervals, `as_of` queries, outcome-triggered invalidation | stale-fact-in-context 39–54% of tasks → 0%; historical queries keep working |
-| no safe way to retire or shrink memory | explicit state machine `ACTIVE → LOW_VALUE → COMPRESSED → ARCHIVED`, `INVALIDATED`; nothing deleted | safe for rarely-needed memories where frequency pruning destroys them (82% → 8% success) |
-| context cost ignored | expected-utility knapsack under a token budget | −9.5 tokens/task; +2.1 pp from this step alone |
-| correct memories sometimes pushed out by the utility layer | similarity guard | targeted failure 2.0% → 0.7% of tasks; success change within noise |
-| single-valued attributes must be declared by hand | schema learned from outcome evidence | recovers about half the gap when no schema is given |
-| credit assignment is cheap but imprecise | leave-one-out only on ambiguous memories | 82.4% vs 76.4% success for 0.41 extra agent calls/task |
-| citation-feedback prior art (RMM) | RMM-style reranker reimplemented as a baseline | within noise of plain similarity here (63.1% vs 62.6%) |
-| no way to plug into agents | Python API, MCP server, LangChain retriever, HTML dashboard | tested end to end (MCP over the real protocol) |
+> [!IMPORTANT]
+> **Research prototype, reported honestly.** In a controlled synthetic benchmark ReMem beats similarity search by **+10 to +14
+> points** (also with real embeddings). With a real (small, local) LLM as the agent the gain is **within noise**, and on the public
+> LongMemEval benchmark, where no question repeats, it behaves like plain search. Details in [Results](#results-at-a-glance) and
+> [Limitations](#11-limitations-read-these).
 
 ## Quickstart
 
 ```bash
-pip install .                       # core: numpy, pyyaml, matplotlib
-pip install ".[all]"                # optional extras: mcp, sentence-transformers, faiss, chroma, tiktoken, openai
-python examples/basic_api.py        # add -> search -> feedback -> better ranking (the GIF above)
-python examples/quickstart.py       # the same ideas through the lower-level ReMemSystem
-python examples/langchain_retriever.py   # ReMem as a LangChain retriever
+git clone https://github.com/<your-username>/ReMem.git
+cd ReMem
+pip install -e .                 # core needs only numpy, pyyaml, matplotlib
+python examples/basic_api.py     # the demo above
 ```
-
-[`examples/claude_desktop_mcp.md`](examples/claude_desktop_mcp.md) shows how to plug the MCP server into Claude Code or Claude Desktop.
-
-### Python API
 
 ```python
 from remem import ReMem
 
-mem = ReMem("~/.remem/myproject")                    # persistent; reloads automatically
-mem.add("The billing service exposes API version v1.", entity="billing", attribute="api_version")
-mem.add("The billing service exposes API version v2.", entity="billing", attribute="api_version")  # supersedes v1
+mem = ReMem("my_memory")                                          # a folder; saved and reloaded automatically
+mem.add("Our server is in east-1.", entity="server", attribute="region")
+mem.add("Our server moved to west-2.", entity="server", attribute="region")   # retires the east-1 fact
 
-hits = mem.search("Which API version does billing expose?", task="api")
-for h in hits.items:
-    print(h.id, h.score, h.text)                     # only the v2 fact is served
-# ... your agent acts on hits.items ...
-mem.feedback(hits.search_id, success=True, used_ids=[hits.items[0].id])   # closes the loop
+hits = mem.search("Where is our server?")
+print(hits.items[0].text)                                         # Our server moved to west-2.
 
-mem.inspect(hits.items[0].id)                        # state, credit, lifecycle, supersession links
-mem.search("...", as_of=some_unix_time)              # ask about the past: superseded facts come back
+# ... your agent answers using hits.items ...
+mem.feedback(hits.search_id, success=True, used_ids=[hits.items[0].id])      # this is what it learns from
 ```
 
-Facts with the same `entity` + `attribute` and role `"state"` (the default) replace each other; store multi-valued things
-(likes, dependencies) with `role="preference"` or `"note"` to keep them all. `mem.add_conversation(raw_text, extractor=...)` turns a
-transcript into facts (see *Fact extraction* below).
+Three calls: **add** facts, **search** before answering, **feedback** after. `mem.inspect(id)` shows any memory's state, credit
+and history, and `mem.search(..., as_of=timestamp)` asks about the past, when retired facts come back.
 
-### As an MCP server (Claude Code, Claude Desktop, any MCP client)
+## How it works
+
+<p align="center">
+  <img src="docs/img/how_it_works.svg" alt="The loop: add facts, search, your agent acts, report the outcome, the memory ledger learns, and the next search is better informed" width="100%">
+</p>
+
+Every memory moves through an explicit lifecycle. Each transition is logged with its reason, and nothing is deleted:
+
+```mermaid
+stateDiagram-v2
+    direction LR
+    [*] --> ACTIVE: add
+    ACTIVE --> LOW_VALUE: shown often, never helps
+    LOW_VALUE --> ACTIVE: helps again
+    LOW_VALUE --> COMPRESSED
+    COMPRESSED --> ARCHIVED
+    ARCHIVED --> ACTIVE: revived by credited use
+    ACTIVE --> INVALIDATED: newer fact replaces it
+    INVALIDATED --> [*]: still returned for as_of queries
+```
+
+| | Plain similarity memory | ReMem |
+|---|---|---|
+| **Ranking** | similarity only | similarity × usefulness learned from outcomes (transparent heuristic or logistic regression) |
+| **Replaced facts** | served next to the new one | retired with a validity interval; still queryable "as of" a past date |
+| **Useless look-alikes** | keep winning forever | demoted per kind of task once evidence says they never help |
+| **Rarely needed but critical** | pruned if retention is frequency-based | protected: retention reacts to *uselessness when shown*, never to rarity |
+| **Context size** | fixed top-k | expected-utility knapsack under a token budget (−9.5 tokens per task) |
+| **Explainability** | a score | per-memory ledger: shown / credited / blamed counts, state history, reasons |
+
+## Results at a glance
+
+<p align="center">
+  <img src="docs/img/results.png" alt="Task success: similarity only 62.6%, RMM-style 63.1%, static score 65.9%, ReMem 76.4%" width="80%">
+</p>
+
+Same memories, same candidate pools, same simulated agent; 7 task families × 15 test seeds that were never used for tuning. The
+gain is concentrated where facts change, and it vanishes on the control family where nothing recurs, which is the expected outcome:
+
+<p align="center">
+  <img src="docs/img/families.png" alt="Per-family task success, similarity only vs ReMem; largest gains on state change and contradiction, none on the control" width="80%">
+</p>
+
+And every other setting tested, including the ones where ReMem does **not** help:
+
+<p align="center">
+  <img src="docs/img/evidence.png" alt="ReMem minus similarity-only: +13.8 synthetic, +10.2 with real embeddings, +5.6 with a timestamp-aware reader, +0.4 and -2.9 with a real 3B LLM (within noise), +1.3 on LongMemEval" width="90%">
+</p>
+
+The full numbers, ablations, failure analysis and the story behind the real-LLM result are in [§10 Results](#10-results).
+
+## Use it with Claude (MCP)
+
+ReMem ships an MCP server, so Claude Code, Claude Desktop or any MCP client can use it as long-term memory:
 
 ```bash
-pip install ".[mcp]"
-claude mcp add remem -- remem-mcp            # Claude Code
+pip install -e ".[mcp,embeddings]"
+claude mcp add remem --env REMEM_EMBEDDER=sentence-transformers -- remem-mcp     # Claude Code
 ```
 
-Claude Desktop, `claude_desktop_config.json`:
+The model gets `remember`, `recall`, `feedback`, `inspect`, `list_memories` and `stats`. If it forgets to call `feedback`, the server
+infers outcomes: a correction counts as a failure, and moving on without one counts as a weak success. Claude Desktop setup:
+[`examples/claude_desktop_mcp.md`](examples/claude_desktop_mcp.md).
 
-```json
-{"mcpServers": {"remem": {"command": "remem-mcp", "env": {"REMEM_PATH": "C:/Users/you/.remem/work", "REMEM_EMBEDDER": "sentence-transformers"}}}}
-```
+## More ways to use it
 
-Tools: `remember`, `recall`, `feedback`, `inspect`, `list_memories`, `stats`. The tool descriptions tell the agent to call `feedback` after
-using a `recall` result. Agents often forget, so by default the server also **infers feedback**. If `remember` corrects a served
-`"state"` memory (same entity and attribute, different text), that recall counts as a failure blamed on the corrected memory. If a later
-`recall` for the same `task` arrives with no correction in between, the earlier recall counts as a weak success, with no memory explicitly
-cited. Inferred outcomes are noisier than explicit ones and have not been benchmarked separately; `REMEM_AUTO_FEEDBACK=0` turns them off.
-Environment: `REMEM_PATH` (store directory, default `~/.remem/default`), `REMEM_EMBEDDER` (`hash` default, or `sentence-transformers`),
-`REMEM_ST_MODEL`, `REMEM_AUTO_FEEDBACK`.
-
-### Embeddings and vector stores
+<details>
+<summary><b>Real embeddings and vector stores</b> (sentence-transformers, FAISS, Chroma)</summary>
 
 ```python
 from remem import ReMem
-from remem.embedders import SentenceTransformerEmbedder      # pip install sentence-transformers
-from remem.backends import FaissBackend, ChromaBackend        # pip install faiss-cpu / chromadb
+from remem.embedders import SentenceTransformerEmbedder      # pip install -e ".[embeddings]"
+from remem.backends import FaissBackend, ChromaBackend        # pip install -e ".[faiss]" / ".[chroma]"
 
-emb = SentenceTransformerEmbedder("all-MiniLM-L6-v2")
+emb = SentenceTransformerEmbedder("all-MiniLM-L6-v2")        # free, runs locally
 mem = ReMem("~/.remem/app", embedder=emb, backend=FaissBackend(emb))
 ```
 
 The built-in hash embedder (`remem.offline.ConceptHashEmbedder`) exists for tests and the synthetic benchmark; use a real model in practice.
 `remem.llm.OpenAIEmbedder` wraps any OpenAI-compatible embeddings endpoint. Any object with `ingest(facts)` and `candidates(query, k)`
 works as a backend.
+</details>
 
-### Fact extraction
+<details>
+<summary><b>Facts from raw conversations</b> (LLM extraction)</summary>
 
 ```python
 from openai import OpenAI
@@ -116,19 +159,43 @@ mem.add_conversation(transcript, extractor=LLMFactExtractor(OpenAI(), model="gpt
 Without an extractor, `add_conversation` stores each sentence as a note (no automatic supersession). The LLM extractor is tested against a
 fake client only; its extraction quality with a real model has not been measured here.
 
-Adding a second `"state"` fact for the same entity and attribute replaces the first. If the new text reads like an *additional*
-value ("also uses Memcached"), `add` emits a `UserWarning` suggesting `role="preference"` or `"note"` for multi-valued attributes.
+Facts with the same `entity` + `attribute` and role `"state"` (the default) replace each other. Store multi-valued things (likes,
+dependencies) with `role="preference"` or `"note"`; if a new `"state"` fact reads like an *additional* value ("also uses Memcached"),
+`add` emits a `UserWarning`.
+</details>
 
-### LangChain
+<details>
+<summary><b>LangChain retriever</b></summary>
 
 ```python
-from remem.integrations.langchain import ReMemRetriever      # pip install ".[langchain]"
+from remem.integrations.langchain import ReMemRetriever      # pip install -e ".[langchain]"
 retriever = ReMemRetriever(memory=mem, k=5, task="support")
 docs = retriever.invoke("Which plan is the customer on?")
 retriever.feedback(success=True, used_ids=[docs[0].metadata["id"]])
 ```
 
-### Dashboard, inspector, tokenizer
+Runnable: [`examples/langchain_retriever.py`](examples/langchain_retriever.py).
+</details>
+
+<details>
+<summary><b>MCP server details</b> (environment variables, inferred feedback)</summary>
+
+Claude Desktop, `claude_desktop_config.json`:
+
+```json
+{"mcpServers": {"remem": {"command": "remem-mcp", "env": {"REMEM_PATH": "C:/Users/you/.remem/work", "REMEM_EMBEDDER": "sentence-transformers"}}}}
+```
+
+If `remember` corrects a served `"state"` memory (same entity and attribute, different text), that recall counts as a failure blamed on the
+corrected memory. If a later `recall` for the same `task` arrives with no correction in between, the earlier recall counts as a weak success,
+with no memory explicitly cited. Inferred outcomes are noisier than explicit ones and have not been benchmarked separately.
+
+Environment: `REMEM_PATH` (store directory, default `~/.remem/default`), `REMEM_EMBEDDER` (`hash` default, or `sentence-transformers`),
+`REMEM_ST_MODEL`, `REMEM_AUTO_FEEDBACK` (`0` turns inference off).
+</details>
+
+<details>
+<summary><b>Dashboard, inspector, real token counts</b></summary>
 
 ```bash
 python -m remem.viz.dashboard ~/.remem/myproject -o memory.html          # self-contained HTML; open in a browser
@@ -137,21 +204,37 @@ python -m remem.viz.ledger_cli ~/.remem/myproject/ledger.json --list --state LOW
 
 Token budgets use a word+punctuation proxy by default; `remem.offline.set_tokenizer("tiktoken")` (or `REMEM_TOKENIZER=tiktoken`) switches
 to real BPE counts.
+</details>
 
-### Running with a real LLM or on LongMemEval (needs your API key / data)
+<details>
+<summary><b>Reproduce the experiments</b> (all free and local)</summary>
 
 ```bash
-# free, local: install Ollama (https://ollama.com), then  ollama pull qwen2.5:3b
+python -m pytest tests -q                                   # 85 tests, under a minute
+python experiments/run_benchmark.py --quick                 # smoke run (~20 s)
+python experiments/run_benchmark.py                         # full protocol, 15 seeds (~20 min, resumable)
+python experiments/run_real_embeddings.py                   # headline comparison with MiniLM embeddings
+# real LLM, free: install Ollama (https://ollama.com), then  ollama pull qwen2.5:3b
 python experiments/run_llm_agent.py --ollama --model qwen2.5:3b --family contradiction --seeds 0,1,2
-OPENAI_API_KEY=... python experiments/run_llm_agent.py --model <chat-model>                  # any OpenAI-compatible API instead
-python experiments/run_real_embeddings.py                                                     # headline comparison with MiniLM embeddings
-python experiments/run_longmemeval.py --data data/longmemeval_s_cleaned.json                  # retrieval recall, no LLM needed
-python experiments/run_longmemeval.py --data ... --qa --model <chat-model>                  # + answers for the official judge
+OPENAI_API_KEY=... python experiments/run_llm_agent.py --model <chat-model>        # any OpenAI-compatible API instead
+python experiments/run_longmemeval.py --data data/longmemeval_s_cleaned.json        # LongMemEval retrieval, no LLM needed
+python docs/make_figures.py                                 # regenerate the README images
 ```
 
 LongMemEval data: `longmemeval_s_cleaned.json` from https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned (put it in `data/`).
+</details>
 
-## Contents
+## What's new compared with prior work
+
+Citation-based feedback on retrieval is prior art (RMM, arXiv 2503.08026), and Zep and Mem0's graph variant already keep superseded facts
+as invalid instead of deleting them. ReMem's contribution is the **combination** (outcome-gated utility, supersession, outcome-aware
+retention and token-budgeted selection in one inspectable ledger) plus a **controlled evaluation that reports its negative results**. An
+RMM-style reranker is reimplemented as a baseline. See [docs/RELATED_WORK.md](docs/RELATED_WORK.md).
+
+---
+
+## Technical documentation
+
 1. [Problem](#1-problem) · 2. [Architecture](#2-architecture) · 3. [Utility model](#3-memory-utility-model) · 4. [Outcome feedback and credit assignment](#4-outcome-feedback-and-credit-assignment) · 5. [Adaptive retention](#5-adaptive-retention) · 6. [Contradiction and staleness](#6-contradiction-and-staleness) · 7. [Cost-aware retrieval](#7-cost-aware-retrieval) · 8. [Additional mechanisms](#8-additional-mechanisms) · 9. [Evaluation methodology](#9-evaluation-methodology) · 10. [Results](#10-results) · 11. [Limitations](#11-limitations-read-these) · 12. [Failure analysis](#12-failure-analysis) · 13. [Future work](#13-future-work) · [Related work](docs/RELATED_WORK.md)
 
 ## 1. Problem

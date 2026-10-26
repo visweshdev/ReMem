@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 430" width="1100" height="430" role="img" aria-label="How ReMem works: add facts, search, the agent answers, report the outcome, and the memory ledger updates scores and states, which changes the next search">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#5b636e"/>
+    </marker>
+    <marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#2f7d5b"/>
+    </marker>
+    <style>
+      .t { font-family: Segoe UI, Helvetica Neue, Helvetica, Arial, sans-serif; fill: #1d2228; }
+      .h { font-size: 19px; font-weight: 700; }
+      .b { font-size: 14.5px; fill: #4a525c; }
+      .n { font-size: 14px; font-weight: 700; fill: #ffffff; }
+      .box { fill: #ffffff; stroke: #d5dae0; stroke-width: 1.5; }
+      .c { font-family: Consolas, Menlo, monospace; font-size: 13.5px; fill: #1d5c43; }
+      .key { fill: #eef7f2; stroke: #2f7d5b; stroke-width: 2; }
+    </style>
+  </defs>
+  <rect width="1100" height="430" rx="16" fill="#f7f8fa"/>
+
+  <!-- 1 add -->
+  <rect class="box" x="30" y="40" width="230" height="120" rx="12"/>
+  <circle cx="58" cy="68" r="15" fill="#2f7d5b"/><text class="t n" x="58" y="73" text-anchor="middle">1</text>
+  <text class="t h" x="84" y="74">Add facts</text>
+  <text class="t c" x="50" y="104">mem.add("Server in west-2",</text>
+  <text class="t c" x="50" y="124">  entity="server", ...)</text>
+  <text class="t b" x="50" y="148">An older value is retired, never deleted</text>
+
+  <!-- 2 search -->
+  <rect class="box" x="310" y="40" width="230" height="120" rx="12"/>
+  <circle cx="338" cy="68" r="15" fill="#2f7d5b"/><text class="t n" x="338" y="73" text-anchor="middle">2</text>
+  <text class="t h" x="364" y="74">Search</text>
+  <text class="t b" x="330" y="104">Rank by similarity × learned</text>
+  <text class="t b" x="330" y="124">usefulness; fit a token budget;</text>
+  <text class="t b" x="330" y="148">skip outdated facts</text>
+
+  <!-- 3 agent -->
+  <rect class="box" x="590" y="40" width="230" height="120" rx="12"/>
+  <circle cx="618" cy="68" r="15" fill="#2f7d5b"/><text class="t n" x="618" y="73" text-anchor="middle">3</text>
+  <text class="t h" x="644" y="74">Your agent acts</text>
+  <text class="t b" x="610" y="104">Any LLM or agent uses the</text>
+  <text class="t b" x="610" y="124">memories it was given and</text>
+  <text class="t b" x="610" y="148">notes which ones it relied on</text>
+
+  <!-- 4 feedback -->
+  <rect class="box" x="840" y="210" width="230" height="120" rx="12"/>
+  <circle cx="868" cy="238" r="15" fill="#2f7d5b"/><text class="t n" x="868" y="243" text-anchor="middle">4</text>
+  <text class="t h" x="894" y="244">Report outcome</text>
+  <text class="t c" x="860" y="274">mem.feedback(sid, True,</text>
+  <text class="t c" x="860" y="294">  used_ids=[...])</text>
+  <text class="t b" x="860" y="318">(the MCP server can infer it)</text>
+
+  <!-- 5 ledger -->
+  <rect class="key" x="310" y="250" width="470" height="150" rx="12"/>
+  <circle cx="338" cy="278" r="15" fill="#2f7d5b"/><text class="t n" x="338" y="283" text-anchor="middle">5</text>
+  <text class="t h" x="364" y="284">Memory ledger learns</text>
+  <text class="t b" x="330" y="314">Credit to memories that helped, blame to ones that misled</text>
+  <text class="t b" x="330" y="338">Look-alikes that never help: ACTIVE → LOW_VALUE → ARCHIVED</text>
+  <text class="t b" x="330" y="362">Facts replaced by newer ones: INVALIDATED (still queryable)</text>
+  <text class="t b" x="330" y="386">Every change is logged with its reason, inspectable later</text>
+
+  <!-- arrows -->
+  <path d="M262 100 L306 100" stroke="#5b636e" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M542 100 L586 100" stroke="#5b636e" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M822 100 Q955 100 955 206" stroke="#5b636e" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+  <path d="M838 300 L784 314" stroke="#5b636e" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M308 330 Q200 330 200 240 Q200 190 380 166" stroke="#2f7d5b" stroke-width="2.5" fill="none" stroke-dasharray="7 5" marker-end="url(#arrg)"/>
+  <text class="t b" x="40" y="262" style="fill:#2f7d5b;font-weight:600">next search is</text>
+  <text class="t b" x="40" y="282" style="fill:#2f7d5b;font-weight:600">better informed</text>
+</svg>
