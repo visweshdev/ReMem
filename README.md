@@ -658,7 +658,7 @@ experiments/           run_benchmark.py, train_utility.py, train_utility_dagger.
                        run_llm_agent.py (--ollama: free local LLM), trace_llm_prompts.py, run_longmemeval.py, run_real_embeddings.py
 examples/              basic_api.py, quickstart.py, langchain_retriever.py, claude_desktop_mcp.md
 configs/systems.yaml   every compared system                   tests/ (85 tests)
-results/               RESULTS.md, failure_analysis.md, *.json, plots/, runs/<…>/ledger.json, models/, records/
+results/               RESULTS.md, failure_analysis.md, *.json, plots/, runs/<…>/ledger.json (example memory ledgers), models/, llm_agent/, longmemeval/
 docs/                  DESIGN.md, RELATED_WORK.md, make_figures.py (README GIF + chart)   .github/workflows/  CI
 ```
 
