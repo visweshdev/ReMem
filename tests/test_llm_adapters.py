@@ -82,3 +82,24 @@ def test_openai_embedder_batches_and_normalises():
     emb = OpenAIEmbedder(SimpleNamespace(embeddings=SimpleNamespace(create=create)), "e", 2)
     out = emb.embed_texts(["a"] * 5, batch_size=2)
     assert calls == [2, 2, 1] and out[0] == [0.6, 0.8] and emb.embed_one("x") == [0.6, 0.8]
+
+
+def test_schema_mode_constrains_the_answer_keys():
+    import json as _json
+    from types import SimpleNamespace
+
+    from remem.eval.world import T0, make_world
+    from remem.llm import LLMAgent
+    w = make_world("distractor", 0)
+    t = w.tasks[0]
+    calls = []
+
+    def create(**kw):
+        calls.append(kw)
+        msg = SimpleNamespace(content=_json.dumps({"answers": w.answer(t), "cited": []}))
+        return SimpleNamespace(choices=[SimpleNamespace(message=msg)])
+
+    client = SimpleNamespace(chat=SimpleNamespace(completions=SimpleNamespace(create=create)))
+    assert LLMAgent(w, client, "m", t0=T0, json_mode="schema").act(t, []).success
+    rf = calls[0]["response_format"]
+    assert rf["type"] == "json_schema" and set(rf["json_schema"]["schema"]["properties"]["answers"]["required"]) == set(w.answer(t))

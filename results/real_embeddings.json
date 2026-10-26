@@ -1,0 +1,2579 @@
+{
+ "model": "all-MiniLM-L6-v2",
+ "families": [
+  "distractor",
+  "long_horizon",
+  "contradiction",
+  "rare_critical",
+  "useless_frequent",
+  "budget_tight",
+  "state_change"
+ ],
+ "seeds": [
+  "0",
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "11",
+  "12",
+  "13",
+  "14"
+ ],
+ "reader": "first",
+ "summary": {
+  "A_vector": {
+   "task_success": 0.6906991410488246,
+   "ci95": 0.01967216479952327,
+   "pool_recall": 0.9937651545725611
+  },
+  "B_static": {
+   "task_success": 0.7029229706650593,
+   "ci95": 0.019009968646310268,
+   "pool_recall": 0.9937651545725611
+  },
+  "C_remem": {
+   "task_success": 0.7923251959011453,
+   "ci95": 0.017623485577677605,
+   "pool_recall": 0.9937651545725611
+  }
+ },
+ "paired_deltas": {
+  "C_remem - A_vector": {
+   "mean": 0.1016260548523207,
+   "ci95": 0.014286561955711919
+  },
+  "C_remem - B_static": {
+   "mean": 0.08940222523608597,
+   "ci95": 0.013764398811850036
+  }
+ },
+ "rows": [
+  {
+   "family": "distractor",
+   "seed": 0,
+   "system": "A_vector",
+   "task_success": 0.8366666666666667,
+   "pool_recall": 0.9967320261437909,
+   "tokens_per_task": 58.31333333333333
+  },
+  {
+   "family": "distractor",
+   "seed": 0,
+   "system": "B_static",
+   "task_success": 0.8366666666666667,
+   "pool_recall": 0.9967320261437909,
+   "tokens_per_task": 58.376666666666665
+  },
+  {
+   "family": "distractor",
+   "seed": 0,
+   "system": "C_remem",
+   "task_success": 0.81,
+   "pool_recall": 0.9967320261437909,
+   "tokens_per_task": 39.67666666666667
+  },
+  {
+   "family": "distractor",
+   "seed": 1,
+   "system": "A_vector",
+   "task_success": 0.7933333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 58.38666666666666
+  },
+  {
+   "family": "distractor",
+   "seed": 1,
+   "system": "B_static",
+   "task_success": 0.7933333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 58.413333333333334
+  },
+  {
+   "family": "distractor",
+   "seed": 1,
+   "system": "C_remem",
+   "task_success": 0.81,
+   "pool_recall": 1.0,
+   "tokens_per_task": 40.02333333333333
+  },
+  {
+   "family": "distractor",
+   "seed": 2,
+   "system": "A_vector",
+   "task_success": 0.5733333333333334,
+   "pool_recall": 0.9504950495049505,
+   "tokens_per_task": 61.486666666666665
+  },
+  {
+   "family": "distractor",
+   "seed": 2,
+   "system": "B_static",
+   "task_success": 0.5733333333333334,
+   "pool_recall": 0.9504950495049505,
+   "tokens_per_task": 61.60666666666667
+  },
+  {
+   "family": "distractor",
+   "seed": 2,
+   "system": "C_remem",
+   "task_success": 0.8633333333333333,
+   "pool_recall": 0.9504950495049505,
+   "tokens_per_task": 30.526666666666667
+  },
+  {
+   "family": "distractor",
+   "seed": 3,
+   "system": "A_vector",
+   "task_success": 0.7933333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 53.196666666666665
+  },
+  {
+   "family": "distractor",
+   "seed": 3,
+   "system": "B_static",
+   "task_success": 0.7933333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 53.11
+  },
+  {
+   "family": "distractor",
+   "seed": 3,
+   "system": "C_remem",
+   "task_success": 0.8133333333333334,
+   "pool_recall": 1.0,
+   "tokens_per_task": 40.193333333333335
+  },
+  {
+   "family": "distractor",
+   "seed": 4,
+   "system": "A_vector",
+   "task_success": 0.8366666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 50.44
+  },
+  {
+   "family": "distractor",
+   "seed": 4,
+   "system": "B_static",
+   "task_success": 0.8366666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 49.96
+  },
+  {
+   "family": "distractor",
+   "seed": 4,
+   "system": "C_remem",
+   "task_success": 0.84,
+   "pool_recall": 1.0,
+   "tokens_per_task": 35.27
+  },
+  {
+   "family": "distractor",
+   "seed": 5,
+   "system": "A_vector",
+   "task_success": 0.8,
+   "pool_recall": 1.0,
+   "tokens_per_task": 58.36666666666667
+  },
+  {
+   "family": "distractor",
+   "seed": 5,
+   "system": "B_static",
+   "task_success": 0.8,
+   "pool_recall": 1.0,
+   "tokens_per_task": 58.39
+  },
+  {
+   "family": "distractor",
+   "seed": 5,
+   "system": "C_remem",
+   "task_success": 0.8533333333333334,
+   "pool_recall": 1.0,
+   "tokens_per_task": 35.63
+  },
+  {
+   "family": "distractor",
+   "seed": 6,
+   "system": "A_vector",
+   "task_success": 0.71,
+   "pool_recall": 0.9325153374233128,
+   "tokens_per_task": 57.02333333333333
+  },
+  {
+   "family": "distractor",
+   "seed": 6,
+   "system": "B_static",
+   "task_success": 0.71,
+   "pool_recall": 0.9325153374233128,
+   "tokens_per_task": 57.10333333333333
+  },
+  {
+   "family": "distractor",
+   "seed": 6,
+   "system": "C_remem",
+   "task_success": 0.7633333333333333,
+   "pool_recall": 0.9325153374233128,
+   "tokens_per_task": 40.026666666666664
+  },
+  {
+   "family": "distractor",
+   "seed": 7,
+   "system": "A_vector",
+   "task_success": 0.8233333333333334,
+   "pool_recall": 1.0,
+   "tokens_per_task": 58.21333333333333
+  },
+  {
+   "family": "distractor",
+   "seed": 7,
+   "system": "B_static",
+   "task_success": 0.8233333333333334,
+   "pool_recall": 1.0,
+   "tokens_per_task": 58.17666666666667
+  },
+  {
+   "family": "distractor",
+   "seed": 7,
+   "system": "C_remem",
+   "task_success": 0.84,
+   "pool_recall": 1.0,
+   "tokens_per_task": 37.54
+  },
+  {
+   "family": "distractor",
+   "seed": 8,
+   "system": "A_vector",
+   "task_success": 0.81,
+   "pool_recall": 1.0,
+   "tokens_per_task": 58.60666666666667
+  },
+  {
+   "family": "distractor",
+   "seed": 8,
+   "system": "B_static",
+   "task_success": 0.81,
+   "pool_recall": 1.0,
+   "tokens_per_task": 58.57666666666667
+  },
+  {
+   "family": "distractor",
+   "seed": 8,
+   "system": "C_remem",
+   "task_success": 0.82,
+   "pool_recall": 1.0,
+   "tokens_per_task": 47.373333333333335
+  },
+  {
+   "family": "distractor",
+   "seed": 9,
+   "system": "A_vector",
+   "task_success": 0.75,
+   "pool_recall": 1.0,
+   "tokens_per_task": 51.39666666666667
+  },
+  {
+   "family": "distractor",
+   "seed": 9,
+   "system": "B_static",
+   "task_success": 0.75,
+   "pool_recall": 1.0,
+   "tokens_per_task": 51.39666666666667
+  },
+  {
+   "family": "distractor",
+   "seed": 9,
+   "system": "C_remem",
+   "task_success": 0.8266666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 31.156666666666666
+  },
+  {
+   "family": "distractor",
+   "seed": 10,
+   "system": "A_vector",
+   "task_success": 0.7966666666666666,
+   "pool_recall": 1.0,
+   "tokens_per_task": 59.093333333333334
+  },
+  {
+   "family": "distractor",
+   "seed": 10,
+   "system": "B_static",
+   "task_success": 0.7966666666666666,
+   "pool_recall": 1.0,
+   "tokens_per_task": 59.123333333333335
+  },
+  {
+   "family": "distractor",
+   "seed": 10,
+   "system": "C_remem",
+   "task_success": 0.8266666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 37.626666666666665
+  },
+  {
+   "family": "distractor",
+   "seed": 11,
+   "system": "A_vector",
+   "task_success": 0.78,
+   "pool_recall": 1.0,
+   "tokens_per_task": 54.64666666666667
+  },
+  {
+   "family": "distractor",
+   "seed": 11,
+   "system": "B_static",
+   "task_success": 0.78,
+   "pool_recall": 1.0,
+   "tokens_per_task": 54.66
+  },
+  {
+   "family": "distractor",
+   "seed": 11,
+   "system": "C_remem",
+   "task_success": 0.8233333333333334,
+   "pool_recall": 1.0,
+   "tokens_per_task": 39.81333333333333
+  },
+  {
+   "family": "distractor",
+   "seed": 12,
+   "system": "A_vector",
+   "task_success": 0.8066666666666666,
+   "pool_recall": 0.9848942598187311,
+   "tokens_per_task": 55.07666666666667
+  },
+  {
+   "family": "distractor",
+   "seed": 12,
+   "system": "B_static",
+   "task_success": 0.8066666666666666,
+   "pool_recall": 0.9848942598187311,
+   "tokens_per_task": 54.97
+  },
+  {
+   "family": "distractor",
+   "seed": 12,
+   "system": "C_remem",
+   "task_success": 0.8266666666666667,
+   "pool_recall": 0.9848942598187311,
+   "tokens_per_task": 40.946666666666665
+  },
+  {
+   "family": "distractor",
+   "seed": 13,
+   "system": "A_vector",
+   "task_success": 0.8133333333333334,
+   "pool_recall": 1.0,
+   "tokens_per_task": 56.8
+  },
+  {
+   "family": "distractor",
+   "seed": 13,
+   "system": "B_static",
+   "task_success": 0.81,
+   "pool_recall": 1.0,
+   "tokens_per_task": 56.89333333333333
+  },
+  {
+   "family": "distractor",
+   "seed": 13,
+   "system": "C_remem",
+   "task_success": 0.82,
+   "pool_recall": 1.0,
+   "tokens_per_task": 41.82333333333333
+  },
+  {
+   "family": "distractor",
+   "seed": 14,
+   "system": "A_vector",
+   "task_success": 0.8066666666666666,
+   "pool_recall": 1.0,
+   "tokens_per_task": 61.03
+  },
+  {
+   "family": "distractor",
+   "seed": 14,
+   "system": "B_static",
+   "task_success": 0.8066666666666666,
+   "pool_recall": 1.0,
+   "tokens_per_task": 61.07333333333333
+  },
+  {
+   "family": "distractor",
+   "seed": 14,
+   "system": "C_remem",
+   "task_success": 0.8466666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 47.79
+  },
+  {
+   "family": "long_horizon",
+   "seed": 0,
+   "system": "A_vector",
+   "task_success": 0.83125,
+   "pool_recall": 0.9970059880239521,
+   "tokens_per_task": 51.871875
+  },
+  {
+   "family": "long_horizon",
+   "seed": 0,
+   "system": "B_static",
+   "task_success": 0.83125,
+   "pool_recall": 0.9970059880239521,
+   "tokens_per_task": 51.946875
+  },
+  {
+   "family": "long_horizon",
+   "seed": 0,
+   "system": "C_remem",
+   "task_success": 0.83125,
+   "pool_recall": 0.9970059880239521,
+   "tokens_per_task": 42.059375
+  },
+  {
+   "family": "long_horizon",
+   "seed": 1,
+   "system": "A_vector",
+   "task_success": 0.775,
+   "pool_recall": 1.0,
+   "tokens_per_task": 46.709375
+  },
+  {
+   "family": "long_horizon",
+   "seed": 1,
+   "system": "B_static",
+   "task_success": 0.775,
+   "pool_recall": 1.0,
+   "tokens_per_task": 46.709375
+  },
+  {
+   "family": "long_horizon",
+   "seed": 1,
+   "system": "C_remem",
+   "task_success": 0.809375,
+   "pool_recall": 1.0,
+   "tokens_per_task": 34.940625
+  },
+  {
+   "family": "long_horizon",
+   "seed": 2,
+   "system": "A_vector",
+   "task_success": 0.825,
+   "pool_recall": 0.9971509971509972,
+   "tokens_per_task": 45.1625
+  },
+  {
+   "family": "long_horizon",
+   "seed": 2,
+   "system": "B_static",
+   "task_success": 0.825,
+   "pool_recall": 0.9971509971509972,
+   "tokens_per_task": 45.16875
+  },
+  {
+   "family": "long_horizon",
+   "seed": 2,
+   "system": "C_remem",
+   "task_success": 0.86875,
+   "pool_recall": 0.9971509971509972,
+   "tokens_per_task": 34.021875
+  },
+  {
+   "family": "long_horizon",
+   "seed": 3,
+   "system": "A_vector",
+   "task_success": 0.696875,
+   "pool_recall": 0.972972972972973,
+   "tokens_per_task": 43.2875
+  },
+  {
+   "family": "long_horizon",
+   "seed": 3,
+   "system": "B_static",
+   "task_success": 0.696875,
+   "pool_recall": 0.972972972972973,
+   "tokens_per_task": 43.3
+  },
+  {
+   "family": "long_horizon",
+   "seed": 3,
+   "system": "C_remem",
+   "task_success": 0.775,
+   "pool_recall": 0.972972972972973,
+   "tokens_per_task": 41.403125
+  },
+  {
+   "family": "long_horizon",
+   "seed": 4,
+   "system": "A_vector",
+   "task_success": 0.815625,
+   "pool_recall": 1.0,
+   "tokens_per_task": 41.290625
+  },
+  {
+   "family": "long_horizon",
+   "seed": 4,
+   "system": "B_static",
+   "task_success": 0.815625,
+   "pool_recall": 1.0,
+   "tokens_per_task": 41.3375
+  },
+  {
+   "family": "long_horizon",
+   "seed": 4,
+   "system": "C_remem",
+   "task_success": 0.846875,
+   "pool_recall": 1.0,
+   "tokens_per_task": 32.25
+  },
+  {
+   "family": "long_horizon",
+   "seed": 5,
+   "system": "A_vector",
+   "task_success": 0.828125,
+   "pool_recall": 0.9878048780487805,
+   "tokens_per_task": 43.01875
+  },
+  {
+   "family": "long_horizon",
+   "seed": 5,
+   "system": "B_static",
+   "task_success": 0.828125,
+   "pool_recall": 0.9878048780487805,
+   "tokens_per_task": 43.01875
+  },
+  {
+   "family": "long_horizon",
+   "seed": 5,
+   "system": "C_remem",
+   "task_success": 0.871875,
+   "pool_recall": 0.9878048780487805,
+   "tokens_per_task": 33.815625
+  },
+  {
+   "family": "long_horizon",
+   "seed": 6,
+   "system": "A_vector",
+   "task_success": 0.78125,
+   "pool_recall": 1.0,
+   "tokens_per_task": 46.546875
+  },
+  {
+   "family": "long_horizon",
+   "seed": 6,
+   "system": "B_static",
+   "task_success": 0.78125,
+   "pool_recall": 1.0,
+   "tokens_per_task": 46.559375
+  },
+  {
+   "family": "long_horizon",
+   "seed": 6,
+   "system": "C_remem",
+   "task_success": 0.79375,
+   "pool_recall": 1.0,
+   "tokens_per_task": 36.6125
+  },
+  {
+   "family": "long_horizon",
+   "seed": 7,
+   "system": "A_vector",
+   "task_success": 0.81875,
+   "pool_recall": 0.9887323943661972,
+   "tokens_per_task": 52.65
+  },
+  {
+   "family": "long_horizon",
+   "seed": 7,
+   "system": "B_static",
+   "task_success": 0.81875,
+   "pool_recall": 0.9887323943661972,
+   "tokens_per_task": 52.65
+  },
+  {
+   "family": "long_horizon",
+   "seed": 7,
+   "system": "C_remem",
+   "task_success": 0.825,
+   "pool_recall": 0.9887323943661972,
+   "tokens_per_task": 45.71875
+  },
+  {
+   "family": "long_horizon",
+   "seed": 8,
+   "system": "A_vector",
+   "task_success": 0.7875,
+   "pool_recall": 1.0,
+   "tokens_per_task": 47.709375
+  },
+  {
+   "family": "long_horizon",
+   "seed": 8,
+   "system": "B_static",
+   "task_success": 0.7875,
+   "pool_recall": 1.0,
+   "tokens_per_task": 47.89375
+  },
+  {
+   "family": "long_horizon",
+   "seed": 8,
+   "system": "C_remem",
+   "task_success": 0.76875,
+   "pool_recall": 1.0,
+   "tokens_per_task": 43.93125
+  },
+  {
+   "family": "long_horizon",
+   "seed": 9,
+   "system": "A_vector",
+   "task_success": 0.759375,
+   "pool_recall": 1.0,
+   "tokens_per_task": 44.525
+  },
+  {
+   "family": "long_horizon",
+   "seed": 9,
+   "system": "B_static",
+   "task_success": 0.759375,
+   "pool_recall": 1.0,
+   "tokens_per_task": 44.54375
+  },
+  {
+   "family": "long_horizon",
+   "seed": 9,
+   "system": "C_remem",
+   "task_success": 0.790625,
+   "pool_recall": 1.0,
+   "tokens_per_task": 40.653125
+  },
+  {
+   "family": "long_horizon",
+   "seed": 10,
+   "system": "A_vector",
+   "task_success": 0.809375,
+   "pool_recall": 1.0,
+   "tokens_per_task": 49.8
+  },
+  {
+   "family": "long_horizon",
+   "seed": 10,
+   "system": "B_static",
+   "task_success": 0.809375,
+   "pool_recall": 1.0,
+   "tokens_per_task": 49.8
+  },
+  {
+   "family": "long_horizon",
+   "seed": 10,
+   "system": "C_remem",
+   "task_success": 0.8375,
+   "pool_recall": 1.0,
+   "tokens_per_task": 42.04375
+  },
+  {
+   "family": "long_horizon",
+   "seed": 11,
+   "system": "A_vector",
+   "task_success": 0.7625,
+   "pool_recall": 1.0,
+   "tokens_per_task": 44.61875
+  },
+  {
+   "family": "long_horizon",
+   "seed": 11,
+   "system": "B_static",
+   "task_success": 0.7625,
+   "pool_recall": 1.0,
+   "tokens_per_task": 44.621875
+  },
+  {
+   "family": "long_horizon",
+   "seed": 11,
+   "system": "C_remem",
+   "task_success": 0.75625,
+   "pool_recall": 1.0,
+   "tokens_per_task": 41.609375
+  },
+  {
+   "family": "long_horizon",
+   "seed": 12,
+   "system": "A_vector",
+   "task_success": 0.840625,
+   "pool_recall": 1.0,
+   "tokens_per_task": 47.653125
+  },
+  {
+   "family": "long_horizon",
+   "seed": 12,
+   "system": "B_static",
+   "task_success": 0.840625,
+   "pool_recall": 1.0,
+   "tokens_per_task": 47.653125
+  },
+  {
+   "family": "long_horizon",
+   "seed": 12,
+   "system": "C_remem",
+   "task_success": 0.84375,
+   "pool_recall": 1.0,
+   "tokens_per_task": 43.64375
+  },
+  {
+   "family": "long_horizon",
+   "seed": 13,
+   "system": "A_vector",
+   "task_success": 0.84375,
+   "pool_recall": 1.0,
+   "tokens_per_task": 43.596875
+  },
+  {
+   "family": "long_horizon",
+   "seed": 13,
+   "system": "B_static",
+   "task_success": 0.84375,
+   "pool_recall": 1.0,
+   "tokens_per_task": 43.5625
+  },
+  {
+   "family": "long_horizon",
+   "seed": 13,
+   "system": "C_remem",
+   "task_success": 0.828125,
+   "pool_recall": 1.0,
+   "tokens_per_task": 37.8375
+  },
+  {
+   "family": "long_horizon",
+   "seed": 14,
+   "system": "A_vector",
+   "task_success": 0.765625,
+   "pool_recall": 0.9314285714285714,
+   "tokens_per_task": 41.19375
+  },
+  {
+   "family": "long_horizon",
+   "seed": 14,
+   "system": "B_static",
+   "task_success": 0.765625,
+   "pool_recall": 0.9314285714285714,
+   "tokens_per_task": 41.25625
+  },
+  {
+   "family": "long_horizon",
+   "seed": 14,
+   "system": "C_remem",
+   "task_success": 0.765625,
+   "pool_recall": 0.9314285714285714,
+   "tokens_per_task": 36.078125
+  },
+  {
+   "family": "contradiction",
+   "seed": 0,
+   "system": "A_vector",
+   "task_success": 0.49333333333333335,
+   "pool_recall": 0.9747634069400631,
+   "tokens_per_task": 43.39
+  },
+  {
+   "family": "contradiction",
+   "seed": 0,
+   "system": "B_static",
+   "task_success": 0.57,
+   "pool_recall": 0.9747634069400631,
+   "tokens_per_task": 43.13666666666666
+  },
+  {
+   "family": "contradiction",
+   "seed": 0,
+   "system": "C_remem",
+   "task_success": 0.81,
+   "pool_recall": 0.9747634069400631,
+   "tokens_per_task": 41.25333333333333
+  },
+  {
+   "family": "contradiction",
+   "seed": 1,
+   "system": "A_vector",
+   "task_success": 0.47333333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 46.64
+  },
+  {
+   "family": "contradiction",
+   "seed": 1,
+   "system": "B_static",
+   "task_success": 0.5366666666666666,
+   "pool_recall": 1.0,
+   "tokens_per_task": 46.78
+  },
+  {
+   "family": "contradiction",
+   "seed": 1,
+   "system": "C_remem",
+   "task_success": 0.82,
+   "pool_recall": 1.0,
+   "tokens_per_task": 44.17333333333333
+  },
+  {
+   "family": "contradiction",
+   "seed": 2,
+   "system": "A_vector",
+   "task_success": 0.7366666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 53.516666666666666
+  },
+  {
+   "family": "contradiction",
+   "seed": 2,
+   "system": "B_static",
+   "task_success": 0.7366666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 53.50333333333333
+  },
+  {
+   "family": "contradiction",
+   "seed": 2,
+   "system": "C_remem",
+   "task_success": 0.8666666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 46.24333333333333
+  },
+  {
+   "family": "contradiction",
+   "seed": 3,
+   "system": "A_vector",
+   "task_success": 0.43333333333333335,
+   "pool_recall": 1.0,
+   "tokens_per_task": 41.39666666666667
+  },
+  {
+   "family": "contradiction",
+   "seed": 3,
+   "system": "B_static",
+   "task_success": 0.44333333333333336,
+   "pool_recall": 1.0,
+   "tokens_per_task": 41.25
+  },
+  {
+   "family": "contradiction",
+   "seed": 3,
+   "system": "C_remem",
+   "task_success": 0.7733333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 37.22666666666667
+  },
+  {
+   "family": "contradiction",
+   "seed": 4,
+   "system": "A_vector",
+   "task_success": 0.5033333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 52.31333333333333
+  },
+  {
+   "family": "contradiction",
+   "seed": 4,
+   "system": "B_static",
+   "task_success": 0.5966666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 52.346666666666664
+  },
+  {
+   "family": "contradiction",
+   "seed": 4,
+   "system": "C_remem",
+   "task_success": 0.8366666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 51.71
+  },
+  {
+   "family": "contradiction",
+   "seed": 5,
+   "system": "A_vector",
+   "task_success": 0.7533333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 38.81
+  },
+  {
+   "family": "contradiction",
+   "seed": 5,
+   "system": "B_static",
+   "task_success": 0.7733333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 38.85666666666667
+  },
+  {
+   "family": "contradiction",
+   "seed": 5,
+   "system": "C_remem",
+   "task_success": 0.8766666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 34.45666666666666
+  },
+  {
+   "family": "contradiction",
+   "seed": 6,
+   "system": "A_vector",
+   "task_success": 0.63,
+   "pool_recall": 0.9968253968253968,
+   "tokens_per_task": 47.29
+  },
+  {
+   "family": "contradiction",
+   "seed": 6,
+   "system": "B_static",
+   "task_success": 0.6766666666666666,
+   "pool_recall": 0.9968253968253968,
+   "tokens_per_task": 47.54333333333334
+  },
+  {
+   "family": "contradiction",
+   "seed": 6,
+   "system": "C_remem",
+   "task_success": 0.7933333333333333,
+   "pool_recall": 0.9968253968253968,
+   "tokens_per_task": 44.016666666666666
+  },
+  {
+   "family": "contradiction",
+   "seed": 7,
+   "system": "A_vector",
+   "task_success": 0.62,
+   "pool_recall": 1.0,
+   "tokens_per_task": 44.53666666666667
+  },
+  {
+   "family": "contradiction",
+   "seed": 7,
+   "system": "B_static",
+   "task_success": 0.6466666666666666,
+   "pool_recall": 1.0,
+   "tokens_per_task": 44.82333333333333
+  },
+  {
+   "family": "contradiction",
+   "seed": 7,
+   "system": "C_remem",
+   "task_success": 0.84,
+   "pool_recall": 1.0,
+   "tokens_per_task": 43.78333333333333
+  },
+  {
+   "family": "contradiction",
+   "seed": 8,
+   "system": "A_vector",
+   "task_success": 0.47,
+   "pool_recall": 1.0,
+   "tokens_per_task": 47.10333333333333
+  },
+  {
+   "family": "contradiction",
+   "seed": 8,
+   "system": "B_static",
+   "task_success": 0.5866666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 47.306666666666665
+  },
+  {
+   "family": "contradiction",
+   "seed": 8,
+   "system": "C_remem",
+   "task_success": 0.8133333333333334,
+   "pool_recall": 1.0,
+   "tokens_per_task": 45.04666666666667
+  },
+  {
+   "family": "contradiction",
+   "seed": 9,
+   "system": "A_vector",
+   "task_success": 0.59,
+   "pool_recall": 0.9906832298136646,
+   "tokens_per_task": 48.513333333333335
+  },
+  {
+   "family": "contradiction",
+   "seed": 9,
+   "system": "B_static",
+   "task_success": 0.6233333333333333,
+   "pool_recall": 0.9906832298136646,
+   "tokens_per_task": 48.53333333333333
+  },
+  {
+   "family": "contradiction",
+   "seed": 9,
+   "system": "C_remem",
+   "task_success": 0.79,
+   "pool_recall": 0.9906832298136646,
+   "tokens_per_task": 44.7
+  },
+  {
+   "family": "contradiction",
+   "seed": 10,
+   "system": "A_vector",
+   "task_success": 0.61,
+   "pool_recall": 1.0,
+   "tokens_per_task": 50.07
+  },
+  {
+   "family": "contradiction",
+   "seed": 10,
+   "system": "B_static",
+   "task_success": 0.6333333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 50.1
+  },
+  {
+   "family": "contradiction",
+   "seed": 10,
+   "system": "C_remem",
+   "task_success": 0.8033333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 43.516666666666666
+  },
+  {
+   "family": "contradiction",
+   "seed": 11,
+   "system": "A_vector",
+   "task_success": 0.58,
+   "pool_recall": 1.0,
+   "tokens_per_task": 45.09
+  },
+  {
+   "family": "contradiction",
+   "seed": 11,
+   "system": "B_static",
+   "task_success": 0.58,
+   "pool_recall": 1.0,
+   "tokens_per_task": 45.4
+  },
+  {
+   "family": "contradiction",
+   "seed": 11,
+   "system": "C_remem",
+   "task_success": 0.79,
+   "pool_recall": 1.0,
+   "tokens_per_task": 33.42
+  },
+  {
+   "family": "contradiction",
+   "seed": 12,
+   "system": "A_vector",
+   "task_success": 0.5966666666666667,
+   "pool_recall": 0.9966777408637874,
+   "tokens_per_task": 43.97
+  },
+  {
+   "family": "contradiction",
+   "seed": 12,
+   "system": "B_static",
+   "task_success": 0.6033333333333334,
+   "pool_recall": 0.9966777408637874,
+   "tokens_per_task": 43.95
+  },
+  {
+   "family": "contradiction",
+   "seed": 12,
+   "system": "C_remem",
+   "task_success": 0.8366666666666667,
+   "pool_recall": 0.9966777408637874,
+   "tokens_per_task": 38.54666666666667
+  },
+  {
+   "family": "contradiction",
+   "seed": 13,
+   "system": "A_vector",
+   "task_success": 0.6533333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 39.64
+  },
+  {
+   "family": "contradiction",
+   "seed": 13,
+   "system": "B_static",
+   "task_success": 0.68,
+   "pool_recall": 1.0,
+   "tokens_per_task": 39.74666666666667
+  },
+  {
+   "family": "contradiction",
+   "seed": 13,
+   "system": "C_remem",
+   "task_success": 0.8066666666666666,
+   "pool_recall": 1.0,
+   "tokens_per_task": 33.41
+  },
+  {
+   "family": "contradiction",
+   "seed": 14,
+   "system": "A_vector",
+   "task_success": 0.58,
+   "pool_recall": 1.0,
+   "tokens_per_task": 44.88
+  },
+  {
+   "family": "contradiction",
+   "seed": 14,
+   "system": "B_static",
+   "task_success": 0.63,
+   "pool_recall": 1.0,
+   "tokens_per_task": 44.846666666666664
+  },
+  {
+   "family": "contradiction",
+   "seed": 14,
+   "system": "C_remem",
+   "task_success": 0.8433333333333334,
+   "pool_recall": 1.0,
+   "tokens_per_task": 41.873333333333335
+  },
+  {
+   "family": "rare_critical",
+   "seed": 0,
+   "system": "A_vector",
+   "task_success": 0.7658227848101266,
+   "pool_recall": 0.9968847352024922,
+   "tokens_per_task": 41.24683544303797
+  },
+  {
+   "family": "rare_critical",
+   "seed": 0,
+   "system": "B_static",
+   "task_success": 0.7658227848101266,
+   "pool_recall": 0.9968847352024922,
+   "tokens_per_task": 41.177215189873415
+  },
+  {
+   "family": "rare_critical",
+   "seed": 0,
+   "system": "C_remem",
+   "task_success": 0.819620253164557,
+   "pool_recall": 0.9968847352024922,
+   "tokens_per_task": 34.54430379746835
+  },
+  {
+   "family": "rare_critical",
+   "seed": 1,
+   "system": "A_vector",
+   "task_success": 0.7436708860759493,
+   "pool_recall": 0.9845679012345679,
+   "tokens_per_task": 48.60126582278481
+  },
+  {
+   "family": "rare_critical",
+   "seed": 1,
+   "system": "B_static",
+   "task_success": 0.7436708860759493,
+   "pool_recall": 0.9845679012345679,
+   "tokens_per_task": 48.60126582278481
+  },
+  {
+   "family": "rare_critical",
+   "seed": 1,
+   "system": "C_remem",
+   "task_success": 0.7974683544303798,
+   "pool_recall": 0.9845679012345679,
+   "tokens_per_task": 42.70569620253165
+  },
+  {
+   "family": "rare_critical",
+   "seed": 2,
+   "system": "A_vector",
+   "task_success": 0.7848101265822784,
+   "pool_recall": 1.0,
+   "tokens_per_task": 46.91139240506329
+  },
+  {
+   "family": "rare_critical",
+   "seed": 2,
+   "system": "B_static",
+   "task_success": 0.7848101265822784,
+   "pool_recall": 1.0,
+   "tokens_per_task": 46.91139240506329
+  },
+  {
+   "family": "rare_critical",
+   "seed": 2,
+   "system": "C_remem",
+   "task_success": 0.8512658227848101,
+   "pool_recall": 1.0,
+   "tokens_per_task": 32.357594936708864
+  },
+  {
+   "family": "rare_critical",
+   "seed": 3,
+   "system": "A_vector",
+   "task_success": 0.7056962025316456,
+   "pool_recall": 1.0,
+   "tokens_per_task": 48.348101265822784
+  },
+  {
+   "family": "rare_critical",
+   "seed": 3,
+   "system": "B_static",
+   "task_success": 0.7056962025316456,
+   "pool_recall": 1.0,
+   "tokens_per_task": 48.360759493670884
+  },
+  {
+   "family": "rare_critical",
+   "seed": 3,
+   "system": "C_remem",
+   "task_success": 0.7626582278481012,
+   "pool_recall": 1.0,
+   "tokens_per_task": 43.734177215189874
+  },
+  {
+   "family": "rare_critical",
+   "seed": 4,
+   "system": "A_vector",
+   "task_success": 0.8291139240506329,
+   "pool_recall": 1.0,
+   "tokens_per_task": 47.221518987341774
+  },
+  {
+   "family": "rare_critical",
+   "seed": 4,
+   "system": "B_static",
+   "task_success": 0.8291139240506329,
+   "pool_recall": 1.0,
+   "tokens_per_task": 47.27215189873418
+  },
+  {
+   "family": "rare_critical",
+   "seed": 4,
+   "system": "C_remem",
+   "task_success": 0.8449367088607594,
+   "pool_recall": 1.0,
+   "tokens_per_task": 42.56962025316456
+  },
+  {
+   "family": "rare_critical",
+   "seed": 5,
+   "system": "A_vector",
+   "task_success": 0.740506329113924,
+   "pool_recall": 1.0,
+   "tokens_per_task": 43.84177215189873
+  },
+  {
+   "family": "rare_critical",
+   "seed": 5,
+   "system": "B_static",
+   "task_success": 0.740506329113924,
+   "pool_recall": 1.0,
+   "tokens_per_task": 43.81962025316456
+  },
+  {
+   "family": "rare_critical",
+   "seed": 5,
+   "system": "C_remem",
+   "task_success": 0.810126582278481,
+   "pool_recall": 1.0,
+   "tokens_per_task": 38.60126582278481
+  },
+  {
+   "family": "rare_critical",
+   "seed": 6,
+   "system": "A_vector",
+   "task_success": 0.5917721518987342,
+   "pool_recall": 0.8108108108108109,
+   "tokens_per_task": 41.436708860759495
+  },
+  {
+   "family": "rare_critical",
+   "seed": 6,
+   "system": "B_static",
+   "task_success": 0.5917721518987342,
+   "pool_recall": 0.8108108108108109,
+   "tokens_per_task": 41.537974683544306
+  },
+  {
+   "family": "rare_critical",
+   "seed": 6,
+   "system": "C_remem",
+   "task_success": 0.6329113924050633,
+   "pool_recall": 0.8108108108108109,
+   "tokens_per_task": 41.93037974683544
+  },
+  {
+   "family": "rare_critical",
+   "seed": 7,
+   "system": "A_vector",
+   "task_success": 0.7531645569620253,
+   "pool_recall": 0.9736842105263158,
+   "tokens_per_task": 46.02215189873418
+  },
+  {
+   "family": "rare_critical",
+   "seed": 7,
+   "system": "B_static",
+   "task_success": 0.7468354430379747,
+   "pool_recall": 0.9736842105263158,
+   "tokens_per_task": 46.085443037974684
+  },
+  {
+   "family": "rare_critical",
+   "seed": 7,
+   "system": "C_remem",
+   "task_success": 0.7816455696202531,
+   "pool_recall": 0.9736842105263158,
+   "tokens_per_task": 45.18987341772152
+  },
+  {
+   "family": "rare_critical",
+   "seed": 8,
+   "system": "A_vector",
+   "task_success": 0.7025316455696202,
+   "pool_recall": 1.0,
+   "tokens_per_task": 44.68354430379747
+  },
+  {
+   "family": "rare_critical",
+   "seed": 8,
+   "system": "B_static",
+   "task_success": 0.7056962025316456,
+   "pool_recall": 1.0,
+   "tokens_per_task": 44.68987341772152
+  },
+  {
+   "family": "rare_critical",
+   "seed": 8,
+   "system": "C_remem",
+   "task_success": 0.7974683544303798,
+   "pool_recall": 1.0,
+   "tokens_per_task": 38.639240506329116
+  },
+  {
+   "family": "rare_critical",
+   "seed": 9,
+   "system": "A_vector",
+   "task_success": 0.6550632911392406,
+   "pool_recall": 1.0,
+   "tokens_per_task": 41.82911392405063
+  },
+  {
+   "family": "rare_critical",
+   "seed": 9,
+   "system": "B_static",
+   "task_success": 0.6550632911392406,
+   "pool_recall": 1.0,
+   "tokens_per_task": 41.83860759493671
+  },
+  {
+   "family": "rare_critical",
+   "seed": 9,
+   "system": "C_remem",
+   "task_success": 0.7848101265822784,
+   "pool_recall": 1.0,
+   "tokens_per_task": 38.085443037974684
+  },
+  {
+   "family": "rare_critical",
+   "seed": 10,
+   "system": "A_vector",
+   "task_success": 0.7911392405063291,
+   "pool_recall": 1.0,
+   "tokens_per_task": 43.174050632911396
+  },
+  {
+   "family": "rare_critical",
+   "seed": 10,
+   "system": "B_static",
+   "task_success": 0.7911392405063291,
+   "pool_recall": 1.0,
+   "tokens_per_task": 43.2246835443038
+  },
+  {
+   "family": "rare_critical",
+   "seed": 10,
+   "system": "C_remem",
+   "task_success": 0.8291139240506329,
+   "pool_recall": 1.0,
+   "tokens_per_task": 38.87658227848101
+  },
+  {
+   "family": "rare_critical",
+   "seed": 11,
+   "system": "A_vector",
+   "task_success": 0.6772151898734177,
+   "pool_recall": 1.0,
+   "tokens_per_task": 41.9746835443038
+  },
+  {
+   "family": "rare_critical",
+   "seed": 11,
+   "system": "B_static",
+   "task_success": 0.6772151898734177,
+   "pool_recall": 1.0,
+   "tokens_per_task": 41.97784810126582
+  },
+  {
+   "family": "rare_critical",
+   "seed": 11,
+   "system": "C_remem",
+   "task_success": 0.8037974683544303,
+   "pool_recall": 1.0,
+   "tokens_per_task": 33.40506329113924
+  },
+  {
+   "family": "rare_critical",
+   "seed": 12,
+   "system": "A_vector",
+   "task_success": 0.7911392405063291,
+   "pool_recall": 1.0,
+   "tokens_per_task": 42.7246835443038
+  },
+  {
+   "family": "rare_critical",
+   "seed": 12,
+   "system": "B_static",
+   "task_success": 0.7911392405063291,
+   "pool_recall": 1.0,
+   "tokens_per_task": 42.45569620253165
+  },
+  {
+   "family": "rare_critical",
+   "seed": 12,
+   "system": "C_remem",
+   "task_success": 0.8575949367088608,
+   "pool_recall": 1.0,
+   "tokens_per_task": 33.936708860759495
+  },
+  {
+   "family": "rare_critical",
+   "seed": 13,
+   "system": "A_vector",
+   "task_success": 0.8132911392405063,
+   "pool_recall": 1.0,
+   "tokens_per_task": 50.21835443037975
+  },
+  {
+   "family": "rare_critical",
+   "seed": 13,
+   "system": "B_static",
+   "task_success": 0.8132911392405063,
+   "pool_recall": 1.0,
+   "tokens_per_task": 50.27215189873418
+  },
+  {
+   "family": "rare_critical",
+   "seed": 13,
+   "system": "C_remem",
+   "task_success": 0.8291139240506329,
+   "pool_recall": 1.0,
+   "tokens_per_task": 49.31962025316456
+  },
+  {
+   "family": "rare_critical",
+   "seed": 14,
+   "system": "A_vector",
+   "task_success": 0.7278481012658228,
+   "pool_recall": 1.0,
+   "tokens_per_task": 48.984177215189874
+  },
+  {
+   "family": "rare_critical",
+   "seed": 14,
+   "system": "B_static",
+   "task_success": 0.7278481012658228,
+   "pool_recall": 1.0,
+   "tokens_per_task": 48.91772151898734
+  },
+  {
+   "family": "rare_critical",
+   "seed": 14,
+   "system": "C_remem",
+   "task_success": 0.8291139240506329,
+   "pool_recall": 1.0,
+   "tokens_per_task": 42.29746835443038
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 0,
+   "system": "A_vector",
+   "task_success": 0.8433333333333334,
+   "pool_recall": 1.0,
+   "tokens_per_task": 48.59
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 0,
+   "system": "B_static",
+   "task_success": 0.8433333333333334,
+   "pool_recall": 1.0,
+   "tokens_per_task": 48.64666666666667
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 0,
+   "system": "C_remem",
+   "task_success": 0.85,
+   "pool_recall": 1.0,
+   "tokens_per_task": 36.49333333333333
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 1,
+   "system": "A_vector",
+   "task_success": 0.78,
+   "pool_recall": 0.990625,
+   "tokens_per_task": 50.31333333333333
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 1,
+   "system": "B_static",
+   "task_success": 0.78,
+   "pool_recall": 0.990625,
+   "tokens_per_task": 50.44
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 1,
+   "system": "C_remem",
+   "task_success": 0.8033333333333333,
+   "pool_recall": 0.990625,
+   "tokens_per_task": 40.843333333333334
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 2,
+   "system": "A_vector",
+   "task_success": 0.7966666666666666,
+   "pool_recall": 0.9873817034700315,
+   "tokens_per_task": 58.23
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 2,
+   "system": "B_static",
+   "task_success": 0.7966666666666666,
+   "pool_recall": 0.9873817034700315,
+   "tokens_per_task": 58.24333333333333
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 2,
+   "system": "C_remem",
+   "task_success": 0.86,
+   "pool_recall": 0.9873817034700315,
+   "tokens_per_task": 39.88666666666666
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 3,
+   "system": "A_vector",
+   "task_success": 0.7733333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 59.58
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 3,
+   "system": "B_static",
+   "task_success": 0.7733333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 59.64666666666667
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 3,
+   "system": "C_remem",
+   "task_success": 0.8166666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 43.623333333333335
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 4,
+   "system": "A_vector",
+   "task_success": 0.8466666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 56.196666666666665
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 4,
+   "system": "B_static",
+   "task_success": 0.8466666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 55.88666666666666
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 4,
+   "system": "C_remem",
+   "task_success": 0.8566666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 46.96333333333333
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 5,
+   "system": "A_vector",
+   "task_success": 0.8333333333333334,
+   "pool_recall": 1.0,
+   "tokens_per_task": 55.26
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 5,
+   "system": "B_static",
+   "task_success": 0.8333333333333334,
+   "pool_recall": 1.0,
+   "tokens_per_task": 55.31333333333333
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 5,
+   "system": "C_remem",
+   "task_success": 0.8766666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 36.63666666666666
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 6,
+   "system": "A_vector",
+   "task_success": 0.7633333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 54.49666666666667
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 6,
+   "system": "B_static",
+   "task_success": 0.7633333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 54.376666666666665
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 6,
+   "system": "C_remem",
+   "task_success": 0.7933333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 38.126666666666665
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 7,
+   "system": "A_vector",
+   "task_success": 0.8033333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 50.093333333333334
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 7,
+   "system": "B_static",
+   "task_success": 0.8033333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 50.14666666666667
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 7,
+   "system": "C_remem",
+   "task_success": 0.8566666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 30.243333333333332
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 8,
+   "system": "A_vector",
+   "task_success": 0.8033333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 58.84
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 8,
+   "system": "B_static",
+   "task_success": 0.8033333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 58.87
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 8,
+   "system": "C_remem",
+   "task_success": 0.81,
+   "pool_recall": 1.0,
+   "tokens_per_task": 50.306666666666665
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 9,
+   "system": "A_vector",
+   "task_success": 0.76,
+   "pool_recall": 1.0,
+   "tokens_per_task": 60.39666666666667
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 9,
+   "system": "B_static",
+   "task_success": 0.76,
+   "pool_recall": 1.0,
+   "tokens_per_task": 60.43666666666667
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 9,
+   "system": "C_remem",
+   "task_success": 0.7666666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 49.026666666666664
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 10,
+   "system": "A_vector",
+   "task_success": 0.76,
+   "pool_recall": 1.0,
+   "tokens_per_task": 58.31
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 10,
+   "system": "B_static",
+   "task_success": 0.76,
+   "pool_recall": 1.0,
+   "tokens_per_task": 58.303333333333335
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 10,
+   "system": "C_remem",
+   "task_success": 0.8,
+   "pool_recall": 1.0,
+   "tokens_per_task": 49.333333333333336
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 11,
+   "system": "A_vector",
+   "task_success": 0.7833333333333333,
+   "pool_recall": 0.9933993399339934,
+   "tokens_per_task": 52.126666666666665
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 11,
+   "system": "B_static",
+   "task_success": 0.7833333333333333,
+   "pool_recall": 0.9933993399339934,
+   "tokens_per_task": 52.15
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 11,
+   "system": "C_remem",
+   "task_success": 0.8233333333333334,
+   "pool_recall": 0.9933993399339934,
+   "tokens_per_task": 38.016666666666666
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 12,
+   "system": "A_vector",
+   "task_success": 0.7966666666666666,
+   "pool_recall": 1.0,
+   "tokens_per_task": 55.54333333333334
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 12,
+   "system": "B_static",
+   "task_success": 0.7966666666666666,
+   "pool_recall": 1.0,
+   "tokens_per_task": 55.43333333333333
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 12,
+   "system": "C_remem",
+   "task_success": 0.82,
+   "pool_recall": 1.0,
+   "tokens_per_task": 46.343333333333334
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 13,
+   "system": "A_vector",
+   "task_success": 0.8033333333333333,
+   "pool_recall": 0.9907407407407407,
+   "tokens_per_task": 52.32333333333333
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 13,
+   "system": "B_static",
+   "task_success": 0.8033333333333333,
+   "pool_recall": 0.9907407407407407,
+   "tokens_per_task": 51.9
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 13,
+   "system": "C_remem",
+   "task_success": 0.8133333333333334,
+   "pool_recall": 0.9907407407407407,
+   "tokens_per_task": 40.33
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 14,
+   "system": "A_vector",
+   "task_success": 0.8366666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 50.62
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 14,
+   "system": "B_static",
+   "task_success": 0.8366666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 50.87
+  },
+  {
+   "family": "useless_frequent",
+   "seed": 14,
+   "system": "C_remem",
+   "task_success": 0.8466666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 39.02333333333333
+  },
+  {
+   "family": "budget_tight",
+   "seed": 0,
+   "system": "A_vector",
+   "task_success": 0.6033333333333334,
+   "pool_recall": 1.0,
+   "tokens_per_task": 42.74
+  },
+  {
+   "family": "budget_tight",
+   "seed": 0,
+   "system": "B_static",
+   "task_success": 0.6033333333333334,
+   "pool_recall": 1.0,
+   "tokens_per_task": 42.74666666666667
+  },
+  {
+   "family": "budget_tight",
+   "seed": 0,
+   "system": "C_remem",
+   "task_success": 0.6033333333333334,
+   "pool_recall": 1.0,
+   "tokens_per_task": 40.596666666666664
+  },
+  {
+   "family": "budget_tight",
+   "seed": 1,
+   "system": "A_vector",
+   "task_success": 0.8233333333333334,
+   "pool_recall": 1.0,
+   "tokens_per_task": 43.02333333333333
+  },
+  {
+   "family": "budget_tight",
+   "seed": 1,
+   "system": "B_static",
+   "task_success": 0.8233333333333334,
+   "pool_recall": 1.0,
+   "tokens_per_task": 43.07
+  },
+  {
+   "family": "budget_tight",
+   "seed": 1,
+   "system": "C_remem",
+   "task_success": 0.7666666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 40.06333333333333
+  },
+  {
+   "family": "budget_tight",
+   "seed": 2,
+   "system": "A_vector",
+   "task_success": 0.7666666666666667,
+   "pool_recall": 0.996742671009772,
+   "tokens_per_task": 41.71
+  },
+  {
+   "family": "budget_tight",
+   "seed": 2,
+   "system": "B_static",
+   "task_success": 0.7666666666666667,
+   "pool_recall": 0.996742671009772,
+   "tokens_per_task": 41.74333333333333
+  },
+  {
+   "family": "budget_tight",
+   "seed": 2,
+   "system": "C_remem",
+   "task_success": 0.76,
+   "pool_recall": 0.996742671009772,
+   "tokens_per_task": 38.84
+  },
+  {
+   "family": "budget_tight",
+   "seed": 3,
+   "system": "A_vector",
+   "task_success": 0.6333333333333333,
+   "pool_recall": 0.9870967741935484,
+   "tokens_per_task": 43.05
+  },
+  {
+   "family": "budget_tight",
+   "seed": 3,
+   "system": "B_static",
+   "task_success": 0.6333333333333333,
+   "pool_recall": 0.9870967741935484,
+   "tokens_per_task": 43.03666666666667
+  },
+  {
+   "family": "budget_tight",
+   "seed": 3,
+   "system": "C_remem",
+   "task_success": 0.5833333333333334,
+   "pool_recall": 0.9870967741935484,
+   "tokens_per_task": 37.733333333333334
+  },
+  {
+   "family": "budget_tight",
+   "seed": 4,
+   "system": "A_vector",
+   "task_success": 0.6233333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 42.25
+  },
+  {
+   "family": "budget_tight",
+   "seed": 4,
+   "system": "B_static",
+   "task_success": 0.6233333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 42.303333333333335
+  },
+  {
+   "family": "budget_tight",
+   "seed": 4,
+   "system": "C_remem",
+   "task_success": 0.6933333333333334,
+   "pool_recall": 1.0,
+   "tokens_per_task": 39.333333333333336
+  },
+  {
+   "family": "budget_tight",
+   "seed": 5,
+   "system": "A_vector",
+   "task_success": 0.43,
+   "pool_recall": 1.0,
+   "tokens_per_task": 42.82666666666667
+  },
+  {
+   "family": "budget_tight",
+   "seed": 5,
+   "system": "B_static",
+   "task_success": 0.4166666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 42.776666666666664
+  },
+  {
+   "family": "budget_tight",
+   "seed": 5,
+   "system": "C_remem",
+   "task_success": 0.37666666666666665,
+   "pool_recall": 1.0,
+   "tokens_per_task": 40.64333333333333
+  },
+  {
+   "family": "budget_tight",
+   "seed": 6,
+   "system": "A_vector",
+   "task_success": 0.42333333333333334,
+   "pool_recall": 0.996742671009772,
+   "tokens_per_task": 43.05
+  },
+  {
+   "family": "budget_tight",
+   "seed": 6,
+   "system": "B_static",
+   "task_success": 0.42333333333333334,
+   "pool_recall": 0.996742671009772,
+   "tokens_per_task": 43.053333333333335
+  },
+  {
+   "family": "budget_tight",
+   "seed": 6,
+   "system": "C_remem",
+   "task_success": 0.39666666666666667,
+   "pool_recall": 0.996742671009772,
+   "tokens_per_task": 40.166666666666664
+  },
+  {
+   "family": "budget_tight",
+   "seed": 7,
+   "system": "A_vector",
+   "task_success": 0.71,
+   "pool_recall": 0.9936305732484076,
+   "tokens_per_task": 42.07666666666667
+  },
+  {
+   "family": "budget_tight",
+   "seed": 7,
+   "system": "B_static",
+   "task_success": 0.71,
+   "pool_recall": 0.9936305732484076,
+   "tokens_per_task": 42.09
+  },
+  {
+   "family": "budget_tight",
+   "seed": 7,
+   "system": "C_remem",
+   "task_success": 0.65,
+   "pool_recall": 0.9936305732484076,
+   "tokens_per_task": 40.65
+  },
+  {
+   "family": "budget_tight",
+   "seed": 8,
+   "system": "A_vector",
+   "task_success": 0.45,
+   "pool_recall": 1.0,
+   "tokens_per_task": 41.64666666666667
+  },
+  {
+   "family": "budget_tight",
+   "seed": 8,
+   "system": "B_static",
+   "task_success": 0.45,
+   "pool_recall": 1.0,
+   "tokens_per_task": 41.71333333333333
+  },
+  {
+   "family": "budget_tight",
+   "seed": 8,
+   "system": "C_remem",
+   "task_success": 0.6166666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 36.54333333333334
+  },
+  {
+   "family": "budget_tight",
+   "seed": 9,
+   "system": "A_vector",
+   "task_success": 0.5566666666666666,
+   "pool_recall": 0.9874213836477987,
+   "tokens_per_task": 42.846666666666664
+  },
+  {
+   "family": "budget_tight",
+   "seed": 9,
+   "system": "B_static",
+   "task_success": 0.5566666666666666,
+   "pool_recall": 0.9874213836477987,
+   "tokens_per_task": 42.88
+  },
+  {
+   "family": "budget_tight",
+   "seed": 9,
+   "system": "C_remem",
+   "task_success": 0.7466666666666667,
+   "pool_recall": 0.9874213836477987,
+   "tokens_per_task": 34.053333333333335
+  },
+  {
+   "family": "budget_tight",
+   "seed": 10,
+   "system": "A_vector",
+   "task_success": 0.7,
+   "pool_recall": 1.0,
+   "tokens_per_task": 42.056666666666665
+  },
+  {
+   "family": "budget_tight",
+   "seed": 10,
+   "system": "B_static",
+   "task_success": 0.7,
+   "pool_recall": 1.0,
+   "tokens_per_task": 42.06333333333333
+  },
+  {
+   "family": "budget_tight",
+   "seed": 10,
+   "system": "C_remem",
+   "task_success": 0.5933333333333334,
+   "pool_recall": 1.0,
+   "tokens_per_task": 41.56333333333333
+  },
+  {
+   "family": "budget_tight",
+   "seed": 11,
+   "system": "A_vector",
+   "task_success": 0.59,
+   "pool_recall": 0.9908536585365854,
+   "tokens_per_task": 42.92
+  },
+  {
+   "family": "budget_tight",
+   "seed": 11,
+   "system": "B_static",
+   "task_success": 0.5833333333333334,
+   "pool_recall": 0.9908536585365854,
+   "tokens_per_task": 42.913333333333334
+  },
+  {
+   "family": "budget_tight",
+   "seed": 11,
+   "system": "C_remem",
+   "task_success": 0.69,
+   "pool_recall": 0.9908536585365854,
+   "tokens_per_task": 37.27
+  },
+  {
+   "family": "budget_tight",
+   "seed": 12,
+   "system": "A_vector",
+   "task_success": 0.69,
+   "pool_recall": 1.0,
+   "tokens_per_task": 41.1
+  },
+  {
+   "family": "budget_tight",
+   "seed": 12,
+   "system": "B_static",
+   "task_success": 0.69,
+   "pool_recall": 1.0,
+   "tokens_per_task": 41.086666666666666
+  },
+  {
+   "family": "budget_tight",
+   "seed": 12,
+   "system": "C_remem",
+   "task_success": 0.6766666666666666,
+   "pool_recall": 1.0,
+   "tokens_per_task": 34.06333333333333
+  },
+  {
+   "family": "budget_tight",
+   "seed": 13,
+   "system": "A_vector",
+   "task_success": 0.71,
+   "pool_recall": 0.978125,
+   "tokens_per_task": 42.72666666666667
+  },
+  {
+   "family": "budget_tight",
+   "seed": 13,
+   "system": "B_static",
+   "task_success": 0.71,
+   "pool_recall": 0.978125,
+   "tokens_per_task": 42.763333333333335
+  },
+  {
+   "family": "budget_tight",
+   "seed": 13,
+   "system": "C_remem",
+   "task_success": 0.73,
+   "pool_recall": 0.978125,
+   "tokens_per_task": 38.873333333333335
+  },
+  {
+   "family": "budget_tight",
+   "seed": 14,
+   "system": "A_vector",
+   "task_success": 0.38,
+   "pool_recall": 1.0,
+   "tokens_per_task": 42.99666666666667
+  },
+  {
+   "family": "budget_tight",
+   "seed": 14,
+   "system": "B_static",
+   "task_success": 0.37666666666666665,
+   "pool_recall": 1.0,
+   "tokens_per_task": 42.99333333333333
+  },
+  {
+   "family": "budget_tight",
+   "seed": 14,
+   "system": "C_remem",
+   "task_success": 0.4,
+   "pool_recall": 1.0,
+   "tokens_per_task": 38.21
+  },
+  {
+   "family": "state_change",
+   "seed": 0,
+   "system": "A_vector",
+   "task_success": 0.44666666666666666,
+   "pool_recall": 1.0,
+   "tokens_per_task": 47.43333333333333
+  },
+  {
+   "family": "state_change",
+   "seed": 0,
+   "system": "B_static",
+   "task_success": 0.5,
+   "pool_recall": 1.0,
+   "tokens_per_task": 47.29666666666667
+  },
+  {
+   "family": "state_change",
+   "seed": 0,
+   "system": "C_remem",
+   "task_success": 0.8633333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 37.28666666666667
+  },
+  {
+   "family": "state_change",
+   "seed": 1,
+   "system": "A_vector",
+   "task_success": 0.49333333333333335,
+   "pool_recall": 1.0,
+   "tokens_per_task": 49.39
+  },
+  {
+   "family": "state_change",
+   "seed": 1,
+   "system": "B_static",
+   "task_success": 0.5466666666666666,
+   "pool_recall": 1.0,
+   "tokens_per_task": 49.223333333333336
+  },
+  {
+   "family": "state_change",
+   "seed": 1,
+   "system": "C_remem",
+   "task_success": 0.8566666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 35.78
+  },
+  {
+   "family": "state_change",
+   "seed": 2,
+   "system": "A_vector",
+   "task_success": 0.5533333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 44.54666666666667
+  },
+  {
+   "family": "state_change",
+   "seed": 2,
+   "system": "B_static",
+   "task_success": 0.6066666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 44.49666666666667
+  },
+  {
+   "family": "state_change",
+   "seed": 2,
+   "system": "C_remem",
+   "task_success": 0.86,
+   "pool_recall": 1.0,
+   "tokens_per_task": 38.42666666666667
+  },
+  {
+   "family": "state_change",
+   "seed": 3,
+   "system": "A_vector",
+   "task_success": 0.5166666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 42.24
+  },
+  {
+   "family": "state_change",
+   "seed": 3,
+   "system": "B_static",
+   "task_success": 0.55,
+   "pool_recall": 1.0,
+   "tokens_per_task": 42.193333333333335
+  },
+  {
+   "family": "state_change",
+   "seed": 3,
+   "system": "C_remem",
+   "task_success": 0.81,
+   "pool_recall": 1.0,
+   "tokens_per_task": 36.3
+  },
+  {
+   "family": "state_change",
+   "seed": 4,
+   "system": "A_vector",
+   "task_success": 0.43,
+   "pool_recall": 1.0,
+   "tokens_per_task": 41.87
+  },
+  {
+   "family": "state_change",
+   "seed": 4,
+   "system": "B_static",
+   "task_success": 0.45666666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 41.86666666666667
+  },
+  {
+   "family": "state_change",
+   "seed": 4,
+   "system": "C_remem",
+   "task_success": 0.8833333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 28.81
+  },
+  {
+   "family": "state_change",
+   "seed": 5,
+   "system": "A_vector",
+   "task_success": 0.6366666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 42.68666666666667
+  },
+  {
+   "family": "state_change",
+   "seed": 5,
+   "system": "B_static",
+   "task_success": 0.7133333333333334,
+   "pool_recall": 1.0,
+   "tokens_per_task": 42.92666666666667
+  },
+  {
+   "family": "state_change",
+   "seed": 5,
+   "system": "C_remem",
+   "task_success": 0.87,
+   "pool_recall": 1.0,
+   "tokens_per_task": 34.376666666666665
+  },
+  {
+   "family": "state_change",
+   "seed": 6,
+   "system": "A_vector",
+   "task_success": 0.6066666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 40.403333333333336
+  },
+  {
+   "family": "state_change",
+   "seed": 6,
+   "system": "B_static",
+   "task_success": 0.6533333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 40.306666666666665
+  },
+  {
+   "family": "state_change",
+   "seed": 6,
+   "system": "C_remem",
+   "task_success": 0.7933333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 37.10333333333333
+  },
+  {
+   "family": "state_change",
+   "seed": 7,
+   "system": "A_vector",
+   "task_success": 0.5233333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 46.916666666666664
+  },
+  {
+   "family": "state_change",
+   "seed": 7,
+   "system": "B_static",
+   "task_success": 0.59,
+   "pool_recall": 1.0,
+   "tokens_per_task": 47.406666666666666
+  },
+  {
+   "family": "state_change",
+   "seed": 7,
+   "system": "C_remem",
+   "task_success": 0.8333333333333334,
+   "pool_recall": 1.0,
+   "tokens_per_task": 40.51
+  },
+  {
+   "family": "state_change",
+   "seed": 8,
+   "system": "A_vector",
+   "task_success": 0.6266666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 50.20333333333333
+  },
+  {
+   "family": "state_change",
+   "seed": 8,
+   "system": "B_static",
+   "task_success": 0.6566666666666666,
+   "pool_recall": 1.0,
+   "tokens_per_task": 50.126666666666665
+  },
+  {
+   "family": "state_change",
+   "seed": 8,
+   "system": "C_remem",
+   "task_success": 0.7966666666666666,
+   "pool_recall": 1.0,
+   "tokens_per_task": 46.46333333333333
+  },
+  {
+   "family": "state_change",
+   "seed": 9,
+   "system": "A_vector",
+   "task_success": 0.5066666666666667,
+   "pool_recall": 0.9879518072289156,
+   "tokens_per_task": 49.92666666666667
+  },
+  {
+   "family": "state_change",
+   "seed": 9,
+   "system": "B_static",
+   "task_success": 0.5566666666666666,
+   "pool_recall": 0.9879518072289156,
+   "tokens_per_task": 50.406666666666666
+  },
+  {
+   "family": "state_change",
+   "seed": 9,
+   "system": "C_remem",
+   "task_success": 0.79,
+   "pool_recall": 0.9879518072289156,
+   "tokens_per_task": 47.21
+  },
+  {
+   "family": "state_change",
+   "seed": 10,
+   "system": "A_vector",
+   "task_success": 0.36333333333333334,
+   "pool_recall": 1.0,
+   "tokens_per_task": 47.00333333333333
+  },
+  {
+   "family": "state_change",
+   "seed": 10,
+   "system": "B_static",
+   "task_success": 0.44333333333333336,
+   "pool_recall": 1.0,
+   "tokens_per_task": 46.96666666666667
+  },
+  {
+   "family": "state_change",
+   "seed": 10,
+   "system": "C_remem",
+   "task_success": 0.8733333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 32.53333333333333
+  },
+  {
+   "family": "state_change",
+   "seed": 11,
+   "system": "A_vector",
+   "task_success": 0.4866666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 51.81
+  },
+  {
+   "family": "state_change",
+   "seed": 11,
+   "system": "B_static",
+   "task_success": 0.55,
+   "pool_recall": 1.0,
+   "tokens_per_task": 51.67666666666667
+  },
+  {
+   "family": "state_change",
+   "seed": 11,
+   "system": "C_remem",
+   "task_success": 0.84,
+   "pool_recall": 1.0,
+   "tokens_per_task": 42.586666666666666
+  },
+  {
+   "family": "state_change",
+   "seed": 12,
+   "system": "A_vector",
+   "task_success": 0.68,
+   "pool_recall": 1.0,
+   "tokens_per_task": 39.66
+  },
+  {
+   "family": "state_change",
+   "seed": 12,
+   "system": "B_static",
+   "task_success": 0.7033333333333334,
+   "pool_recall": 1.0,
+   "tokens_per_task": 39.64666666666667
+  },
+  {
+   "family": "state_change",
+   "seed": 12,
+   "system": "C_remem",
+   "task_success": 0.8266666666666667,
+   "pool_recall": 1.0,
+   "tokens_per_task": 36.083333333333336
+  },
+  {
+   "family": "state_change",
+   "seed": 13,
+   "system": "A_vector",
+   "task_success": 0.6533333333333333,
+   "pool_recall": 1.0,
+   "tokens_per_task": 38.84
+  },
+  {
+   "family": "state_change",
+   "seed": 13,
+   "system": "B_static",
+   "task_success": 0.68,
+   "pool_recall": 1.0,
+   "tokens_per_task": 38.7
+  },
+  {
+   "family": "state_change",
+   "seed": 13,
+   "system": "C_remem",
+   "task_success": 0.84,
+   "pool_recall": 1.0,
+   "tokens_per_task": 28.85
+  },
+  {
+   "family": "state_change",
+   "seed": 14,
+   "system": "A_vector",
+   "task_success": 0.46,
+   "pool_recall": 1.0,
+   "tokens_per_task": 44.79
+  },
+  {
+   "family": "state_change",
+   "seed": 14,
+   "system": "B_static",
+   "task_success": 0.49666666666666665,
+   "pool_recall": 1.0,
+   "tokens_per_task": 44.75333333333333
+  },
+  {
+   "family": "state_change",
+   "seed": 14,
+   "system": "C_remem",
+   "task_success": 0.8533333333333334,
+   "pool_recall": 1.0,
+   "tokens_per_task": 31.763333333333332
+  }
+ ]
+}

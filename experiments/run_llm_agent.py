@@ -46,6 +46,8 @@ def main() -> None:
     ap.add_argument("--embed-model")
     ap.add_argument("--embed-dim", type=int, default=1024)
     ap.add_argument("--ollama", action="store_true", help="use a local Ollama server (free; no API key)")
+    ap.add_argument("--output", default="schema", choices=["schema", "object", "text"],
+                    help="schema: constrained JSON with the exact answer keys (default) | object: any JSON | text: free text")
     ap.add_argument("--out", default=None)
     a = ap.parse_args()
 
@@ -74,7 +76,7 @@ def main() -> None:
             holder = {}
 
             def factory(w, s):
-                holder["a"] = LLMAgent(w, client, a.model, t0=T0, json_mode=a.ollama)
+                holder["a"] = LLMAgent(w, client, a.model, t0=T0, json_mode={"schema": "schema", "object": True, "text": False}[a.output])
                 return holder["a"]
 
             t = time.time()

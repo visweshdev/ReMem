@@ -167,9 +167,10 @@ class ReMem:
 
     # ── reading ────────────────────────────────────────────────────────────────
     def search(self, query: str, *, k: int | None = None, task: str = "default", as_of: float | None = None,
-               budget_tokens: int | None = None) -> SearchResult:
+               budget_tokens: int | None = None, now: float | None = None) -> SearchResult:
         """Retrieve the memories most likely to help with `query`. `task` groups similar requests so that
-        usefulness is learned per kind of task; `as_of` (unix time) asks about the past."""
+        usefulness is learned per kind of task; `as_of` (unix time) asks about the past. `now` (unix time,
+        default: the clock) is the moment recency is measured from, e.g. when replaying old conversations."""
         with self._lock:
             if not self._facts:
                 return SearchResult(search_id="", query=query)
@@ -182,7 +183,7 @@ class ReMem:
             try:
                 pool, ms = self.backend.candidates(query, k=cfg.pool_size)
                 self._task_counter += 1
-                ctx = self.system.retrieve(self._task_counter, query, pool, task_class=task, now=time.time(),
+                ctx = self.system.retrieve(self._task_counter, query, pool, task_class=task, now=time.time() if now is None else float(now),
                                            as_of=as_of, pool_time_ms=ms)
             finally:
                 self.system.cfg = cfg

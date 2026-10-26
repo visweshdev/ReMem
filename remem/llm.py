@@ -81,15 +81,24 @@ def parse_reply(text: str) -> tuple[dict[str, str], list[str]]:
 
 class LLMAgent:
     def __init__(self, world: World, client: Any, model: str, *, t0: float, temperature: float = 0.0, max_tokens: int = 200,
-                 json_mode: bool = False) -> None:
+                 json_mode: bool | str = False) -> None:
         self.world, self.client, self.model, self.t0 = world, client, model, t0
         self.temperature, self.max_tokens = temperature, max_tokens
         self.n_calls = 0
-        self.json_mode = json_mode           # response_format=json_object (supported by OpenAI and Ollama)
+        # False: free text | True / "object": response_format=json_object | "schema": JSON schema with the exact
+        # answer slots (constrained decoding; supported by OpenAI and Ollama), so a reply can't use a wrong key
+        self.json_mode = json_mode
         self.parse_failures = 0
 
     def act(self, task: Task, items: list[tuple[str, str, float]]) -> AgentResult:
-        extra = {"response_format": {"type": "json_object"}} if self.json_mode else {}
+        if self.json_mode == "schema":
+            from remem.claude_agent import answer_schema
+            extra = {"response_format": {"type": "json_schema", "json_schema": {
+                "name": "answer", "strict": True, "schema": answer_schema(task)}}}
+        elif self.json_mode:
+            extra = {"response_format": {"type": "json_object"}}
+        else:
+            extra = {}
         resp = self.client.chat.completions.create(
             model=self.model, temperature=self.temperature, max_tokens=self.max_tokens, **extra,
             messages=[{"role": "system", "content": SYSTEM_PROMPT},

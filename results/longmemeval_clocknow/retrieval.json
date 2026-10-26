@@ -1,0 +1,76 @@
+{
+ "data": "longmemeval_s_cleaned.json",
+ "limit": null,
+ "embedder": "all-MiniLM-L6-v2",
+ "n_questions": 470,
+ "summary": {
+  "similarity": {
+   "turn_recall@5": 0.7468085106382979,
+   "turn_recall@10": 0.8595744680851064,
+   "session_recall@5": 0.951063829787234,
+   "session_recall@10": 0.9702127659574468
+  },
+  "static": {
+   "turn_recall@5": 0.7468085106382979,
+   "turn_recall@10": 0.8595744680851064,
+   "session_recall@5": 0.951063829787234,
+   "session_recall@10": 0.9702127659574468
+  },
+  "remem": {
+   "turn_recall@5": 0.7468085106382979,
+   "turn_recall@10": 0.8595744680851064,
+   "session_recall@5": 0.951063829787234,
+   "session_recall@10": 0.9702127659574468
+  }
+ },
+ "per_type": {
+  "single-session-user": {
+   "similarity|turn_recall@5": 0.828125,
+   "similarity|turn_recall@10": 0.890625,
+   "static|turn_recall@5": 0.828125,
+   "static|turn_recall@10": 0.890625,
+   "remem|turn_recall@5": 0.828125,
+   "remem|turn_recall@10": 0.890625
+  },
+  "multi-session": {
+   "similarity|turn_recall@5": 0.71900826446281,
+   "similarity|turn_recall@10": 0.8677685950413223,
+   "static|turn_recall@5": 0.71900826446281,
+   "static|turn_recall@10": 0.8677685950413223,
+   "remem|turn_recall@5": 0.71900826446281,
+   "remem|turn_recall@10": 0.8677685950413223
+  },
+  "single-session-preference": {
+   "similarity|turn_recall@5": 0.6666666666666666,
+   "similarity|turn_recall@10": 0.7,
+   "static|turn_recall@5": 0.6666666666666666,
+   "static|turn_recall@10": 0.7,
+   "remem|turn_recall@5": 0.6666666666666666,
+   "remem|turn_recall@10": 0.7
+  },
+  "temporal-reasoning": {
+   "similarity|turn_recall@5": 0.6692913385826772,
+   "similarity|turn_recall@10": 0.7637795275590551,
+   "static|turn_recall@5": 0.6692913385826772,
+   "static|turn_recall@10": 0.7637795275590551,
+   "remem|turn_recall@5": 0.6692913385826772,
+   "remem|turn_recall@10": 0.7637795275590551
+  },
+  "knowledge-update": {
+   "similarity|turn_recall@5": 0.8055555555555556,
+   "similarity|turn_recall@10": 0.9583333333333334,
+   "static|turn_recall@5": 0.8055555555555556,
+   "static|turn_recall@10": 0.9583333333333334,
+   "remem|turn_recall@5": 0.8055555555555556,
+   "remem|turn_recall@10": 0.9583333333333334
+  },
+  "single-session-assistant": {
+   "similarity|turn_recall@5": 0.8571428571428571,
+   "similarity|turn_recall@10": 0.9821428571428571,
+   "static|turn_recall@5": 0.8571428571428571,
+   "static|turn_recall@10": 0.9821428571428571,
+   "remem|turn_recall@5": 0.8571428571428571,
+   "remem|turn_recall@10": 0.9821428571428571
+  }
+ }
+}

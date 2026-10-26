@@ -4,8 +4,10 @@ ReMem is a memory layer that learns **which memories actually help an agent succ
 retrieve, what to keep, what to supersede, and how much context to spend. It sits on top of a retrieval backend (a flat
 vector index is built in; any backend implementing `remem.backends.base.Backend` can be plugged in).
 
-> **Status: research prototype.** All numbers below come from a *synthetic, controlled benchmark with a simulated agent and an
-> offline hash-based embedder*, not from a real LLM agent or a public memory benchmark. See [§11 Limitations](#11-limitations-read-these).
+> **Status: research prototype.** The headline numbers come from a *synthetic, controlled benchmark with a simulated agent*. They hold
+> with a real embedding model (+10.2 pp). With a real (small, local) LLM as the agent, **the gain disappears** (within noise), and on the
+> public LongMemEval benchmark, where questions never repeat, ReMem behaves like plain similarity search. See [§10](#with-a-real-llm-free-local-qwen253b)
+> and [§11 Limitations](#11-limitations-read-these).
 >
 > **Novelty:** citation-based feedback on retrieval is prior art (RMM, arXiv 2503.08026, refines retrieval with online RL from the LLM's cited
 > evidence), and Zep and Mem0's graph variant already keep superseded facts as invalid instead of deleting them. ReMem's contribution is the
@@ -139,12 +141,15 @@ to real BPE counts.
 ### Running with a real LLM or on LongMemEval (needs your API key / data)
 
 ```bash
-OPENAI_API_KEY=... python experiments/run_llm_agent.py --model <chat-model>                  # synthetic tasks, real LLM agent
-python experiments/run_longmemeval.py --data longmemeval_s_cleaned.json --embedder st       # retrieval recall, no LLM needed
+# free, local: install Ollama (https://ollama.com), then  ollama pull qwen2.5:3b
+python experiments/run_llm_agent.py --ollama --model qwen2.5:3b --family contradiction --seeds 0,1,2
+OPENAI_API_KEY=... python experiments/run_llm_agent.py --model <chat-model>                  # any OpenAI-compatible API instead
+python experiments/run_real_embeddings.py                                                     # headline comparison with MiniLM embeddings
+python experiments/run_longmemeval.py --data data/longmemeval_s_cleaned.json                  # retrieval recall, no LLM needed
 python experiments/run_longmemeval.py --data ... --qa --model <chat-model>                  # + answers for the official judge
 ```
 
-Neither has been run in this repository: no API key was available and the dataset download was blocked from the development machine.
+LongMemEval data: `longmemeval_s_cleaned.json` from https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned (put it in `data/`).
 
 ## Contents
 1. [Problem](#1-problem) · 2. [Architecture](#2-architecture) · 3. [Utility model](#3-memory-utility-model) · 4. [Outcome feedback and credit assignment](#4-outcome-feedback-and-credit-assignment) · 5. [Adaptive retention](#5-adaptive-retention) · 6. [Contradiction and staleness](#6-contradiction-and-staleness) · 7. [Cost-aware retrieval](#7-cost-aware-retrieval) · 8. [Additional mechanisms](#8-additional-mechanisms) · 9. [Evaluation methodology](#9-evaluation-methodology) · 10. [Results](#10-results) · 11. [Limitations](#11-limitations-read-these) · 12. [Failure analysis](#12-failure-analysis) · 13. [Future work](#13-future-work) · [Related work](docs/RELATED_WORK.md)
@@ -411,6 +416,74 @@ than UCB (−1.7 pp, +3 tokens/task).
 
 The absolute level moves a lot with the assumed cost of wasted context; ReMem's lead over similarity-only does not (+14.3 / +13.0 pp).
 
+### With real embeddings (all-MiniLM-L6-v2)
+
+`experiments/run_real_embeddings.py`: the same 7 core families x 15 test seeds and reader `first`, but every candidate pool comes from a real,
+free, local embedding model instead of the hash embedder. The learned utility model was *not* retrained for these embeddings.
+
+| System | Task success (95% CI) | Gold memory in candidate pool |
+|---|---:|---:|
+| A similarity only | 69.1 ± 2.0 | 99.4% |
+| B static score | 70.3 ± 1.9 | 99.4% |
+| **C ReMem** | **79.2 ± 1.8** | 99.4% |
+
+Paired difference C - A: **+10.2 ± 1.4 pp** (hash embedder: +13.8 ± 1.8). Better embeddings raise the baseline and close the "gold never retrieved"
+gap (3% -> 0.6%); most of ReMem's gain remains, concentrated where facts change (state_change 53.2 -> 83.9, contradiction 58.2 -> 82.0) and smallest
+under a tight token budget (60.6 -> 61.9). Raw rows: `results/real_embeddings.json`.
+
+### With a real LLM (free, local qwen2.5:3b)
+
+`experiments/run_llm_agent.py --ollama`: the agent is a real 3-billion-parameter model running locally through Ollama (CPU only, temperature 0);
+it sees the served memories and must answer in JSON, and success is checked against the world's hidden truth. 80 tasks x 3 seeds per family,
+hash embedder, A = similarity only, C = ReMem. ReMem learns from the LLM's real outcomes and citations.
+
+| Family | Output format | A similarity | C ReMem | C - A (95% CI over seeds) | Tasks with a stale fact in context (A / C) |
+|---|---|---:|---:|---:|---:|
+| contradiction | JSON schema (exact keys) | 84.6 | 81.7 | -2.9 ± 23.3 | 29.6% / 0.0% |
+| distractor | JSON schema (exact keys) | 87.1 | 87.5 | +0.4 ± 4.7 | 0 / 0 |
+| contradiction | free JSON | 83.3 | 75.4 | -7.9 ± 21.1 | 29.6% / 0.0% |
+| distractor | free JSON | 80.8 | 75.4 | -5.4 ± 22.0 | 0 / 0 |
+
+**No measurable gain with a real model.** What happened, in order:
+
+1. The first run let the model write free-form JSON. ReMem scored *lower*. Recording every prompt and reply
+   (`experiments/trace_llm_prompts.py`, `results/llm_agent/traces_distractor_2_object.jsonl`) showed that 22 of ReMem's 26 failures in the
+   worst world, and 10 of similarity's 15, contained the right answer under a malformed key (e.g. `"project.who_is_responsible_for_recs": "alice"`
+   instead of `"recs.owner"`). ReMem's contexts hold more real facts and fewer junk notes, which seems to derail the small model's formatting
+   more often.
+2. The runner then constrained the output with a JSON schema of the exact answer keys (as the Claude adapter already does) and both systems were
+   re-run. Both numbers are reported, not just the second.
+3. With the format fixed, the systems are within noise. ReMem still removes every stale fact from the context, but this model, told to prefer the
+   most recent memory, mostly copes with stale facts on its own, so removing them buys little. The simulated reader in the main benchmark is hurt
+   more by stale and irrelevant context than this LLM is; the headline gains depend on that assumption.
+
+Three seeds with one small model are too few to rule out a small effect either way; a larger model or more seeds may differ.
+
+### Trying to make the learned model beat the heuristic (on-policy retraining)
+
+The learned utility was fitted on what the heuristic chose to show, then deployed as its own ranker (distribution shift).
+`experiments/train_utility_dagger.py` collects new traces with the learned model itself (3 rounds, DAgger-style aggregation, 170k rows) and
+compares on DEV seeds only: heuristic 75.7%, round 0 76.4%, rounds 1-3 76.3-76.4%. **No gain**, so the round-0 model stays; the new on-policy
+data adds rows but little new information because the two policies already serve nearly the same memories. Report:
+`results/models/dagger/report.json`.
+
+### LongMemEval (public benchmark, retrieval only)
+
+`experiments/run_longmemeval.py` on `longmemeval_s_cleaned.json` (ICLR 2025; ~50 sessions of chat history per question), MiniLM embeddings, every
+turn stored as one memory, no LLM. 470 questions (the 30 abstention questions have no evidence and are excluded). *turn@k*: an evidence turn
+(`has_answer`) is among the k retrieved memories; *session@k*: a retrieved memory comes from an evidence session.
+
+| System | turn@5 | turn@10 | session@5 | session@10 |
+|---|---:|---:|---:|---:|
+| similarity only | 74.7 | 86.0 | 95.1 | 97.0 |
+| static score | 74.7 | 86.0 | 95.1 | 97.0 |
+| ReMem | 74.7 | 86.0 | 95.1 | 97.0 |
+
+**No difference, as expected:** every question has its own history and is asked once, so ReMem never receives feedback, and raw turns carry no
+entity/attribute keys for supersession. This run measured recency from the wall clock instead of each question's date (a bug, since fixed with
+`search(..., now=...)`), which made every turn look equally old; a re-run with question-date recency is in progress, and on its first 80 questions
+the date-aware systems are slightly ahead (turn@5 78.7 vs 76.2). Only retrieval is measured; answer accuracy would need an LLM and the official judge.
+
 ### Ranking demonstration and lifecycle
 
 `python experiments/demo_ranking.py` writes `results/demo_ranking.md`: tasks where a look-alike with higher similarity is **not** served while a
@@ -421,16 +494,16 @@ decomposition of the score, not as independent effects.
 
 ## 11. Limitations (read these)
 
-* **No real-LLM and no public-benchmark evidence yet.** The LLM agent and LongMemEval runners exist (`experiments/run_llm_agent.py`,
-  `experiments/run_longmemeval.py`) but were not run: no API key was available and the dataset download was blocked from the development machine.
-  **No number in this repository is from a public benchmark or a real LLM.** The reader is deterministic and simulated; its distraction strength
-  (0.05 per irrelevant item) and chance-guessing are assumptions, and the cost-aware gain depends on "wasted context hurts".
-* **On LongMemEval-style data, expect little from ReMem.** Each question there has its own history and is asked once, so per-memory feedback never
-  accumulates, and raw turns carry no entity/attribute keys for supersession (without LLM extraction). This is the same situation as the
-  `distractor_norecur` control, where ReMem shows no gain.
-* **Offline hash embedder in the benchmark.** Hash embeddings with a hand-written synonym lexicon replace a trained embedding model; about 3% of gold
-  facts are never retrieved at all (the embedder has no stemming). Real embeddings are supported (`SentenceTransformerEmbedder`) but the benchmark
-  numbers do not use them.
+* **The headline gain is not confirmed with a real LLM.** With a free local 3B model as the agent, ReMem and similarity search are within noise
+  (3 seeds, 2 families, one small model). The headline numbers use a deterministic simulated reader whose distraction strength (0.05 per
+  irrelevant item), sensitivity to stale facts and chance-guessing are assumptions; the real model was less hurt by stale facts than the simulated
+  reader. No larger or hosted model has been tested.
+* **No gain on LongMemEval.** Each question there has its own history and is asked once, so per-memory feedback never accumulates, and raw turns
+  carry no entity/attribute keys for supersession (without LLM extraction). ReMem ranks like the static baseline there, as in the
+  `distractor_norecur` control. Only retrieval recall was measured, not answer accuracy.
+* **Offline hash embedder in most tables.** Hash embeddings with a hand-written synonym lexicon replace a trained embedding model; about 3% of gold
+  facts are never retrieved (no stemming). The headline comparison was repeated with MiniLM (+10.2 pp instead of +13.8); the ablations, retention,
+  credit-assignment and LLM tables were not.
 * **Only flat vector stores are built in** (numpy, FAISS, Chroma). An earlier version also compared against a hierarchical-memory backend; that
   backend and every comparison against it were removed, so no claim here concerns any hierarchical memory system.
 * **Synthetic, author-designed tasks.** They exercise the mechanisms and some (traps, repeated pairs) favour per-memory history by construction; the
@@ -439,10 +512,10 @@ decomposition of the score, not as independent effects.
   there they come from the generator (noise sensitivity above). `LLMFactExtractor` exists but its quality with a real model is unmeasured.
 * **Library supersession rule.** Through `ReMem.add`, two `"state"` facts with the same entity and attribute replace each other; a multi-valued
   attribute stored as `"state"` would lose values. Store those as `"preference"` or `"note"`.
-* **Feedback only on shown memories** (bandit feedback); exploration is a heuristic; memories never shown never get labels. In the MCP server, learning
-  only happens if the agent actually calls `feedback`.
+* **Feedback only on shown memories** (bandit feedback); exploration is a heuristic; memories never shown never get labels. In the MCP server,
+  inferred feedback (when the agent never calls `feedback`) is a guess and has not been evaluated.
 * **Credit assignment is not causal.** Default credit precision is only 0.49; leave-one-out fixes it at a cost of extra agent calls (0.41–2.34/task).
-* **The learned model does not beat the heuristic**; it was trained on observed labels from a heuristic policy and deployed under another (distribution shift).
+* **The learned model does not beat the heuristic**, and three rounds of on-policy retraining did not change that (DEV seeds).
 * **Several mechanisms did not help or are within noise:** retention (accuracy), similarity guard (success), Thompson sampling (worse), outcome gating
   (usage-only matches it), and the RMM-style reranker (within noise of similarity; our reimplementation, not the authors' code).
 * **Statistics.** 15 seeds, t-intervals over seeds; worlds come from one author-written generator, so seeds are not independent real-world samples.
@@ -473,7 +546,7 @@ in eight fails with every needed memory present, because the simulated agent can
 
 ## 13. Future work
 
-Run the LLM-agent and LongMemEval runners with a real model and the real data (both are ready; see Quickstart); measure how well an LLM's
+Repeat the real-LLM test with larger models and more seeds, and LongMemEval with LLM fact extraction and the QA judge; measure how well an LLM's
 self-citations track real dependence; evaluate `LLMFactExtractor` quality; let per-memory utility generalise to unseen memories (the RMM idea of
 adapting the embedding space, combined with ReMem's outcome gating); off-policy correction for the learned model; more backends (Qdrant, pgvector).
 
@@ -486,9 +559,9 @@ remem/extract.py       fact extraction                         remem/integration
 remem/baselines/       RMM-style reranker (reimplementation)  remem/viz/           dashboard (HTML), ledger_cli
 remem/eval/            synthetic worlds, simulated agent, runner, metrics, failure analysis, report
 experiments/           run_benchmark.py, train_utility.py, train_utility_dagger.py, tune_rmm.py, demo_ranking.py,
-                       run_llm_agent.py (--ollama: free local LLM), run_longmemeval.py, run_real_embeddings.py
+                       run_llm_agent.py (--ollama: free local LLM), trace_llm_prompts.py, run_longmemeval.py, run_real_embeddings.py
 examples/              basic_api.py, quickstart.py, langchain_retriever.py, claude_desktop_mcp.md
-configs/systems.yaml   every compared system                   tests/ (84 tests)
+configs/systems.yaml   every compared system                   tests/ (85 tests)
 results/               RESULTS.md, failure_analysis.md, *.json, plots/, runs/<…>/ledger.json, models/, records/
 docs/                  DESIGN.md, RELATED_WORK.md, make_figures.py (README GIF + chart)   .github/workflows/  CI
 ```

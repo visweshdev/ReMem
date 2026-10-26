@@ -91,7 +91,7 @@ def evaluate(instances: list[dict], embedder, ks=(5, 10), systems=SYSTEMS, qa_ag
                     session_of[fid] = sid
                     if turn.get("has_answer"):
                         evidence.add(fid)
-            res = mem.search(inst["question"], k=kmax)
+            res = mem.search(inst["question"], k=kmax, now=q_time)     # recency relative to the question date
             ids = [h.id for h in res.items]
             for k in ks:
                 turn_hit = int(any(i in evidence for i in ids[:k]))
@@ -117,6 +117,7 @@ def main() -> None:
     ap.add_argument("--st-model", default="all-MiniLM-L6-v2")
     ap.add_argument("--qa", action="store_true", help="also write QA hypotheses with an LLM (needs OPENAI_API_KEY)")
     ap.add_argument("--model", help="chat model for --qa")
+    ap.add_argument("--systems", default=",".join(SYSTEMS))
     ap.add_argument("--out", type=Path, default=ROOT / "results" / "longmemeval")
     a = ap.parse_args()
 
@@ -144,7 +145,7 @@ def main() -> None:
                                             f"Question: {question}\nAnswer concisely."}])
             return r.choices[0].message.content.strip()
 
-    res = evaluate(instances, embedder, qa_agent=qa_agent)
+    res = evaluate(instances, embedder, systems=tuple(a.systems.split(",")), qa_agent=qa_agent)
     a.out.mkdir(parents=True, exist_ok=True)
     meta = {"data": a.data.name, "limit": a.limit, "embedder": a.embedder if a.embedder == "hash" else a.st_model}
     (a.out / "retrieval.json").write_text(json.dumps({**meta, **{k: v for k, v in res.items() if k != "hypotheses"}},
