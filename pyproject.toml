@@ -13,6 +13,10 @@ authors = [{ name = "Viswesh Kesarla", email = "visweshkesarla@gmail.com" }]
 keywords = ["llm", "agents", "memory", "retrieval", "rag"]
 dependencies = ["numpy>=1.26", "pyyaml>=6.0", "matplotlib>=3.7"]
 
+[project.urls]
+Homepage = "https://github.com/visweshdev/ReMem"
+Issues = "https://github.com/visweshdev/ReMem/issues"
+
 [project.optional-dependencies]
 claude = ["anthropic>=0.40"]                # remem.claude_agent: Claude as the evaluation agent
 llm = ["openai>=1.50"]                       # remem.llm: real-model agent / embeddings / fact extraction

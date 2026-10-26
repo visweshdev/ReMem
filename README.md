@@ -5,7 +5,7 @@
 <p align="center">
   <img alt="Python 3.10+" src="https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white">
   <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-2f7d5b">
-  <img alt="85 tests" src="https://img.shields.io/badge/tests-85%20passing-2f7d5b">
+  <a href="https://github.com/visweshdev/ReMem/actions/workflows/tests.yml"><img alt="tests" src="https://github.com/visweshdev/ReMem/actions/workflows/tests.yml/badge.svg"></a>
   <img alt="MCP server" src="https://img.shields.io/badge/MCP-server-6b4fbb">
   <img alt="LangChain retriever" src="https://img.shields.io/badge/LangChain-retriever-1c3c3c">
   <img alt="Runs locally" src="https://img.shields.io/badge/runs-100%25%20local-555">
@@ -41,7 +41,7 @@ tokens. Nothing is ever deleted, and every decision can be inspected.
 ## Quickstart
 
 ```bash
-git clone https://github.com/<your-username>/ReMem.git
+git clone https://github.com/visweshdev/ReMem.git
 cd ReMem
 pip install -e .                 # core needs only numpy, pyyaml, matplotlib
 python examples/basic_api.py     # the demo above
