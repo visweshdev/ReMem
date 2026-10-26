@@ -20,9 +20,11 @@ Searches awaiting feedback are kept in memory only: give feedback in the same pr
 from __future__ import annotations
 
 import json
+import re
 import threading
 import time
 import uuid
+import warnings
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any
@@ -82,6 +84,21 @@ class SearchResult:
                 "items": [h.to_dict() for h in self.items]}
 
 
+_ADDITIVE = re.compile(r"\b(also|another|additionally|as well|too|in addition|one of|among)\b", re.I)
+
+
+def _warn_if_list_like(text: str, new: StoredFact, existing) -> None:
+    """Two "state" facts with the same entity+attribute replace each other. If the new one reads like an
+    additional value ("also uses Redis") rather than an update, the older value would be lost: warn."""
+    if not _ADDITIVE.search(text):
+        return
+    if any(f.semantic_role == "state" and f.entities == new.entities and f.attribute_keys == new.attribute_keys
+           for f in existing):
+        warnings.warn(f"{text!r} looks like an additional value for {new.entities[0]}.{new.attribute_keys[0]}, but "
+                      "role='state' will supersede the existing fact. Use role='preference' or 'note' for "
+                      "multi-valued attributes.", UserWarning, stacklevel=3)
+
+
 class ReMem:
     """Persistent outcome-aware memory over a built-in vector index.
 
@@ -124,6 +141,8 @@ class ReMem:
             fact = StoredFact(fid, text, float(when if when is not None else time.time()),
                               (entity.strip().lower(),) if entity else (),
                               (attribute.strip().lower(),) if attribute else (), semantic_role=role)
+            if role == "state" and entity and attribute:
+                _warn_if_list_like(text, fact, self._facts.values())
             self._ingest(fact)
             if self.path is not None:
                 with open(self.path / "facts.jsonl", "a", encoding="utf-8") as fh:

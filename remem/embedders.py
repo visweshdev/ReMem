@@ -8,8 +8,6 @@ returning L2-normalised lists of floats.
 
 from __future__ import annotations
 
-from functools import lru_cache
-
 
 class SentenceTransformerEmbedder:
     def __init__(self, model: str = "all-MiniLM-L6-v2", device: str | None = None) -> None:
@@ -20,17 +18,27 @@ class SentenceTransformerEmbedder:
         self.model_name = model
         self._model = SentenceTransformer(model, device=device)
         self.dim = int(self._model.get_sentence_embedding_dimension())
-        self._cached = lru_cache(maxsize=50_000)(self._embed_uncached)
+        self._cache: dict[str, list[float]] = {}
 
-    def _embed_uncached(self, text: str) -> tuple[float, ...]:
-        v = self._model.encode([text], normalize_embeddings=True, show_progress_bar=False)[0]
-        return tuple(float(x) for x in v)
+    def warm(self, texts: list[str], *, batch_size: int = 64) -> None:
+        """Batch-embed texts not yet cached (much faster than one call per text)."""
+        todo = [t for t in dict.fromkeys(texts) if t not in self._cache]
+        if not todo:
+            return
+        vecs = self._model.encode(todo, batch_size=batch_size, normalize_embeddings=True, show_progress_bar=False)
+        for t, v in zip(todo, vecs):
+            self._cache[t] = [float(x) for x in v]
+        if len(self._cache) > 500_000:          # bound memory on very long runs
+            for k in list(self._cache)[: len(self._cache) // 2]:
+                del self._cache[k]
 
     def embed_one(self, text: str) -> list[float]:
-        return list(self._cached(text))
+        v = self._cache.get(text)
+        if v is None:
+            self.warm([text])
+            v = self._cache[text]
+        return v
 
     def embed_texts(self, texts: list[str], *, batch_size: int = 64) -> list[list[float]]:
-        unique = list(dict.fromkeys(texts))
-        vecs = self._model.encode(unique, batch_size=batch_size, normalize_embeddings=True, show_progress_bar=False)
-        table = {t: [float(x) for x in v] for t, v in zip(unique, vecs)}
-        return [table[t] for t in texts]
+        self.warm(list(texts), batch_size=batch_size)
+        return [self._cache[t] if t in self._cache else self.embed_one(t) for t in texts]

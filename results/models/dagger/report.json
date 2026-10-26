@@ -1,0 +1,78 @@
+{
+ "dev_seeds": [
+  200,
+  201
+ ],
+ "families": [
+  "distractor",
+  "long_horizon",
+  "contradiction",
+  "rare_critical",
+  "useless_frequent",
+  "budget_tight",
+  "state_change"
+ ],
+ "reader": "first",
+ "l2": 1.0,
+ "dev_success": {
+  "heuristic": 0.7566623342374923,
+  "r0": 0.7644450723327306,
+  "r1": 0.7625551913803496,
+  "r2": 0.7628202230259192,
+  "r3": 0.7635075723327305
+ },
+ "dev_per_family": {
+  "heuristic": {
+   "distractor": 0.7933333333333333,
+   "long_horizon": 0.7890625,
+   "contradiction": 0.815,
+   "rare_critical": 0.764240506329114,
+   "useless_frequent": 0.8016666666666666,
+   "budget_tight": 0.5133333333333333,
+   "state_change": 0.8200000000000001
+  },
+  "r0": {
+   "distractor": 0.8,
+   "long_horizon": 0.796875,
+   "contradiction": 0.8166666666666667,
+   "rare_critical": 0.7642405063291139,
+   "useless_frequent": 0.8066666666666666,
+   "budget_tight": 0.5083333333333333,
+   "state_change": 0.8583333333333334
+  },
+  "r1": {
+   "distractor": 0.8,
+   "long_horizon": 0.7953125,
+   "contradiction": 0.81,
+   "rare_critical": 0.7642405063291139,
+   "useless_frequent": 0.8066666666666666,
+   "budget_tight": 0.5083333333333333,
+   "state_change": 0.8533333333333333
+  },
+  "r2": {
+   "distractor": 0.8016666666666667,
+   "long_horizon": 0.79375,
+   "contradiction": 0.8116666666666666,
+   "rare_critical": 0.7626582278481012,
+   "useless_frequent": 0.8066666666666666,
+   "budget_tight": 0.5066666666666666,
+   "state_change": 0.8566666666666667
+  },
+  "r3": {
+   "distractor": 0.8016666666666666,
+   "long_horizon": 0.7953125,
+   "contradiction": 0.8083333333333333,
+   "rare_critical": 0.7642405063291139,
+   "useless_frequent": 0.8083333333333333,
+   "budget_tight": 0.51,
+   "state_change": 0.8566666666666667
+  }
+ },
+ "best_on_dev": "r0",
+ "models": {
+  "r0": "C:\\Users\\viswe\\OneDrive\\Desktop\\ReMem\\results\\models\\utility_full.json",
+  "r1": "C:\\Users\\viswe\\OneDrive\\Desktop\\ReMem\\results\\models\\dagger\\utility_full_r1.json",
+  "r2": "C:\\Users\\viswe\\OneDrive\\Desktop\\ReMem\\results\\models\\dagger\\utility_full_r2.json",
+  "r3": "C:\\Users\\viswe\\OneDrive\\Desktop\\ReMem\\results\\models\\dagger\\utility_full_r3.json"
+ }
+}

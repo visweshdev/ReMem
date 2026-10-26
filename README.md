@@ -11,6 +11,13 @@ vector index is built in; any backend implementing `remem.backends.base.Backend`
 > evidence), and Zep and Mem0's graph variant already keep superseded facts as invalid instead of deleting them. ReMem's contribution is the
 > combination plus a controlled evaluation, not any single idea. See [docs/RELATED_WORK.md](docs/RELATED_WORK.md).
 
+![demo: add, search, feedback, better results](docs/img/demo.gif)
+
+*The real output of [`examples/basic_api.py`](examples/basic_api.py): an outdated fact is retired when a newer one arrives, and a
+look-alike note that never helps is demoted after a few rounds of feedback.*
+
+![task success: similarity only 62.6%, RMM-style 63.1%, static score 65.9%, ReMem 76.4%](docs/img/results.png)
+
 ## What it adds to a retrieve-by-similarity memory
 
 | Gap in a retrieve-by-similarity memory | ReMem's mechanism | Measured effect (this benchmark, 15 test seeds) |
@@ -30,8 +37,12 @@ vector index is built in; any backend implementing `remem.backends.base.Backend`
 ```bash
 pip install .                       # core: numpy, pyyaml, matplotlib
 pip install ".[all]"                # optional extras: mcp, sentence-transformers, faiss, chroma, tiktoken, openai
-python examples/quickstart.py       # 2-second demo: supersession, demotion, credit
+python examples/basic_api.py        # add -> search -> feedback -> better ranking (the GIF above)
+python examples/quickstart.py       # the same ideas through the lower-level ReMemSystem
+python examples/langchain_retriever.py   # ReMem as a LangChain retriever
 ```
+
+[`examples/claude_desktop_mcp.md`](examples/claude_desktop_mcp.md) shows how to plug the MCP server into Claude Code or Claude Desktop.
 
 ### Python API
 
@@ -70,8 +81,12 @@ Claude Desktop, `claude_desktop_config.json`:
 ```
 
 Tools: `remember`, `recall`, `feedback`, `inspect`, `list_memories`, `stats`. The tool descriptions tell the agent to call `feedback` after
-using a `recall` result. **If the agent never calls it, ranking stays similarity-only.** Environment: `REMEM_PATH` (store directory,
-default `~/.remem/default`), `REMEM_EMBEDDER` (`hash` default, or `sentence-transformers`), `REMEM_ST_MODEL`.
+using a `recall` result. Agents often forget, so by default the server also **infers feedback**. If `remember` corrects a served
+`"state"` memory (same entity and attribute, different text), that recall counts as a failure blamed on the corrected memory. If a later
+`recall` for the same `task` arrives with no correction in between, the earlier recall counts as a weak success, with no memory explicitly
+cited. Inferred outcomes are noisier than explicit ones and have not been benchmarked separately; `REMEM_AUTO_FEEDBACK=0` turns them off.
+Environment: `REMEM_PATH` (store directory, default `~/.remem/default`), `REMEM_EMBEDDER` (`hash` default, or `sentence-transformers`),
+`REMEM_ST_MODEL`, `REMEM_AUTO_FEEDBACK`.
 
 ### Embeddings and vector stores
 
@@ -98,6 +113,9 @@ mem.add_conversation(transcript, extractor=LLMFactExtractor(OpenAI(), model="gpt
 
 Without an extractor, `add_conversation` stores each sentence as a note (no automatic supersession). The LLM extractor is tested against a
 fake client only; its extraction quality with a real model has not been measured here.
+
+Adding a second `"state"` fact for the same entity and attribute replaces the first. If the new text reads like an *additional*
+value ("also uses Memcached"), `add` emits a `UserWarning` suggesting `role="preference"` or `"note"` for multi-valued attributes.
 
 ### LangChain
 
@@ -467,10 +485,12 @@ remem/backends/        numpy vector, FAISS, Chroma            remem/embedders.py
 remem/extract.py       fact extraction                         remem/integrations/  LangChain retriever
 remem/baselines/       RMM-style reranker (reimplementation)  remem/viz/           dashboard (HTML), ledger_cli
 remem/eval/            synthetic worlds, simulated agent, runner, metrics, failure analysis, report
-experiments/           run_benchmark.py, train_utility.py, tune_rmm.py, demo_ranking.py, run_llm_agent.py, run_longmemeval.py
-examples/quickstart.py configs/systems.yaml (every compared system)      tests/ (77 tests)
+experiments/           run_benchmark.py, train_utility.py, train_utility_dagger.py, tune_rmm.py, demo_ranking.py,
+                       run_llm_agent.py (--ollama: free local LLM), run_longmemeval.py, run_real_embeddings.py
+examples/              basic_api.py, quickstart.py, langchain_retriever.py, claude_desktop_mcp.md
+configs/systems.yaml   every compared system                   tests/ (84 tests)
 results/               RESULTS.md, failure_analysis.md, *.json, plots/, runs/<…>/ledger.json, models/, records/
-docs/                  DESIGN.md, RELATED_WORK.md                .github/workflows/  CI
+docs/                  DESIGN.md, RELATED_WORK.md, make_figures.py (README GIF + chart)   .github/workflows/  CI
 ```
 
 License: MIT (see `LICENSE`). © 2026 Viswesh Kesarla.

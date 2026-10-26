@@ -80,19 +80,25 @@ def parse_reply(text: str) -> tuple[dict[str, str], list[str]]:
 
 
 class LLMAgent:
-    def __init__(self, world: World, client: Any, model: str, *, t0: float, temperature: float = 0.0, max_tokens: int = 200) -> None:
+    def __init__(self, world: World, client: Any, model: str, *, t0: float, temperature: float = 0.0, max_tokens: int = 200,
+                 json_mode: bool = False) -> None:
         self.world, self.client, self.model, self.t0 = world, client, model, t0
         self.temperature, self.max_tokens = temperature, max_tokens
         self.n_calls = 0
+        self.json_mode = json_mode           # response_format=json_object (supported by OpenAI and Ollama)
+        self.parse_failures = 0
 
     def act(self, task: Task, items: list[tuple[str, str, float]]) -> AgentResult:
+        extra = {"response_format": {"type": "json_object"}} if self.json_mode else {}
         resp = self.client.chat.completions.create(
-            model=self.model, temperature=self.temperature, max_tokens=self.max_tokens,
+            model=self.model, temperature=self.temperature, max_tokens=self.max_tokens, **extra,
             messages=[{"role": "system", "content": SYSTEM_PROMPT},
                       {"role": "user", "content": build_prompt(task, items, self.t0)}],
         )
         self.n_calls += 1
         answers, cited = parse_reply(resp.choices[0].message.content)
+        if not answers:
+            self.parse_failures += 1
         truth = self.world.answer(task)
         success = all(answers.get(k, "").lower() == v.lower() for k, v in truth.items())
         served = {fid for fid, _, _ in items}

@@ -75,16 +75,19 @@ def evaluate(instances: list[dict], embedder, ks=(5, 10), systems=SYSTEMS, qa_ag
         n += 1
         answer_sessions = set(inst.get("answer_session_ids", []))
         q_time = parse_date(inst["question_date"]) if inst.get("question_date") else time.time()
+        if hasattr(embedder, "warm"):              # batch-embed this question's whole history once, shared by all systems
+            embedder.warm([f"{turn['role']}: {turn['content']}".strip()[:4000] for session in inst["haystack_sessions"]
+                           for turn in session] + [inst["question"]])
         for system in systems:
             mem = make_memory(system, embedder, kmax)
             evidence, session_of = set(), {}
-            for sid, date, session in zip(inst["haystack_session_ids"], inst["haystack_dates"], inst["haystack_sessions"]):
+            for si, (sid, date, session) in enumerate(zip(inst["haystack_session_ids"], inst["haystack_dates"], inst["haystack_sessions"])):
                 t = parse_date(date)
                 for j, turn in enumerate(session):
                     text = f"{turn['role']}: {turn['content']}".strip()
                     if len(text) < 8:
                         continue
-                    fid = mem.add(text[:4000], when=t, role="note", fact_id=f"{sid}::{j}")
+                    fid = mem.add(text[:4000], when=t, role="note", fact_id=f"{si}:{sid}::{j}")   # session ids can repeat within a haystack
                     session_of[fid] = sid
                     if turn.get("has_answer"):
                         evidence.add(fid)

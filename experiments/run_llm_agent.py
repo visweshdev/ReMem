@@ -18,6 +18,7 @@ import argparse
 import json
 import os
 import sys
+import time
 from dataclasses import replace
 from pathlib import Path
 
@@ -38,43 +39,61 @@ def main() -> None:
     ap.add_argument("--model", required=True)
     ap.add_argument("--family", default="distractor")
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--seeds", default=None, help="comma-separated seeds, e.g. 0,1,2 (overrides --seed)")
     ap.add_argument("--n-tasks", type=int, default=60)
     ap.add_argument("--systems", default="A_vector,C_remem")
     ap.add_argument("--embed", choices=["offline", "openai"], default="offline")
     ap.add_argument("--embed-model")
     ap.add_argument("--embed-dim", type=int, default=1024)
-    ap.add_argument("--out", default=str(ROOT / "results" / "llm_agent.json"))
+    ap.add_argument("--ollama", action="store_true", help="use a local Ollama server (free; no API key)")
+    ap.add_argument("--out", default=None)
     a = ap.parse_args()
 
     try:
         from openai import OpenAI
     except ImportError:
         sys.exit("This script needs the optional 'openai' package: pip install openai  (or: pip install .[llm])")
-    if not os.environ.get("OPENAI_API_KEY"):
-        sys.exit("Set OPENAI_API_KEY (and OPENAI_BASE_URL for a local/compatible server) before running this script.")
-    client = OpenAI()   # reads OPENAI_API_KEY / OPENAI_BASE_URL from the environment
+    if a.ollama:   # Ollama's OpenAI-compatible endpoint; the key is required by the SDK but ignored by the server
+        client = OpenAI(base_url=os.environ.get("OLLAMA_URL", "http://127.0.0.1:11434/v1"), api_key="ollama")
+    else:
+        if not os.environ.get("OPENAI_API_KEY"):
+            sys.exit("Set OPENAI_API_KEY (and OPENAI_BASE_URL for a local/compatible server), or use --ollama.")
+        client = OpenAI()   # reads OPENAI_API_KEY / OPENAI_BASE_URL from the environment
     emb = make_embedder() if a.embed == "offline" else OpenAIEmbedder(client, a.embed_model, a.embed_dim)
-    world = make_world(a.family, a.seed, {"n_tasks": a.n_tasks})
-    pools = build_pools(world, VectorBackend(emb), 20)
     systems = load_systems(ROOT / "configs" / "systems.yaml")
-    out = {}
-    for name in a.systems.split(","):
-        cfg = apply_world_selection(systems[name], world)
-        if cfg.utility.model_path:
-            cfg = replace(cfg, utility=replace(cfg.utility, model_path=str(ROOT / cfg.utility.model_path)))
-        agent_holder = {}
+    seeds = [int(x) for x in str(a.seeds).split(",")] if a.seeds else [a.seed]
+    out = {"args": vars(a), "runs": []}
+    out_path = Path(a.out) if a.out else ROOT / "results" / "llm_agent" / f"{a.model.replace(':', '_')}_{a.family}.json"
+    for seed in seeds:
+        world = make_world(a.family, seed, {"n_tasks": a.n_tasks})
+        pools = build_pools(world, VectorBackend(emb), 20)
+        for name in a.systems.split(","):
+            cfg = apply_world_selection(systems[name], world)
+            if cfg.utility.model_path:
+                cfg = replace(cfg, utility=replace(cfg.utility, model_path=str(ROOT / cfg.utility.model_path)))
+            holder = {}
 
-        def factory(w, seed):
-            agent_holder["a"] = LLMAgent(w, client, a.model, t0=T0)
-            return agent_holder["a"]
+            def factory(w, s):
+                holder["a"] = LLMAgent(w, client, a.model, t0=T0, json_mode=a.ollama)
+                return holder["a"]
 
-        run = run_stream(world, pools, cfg, emb, seed=a.seed, agent_factory=factory)
-        m = summarize_run(run)
-        out[name] = {"task_success": m["task_success"], "tokens_per_task": m["tokens_per_task"],
-                     "llm_calls": agent_holder["a"].n_calls, "n_tasks": m["n_tasks"]}
-        print(name, out[name])
-    Path(a.out).parent.mkdir(parents=True, exist_ok=True)
-    Path(a.out).write_text(json.dumps({"args": vars(a), "results": out}, indent=1), encoding="utf-8")
+            t = time.time()
+            run = run_stream(world, pools, cfg, emb, seed=seed, agent_factory=factory)
+            m = summarize_run(run)
+            row = {"seed": seed, "system": name, "task_success": m["task_success"], "gold_recall": m["gold_recall"],
+                   "stale_task_rate": m["stale_task_rate"], "tokens_per_task": m["tokens_per_task"],
+                   "llm_calls": holder["a"].n_calls, "parse_failures": holder["a"].parse_failures,
+                   "seconds": round(time.time() - t, 1),
+                   "per_task": [{"task_id": r.task_id, "kind": r.kind, "success": r.success,
+                                 "gold_in_context": r.gold_in_context, "n_gold": r.n_gold,
+                                 "stale_in_context": r.n_stale_selected} for r in run.records]}
+            out["runs"].append(row)
+            print(f"seed {seed} {name:10s} success={100 * row['task_success']:.1f}% gold_recall={100 * row['gold_recall']:.1f}% "
+                  f"stale_tasks={100 * row['stale_task_rate']:.1f}% parse_failures={row['parse_failures']} "
+                  f"({row['seconds']}s)", flush=True)
+            out_path.parent.mkdir(parents=True, exist_ok=True)
+            out_path.write_text(json.dumps(out, indent=1), encoding="utf-8")   # save after every run
+    print(f"wrote {out_path}")
 
 
 if __name__ == "__main__":

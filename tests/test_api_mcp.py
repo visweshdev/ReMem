@@ -63,6 +63,8 @@ def test_mcp_tool_functions(tmp_path, monkeypatch):
     import remem.mcp_server as srv
     monkeypatch.setenv("REMEM_PATH", str(tmp_path / "store"))
     monkeypatch.setattr(srv, "_mem", None)
+    monkeypatch.setattr(srv, "_unreported", {})
+    monkeypatch.setenv("REMEM_AUTO_FEEDBACK", "0")
     srv.memory_remember("The billing service exposes API version v1.", "billing", "api_version")
     new = srv.memory_remember("The billing service migrated and now exposes API version v2.", "billing", "api_version")["id"]
     rec = srv.memory_recall("Which API version does billing expose?", "api")
@@ -106,3 +108,39 @@ def test_library_supersedes_state_facts_but_keeps_preferences(embedder):
     p2 = m.add("Alice likes hiking.", entity="alice", attribute="hobby", role="preference")
     assert m.inspect(a)["state"] == "INVALIDATED" and m.inspect(a)["superseded_by"] == b
     assert m.inspect(p1)["state"] == "ACTIVE" and m.inspect(p2)["state"] == "ACTIVE"
+
+
+def test_mcp_implicit_feedback(tmp_path, monkeypatch):
+    import remem.mcp_server as srv
+    monkeypatch.setenv("REMEM_PATH", str(tmp_path / "store"))
+    monkeypatch.setattr(srv, "_mem", None)
+    monkeypatch.setattr(srv, "_unreported", {})
+    old = srv.memory_remember("The billing service exposes API version v1.", "billing", "api_version")["id"]
+    first = srv.memory_recall("Which API version does billing expose?", "api")
+    # a correction of a served state fact counts as a failure blamed on it
+    out = srv.memory_remember("Billing now exposes API version v2.", "billing", "api_version")
+    fb = out["implicit_feedback"][0]
+    assert fb["search_id"] == first["search_id"] and fb["blamed"] == [old] and not fb["success"]
+    # an unreported recall followed by another recall for the same task counts as a success
+    second = srv.memory_recall("Which API version does billing expose?", "api")
+    third = srv.memory_recall("billing API version?", "api")
+    assert third["implicit_feedback"] == [{"search_id": second["search_id"], "success": True, "used": [],
+                                           "reason": "no correction before the next recall for this task"}]
+    # explicit feedback is never double-counted; the switch turns inference off
+    srv.memory_feedback(third["search_id"], True)
+    assert "implicit_feedback" not in srv.memory_recall("billing API version?", "api")
+    monkeypatch.setenv("REMEM_AUTO_FEEDBACK", "0")
+    assert "implicit_feedback" not in srv.memory_recall("billing API version?", "api")
+
+
+def test_list_like_state_fact_warns(embedder):
+    import warnings
+
+    from remem.api import ReMem
+    m = ReMem(embedder=embedder)
+    m.add("The cache layer uses Redis.", entity="cache", attribute="backend")
+    with pytest.warns(UserWarning, match="additional value"):
+        m.add("The cache layer also uses Memcached.", entity="cache", attribute="backend")
+    with warnings.catch_warnings():
+        warnings.simplefilter("error")
+        m.add("The cache layer switched to Valkey.", entity="cache", attribute="backend")

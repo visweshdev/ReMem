@@ -9,13 +9,19 @@ Environment:
     REMEM_PATH       memory directory (default ~/.remem/default)
     REMEM_EMBEDDER   "hash" (default, offline, weak) | "sentence-transformers" (local model, much better)
     REMEM_ST_MODEL   sentence-transformers model name (default all-MiniLM-L6-v2)
+    REMEM_AUTO_FEEDBACK  "1" (default) | "0": infer outcomes for recalls the agent never reported (see below)
 
 Claude Code:   claude mcp add remem -- remem-mcp
 Claude Desktop (claude_desktop_config.json):
     {"mcpServers": {"remem": {"command": "remem-mcp", "env": {"REMEM_PATH": "C:/Users/you/.remem/work"}}}}
 
-The feedback loop only works if the agent calls `memory_feedback` after using recalled memories. The tool
-descriptions below say so explicitly; agents that never report outcomes get plain similarity search.
+The feedback loop works best if the agent calls `feedback` after using recalled memories. Agents often forget, so
+by default the server also infers outcomes for unreported recalls (implicit feedback):
+  * correction: `remember` stores a fact whose entity+attribute matches a served "state" memory but with different
+    text -> that recall is recorded as a failure, blaming the served memory (the user corrected it);
+  * no complaint: a later `recall` with the same `task` arrives and the earlier one was never reported or corrected
+    -> the earlier recall is recorded as a success, with no memory explicitly cited (weak, presence-only credit).
+Inferred outcomes are noisier than explicit ones; set REMEM_AUTO_FEEDBACK=0 to disable them.
 """
 
 from __future__ import annotations
@@ -27,6 +33,7 @@ from typing import Any
 from remem.api import ReMem
 
 _mem: ReMem | None = None
+_unreported: dict[str, dict[str, Any]] = {}      # search_id -> {"task", "ids"} for recalls without feedback yet
 
 
 def get_memory() -> ReMem:
@@ -48,17 +55,57 @@ def _make_embedder():
 
 # ── tool implementations (plain functions so they can be unit-tested without an MCP client) ──
 
+def _auto_enabled() -> bool:
+    return os.environ.get("REMEM_AUTO_FEEDBACK", "1").strip().lower() not in ("0", "false", "no", "off")
+
+
+def _infer(search_id: str, success: bool, used: list[str], reason: str) -> dict[str, Any]:
+    _unreported.pop(search_id, None)
+    try:
+        get_memory().feedback(search_id, success, used_ids=used)
+    except KeyError:                                   # already reported or evicted
+        return {}
+    return {"search_id": search_id, "success": success, ("used" if success else "blamed"): used, "reason": reason}
+
+
 def memory_remember(text: str, entity: str | None = None, attribute: str | None = None, kind: str = "fact") -> dict[str, Any]:
     role = "state" if kind == "fact" else "event"
-    fid = get_memory().add(text, entity=entity, attribute=attribute, role=role)
-    return {"id": fid, "stored": text}
+    mem = get_memory()
+    inferred = []
+    if _auto_enabled() and role == "state" and entity and attribute:
+        key = ((entity.strip().lower(),), (attribute.strip().lower(),))
+        for sid, info in list(_unreported.items()):
+            wrong = [i for i in info["ids"] if (f := mem._facts.get(i)) is not None and f.semantic_role == "state"
+                     and (f.entities, f.attribute_keys) == key and f.text.strip() != text.strip()]
+            if wrong:
+                inferred.append(_infer(sid, False, wrong, "corrected by a newer fact"))
+    fid = mem.add(text, entity=entity, attribute=attribute, role=role)
+    out: dict[str, Any] = {"id": fid, "stored": text}
+    inferred = [x for x in inferred if x]
+    if inferred:
+        out["implicit_feedback"] = inferred
+    return out
 
 
 def memory_recall(query: str, task: str = "default", k: int = 5) -> dict[str, Any]:
-    return get_memory().search(query, k=k, task=task).to_dict()
+    inferred = []
+    if _auto_enabled():
+        for sid, info in list(_unreported.items()):
+            if info["task"] == task:
+                inferred.append(_infer(sid, True, [], "no correction before the next recall for this task"))
+    res = get_memory().search(query, k=k, task=task).to_dict()
+    if res["search_id"]:
+        _unreported[res["search_id"]] = {"task": task, "ids": [h["id"] for h in res["items"]]}
+        while len(_unreported) > 1000:
+            _unreported.pop(next(iter(_unreported)))
+    inferred = [x for x in inferred if x]
+    if inferred:
+        res["implicit_feedback"] = inferred
+    return res
 
 
 def memory_feedback(search_id: str, success: bool, used_ids: list[str] | None = None, answer: str | None = None) -> dict[str, Any]:
+    _unreported.pop(search_id, None)
     credits = get_memory().feedback(search_id, success, used_ids=used_ids, answer=answer)
     return {"recorded": True, "credit": credits}
 
@@ -92,7 +139,9 @@ def build_server():
     def recall(query: str, task: str = "default", k: int = 5) -> dict:
         """Retrieve memories likely to help with `query`. Returns a `search_id` and ranked items.
         `task` is a short label for the kind of work (e.g. "deploy", "debug") so usefulness is learned per task.
-        IMPORTANT: after you finish the work that used these memories, call `feedback` with this search_id."""
+        IMPORTANT: after you finish the work that used these memories, call `feedback` with this search_id.
+        (If you do not, the server infers an outcome: success if no correction arrives before the next recall
+        for the same task, failure if a newer fact corrects a served one.)"""
         return memory_recall(query, task, k)
 
     @mcp.tool()
