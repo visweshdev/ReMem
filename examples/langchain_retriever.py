@@ -1,6 +1,6 @@
 """ReMem as a LangChain retriever (no LLM needed to run this file).
 
-    pip install langchain-core
+    pip install ".[langchain]"
     python examples/langchain_retriever.py
 
 Use `retriever` anywhere LangChain expects a retriever (e.g. in an LCEL chain). After the chain has run, call

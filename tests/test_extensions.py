@@ -81,7 +81,7 @@ def test_dashboard_html_is_self_contained_and_escapes(embedder, tmp_path):
     m.add("Payload </script><b>not markup</b> stays text.")
     m.add("The billing service exposes API version v2.")
     page = build_html(m.system.ledger, "test")
-    assert "</script><b>" not in page and "<\/script>" in page        # cannot break out of the script tag
+    assert "</script><b>" not in page and r"<\/script>" in page        # cannot break out of the script tag
     assert "http" not in page.split("<script>")[0].lower().replace("http-equiv", "")   # no external assets
     out = tmp_path / "d.html"
     assert main([str(tmp_path), "-o", str(out)]) == 0 and out.stat().st_size > 1000

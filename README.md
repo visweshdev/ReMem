@@ -122,7 +122,7 @@ value ("also uses Memcached"), `add` emits a `UserWarning` suggesting `role="pre
 ### LangChain
 
 ```python
-from remem.integrations.langchain import ReMemRetriever      # pip install langchain-core
+from remem.integrations.langchain import ReMemRetriever      # pip install ".[langchain]"
 retriever = ReMemRetriever(memory=mem, k=5, task="support")
 docs = retriever.invoke("Which plan is the customer on?")
 retriever.feedback(success=True, used_ids=[docs[0].metadata["id"]])
@@ -276,7 +276,7 @@ Each was tested and measured; results (including those that did not help) are in
 
 ```bash
 python -m pip install -r requirements.txt
-python -m pytest tests -q                      # 77 tests, under a minute
+python -m pytest tests -q                      # 85 tests, under a minute
 python experiments/run_benchmark.py --quick    # smoke run
 python experiments/run_benchmark.py            # full protocol, 15 seeds; trains the model if missing (~20 min, 12 workers; resumable)
 python experiments/demo_ranking.py             # "more similar vs more useful" demonstration
@@ -480,11 +480,22 @@ turn stored as one memory, no LLM. 470 questions (the 30 abstention questions ha
 | ReMem | 74.7 | 86.0 | 95.1 | 97.0 |
 
 **No difference, as expected:** every question has its own history and is asked once, so ReMem never receives feedback, and raw turns carry no
-entity/attribute keys for supersession. This run measured recency from the wall clock instead of each question's date (a bug, since fixed with
-`search(..., now=...)`), which made every turn look equally old. A re-run with question-date recency was interrupted after 430 of the 470
-questions; its running totals at that point (log only, turn@5): similarity 68.8%, static 70.2%, ReMem 70.2%. So recency measured from the
-question date helps a little (+1.4 pp on those questions), and ReMem adds nothing beyond it, because nothing is ever fed back. Only retrieval is
-measured; answer accuracy would need an LLM and the official judge.
+entity/attribute keys for supersession. In this run recency was measured from the wall clock, so every turn looked equally old and recency had
+no effect (`results/longmemeval_clocknow/retrieval.json`).
+
+A second full run measures time from each question's date (`search(..., now=question_date)`, `results/longmemeval/retrieval.json`):
+
+| System | turn@5 | turn@10 | session@5 | session@10 |
+|---|---:|---:|---:|---:|
+| similarity only | 70.4 | 82.3 | 91.1 | 93.2 |
+| static score | 71.7 | 82.8 | 91.1 | 93.4 |
+| ReMem | 71.7 | 82.8 | 91.1 | 93.4 |
+
+All numbers are lower here because of a dataset quirk: 69 of the 470 questions have haystack sessions timestamped *after* the question (41 of
+them evidence sessions), and every system, as designed, does not serve memories recorded after the moment it is asked about. Since all three
+systems lose the same turns, the comparison inside this table is fair: recency from the question date helps a little (+1.3 pp turn@5, largest on
+knowledge-update questions, 80.6 -> 83.3), and ReMem adds nothing beyond the static score. Only retrieval is measured; answer accuracy would need
+an LLM and the official judge.
 
 ### Ranking demonstration and lifecycle
 

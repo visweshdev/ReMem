@@ -170,7 +170,8 @@ class ReMem:
                budget_tokens: int | None = None, now: float | None = None) -> SearchResult:
         """Retrieve the memories most likely to help with `query`. `task` groups similar requests so that
         usefulness is learned per kind of task; `as_of` (unix time) asks about the past. `now` (unix time,
-        default: the clock) is the moment recency is measured from, e.g. when replaying old conversations."""
+        default: the clock) is the moment recency is measured from, e.g. when replaying old conversations; memories
+        recorded after `now` are not yet valid and are not returned."""
         with self._lock:
             if not self._facts:
                 return SearchResult(search_id="", query=query)

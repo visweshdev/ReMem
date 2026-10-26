@@ -21,7 +21,8 @@ embeddings = ["sentence-transformers>=2.2"]  # local neural embeddings
 faiss = ["faiss-cpu>=1.8"]
 chroma = ["chromadb>=0.5"]
 tokenizer = ["tiktoken>=0.6"]
-all = ["anthropic>=0.40", "openai>=1.50", "mcp>=1.2", "sentence-transformers>=2.2", "faiss-cpu>=1.8", "chromadb>=0.5", "tiktoken>=0.6"]
+langchain = ["langchain-core>=0.2"]           # remem.integrations.langchain
+all = ["anthropic>=0.40", "openai>=1.50", "mcp>=1.2", "sentence-transformers>=2.2", "faiss-cpu>=1.8", "chromadb>=0.5", "tiktoken>=0.6", "langchain-core>=0.2"]
 dev = ["pytest>=8.0"]
 
 [project.scripts]

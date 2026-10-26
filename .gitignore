@@ -10,3 +10,4 @@ bench.log
 results/records/
 data/
 results/*.log
+build/
