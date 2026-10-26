@@ -481,8 +481,10 @@ turn stored as one memory, no LLM. 470 questions (the 30 abstention questions ha
 
 **No difference, as expected:** every question has its own history and is asked once, so ReMem never receives feedback, and raw turns carry no
 entity/attribute keys for supersession. This run measured recency from the wall clock instead of each question's date (a bug, since fixed with
-`search(..., now=...)`), which made every turn look equally old; a re-run with question-date recency is in progress, and on its first 80 questions
-the date-aware systems are slightly ahead (turn@5 78.7 vs 76.2). Only retrieval is measured; answer accuracy would need an LLM and the official judge.
+`search(..., now=...)`), which made every turn look equally old. A re-run with question-date recency was interrupted after 430 of the 470
+questions; its running totals at that point (log only, turn@5): similarity 68.8%, static 70.2%, ReMem 70.2%. So recency measured from the
+question date helps a little (+1.4 pp on those questions), and ReMem adds nothing beyond it, because nothing is ever fed back. Only retrieval is
+measured; answer accuracy would need an LLM and the official judge.
 
 ### Ranking demonstration and lifecycle
 
