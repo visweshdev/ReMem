@@ -1,6 +1,6 @@
+# core dependencies + test runner. Prefer:  pip install -e ".[dev]"
+# optional features are extras in pyproject.toml, e.g.  pip install -e ".[mcp,embeddings,langchain]"  or  ".[all]"
 numpy>=1.26
 pyyaml>=6.0
 matplotlib>=3.7
 pytest>=8.0
-# optional, only for remem.llm / experiments/run_llm_agent.py:
-# openai>=1.50

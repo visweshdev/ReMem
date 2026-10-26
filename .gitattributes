@@ -1,0 +1,10 @@
+# normalise line endings: LF in the repository, whatever the OS
+* text=auto eol=lf
+
+# binary files: never touch
+*.png binary
+*.gif binary
+*.jpg binary
+*.pkl binary
+*.npz binary
+*.gz binary

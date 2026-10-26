@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use ReMem in your work, please cite it as below."
+title: "ReMem: outcome-aware adaptive memory for long-horizon AI agents"
+type: software
+authors:
+  - family-names: Kesarla
+    given-names: Viswesh
+    email: visweshkesarla@gmail.com
+version: 0.1.0
+date-released: 2026-10-26
+license: MIT
+repository-code: "https://github.com/visweshdev/ReMem"
+keywords:
+  - llm agents
+  - long-term memory
+  - retrieval
+  - credit assignment
+abstract: >-
+  A memory layer for AI agents that learns from task outcomes which memories help,
+  supersedes replaced facts, retires useless ones without deleting them, and selects
+  context under a token budget. Includes a controlled evaluation that reports its
+  negative results (no measurable gain with a small real LLM, none on LongMemEval).
