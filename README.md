@@ -40,6 +40,9 @@ tokens. Nothing is ever deleted, and every decision can be inspected.
 
 ## Quickstart
 
+▶ **New to this? Watch the 1-minute install video:** [`docs/video/install_and_run.mp4`](docs/video/install_and_run.mp4)
+(clone, install, run the demo, use it in your own code, run the tests; every output in it is from a real run).
+
 ```bash
 git clone https://github.com/visweshdev/ReMem.git
 cd ReMem
