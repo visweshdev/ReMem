@@ -72,7 +72,7 @@ def main() -> None:
             cfg = replace(cfg, utility=replace(cfg.utility, model_path=str(ROOT / cfg.utility.model_path)))
         holder = {}
 
-        def factory(w, seed):
+        def factory(w, seed, holder=holder):
             holder["agent"] = ClaudeAgent(w, client, a.model, t0=T0, effort=a.effort)
             return holder["agent"]
 

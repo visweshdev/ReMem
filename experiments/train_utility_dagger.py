@@ -108,7 +108,7 @@ def main() -> None:
         jobs = [(f, s, v, p) for v, p in variants.items() for f in HEADLINE_FAMILIES for s in DEV_SEEDS]
         res: dict[str, list[float]] = {}
         per_fam: dict[str, dict[str, list[float]]] = {}
-        for v, f, s, succ in ex.map(_dev_one, jobs):
+        for v, f, _seed, succ in ex.map(_dev_one, jobs):
             res.setdefault(v, []).append(succ)
             per_fam.setdefault(v, {}).setdefault(f, []).append(succ)
     summary = {v: float(np.mean(x)) for v, x in res.items()}

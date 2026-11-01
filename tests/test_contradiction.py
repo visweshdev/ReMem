@@ -1,4 +1,3 @@
-import pytest
 
 from remem.config import ContradictionConfig
 from remem.contradiction import ContradictionDetector

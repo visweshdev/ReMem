@@ -13,21 +13,26 @@ from __future__ import annotations
 
 import random
 import time
+from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Callable
 
 from remem.attribution import Attribution, Attributor
 from remem.config import SystemConfig
 from remem.contradiction import ContradictionDetector
-from remem.features import ALL_FEATURES, FeatureBuilder
+from remem.features import FeatureBuilder
 from remem.ledger import MemoryLedger
-from remem.offline import ConceptHashEmbedder, count_tokens
+from remem.offline import ConceptHashEmbedder
 from remem.retention import RetentionPolicy
 from remem.selection import select
 from remem.types import (
-    AgentTrace, Candidate, Context, MemState, Outcome, ScoredCandidate,
+    AgentTrace,
+    Candidate,
+    Context,
+    MemState,
+    Outcome,
+    ScoredCandidate,
 )
-from remem.utility import HeuristicUtility, LearnedUtility, build_utility
+from remem.utility import HeuristicUtility, build_utility
 
 
 @dataclass

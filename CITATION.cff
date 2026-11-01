@@ -6,8 +6,8 @@ authors:
   - family-names: Kesarla
     given-names: Viswesh
     email: visweshkesarla@gmail.com
-version: 0.1.0
-date-released: 2026-10-26
+version: 0.2.0
+date-released: 2026-11-01
 license: MIT
 repository-code: "https://github.com/visweshdev/ReMem"
 keywords:

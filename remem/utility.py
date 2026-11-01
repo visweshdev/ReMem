@@ -16,7 +16,6 @@ selection; `components` maps feature name -> additive contribution (for explanat
 from __future__ import annotations
 
 import json
-import math
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -153,7 +152,7 @@ class LearnedUtility:
         tol: float = 1e-8,
         explore_c: float = 0.0,
         meta: dict | None = None,
-    ) -> tuple["LearnedUtility", FitReport]:
+    ) -> tuple[LearnedUtility, FitReport]:
         """Fit by Newton's method. X columns follow ALL_FEATURES. Deterministic (no RNG)."""
         names = names_for_groups(feature_groups)
         idx = [FEATURE_INDEX[n] for n in names]
@@ -170,7 +169,7 @@ class LearnedUtility:
         reg[-1] = 0.0  # do not penalise the bias
         converged = False
         it = 0
-        for it in range(1, max_iter + 1):
+        for it in range(1, max_iter + 1):  # noqa: B007 (`it` is reported after the loop)
             p = _sigmoid(A @ beta)
             grad = A.T @ (p - y) + reg * beta
             W = p * (1 - p) + 1e-9
@@ -203,7 +202,7 @@ class LearnedUtility:
         p.write_text(json.dumps(self.to_json(), indent=1), encoding="utf-8")
 
     @classmethod
-    def load(cls, path: str | Path, explore_c: float = 0.0) -> "LearnedUtility":
+    def load(cls, path: str | Path, explore_c: float = 0.0) -> LearnedUtility:
         d = json.loads(Path(path).read_text(encoding="utf-8"))
         unknown = [n for n in d["feature_names"] if n not in FEATURE_INDEX]
         if unknown:

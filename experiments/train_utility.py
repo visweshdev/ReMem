@@ -26,7 +26,6 @@ import json
 import logging
 import sys
 import time
-from dataclasses import replace
 from pathlib import Path
 
 import numpy as np
@@ -113,7 +112,7 @@ def main() -> None:
             ll, a = cv_scores(X, y, seeds, groups, l2)
             grid[str(l2)] = {"cv_logloss": ll, "cv_auc": a}
             log.info("%s l2=%g cv_logloss=%.4f cv_auc=%.4f", name, l2, ll, a)
-        best = min(L2_GRID, key=lambda l: grid[str(l)]["cv_logloss"])
+        best = min(L2_GRID, key=lambda lam: grid[str(lam)]["cv_logloss"])
         model, fit = LearnedUtility.fit(X, y, groups, l2=best, meta={
             "groups": list(groups), "l2": best, "n_rows": int(len(y)), "train_seeds": list(TRAIN_SEEDS),
             "families": list(TRAIN_FAMILIES), "labels": "attributed credit >= 0.5 on successful tasks"})

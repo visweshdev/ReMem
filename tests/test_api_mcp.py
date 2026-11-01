@@ -78,6 +78,7 @@ def test_mcp_tool_functions(tmp_path, monkeypatch):
 @pytest.mark.skipif(importlib.util.find_spec("mcp") is None, reason="mcp not installed")
 def test_mcp_server_registers_tools():
     import asyncio
+
     from remem.mcp_server import build_server
     names = {t.name for t in asyncio.run(build_server().list_tools())}
     assert names == {"remember", "recall", "feedback", "inspect", "list_memories", "stats"}

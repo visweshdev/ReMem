@@ -122,7 +122,6 @@ def run_job(job: dict[str, Any]) -> list[dict[str, Any]]:
         metrics = summarize_run(run)
         metrics['utility_demoted_gold_rate'] = sum('utility_demoted_gold' in failmod.classify(r, cfg.selection.top_k) for r in run.records) / max(1, len(run.records))
         recs = run.records
-        n = len(recs)
         row: dict[str, Any] = {
             "tag": job["tag"], "mode": job["mode"], "family": job["family"], "seed": job["seed"], "system": name,
             "metrics": metrics,
@@ -255,7 +254,7 @@ def curves(rows: list[dict]) -> dict[str, Any]:
     for (tag, mode, fam, system), rs in g.items():
         if tag != "main" or mode != "first" or system not in CORE + ["ret_frequency_prune"]:
             continue
-        def binned(key):
+        def binned(key, rs=rs):
             acc = []
             for r in rs:
                 seq = np.asarray(r[key], dtype=float)
@@ -286,7 +285,7 @@ def calibration(rows: list[dict]) -> dict[str, Any]:
     for r in rows:
         if r["tag"] != "main" or r["mode"] != "first" or "calibration" not in r:
             continue
-        for b, (p, y, n) in enumerate(r["calibration"]):
+        for p, y, n in r["calibration"]:
             cell = acc[r["system"]][int(round(p * 10))]
             cell[0] += p * n
             cell[1] += y * n
@@ -315,7 +314,7 @@ def merge_failures(rows: list[dict], out: Path) -> dict[str, Any]:
                 if len(examples[(r["system"])][cat]) < 12:
                     examples[r["system"]][cat].append(ex)
     with open(out / "failures.jsonl", "w", encoding="utf-8") as fh:
-        for system, cats in examples.items():
+        for cats in examples.values():
             for cat, exs in cats.items():
                 for ex in exs:
                     fh.write(json.dumps({"category": cat, **ex}) + "\n")

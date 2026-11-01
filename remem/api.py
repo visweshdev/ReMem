@@ -31,7 +31,13 @@ from typing import Any
 
 from remem.backends import StoredFact, VectorBackend
 from remem.config import (
-    ContradictionConfig, RetentionConfig, SelectionConfig, SystemConfig, UtilityConfig, from_dict, to_dict,
+    ContradictionConfig,
+    RetentionConfig,
+    SelectionConfig,
+    SystemConfig,
+    UtilityConfig,
+    from_dict,
+    to_dict,
 )
 from remem.ledger import MemoryLedger
 from remem.offline import ConceptHashEmbedder

@@ -23,7 +23,6 @@ synonym lexicon for the offline embedder.
 
 from __future__ import annotations
 
-import math
 import random
 from dataclasses import dataclass, field, replace
 from typing import Any

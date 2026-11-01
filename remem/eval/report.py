@@ -6,12 +6,23 @@ import math
 from pathlib import Path
 from typing import Any
 
-import matplotlib
+from remem.eval.failures import CATEGORIES
 
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt  # noqa: E402
+plt: Any = None   # matplotlib is optional (pip install "remem[plots]"); imported on first use
 
-from remem.eval.failures import CATEGORIES  # noqa: E402
+
+def _load_matplotlib() -> bool:
+    global plt
+    if plt is not None:
+        return True
+    try:
+        import matplotlib
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as _plt
+    except ImportError:
+        return False
+    plt = _plt
+    return True
 
 NAMES = {
     "A_vector": "A  flat vector (similarity only)", "B_static": "B  flat vector + static score (recency, confidence)",
@@ -192,7 +203,10 @@ def write_all(out: Path, agg: dict, curves: dict, growth: dict, calib: dict, fa:
 
     (out / "RESULTS.md").write_text("\n".join(md) + "\n", encoding="utf-8")
     _write_failures(out, fa)
-    _plots(plots, agg, curves, growth, calib, families)
+    if _load_matplotlib():
+        _plots(plots, agg, curves, growth, calib, families)
+    else:
+        print('plots skipped: matplotlib is not installed (pip install "remem[plots]")')
 
 
 def _write_failures(out: Path, fa: dict) -> None:

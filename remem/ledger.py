@@ -10,8 +10,8 @@ from __future__ import annotations
 import json
 import math
 from collections import Counter
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Iterable
 
 from remem.offline import content_tokens, count_tokens
 from remem.types import Candidate, ClassStats, LifecycleEvent, MemoryRecord, MemState
@@ -140,7 +140,7 @@ class MemoryLedger:
         p.write_text(json.dumps(self.to_dict(), indent=1), encoding="utf-8")
 
     @classmethod
-    def load(cls, path: str | Path) -> "MemoryLedger":
+    def load(cls, path: str | Path) -> MemoryLedger:
         raw = json.loads(Path(path).read_text(encoding="utf-8"))
         led = cls()
         led.step = int(raw["step"])

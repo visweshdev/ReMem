@@ -16,7 +16,7 @@ from typing import Any
 
 from remem.backends import VectorBackend
 from remem.eval.runner import Pools, build_pools
-from remem.eval.world import LEXICON, World, make_world
+from remem.eval.world import LEXICON, make_world
 from remem.offline import ConceptHashEmbedder
 
 EMBED_DIM = 256
@@ -28,6 +28,7 @@ def make_embedder() -> ConceptHashEmbedder:
 
 def _key(family: str, seed: int, backend: str, k: int, overrides: dict[str, Any] | None) -> str:
     from dataclasses import asdict
+
     from remem.eval.world import FAMILIES
     fam_params = asdict(FAMILIES[family]) if family in FAMILIES else {}
     blob = json.dumps([family, seed, backend, k, overrides or {}, EMBED_DIM, fam_params], sort_keys=True, default=str)

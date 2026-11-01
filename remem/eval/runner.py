@@ -8,7 +8,7 @@ fact kinds) is used only here, to fill `TaskRecord`s for the metrics.
 from __future__ import annotations
 
 import random
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any
 
 from remem.backends.base import Backend, StoredFact

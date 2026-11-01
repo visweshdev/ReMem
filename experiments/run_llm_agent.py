@@ -75,7 +75,7 @@ def main() -> None:
                 cfg = replace(cfg, utility=replace(cfg.utility, model_path=str(ROOT / cfg.utility.model_path)))
             holder = {}
 
-            def factory(w, s):
+            def factory(w, s, holder=holder):
                 holder["a"] = LLMAgent(w, client, a.model, t0=T0, json_mode={"schema": "schema", "object": True, "text": False}[a.output])
                 return holder["a"]
 

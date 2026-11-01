@@ -55,9 +55,11 @@ def demo_gif() -> Path:
 
     frames, durations = [], []
     for i in range(0, len(cmd) + 1, 2):
-        frames.append(frame(cmd[:i], 0)); durations.append(45)
+        frames.append(frame(cmd[:i], 0))
+        durations.append(45)
     for n in range(1, len(out) + 1):
-        frames.append(frame(cmd, n)); durations.append(1300 if n <= 3 else 500)
+        frames.append(frame(cmd, n))
+        durations.append(1300 if n <= 3 else 500)
     durations[-1] = 5000
     OUT.mkdir(parents=True, exist_ok=True)
     path = OUT / "demo.gif"
@@ -161,7 +163,7 @@ def evidence_chart() -> Path:
         ("LongMemEval retrieval (no repeated questions)", 1.3, None),
     ][::-1]
     fig, ax = plt.subplots(figsize=(8.4, 3.5), dpi=150)
-    for i, (lab, d, ci) in enumerate(rows):
+    for i, (_lab, d, ci) in enumerate(rows):
         sig = ci is not None and d - ci > 0
         col = "#2f7d5b" if sig else "#8a929c"
         if ci is not None:

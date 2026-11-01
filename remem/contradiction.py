@@ -18,8 +18,8 @@ excluded from default retrieval but still returned for historical (`as_of`) quer
 from __future__ import annotations
 
 import math
+from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Callable
 
 from remem.config import ContradictionConfig
 from remem.ledger import MemoryLedger

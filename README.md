@@ -40,13 +40,13 @@ tokens. Nothing is ever deleted, and every decision can be inspected.
 
 ## Quickstart
 
-▶ **New to this? Watch the 1-minute install video:** [`docs/video/install_and_run.mp4`](docs/video/install_and_run.mp4)
-(clone, install, run the demo, use it in your own code, run the tests; every output in it is from a real run).
+▶ **New to this? Watch the install video (under 1½ minutes):** [`docs/video/install_and_run.mp4`](docs/video/install_and_run.mp4)
+(clone, install, run the demo, try the `remem` shell, use it in your own code, run the tests; every output in it is from a real run).
 
 ```bash
 git clone https://github.com/visweshdev/ReMem.git
 cd ReMem
-pip install -e .                 # core needs only numpy, pyyaml, matplotlib
+pip install -e .                 # core needs only numpy and pyyaml
 python examples/basic_api.py     # the demo above
 ```
 
@@ -66,6 +66,18 @@ mem.feedback(hits.search_id, success=True, used_ids=[hits.items[0].id])      # t
 
 Three calls: **add** facts, **search** before answering, **feedback** after. `mem.inspect(id)` shows any memory's state, credit
 and history, and `mem.search(..., as_of=timestamp)` asks about the past, when retired facts come back.
+
+### No code? Use the `remem` command
+
+```bash
+remem add "Our server is in east-1." --entity server --attribute region
+remem search "Where is our server?"
+remem list                       # every memory and its state
+remem shell                      # interactive: search, then type 'good 1' or 'bad' and watch the ranking change
+remem dashboard -o memory.html   # open in a browser
+```
+
+Memories are kept in `~/.remem/cli` (change with `--store PATH` or `REMEM_PATH`). `remem --help` lists everything.
 
 ## How it works
 
@@ -213,7 +225,8 @@ to real BPE counts.
 <summary><b>Reproduce the experiments</b> (all free and local)</summary>
 
 ```bash
-python -m pytest tests -q                                   # 85 tests, under a minute
+pip install -e ".[dev]"                                      # tests, lint and plotting tools
+python -m pytest tests -q                                   # 88 tests, under a minute
 python experiments/run_benchmark.py --quick                 # smoke run (~20 s)
 python experiments/run_benchmark.py                         # full protocol, 15 seeds (~20 min, resumable)
 python experiments/run_real_embeddings.py                   # headline comparison with MiniLM embeddings
@@ -361,8 +374,8 @@ Each was tested and measured; results (including those that did not help) are in
   Means with 95% t-intervals over seeds; paired differences over seeds. The whole pipeline is deterministic.
 
 ```bash
-python -m pip install -r requirements.txt
-python -m pytest tests -q                      # 85 tests, under a minute
+pip install -e ".[dev]"
+python -m pytest tests -q                      # 88 tests, under a minute
 python experiments/run_benchmark.py --quick    # smoke run
 python experiments/run_benchmark.py            # full protocol, 15 seeds; trains the model if missing (~20 min, 12 workers; resumable)
 python experiments/demo_ranking.py             # "more similar vs more useful" demonstration
@@ -652,7 +665,8 @@ adapting the embedding space, combined with ReMem's outcome gating); off-policy 
 ## Repository map
 
 ```
-remem/                 the library: api.py (ReMem), mcp_server.py, system.py, ledger, utility, attribution, contradiction, retention, selection
+remem/                 the library: api.py (ReMem), cli.py (`remem` command), mcp_server.py, system.py, ledger, utility,
+                       attribution, contradiction, retention, selection
 remem/backends/        numpy vector, FAISS, Chroma            remem/embedders.py   sentence-transformers
 remem/extract.py       fact extraction                         remem/integrations/  LangChain retriever
 remem/baselines/       RMM-style reranker (reimplementation)  remem/viz/           dashboard (HTML), ledger_cli
@@ -660,9 +674,11 @@ remem/eval/            synthetic worlds, simulated agent, runner, metrics, failu
 experiments/           run_benchmark.py, train_utility.py, train_utility_dagger.py, tune_rmm.py, demo_ranking.py,
                        run_llm_agent.py (--ollama: free local LLM), trace_llm_prompts.py, run_longmemeval.py, run_real_embeddings.py
 examples/              basic_api.py, quickstart.py, langchain_retriever.py, claude_desktop_mcp.md
-configs/systems.yaml   every compared system                   tests/ (85 tests)
+configs/systems.yaml   every compared system                   tests/ (88 tests)
 results/               RESULTS.md, failure_analysis.md, *.json, plots/, runs/<…>/ledger.json (example memory ledgers), models/, llm_agent/, longmemeval/
-docs/                  DESIGN.md, RELATED_WORK.md, make_figures.py (README GIF + chart)   .github/workflows/  CI
+docs/                  DESIGN.md, RELATED_WORK.md, make_figures.py (README images), make_install_video.py, video/
+.github/               CI (lint, tests on Linux and Windows, benchmark smoke run), issue and PR templates
+CHANGELOG.md, CONTRIBUTING.md, SECURITY.md, CITATION.cff
 ```
 
 License: MIT (see `LICENSE`). © 2026 Viswesh Kesarla.

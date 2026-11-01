@@ -26,13 +26,12 @@ deterministic agent and costs one extra agent call per memory; none of this prov
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Callable
 
 from remem.config import AttributionConfig
 from remem.offline import tokenize
 from remem.types import AgentTrace, ScoredCandidate
-
 
 #: share of signal credit kept by a memory that LOO shows to be unnecessary; must stay below the
 #: contribution threshold (0.5) so that spurious/redundant credit stops counting as a contribution

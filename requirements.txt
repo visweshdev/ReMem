@@ -1,6 +1,5 @@
 # core dependencies + test runner. Prefer:  pip install -e ".[dev]"
-# optional features are extras in pyproject.toml, e.g.  pip install -e ".[mcp,embeddings,langchain]"  or  ".[all]"
+# optional features are extras in pyproject.toml, e.g.  pip install -e ".[mcp,embeddings,langchain,plots]"  or  ".[all]"
 numpy>=1.26
 pyyaml>=6.0
-matplotlib>=3.7
 pytest>=8.0
