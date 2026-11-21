@@ -115,6 +115,12 @@ class MemoryRecord:
     entities: tuple[str, ...] = ()
     attribute_keys: tuple[str, ...] = ()
     semantic_role: str = "state"
+    # how a newer fact on the same (entity, attribute) may retire this one when it arrives:
+    #   auto    the configured rules decide (key match on single-valued attributes, update wording, learned schema)
+    #   replace the caller says this fact updates older same-key facts
+    #   check   retire an older fact only if the update checker (e.g. an LLM) confirms it; without a checker, keep both
+    #   keep    never retire anything
+    update_policy: str = "auto"
     state: MemState = MemState.ACTIVE
     valid_from: float = 0.0
     valid_to: float | None = None

@@ -15,6 +15,9 @@ State on disk (plain JSON, human-readable):
     <path>/config.json     the SystemConfig the store was created with
 
 Searches awaiting feedback are kept in memory only: give feedback in the same process that searched.
+
+Status: fact replacement (`add(update=...)`) was evaluated on real data (LongMemEval, README). Learning from feedback
+(`feedback`) is EXPERIMENTAL and untested on real data.
 """
 
 from __future__ import annotations
@@ -73,6 +76,8 @@ class Hit:
     similarity: float     # raw cosine similarity to the query
     state: str
     why: str              # top utility components behind the score
+    source: str | None = None   # the original text this fact was extracted from (add_conversation / add(source=...))
+    time: float | None = None   # when the fact was recorded
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -113,7 +118,10 @@ class ReMem:
     """
 
     def __init__(self, path: str | Path | None = None, *, embedder: Any = None, backend: Any = None,
-                 config: SystemConfig | None = None, autosave: bool = True) -> None:
+                 config: SystemConfig | None = None, autosave: bool = True, update_checker: Any = None) -> None:
+        """`update_checker(old_text, new_text) -> bool` confirms that a new fact replaces an older one on the same
+        entity+attribute (e.g. remem.extract.LLMUpdateChecker). Facts added with update="check" (the default) only
+        retire older facts when it says yes; without a checker they never retire anything."""
         self.path = Path(path).expanduser() if path is not None else None
         self.autosave = autosave and self.path is not None
         self._lock = threading.RLock()
@@ -124,6 +132,9 @@ class ReMem:
         # any object with ingest(facts) / candidates(query, k): VectorBackend, FaissBackend, ChromaBackend, ...
         self.backend = backend if backend is not None else VectorBackend(self.embedder)
         self.system = ReMemSystem(self.config, self.embedder)
+        self.update_checker = update_checker
+        if update_checker is not None:
+            self.system.detector.confirm = lambda old, new: bool(update_checker(old.original_text, new.original_text))
         self._facts: dict[str, StoredFact] = {}
         self._pending: dict[str, Context] = {}
         self._task_counter = 0
@@ -133,10 +144,18 @@ class ReMem:
 
     # ── writing ────────────────────────────────────────────────────────────────
     def add(self, text: str, *, entity: str | None = None, attribute: str | None = None, role: str = "state",
-            when: float | None = None, fact_id: str | None = None) -> str:
-        """Store a fact. `entity`/`attribute` (e.g. "billing", "api_version") enable supersession: a newer fact
-        with the same key and a different value invalidates the older one. `role` other than "state"
-        (e.g. "event", "note") is stored and retrievable but never supersedes anything. Returns the fact id."""
+            when: float | None = None, fact_id: str | None = None, update: str = "check",
+            source: str | None = None) -> str:
+        """Store a fact. `entity`/`attribute` (e.g. "billing", "api_version") let a newer fact retire an older one
+        with the same key and a different value. Whether it does is set by `update`:
+            "check"   (default) only if the update checker confirms it is an update; without a checker, keep both
+            "replace" yes: you know this fact updates the older one (e.g. "the server moved to west-2")
+            "keep"    never
+        Same key alone is not trusted by default: on real data, LLM-extracted keys are broad, and replacing on key
+        match retired correct facts (README, Results). `role` other than "state" never supersedes anything.
+        `source`: the original text the fact came from, returned with search hits. Returns the fact id."""
+        if update not in ("check", "replace", "keep"):
+            raise ValueError(f"update must be 'check', 'replace' or 'keep', not {update!r}")
         text = (text or "").strip()
         if not text:
             raise ValueError("cannot remember an empty text")
@@ -146,8 +165,9 @@ class ReMem:
                 raise ValueError(f"fact id {fid!r} already exists")
             fact = StoredFact(fid, text, float(when if when is not None else time.time()),
                               (entity.strip().lower(),) if entity else (),
-                              (attribute.strip().lower(),) if attribute else (), semantic_role=role)
-            if role == "state" and entity and attribute:
+                              (attribute.strip().lower(),) if attribute else (), semantic_role=role,
+                              update_policy=update if role == "state" else "keep", source=source)
+            if role == "state" and entity and attribute and update == "replace":
                 _warn_if_list_like(text, fact, self._facts.values())
             self._ingest(fact)
             if self.path is not None:
@@ -162,14 +182,15 @@ class ReMem:
         dependency-free SentenceSplitter, which stores each sentence as a note."""
         from remem.extract import SentenceSplitter
         ex = extractor or SentenceSplitter()
-        return [self.add(f.text, entity=f.entity, attribute=f.attribute, role=f.role, when=when)
+        return [self.add(f.text, entity=f.entity, attribute=f.attribute, role=f.role, when=when, update="check",
+                         source=text)
                 for f in ex.extract(text)]
 
     def _ingest(self, fact: StoredFact) -> None:
         self._facts[fact.fact_id] = fact
         self.backend.ingest([fact])
         self.system.ingest(IngestedFact(fact.fact_id, fact.text, fact.time, fact.entities, fact.attribute_keys,
-                                        fact.confidence, fact.semantic_role))
+                                        fact.confidence, fact.semantic_role, fact.update_policy))
 
     # ── reading ────────────────────────────────────────────────────────────────
     def search(self, query: str, *, k: int | None = None, task: str = "default", as_of: float | None = None,
@@ -198,8 +219,11 @@ class ReMem:
             self._pending[sid] = ctx
             if len(self._pending) > 1000:                 # bound memory if feedback is never given
                 self._pending.pop(next(iter(self._pending)))
-            items = [Hit(s.cand.fact_id, s.text, round(s.prob, 4), round(s.cand.sim, 4), s.state, s.reason)
-                     for s in ctx.selected]
+            items = []
+            for s in ctx.selected:
+                f = self._facts.get(s.cand.fact_id)
+                items.append(Hit(s.cand.fact_id, s.text, round(s.prob, 4), round(s.cand.sim, 4), s.state, s.reason,
+                                 f.source if f else None, f.time if f else None))
             self._maybe_save()
             return SearchResult(sid, query, items, ctx.tokens_used)
 
@@ -208,7 +232,10 @@ class ReMem:
                  answer: str | None = None) -> dict[str, float]:
         """Report how the task that used `search_id` went. `used_ids`: the memories you actually relied on
         (the strongest signal). `answer`: optional final answer text; memories containing it count as used.
-        Returns the credit each served memory received."""
+        Returns the credit each served memory received.
+
+        EXPERIMENTAL: learning from feedback has not been tested on real data (no public benchmark repeats
+        questions with outcomes). It is exercised only by unit tests and the development simulator in dev/."""
         with self._lock:
             ctx = self._pending.pop(search_id, None)
             if ctx is None:

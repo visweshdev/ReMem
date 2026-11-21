@@ -24,6 +24,8 @@ class StoredFact:
     origin: str = "user"
     session_id: str = "s0"
     semantic_role: str = "state"
+    update_policy: str = "auto"          # see remem.types.MemoryRecord.update_policy
+    source: str | None = None            # original text the fact was extracted from, if any
 
     @property
     def tokens(self) -> int:

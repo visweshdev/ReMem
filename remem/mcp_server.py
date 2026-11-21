@@ -17,11 +17,17 @@ Claude Desktop (claude_desktop_config.json):
 
 The feedback loop works best if the agent calls `feedback` after using recalled memories. Agents often forget, so
 by default the server also infers outcomes for unreported recalls (implicit feedback):
-  * correction: `remember` stores a fact whose entity+attribute matches a served "state" memory but with different
-    text -> that recall is recorded as a failure, blaming the served memory (the user corrected it);
+  * correction: `remember` with is_update=true stores a fact whose entity+attribute matches a served "state" memory
+    -> that recall is recorded as a failure, blaming the served memory (the user corrected it);
   * no complaint: a later `recall` with the same `task` arrives and the earlier one was never reported or corrected
     -> the earlier recall is recorded as a success, with no memory explicitly cited (weak, presence-only credit).
 Inferred outcomes are noisier than explicit ones; set REMEM_AUTO_FEEDBACK=0 to disable them.
+
+Learning from feedback is EXPERIMENTAL: it has not been tested on real data (no public benchmark repeats questions).
+
+Replacing facts: an older fact with the same entity+attribute is retired only when `remember` is called with
+is_update=true, i.e. when the calling model confirms the new fact replaces it. Otherwise both are kept. On real data,
+replacing on key match alone retired correct facts (README, Results).
 """
 
 from __future__ import annotations
@@ -68,18 +74,19 @@ def _infer(search_id: str, success: bool, used: list[str], reason: str) -> dict[
     return {"search_id": search_id, "success": success, ("used" if success else "blamed"): used, "reason": reason}
 
 
-def memory_remember(text: str, entity: str | None = None, attribute: str | None = None, kind: str = "fact") -> dict[str, Any]:
+def memory_remember(text: str, entity: str | None = None, attribute: str | None = None, kind: str = "fact",
+                    is_update: bool = False) -> dict[str, Any]:
     role = "state" if kind == "fact" else "event"
     mem = get_memory()
     inferred = []
-    if _auto_enabled() and role == "state" and entity and attribute:
+    if _auto_enabled() and role == "state" and entity and attribute and is_update:
         key = ((entity.strip().lower(),), (attribute.strip().lower(),))
         for sid, info in list(_unreported.items()):
             wrong = [i for i in info["ids"] if (f := mem._facts.get(i)) is not None and f.semantic_role == "state"
                      and (f.entities, f.attribute_keys) == key and f.text.strip() != text.strip()]
             if wrong:
                 inferred.append(_infer(sid, False, wrong, "corrected by a newer fact"))
-    fid = mem.add(text, entity=entity, attribute=attribute, role=role)
+    fid = mem.add(text, entity=entity, attribute=attribute, role=role, update="replace" if is_update else "check")
     out: dict[str, Any] = {"id": fid, "stored": text}
     inferred = [x for x in inferred if x]
     if inferred:
@@ -128,12 +135,14 @@ def build_server():
     mcp = FastMCP("remem")
 
     @mcp.tool()
-    def remember(text: str, entity: str | None = None, attribute: str | None = None, kind: str = "fact") -> dict:
+    def remember(text: str, entity: str | None = None, attribute: str | None = None, kind: str = "fact",
+                 is_update: bool = False) -> dict:
         """Store a memory for future sessions. Write one self-contained fact per call
         (e.g. "The billing service exposes API version v2."). Optional `entity` + `attribute`
-        (e.g. "billing", "api_version") let ReMem retire an older fact automatically when a newer one with a
-        different value arrives. Use kind="note" for observations that are not statements of current fact."""
-        return memory_remember(text, entity, attribute, kind)
+        (e.g. "billing", "api_version") name what the fact is about. Set is_update=true only when this fact replaces
+        an earlier one with the same entity+attribute (e.g. "billing moved to v2"): the older fact is then retired.
+        Without it, both are kept. Use kind="note" for observations that are not statements of current fact."""
+        return memory_remember(text, entity, attribute, kind, is_update)
 
     @mcp.tool()
     def recall(query: str, task: str = "default", k: int = 5) -> dict:

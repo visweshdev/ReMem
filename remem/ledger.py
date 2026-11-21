@@ -49,6 +49,7 @@ class MemoryLedger:
             entities=tuple(src.entities) if src else tuple(kw.get("entities", ())),
             attribute_keys=tuple(src.attribute_keys) if src else tuple(kw.get("attribute_keys", ())),
             semantic_role=kw.get("semantic_role", "state"),
+            update_policy=kw.get("update_policy", "auto"),
             valid_from=src.time if src else kw["time"],
         )
         rec.last_updated_step = self.step
@@ -121,6 +122,7 @@ class MemoryLedger:
                 "tokens": r.tokens, "original_tokens": r.original_tokens,
                 "created_step": r.created_step, "time": r.time, "confidence": r.confidence,
                 "entities": list(r.entities), "attribute_keys": list(r.attribute_keys), "semantic_role": r.semantic_role,
+                "update_policy": r.update_policy,
                 "state": r.state.value, "valid_from": r.valid_from, "valid_to": r.valid_to,
                 "superseded_by": r.superseded_by, "supersedes": r.supersedes,
                 "contradictions": r.contradictions, "n_pooled": r.n_pooled,
@@ -150,7 +152,7 @@ class MemoryLedger:
                 tokens=d["tokens"], original_tokens=d["original_tokens"],
                 created_step=d["created_step"], time=d["time"], confidence=d["confidence"],
                 entities=tuple(d["entities"]), attribute_keys=tuple(d["attribute_keys"]), semantic_role=d.get("semantic_role", "state"),
-                state=MemState(d["state"]), valid_from=d["valid_from"], valid_to=d["valid_to"],
+                update_policy=d.get("update_policy", "auto"), state=MemState(d["state"]), valid_from=d["valid_from"], valid_to=d["valid_to"],
                 superseded_by=d["superseded_by"], supersedes=list(d["supersedes"]),
                 contradictions=d["contradictions"], n_pooled=d["n_pooled"],
                 n_retrieved=d["n_retrieved"], n_credited=d["n_credited"], n_wasted=d["n_wasted"],

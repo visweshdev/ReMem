@@ -1,6 +1,7 @@
 """`remem` command-line tool: try ReMem without writing Python.
 
     remem add "Our server is in east-1." --entity server --attribute region
+    remem add "Our server moved to west-2." --entity server --attribute region --replace
     remem search "Where is our server?"
     remem list                     remem inspect <id>          remem stats
     remem shell                    # interactive: search, then mark results good/bad and watch the ranking change
@@ -54,7 +55,8 @@ def _print_inspect(info, out) -> None:
 def cmd_shell(mem, inp=sys.stdin, out=sys.stdout) -> None:
     """A small REPL. Commands: add, search, good [n ...], bad, list, inspect, stats, help, quit."""
     help_text = ("commands:\n"
-                 "  add <text> [--entity E --attribute A]   store a fact (same entity+attribute replaces the old one)\n"
+                 "  add <text> [--entity E --attribute A] [--replace]   store a fact; --replace retires the older fact\n"
+                 "                                          with the same entity+attribute\n"
                  "  search <question>                       retrieve memories\n"
                  "  good [n ...]                            the last search helped; n = which results you used\n"
                  "  bad                                     the last search did not help\n"
@@ -82,8 +84,10 @@ def cmd_shell(mem, inp=sys.stdin, out=sys.stdout) -> None:
                 p.add_argument("--entity")
                 p.add_argument("--attribute")
                 p.add_argument("--role", default="state")
+                p.add_argument("--replace", action="store_true")
                 a = p.parse_args(shlex.split(rest))
-                fid = mem.add(" ".join(a.text), entity=a.entity, attribute=a.attribute, role=a.role)
+                fid = mem.add(" ".join(a.text), entity=a.entity, attribute=a.attribute, role=a.role,
+                              update="replace" if a.replace else "check")
                 print(f"  stored [{fid}]", file=out)
             elif cmd == "search":
                 last = mem.search(rest, task="shell")
@@ -127,7 +131,9 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("text")
     p.add_argument("--entity")
     p.add_argument("--attribute")
-    p.add_argument("--role", default="state", help='"state" (default; replaces same entity+attribute), "note", ...')
+    p.add_argument("--role", default="state", help='"state" (default), "note", "preference", ...')
+    p.add_argument("--replace", action="store_true",
+                   help="this fact replaces the older one with the same --entity and --attribute (otherwise both are kept)")
     p = sub.add_parser("search", help="retrieve memories for a question")
     p.add_argument("query")
     p.add_argument("-k", type=int, default=5)
@@ -158,7 +164,8 @@ def main(argv: list[str] | None = None) -> int:
     mem = _memory(a.store)
     try:
         if a.cmd == "add":
-            print(mem.add(a.text, entity=a.entity, attribute=a.attribute, role=a.role))
+            print(mem.add(a.text, entity=a.entity, attribute=a.attribute, role=a.role,
+                          update="replace" if a.replace else "check"))
         elif a.cmd == "search":
             _print_hits(mem.search(a.query, k=a.k, task="cli"), sys.stdout)
         elif a.cmd == "list":
@@ -183,7 +190,7 @@ def _builtin_demo() -> None:
     mem = ReMem()
     old = mem.add("The deploy pipeline targets cluster east-1.", entity="deploy", attribute="cluster")
     note = mem.add("Note: someone asked which cluster the deploy pipeline targets; nobody answered.", role="note")
-    new = mem.add("The deploy pipeline moved to cluster west-2.", entity="deploy", attribute="cluster")
+    new = mem.add("The deploy pipeline moved to cluster west-2.", entity="deploy", attribute="cluster", update="replace")
     for _ in range(7):
         res = mem.search("Which cluster does the deploy pipeline target?", k=2, task="deploy")
         mem.feedback(res.search_id, success=True, used_ids=[new])

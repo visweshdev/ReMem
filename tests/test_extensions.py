@@ -32,9 +32,15 @@ def test_llm_extractor_parses_and_normalises_and_feeds_supersession(embedder):
     assert [f.attribute for f in facts] == ["api_version", "api_version", None]
     assert facts[0].entity == "billing" and facts[1].role == "state" and facts[2].role == "note"
     assert "User: we moved billing to v2." in client.calls[0]["messages"][0]["content"]
-    m = ReMem(None, embedder=embedder)
-    ids = m.add_conversation("ignored", extractor=SimpleNamespace(extract=lambda t: facts))
-    assert len(ids) == 3 and m.inspect(ids[0])["state"] == "INVALIDATED"
+    # extracted facts only replace older ones when the update checker confirms it
+    kept = ReMem(None, embedder=embedder)
+    ids = kept.add_conversation("ignored", extractor=SimpleNamespace(extract=lambda t: facts))
+    assert len(ids) == 3 and kept.inspect(ids[0])["state"] == "ACTIVE"
+    m = ReMem(None, embedder=embedder, update_checker=lambda old, new: True)
+    ids = m.add_conversation("User: we moved billing to v2.", extractor=SimpleNamespace(extract=lambda t: facts))
+    assert m.inspect(ids[0])["state"] == "INVALIDATED"
+    hit = m.search("Which API version does billing expose?").items[0]
+    assert hit.source == "User: we moved billing to v2." and hit.time is not None
 
 
 def test_parse_facts_never_raises_on_garbage():

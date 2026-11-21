@@ -15,7 +15,8 @@ def _billing(m):
                 when=time.time() - 30 * DAY)
     note = m.add("Notes: someone asked which API version billing exposes; nothing decided.",
                  entity="billing", attribute="api_version", role="note")
-    new = m.add("The billing service migrated and now exposes API version v2.", entity="billing", attribute="api_version")
+    new = m.add("The billing service migrated and now exposes API version v2.", entity="billing", attribute="api_version",
+                update="replace")
     return old, note, new
 
 
@@ -66,7 +67,8 @@ def test_mcp_tool_functions(tmp_path, monkeypatch):
     monkeypatch.setattr(srv, "_unreported", {})
     monkeypatch.setenv("REMEM_AUTO_FEEDBACK", "0")
     srv.memory_remember("The billing service exposes API version v1.", "billing", "api_version")
-    new = srv.memory_remember("The billing service migrated and now exposes API version v2.", "billing", "api_version")["id"]
+    new = srv.memory_remember("The billing service migrated and now exposes API version v2.", "billing", "api_version",
+                              is_update=True)["id"]
     rec = srv.memory_recall("Which API version does billing expose?", "api")
     assert rec["items"][0]["id"] == new
     assert srv.memory_feedback(rec["search_id"], True, [new])["credit"][new] >= 0.5
@@ -98,15 +100,16 @@ def test_vector_store_backends_match_the_builtin_ranking(backend, embedder):
     ref.ingest(facts)
     other.ingest(facts)
     q = "Which region does payments deploy to?"
-    assert [c.fact_id for c in other.candidates(q, k=3)[0]] == [c.fact_id for c in ref.candidates(q, k=3)[0]]
+    # top 2 only: the remaining facts tie at similarity 0 and backends may order ties differently
+    assert [c.fact_id for c in other.candidates(q, k=2)[0]] == [c.fact_id for c in ref.candidates(q, k=2)[0]]
 
 
 def test_library_supersedes_state_facts_but_keeps_preferences(embedder):
     m = ReMem(None, embedder=embedder)
     a = m.add("Alice lives in Paris.", entity="alice", attribute="city")
-    b = m.add("Alice lives in Berlin.", entity="alice", attribute="city")
+    b = m.add("Alice lives in Berlin.", entity="alice", attribute="city", update="replace")
     p1 = m.add("Alice likes chess.", entity="alice", attribute="hobby", role="preference")
-    p2 = m.add("Alice likes hiking.", entity="alice", attribute="hobby", role="preference")
+    p2 = m.add("Alice likes hiking.", entity="alice", attribute="hobby", role="preference", update="replace")
     assert m.inspect(a)["state"] == "INVALIDATED" and m.inspect(a)["superseded_by"] == b
     assert m.inspect(p1)["state"] == "ACTIVE" and m.inspect(p2)["state"] == "ACTIVE"
 
@@ -119,7 +122,7 @@ def test_mcp_implicit_feedback(tmp_path, monkeypatch):
     old = srv.memory_remember("The billing service exposes API version v1.", "billing", "api_version")["id"]
     first = srv.memory_recall("Which API version does billing expose?", "api")
     # a correction of a served state fact counts as a failure blamed on it
-    out = srv.memory_remember("Billing now exposes API version v2.", "billing", "api_version")
+    out = srv.memory_remember("Billing now exposes API version v2.", "billing", "api_version", is_update=True)
     fb = out["implicit_feedback"][0]
     assert fb["search_id"] == first["search_id"] and fb["blamed"] == [old] and not fb["success"]
     # an unreported recall followed by another recall for the same task counts as a success
@@ -141,7 +144,7 @@ def test_list_like_state_fact_warns(embedder):
     m = ReMem(embedder=embedder)
     m.add("The cache layer uses Redis.", entity="cache", attribute="backend")
     with pytest.warns(UserWarning, match="additional value"):
-        m.add("The cache layer also uses Memcached.", entity="cache", attribute="backend")
+        m.add("The cache layer also uses Memcached.", entity="cache", attribute="backend", update="replace")
     with warnings.catch_warnings():
         warnings.simplefilter("error")
-        m.add("The cache layer switched to Valkey.", entity="cache", attribute="backend")
+        m.add("The cache layer switched to Valkey.", entity="cache", attribute="backend", update="replace")

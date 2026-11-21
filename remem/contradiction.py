@@ -47,6 +47,9 @@ class ContradictionDetector:
         self.cfg = cfg
         self.ledger = ledger
         self.text_sim = text_sim
+        # optional update checker for facts with update_policy="check": confirm(old, new) -> True if `new` makes `old`
+        # no longer true (e.g. an LLM asked "is this an update?"). Without one, "check" facts never retire anything.
+        self.confirm: Callable[[MemoryRecord, MemoryRecord], bool] | None = None
         self.by_key: dict[Key, list[str]] = {}
         self.volatile_attrs: set[str] = set()
         self.conflicts: list[Conflict] = []
@@ -101,6 +104,15 @@ class ContradictionDetector:
         ov, nv = self._value_tokens(old.original_text), self._value_tokens(new.original_text)
         if not (nv - ov) or not (ov - nv):
             return None               # same value restated (or nothing value-like differs): reconfirmation
+        policy = new.update_policy
+        if policy == "keep":
+            return None
+        if policy == "replace":       # the caller declared this fact an update of the same key
+            return Conflict(old.fact_id, new.fact_id, "declared", self.text_sim(old.original_text, new.original_text))
+        if policy == "check":         # same key is not enough: an update checker must confirm it
+            if self.confirm is not None and self.confirm(old, new):
+                return Conflict(old.fact_id, new.fact_id, "confirmed", self.text_sim(old.original_text, new.original_text))
+            return None
         exclusive = self.is_exclusive(key[1]) or (
             old.semantic_role in self.cfg.exclusive_roles and new.semantic_role in self.cfg.exclusive_roles)
         if exclusive:                 # declared single-valued: same key + different value is enough
@@ -185,6 +197,10 @@ class ContradictionDetector:
                 if other is None or other.fact_id == rec.fact_id or other.time <= rec.time:
                     continue
                 if other.state == MemState.INVALIDATED:
+                    continue
+                if other.update_policy == "keep":
+                    continue
+                if other.update_policy == "check" and not (self.confirm is not None and self.confirm(rec, other)):
                     continue
                 if best is None or other.time > best.time:
                     best = other

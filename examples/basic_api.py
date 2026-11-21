@@ -27,7 +27,8 @@ def show(label):
 
 
 res = show("1. first search:")
-new = mem.add("The deploy pipeline moved to cluster west-2.", entity="deploy", attribute="cluster", when=10 * DAY)
+new = mem.add("The deploy pipeline moved to cluster west-2.", entity="deploy", attribute="cluster", when=10 * DAY,
+              update="replace")                                # we know this is an update: retire the east-1 fact
 res = show("2. after the update:")         # the east-1 fact is superseded and no longer served
 for _ in range(6):                          # the agent keeps succeeding using the west-2 fact, never the note
     mem.feedback(res.search_id, success=True, used_ids=[new])

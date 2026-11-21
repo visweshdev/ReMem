@@ -44,6 +44,7 @@ class IngestedFact:
     attribute_keys: tuple[str, ...] = ()
     confidence: float = 1.0
     semantic_role: str = "state"
+    update_policy: str = "auto"          # see MemoryRecord.update_policy
 
 
 @dataclass
@@ -110,7 +111,7 @@ class ReMemSystem:
         rec = self.ledger.register(
             fact_id=fact.fact_id, text=fact.text, time=fact.time,
             entities=fact.entities, attribute_keys=fact.attribute_keys, confidence=fact.confidence,
-            semantic_role=fact.semantic_role,
+            semantic_role=fact.semantic_role, update_policy=fact.update_policy,
         )
         return self.detector.on_ingest(rec)
 

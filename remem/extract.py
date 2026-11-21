@@ -9,8 +9,10 @@
 `SentenceSplitter` is a dependency-free fallback that stores each sentence as a note (no entity/attribute,
 so no automatic supersession). `LLMFactExtractor` works with any OpenAI-compatible chat client.
 
-STATUS: LLMFactExtractor is tested against a fake client only; its extraction quality with a real model
-has not been measured in this repository.
+`LLMUpdateChecker` asks an LLM whether a newer fact replaces an older one on the same entity+attribute; pass it
+as ReMem(update_checker=...) so extracted facts only retire older ones when the model confirms an update.
+
+The extraction prompt was used with a real local model (qwen2.5:3b) in experiments/run_real_knowledge_update.py.
 """
 
 from __future__ import annotations
@@ -73,6 +75,34 @@ class LLMFactExtractor:
             messages=[{"role": "user", "content": PROMPT + text}],
         )
         return parse_facts(resp.choices[0].message.content)
+
+
+UPDATE_PROMPT = """Two memories about the same thing, the second recorded later.
+
+Older: {old}
+Newer: {new}
+
+Does the newer memory state a different current value for exactly what the older memory states, so the older one is
+no longer true? Answer "no" if the newer one is about something else, adds information, or only mentions the topic.
+Answer yes or no only."""
+
+
+class LLMUpdateChecker:
+    """`checker(old_text, new_text) -> bool`: True when an LLM says the newer fact replaces the older one."""
+
+    def __init__(self, client: Any, model: str, *, complete: Any = None) -> None:
+        self.client, self.model = client, model
+        self.complete = complete     # optional callable(prompt, max_tokens) -> str, e.g. a cached wrapper
+
+    def __call__(self, old_text: str, new_text: str) -> bool:
+        prompt = UPDATE_PROMPT.format(old=old_text, new=new_text)
+        if self.complete is not None:
+            reply = self.complete(prompt, 5)
+        else:
+            resp = self.client.chat.completions.create(model=self.model, temperature=0, max_tokens=5,
+                                                       messages=[{"role": "user", "content": prompt}])
+            reply = resp.choices[0].message.content or ""
+        return reply.strip().lower().startswith("yes")
 
 
 def parse_facts(reply: str) -> list[ExtractedFact]:

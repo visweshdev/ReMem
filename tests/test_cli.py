@@ -9,7 +9,8 @@ def test_add_search_list_inspect_stats(tmp_path, capsys):
     store = str(tmp_path / "s")
     assert cli.main(["--store", store, "add", "Our server is in east-1.", "--entity", "server", "--attribute", "region"]) == 0
     old = capsys.readouterr().out.strip()
-    assert cli.main(["--store", store, "add", "Our server moved to west-2.", "--entity", "server", "--attribute", "region"]) == 0
+    assert cli.main(["--store", store, "add", "Our server moved to west-2.", "--entity", "server", "--attribute", "region",
+                     "--replace"]) == 0
     capsys.readouterr()
     cli.main(["--store", store, "search", "Where is our server?"])
     out = capsys.readouterr().out
