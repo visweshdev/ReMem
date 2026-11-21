@@ -37,4 +37,8 @@ data/
 results/cache/
 results/traces/
 results/records/
+/dev/results/cache/
+/dev/results/traces/
+/dev/results/records/
+/results/real_knowledge_update/llm_cache.jsonl
 *.log
