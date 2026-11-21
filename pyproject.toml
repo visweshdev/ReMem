@@ -29,13 +29,12 @@ Homepage = "https://github.com/visweshdev/ReMem"
 Issues = "https://github.com/visweshdev/ReMem/issues"
 
 [project.optional-dependencies]
-claude = ["anthropic>=0.40"]                # remem.claude_agent: Claude as the evaluation agent
-llm = ["openai>=1.50"]                       # remem.llm: real-model agent / embeddings / fact extraction
+llm = ["openai>=1.50"]                       # remem.llm embeddings, remem.extract fact extraction
 mcp = ["mcp>=1.2"]                           # remem-mcp server
 embeddings = ["sentence-transformers>=2.2"]  # local neural embeddings
 faiss = ["faiss-cpu>=1.8"]
 chroma = ["chromadb>=0.5"]
-plots = ["matplotlib>=3.7"]                  # benchmark plots and README figures
+plots = ["matplotlib>=3.7"]                  # README figures
 tokenizer = ["tiktoken>=0.6"]
 langchain = ["langchain-core>=0.2"]           # remem.integrations.langchain
 all = ["anthropic>=0.40", "openai>=1.50", "mcp>=1.2", "sentence-transformers>=2.2", "faiss-cpu>=1.8", "chromadb>=0.5", "tiktoken>=0.6", "langchain-core>=0.2", "matplotlib>=3.7"]
@@ -57,7 +56,7 @@ testpaths = ["tests"]
 [tool.ruff]
 line-length = 130
 target-version = "py310"
-extend-exclude = ["data", "results"]
+extend-exclude = ["data", "results", "dev/results"]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "B", "UP"]
@@ -71,3 +70,8 @@ ignore = [
 "docs/*" = ["E402"]
 "examples/*" = ["E402"]
 "tests/*" = ["E402"]
+"dev/experiments/*" = ["E402"]   # dev scripts put the repo root and dev/ on sys.path first
+"dev/tests/*" = ["E402"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["remem", "remem_sim"]

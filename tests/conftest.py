@@ -7,14 +7,13 @@ if str(ROOT) not in sys.path:
 
 import pytest
 
-from remem.eval.pools import make_embedder
-from remem.offline import count_tokens
+from remem.offline import ConceptHashEmbedder, count_tokens
 from remem.types import Candidate, ScoredCandidate
 
 
 @pytest.fixture(scope="session")
 def embedder():
-    return make_embedder()
+    return ConceptHashEmbedder(256)
 
 
 def mk_cand(fid, text="x y z", sim=0.5, rank=0, tokens=None, time=1.7e9):

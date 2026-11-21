@@ -13,11 +13,11 @@ from typing import Any
 
 from remem.backends.base import Backend, StoredFact
 from remem.config import SystemConfig
-from remem.eval.agent import AgentConfig, SimAgent
-from remem.eval.world import Task, World
 from remem.offline import ConceptHashEmbedder
 from remem.system import IngestedFact, ReMemSystem
 from remem.types import Candidate, MemState, Outcome
+from remem_sim.eval.agent import AgentConfig, SimAgent
+from remem_sim.eval.world import Task, World
 
 Pools = dict[int, tuple[list[Candidate], float]]
 

@@ -10,8 +10,11 @@ systems:
     selection: {mode: rank_pack, top_k: 5}
     contradiction:
       enabled: false
-      # single-valued attribute keys of the (assumed) schema; the cue path works without them
-      exclusive_attributes: [region, owner, api_version, oncall, approver]
+      # No hand-written list of single-valued attributes: when contradiction handling is on, the system has to
+      # learn which attributes change from outcome evidence. `schema_given` and `A_newest_key_schema` below are
+      # the only systems handed the benchmark's own single-valued attributes, and they are labelled as such.
+      exclusive_attributes: []
+      learn_schema: true
       conf_half_life_days: 0.0
     retention: {mode: none}
     attribution: {method: signals}
@@ -23,6 +26,16 @@ systems:
   # ── baselines ───────────────────────────────────────────────────────────────
   A_vector:           {extends: _base}
   B_static:           {extends: _base, ranker: static}
+  # "keep only the newest fact per (entity, attribute)": similarity ranking, no learning, no feedback.
+  # Naive version: every pair of same-key state facts with different values supersedes (multi-valued keys lose values).
+  A_newest_key:
+    extends: _base
+    contradiction: {enabled: true, exclusive_roles: [state], learn_schema: false, outcome_invalidation: false}
+  # Same rule, but handed the benchmark's single-valued attributes (an upper bound for a rule-based dedupe)
+  A_newest_key_schema:
+    extends: _base
+    contradiction: {enabled: true, exclusive_attributes: [region, owner, api_version, oncall, approver],
+                    learn_schema: false, outcome_invalidation: false}
 
   # ── proposed system ─────────────────────────────────────────────────────────
   C_remem:
@@ -73,9 +86,9 @@ systems:
     extends: C_remem
     ranker: heuristic
     utility: {kind: heuristic, explore_c: 0.5}
-  loo_no_exclusive_schema:
+  loo_no_exclusive_schema:          # no schema at all: only explicit update wording ("migrated", ...) supersedes
     extends: C_remem
-    contradiction: {exclusive_attributes: []}
+    contradiction: {learn_schema: false}
 
   # ── attribution-method comparison (same system, different credit assignment) ─
   attr_presence:        {extends: C_remem, attribution: {method: presence}}
@@ -85,7 +98,7 @@ systems:
   # ── new in ReMem: safeguards, exploration, schema learning, cheaper credit assignment ──
   loo_no_guard:         {extends: C_remem, selection: {guard_top: 0}}
   new_thompson:         {extends: C_remem, utility: {explore_mode: thompson}}   # explore_c stays 0.5 (dev sweep: worse than UCB at 0.1/0.25/0.5)
-  schema_learned:       {extends: C_remem, contradiction: {exclusive_attributes: [], learn_schema: true}}
+  schema_given:         {extends: C_remem, contradiction: {exclusive_attributes: [region, owner, api_version, oncall, approver]}}   # hand-written schema (the old default)
   attr_signals_loo_ambiguous: {extends: C_remem, attribution: {method: signals_loo, loo_policy: ambiguous}}
 
   # ── RMM-style baseline (reimplementation of arXiv 2503.08026 §6; citation reward, REINFORCE reranker) ──

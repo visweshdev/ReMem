@@ -7,7 +7,7 @@ from collections.abc import Iterable, Sequence
 
 import numpy as np
 
-from remem.eval.runner import RunResult, TaskRecord
+from remem_sim.eval.runner import RunResult, TaskRecord
 
 # two-sided 95% t critical values, df = 1..30 (n seeds - 1)
 _T95 = [12.706, 4.303, 3.182, 2.776, 2.571, 2.447, 2.365, 2.306, 2.262, 2.228, 2.201, 2.179, 2.160, 2.145,

@@ -3,21 +3,21 @@
 from dataclasses import replace
 
 import pytest
+from conftest import DEV
 
 from remem.backends import VectorBackend
 from remem.config import load_systems
-from remem.eval.agent import AgentConfig
-from remem.eval.runner import apply_world_selection, build_pools, run_stream
-from remem.eval.world import make_world
 from remem.types import MemState
-from tests.conftest import ROOT
+from remem_sim.eval.agent import AgentConfig
+from remem_sim.eval.runner import apply_world_selection, build_pools, run_stream
+from remem_sim.eval.world import make_world
 
 
 @pytest.fixture(scope="module")
 def setup(embedder):
     world = make_world("useless_frequent", 7, {"n_tasks": 150, "filler": 20})
     pools = build_pools(world, VectorBackend(embedder), 20)
-    systems = load_systems(ROOT / "configs" / "systems.yaml")
+    systems = load_systems(DEV / "configs" / "systems.yaml")
     return world, pools, systems
 
 
@@ -77,9 +77,10 @@ def test_ledger_persistence_roundtrip(setup, embedder, tmp_path):
 def test_contradiction_handling_removes_stale_memory_from_context(embedder):
     world = make_world("contradiction", 5, {"n_tasks": 120, "filler": 20})
     pools = build_pools(world, VectorBackend(embedder), 20)
-    systems = load_systems(ROOT / "configs" / "systems.yaml")
+    systems = load_systems(DEV / "configs" / "systems.yaml")
     off = apply_world_selection(replace(systems["A_vector"], backend="vector"), world)
-    on = replace(off, contradiction=replace(systems["C_remem"].contradiction))
+    # no outcome feedback here, so the schema cannot be learned: test the mechanism with the schema given
+    on = replace(off, contradiction=replace(systems["schema_given"].contradiction))
     r_off = run_stream(world, pools, off, embedder, AgentConfig(mode="first"), seed=5)
     r_on = run_stream(world, pools, on, embedder, AgentConfig(mode="first"), seed=5)
     stale = lambda run: sum(r.n_stale_selected > 0 for r in run.records)   # noqa: E731
@@ -91,7 +92,7 @@ def test_contradiction_handling_removes_stale_memory_from_context(embedder):
 def test_historical_queries_still_find_invalidated_memories(embedder):
     world = make_world("state_change", 5, {"n_tasks": 150, "filler": 20})
     pools = build_pools(world, VectorBackend(embedder), 20)
-    systems = load_systems(ROOT / "configs" / "systems.yaml")
+    systems = load_systems(DEV / "configs" / "systems.yaml")
     cfg = apply_world_selection(replace(systems["A_vector"], backend="vector"), world)
     on = replace(cfg, contradiction=replace(systems["C_remem"].contradiction))
     run = run_stream(world, pools, on, embedder, AgentConfig(mode="latest"), seed=5)

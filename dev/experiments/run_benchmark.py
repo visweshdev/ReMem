@@ -38,20 +38,21 @@ from typing import Any
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT.parent))   # the repository root, for `remem`
+sys.path.insert(0, str(ROOT))          # dev/, for `remem_sim`
 
 from remem.config import load_systems  # noqa: E402
-from remem.eval import failures as failmod  # noqa: E402
-from remem.eval.agent import AgentConfig  # noqa: E402
-from remem.eval.metrics import aggregate, mean_ci, paired_delta, summarize_run  # noqa: E402
-from remem.eval.pools import ensure_pools, load_pools, make_embedder  # noqa: E402
-from remem.eval.protocol import EXTRA_FAMILIES, HEADLINE_FAMILIES, READER_MODES, TEST_SEEDS  # noqa: E402
-from remem.eval.runner import apply_world_selection, run_stream  # noqa: E402
-from remem.eval.world import make_world  # noqa: E402
+from remem_sim.eval import failures as failmod  # noqa: E402
+from remem_sim.eval.agent import AgentConfig  # noqa: E402
+from remem_sim.eval.metrics import aggregate, mean_ci, paired_delta, summarize_run  # noqa: E402
+from remem_sim.eval.pools import ensure_pools, load_pools, make_embedder  # noqa: E402
+from remem_sim.eval.protocol import EXTRA_FAMILIES, HEADLINE_FAMILIES, READER_MODES, TEST_SEEDS  # noqa: E402
+from remem_sim.eval.runner import apply_world_selection, run_stream  # noqa: E402
+from remem_sim.eval.world import make_world  # noqa: E402
 
 log = logging.getLogger("benchmark")
 
-BASELINES = ["A_vector"]
+BASELINES = ["A_vector", "A_newest_key", "A_newest_key_schema"]
 STATIC = ["B_static"]
 REMEM = ["C_remem"]
 ABLATION = [
@@ -60,7 +61,7 @@ ABLATION = [
     "loo_no_feedback", "loo_no_contradiction", "loo_no_retention", "loo_no_cost_aware", "loo_heuristic_utility",
     "loo_no_exclusive_schema", "attr_presence", "attr_signals_loo", "attr_usage_only", "rmm_style", "ret_frequency_prune",
 ]
-NEW = ["loo_no_guard", "new_thompson", "schema_learned", "attr_signals_loo_ambiguous"]
+NEW = ["loo_no_guard", "new_thompson", "schema_given", "attr_signals_loo_ambiguous"]
 CORE = ["A_vector", "B_static", "C_remem"]
 MAIN_SYSTEMS = BASELINES + STATIC + REMEM + ABLATION + NEW
 FAILURE_SYSTEMS = {"A_vector", "B_static", "C_remem"}
@@ -74,10 +75,10 @@ def code_fingerprint() -> str:
     """Hash of everything that can change a job's result: library code, system configs, trained models."""
     import hashlib
     h = hashlib.sha1()
-    paths = sorted((ROOT / "remem").rglob("*.py")) + [ROOT / "configs" / "systems.yaml"]
+    paths = sorted((ROOT.parent / "remem").rglob("*.py")) + sorted((ROOT / "remem_sim").rglob("*.py")) + [ROOT / "configs" / "systems.yaml"]
     paths += sorted((ROOT / "results" / "models").glob("*.json"))
     for p in paths:
-        h.update(p.relative_to(ROOT).as_posix().encode())
+        h.update(p.relative_to(ROOT.parent).as_posix().encode())
         h.update(p.read_bytes())
     return h.hexdigest()[:16]
 
@@ -188,7 +189,7 @@ def build_jobs(args, out_dir: Path, cache: Path) -> tuple[list[dict], list[tuple
         for fam in [f for f in ("contradiction", "state_change") if f in families]:
             for seed in seeds:
                 jobs.append({**base, "tag": "no_update_cue", "family": fam, "seed": seed, "mode": "first",
-                             "systems": CORE + ["loo_no_exclusive_schema", "schema_learned"],
+                             "systems": CORE + ["A_newest_key", "A_newest_key_schema", "loo_no_exclusive_schema", "schema_given"],
                              "world_overrides": {"update_cue_rate": 0.0}})
                 jobs.append({**base, "tag": "extraction_noise_0.2", "family": fam, "seed": seed, "mode": "first",
                              "systems": CORE, "world_overrides": {"extraction_noise": 0.2}})
@@ -379,13 +380,15 @@ def main() -> None:
     paired = {}
     for mode in READER_MODES:
         for metric in ("task_success", "tokens_per_task", "context_precision", "gold_recall"):
-            for a, b in (("C_remem", "A_vector"), ("C_remem", "B_static"), ("B_static", "A_vector")):
+            for a, b in (("C_remem", "A_vector"), ("C_remem", "B_static"), ("B_static", "A_vector"),
+                         ("C_remem", "A_newest_key"), ("C_remem", "A_newest_key_schema"), ("A_newest_key", "A_vector"),
+                         ("schema_given", "A_vector")):
                 fams = [f for f in HEADLINE_FAMILIES if f in {r["family"] for r in rows}]
                 d, ci = paired_vs(rows, a, b, "main", mode, metric, fams)
                 paired[f"{mode}|{metric}|{a} - {b}"] = {"delta": d, "ci95": ci}
     save_json(out / "paired_deltas.json", paired)
 
-    from remem.eval import report
+    from remem_sim.eval import report
     report.write_all(out, agg, curves(rows), growth(rows), calibration(rows), fa, paired,
                      [f for f in list(HEADLINE_FAMILIES) + list(EXTRA_FAMILIES) if f in {r["family"] for r in rows}])
     log.info("done in %.0fs; results in %s", time.time() - t0, out)

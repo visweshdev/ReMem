@@ -17,14 +17,15 @@ from dataclasses import replace
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT.parent))   # the repository root, for `remem`
+sys.path.insert(0, str(ROOT))          # dev/, for `remem_sim`
 
 from remem.config import load_systems  # noqa: E402
-from remem.eval.agent import AgentConfig  # noqa: E402
-from remem.eval.pools import load_pools, make_embedder  # noqa: E402
-from remem.eval.runner import apply_world_selection, run_stream  # noqa: E402
-from remem.eval.world import make_world  # noqa: E402
 from remem.viz.ledger_cli import lifecycle  # noqa: E402
+from remem_sim.eval.agent import AgentConfig  # noqa: E402
+from remem_sim.eval.pools import load_pools, make_embedder  # noqa: E402
+from remem_sim.eval.runner import apply_world_selection, run_stream  # noqa: E402
+from remem_sim.eval.world import make_world  # noqa: E402
 
 
 def main() -> None:

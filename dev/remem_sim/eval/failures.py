@@ -17,8 +17,8 @@ from __future__ import annotations
 from collections import Counter
 from typing import Any
 
-from remem.eval.runner import RunResult, TaskRecord
-from remem.eval.world import World
+from remem_sim.eval.runner import RunResult, TaskRecord
+from remem_sim.eval.world import World
 
 CATEGORIES = (
     "gold_not_in_pool", "gold_pooled_not_selected", "utility_demoted_gold", "useful_filtered",

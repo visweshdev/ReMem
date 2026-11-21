@@ -18,9 +18,9 @@ from __future__ import annotations
 import json
 from typing import Any
 
-from remem.eval.agent import AgentResult
-from remem.eval.world import Task, World
 from remem.types import AgentTrace
+from remem_sim.eval.agent import AgentResult
+from remem_sim.eval.world import Task, World
 
 SYSTEM = (
     "You answer questions about a software project using ONLY the memory snippets provided. Each memory has an id and the "

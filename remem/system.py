@@ -75,8 +75,8 @@ class ReMemSystem:
         self._emb_cache: dict[str, list[float]] = {}
         self.rmm = None
         self._rmm_pending: dict[int, tuple] = {}
-        if cfg.ranker == "rmm":
-            from remem.baselines.rmm import RMMReranker
+        if cfg.ranker == "rmm":    # RMM-style baseline of the development simulator (needs dev/ on sys.path)
+            from remem_sim.baselines.rmm import RMMReranker
             self.rmm = RMMReranker(embedder.dim, lr=cfg.utility.rmm_lr, tau=cfg.utility.rmm_tau, seed=seed)
 
     # ── construction helpers ───────────────────────────────────────────────────

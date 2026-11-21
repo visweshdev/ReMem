@@ -3,8 +3,8 @@
 import json
 from types import SimpleNamespace
 
-from remem.claude_agent import ClaudeAgent, answer_schema
-from remem.eval.world import T0, make_world
+from remem_sim.claude_agent import ClaudeAgent, answer_schema
+from remem_sim.eval.world import T0, make_world
 
 
 class FakeAnthropic:
@@ -61,14 +61,15 @@ def test_schema_requires_every_slot():
 
 
 def test_runs_inside_the_harness(embedder):
+    from conftest import DEV
+
     from remem.backends import VectorBackend
     from remem.config import load_systems
-    from remem.eval.runner import apply_world_selection, build_pools, run_stream
-    from tests.conftest import ROOT
+    from remem_sim.eval.runner import apply_world_selection, build_pools, run_stream
 
     w = make_world("distractor", 3, {"n_tasks": 10, "filler": 10})
     pools = build_pools(w, VectorBackend(embedder), 20)
-    cfg = apply_world_selection(load_systems(ROOT / "configs" / "systems.yaml")["A_vector"], w)
+    cfg = apply_world_selection(load_systems(DEV / "configs" / "systems.yaml")["A_vector"], w)
 
     def oracle(kw):   # answers correctly whenever the gold memory text was served
         task = next(t for t in w.tasks if t.query in kw["messages"][0]["content"])

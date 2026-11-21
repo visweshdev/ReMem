@@ -1,8 +1,8 @@
 import random
 
-from remem.eval.agent import AgentConfig, SimAgent
-from remem.eval.metrics import auc, brier_and_ece, mean_ci
-from remem.eval.world import FAMILIES, make_world, parse_text
+from remem_sim.eval.agent import AgentConfig, SimAgent
+from remem_sim.eval.metrics import auc, brier_and_ece, mean_ci
+from remem_sim.eval.world import FAMILIES, make_world, parse_text
 
 
 def test_world_is_deterministic_and_truth_consistent():

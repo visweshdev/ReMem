@@ -21,7 +21,8 @@ from dataclasses import replace
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT.parent))   # the repository root, for `remem`
+sys.path.insert(0, str(ROOT))          # dev/, for `remem_sim`
 
 SYSTEMS = ("A_vector", "B_static", "C_remem")
 _EMB = None
@@ -39,10 +40,10 @@ def _init(model: str, threads: int) -> None:
 def run_one(job: tuple[str, int]) -> list[dict]:
     from remem.backends import VectorBackend
     from remem.config import load_systems
-    from remem.eval.agent import AgentConfig
-    from remem.eval.metrics import summarize_run
-    from remem.eval.runner import apply_world_selection, build_pools, run_stream
-    from remem.eval.world import make_world
+    from remem_sim.eval.agent import AgentConfig
+    from remem_sim.eval.metrics import summarize_run
+    from remem_sim.eval.runner import apply_world_selection, build_pools, run_stream
+    from remem_sim.eval.world import make_world
 
     family, seed = job
     world = make_world(family, seed)
@@ -76,7 +77,7 @@ def _ci(xs: list[float]) -> tuple[float, float]:
 
 
 def main() -> None:
-    from remem.eval.protocol import HEADLINE_FAMILIES, TEST_SEEDS
+    from remem_sim.eval.protocol import HEADLINE_FAMILIES, TEST_SEEDS
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", default="all-MiniLM-L6-v2")
     ap.add_argument("--families", default=",".join(HEADLINE_FAMILIES))

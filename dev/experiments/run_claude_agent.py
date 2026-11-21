@@ -20,15 +20,16 @@ from dataclasses import replace
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT.parent))   # the repository root, for `remem`
+sys.path.insert(0, str(ROOT))          # dev/, for `remem_sim`
 
 from remem.backends import VectorBackend  # noqa: E402
-from remem.claude_agent import PRICES, ClaudeAgent  # noqa: E402
 from remem.config import load_systems  # noqa: E402
-from remem.eval.metrics import summarize_run  # noqa: E402
-from remem.eval.pools import make_embedder  # noqa: E402
-from remem.eval.runner import apply_world_selection, build_pools, run_stream  # noqa: E402
-from remem.eval.world import T0, make_world  # noqa: E402
+from remem_sim.claude_agent import PRICES, ClaudeAgent  # noqa: E402
+from remem_sim.eval.metrics import summarize_run  # noqa: E402
+from remem_sim.eval.pools import make_embedder  # noqa: E402
+from remem_sim.eval.runner import apply_world_selection, build_pools, run_stream  # noqa: E402
+from remem_sim.eval.world import T0, make_world  # noqa: E402
 
 
 def main() -> None:

@@ -2,7 +2,7 @@
 
 import numpy as np
 
-from remem.baselines.rmm import RMMReranker
+from remem_sim.baselines.rmm import RMMReranker
 
 
 def _setup(seed=0, d=12):

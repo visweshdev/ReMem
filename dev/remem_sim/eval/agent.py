@@ -23,8 +23,8 @@ from __future__ import annotations
 import random
 from dataclasses import dataclass, field
 
-from remem.eval.world import Task, World, parse_text
 from remem.types import AgentTrace
+from remem_sim.eval.world import Task, World, parse_text
 
 
 @dataclass

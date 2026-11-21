@@ -15,9 +15,9 @@ from pathlib import Path
 from typing import Any
 
 from remem.backends import VectorBackend
-from remem.eval.runner import Pools, build_pools
-from remem.eval.world import LEXICON, make_world
 from remem.offline import ConceptHashEmbedder
+from remem_sim.eval.runner import Pools, build_pools
+from remem_sim.eval.world import LEXICON, make_world
 
 EMBED_DIM = 256
 
@@ -29,7 +29,7 @@ def make_embedder() -> ConceptHashEmbedder:
 def _key(family: str, seed: int, backend: str, k: int, overrides: dict[str, Any] | None) -> str:
     from dataclasses import asdict
 
-    from remem.eval.world import FAMILIES
+    from remem_sim.eval.world import FAMILIES
     fam_params = asdict(FAMILIES[family]) if family in FAMILIES else {}
     blob = json.dumps([family, seed, backend, k, overrides or {}, EMBED_DIM, fam_params], sort_keys=True, default=str)
     return hashlib.sha1(blob.encode()).hexdigest()[:12]

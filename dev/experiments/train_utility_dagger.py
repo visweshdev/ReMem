@@ -30,15 +30,16 @@ from pathlib import Path
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT.parent))   # the repository root, for `remem`
+sys.path.insert(0, str(ROOT))          # dev/, for `remem_sim`
 
 from remem.config import load_systems  # noqa: E402
-from remem.eval.agent import AgentConfig  # noqa: E402
-from remem.eval.pools import ensure_pools, load_pools, make_embedder  # noqa: E402
-from remem.eval.protocol import DEV_SEEDS, HEADLINE_FAMILIES, TRAIN_FAMILIES, TRAIN_SEEDS, train_reader_mode  # noqa: E402
-from remem.eval.runner import apply_world_selection, run_stream  # noqa: E402
-from remem.eval.world import make_world  # noqa: E402
 from remem.utility import LearnedUtility  # noqa: E402
+from remem_sim.eval.agent import AgentConfig  # noqa: E402
+from remem_sim.eval.pools import ensure_pools, load_pools, make_embedder  # noqa: E402
+from remem_sim.eval.protocol import DEV_SEEDS, HEADLINE_FAMILIES, TRAIN_FAMILIES, TRAIN_SEEDS, train_reader_mode  # noqa: E402
+from remem_sim.eval.runner import apply_world_selection, run_stream  # noqa: E402
+from remem_sim.eval.world import make_world  # noqa: E402
 
 GROUPS = ("static", "history", "outcome", "contradiction")
 CACHE = ROOT / "results" / "cache" / "pools"
