@@ -11,6 +11,8 @@ Both expose the same interface:
 
 `rank_score` orders candidates; `probability` is a [0,1] estimate used by cost-aware
 selection; `components` maps feature name -> additive contribution (for explanations).
+
+EXPERIMENTAL: this module learns from task feedback, which has not been tested on real data (README, Limitations).
 """
 
 from __future__ import annotations

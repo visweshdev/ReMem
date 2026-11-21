@@ -16,6 +16,8 @@ Design rules that distinguish this from frequency-based pruning:
   4. Memories with substantial accumulated credit are protected from ARCHIVED.
 
 `FrequencyPrune` is the *control* policy used in the evaluation to show what rule 1 avoids.
+
+EXPERIMENTAL: this module learns from task feedback, which has not been tested on real data (README, Limitations).
 """
 
 from __future__ import annotations

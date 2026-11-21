@@ -4,6 +4,19 @@ All notable changes are listed here. Versions follow [semantic versioning](https
 
 ## [Unreleased]
 
+### Added
+- Real-data evaluation: `experiments/run_real_knowledge_update.py` runs LongMemEval's 72 knowledge-update questions end to end
+  with a local LLM (fact extraction, answering) and a larger local judge. Results in `results/real_knowledge_update/`.
+  ReMem scores 45.8% vs 63.9% for plain search over raw chat: supersession on LLM-extracted keys retired correct facts.
+- "Newest fact per key" baselines (rule only, no learning) in the simulator configs.
+
+### Changed
+- The README reports only real-benchmark results (LongMemEval with a real LLM, LongMemEval retrieval). The synthetic simulator
+  stays in the repository for development; its output is no longer presented as evidence.
+- The simulator no longer hands ReMem the benchmark's own single-valued attributes; ReMem must learn them (`schema_given` keeps the
+  old setting as a comparison). The learned scoring model was retrained accordingly.
+- `docs/make_figures.py` reads its numbers from result files; the synthetic charts were removed from the README.
+
 ## [0.2.0] - 2026-11-01
 
 ### Added

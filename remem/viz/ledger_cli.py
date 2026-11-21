@@ -6,7 +6,7 @@
     python -m remem.viz.ledger_cli <ledger.json> --id fact_00012         # full record + lifecycle
     python -m remem.viz.ledger_cli <ledger.json> --contradictions
 
-Ledgers are written by experiments/run_benchmark.py under results/runs/ (or by
+Ledgers are the ledger.json inside every ReMem store (written by
 `MemoryLedger.save`). The lifecycle line is a run-length encoding of the memory's event log,
 e.g.  CREATED -> RETRIEVED -> NO_CONTRIBUTION ... [RETRIEVED x12, NO_CONTRIBUTION x9] ; STATE_CHANGE: ACTIVE -> LOW_VALUE ; utility 0.58 -> 0.31 (DOWN)
 """

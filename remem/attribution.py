@@ -22,6 +22,8 @@ Methods (`AttributionConfig.method`):
 Known limitations (also in the README): citations are self-reported; "used" is lexical and is
 also true of a decoy that merely mentions the answer value; LOO assumes a replayable,
 deterministic agent and costs one extra agent call per memory; none of this proves causality.
+
+EXPERIMENTAL: this module learns from task feedback, which has not been tested on real data (README, Limitations).
 """
 
 from __future__ import annotations

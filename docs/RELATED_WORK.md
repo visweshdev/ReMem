@@ -15,8 +15,8 @@ Treat "not found" as "not seen in this check".
 ## Benchmarks (not memory systems)
 
 LongMemEval and LoCoMo are long-conversation memory benchmarks (Zep's paper evaluates on a LongMemEval variant with ~115k-token
-conversations; Mem0's evaluates on LoCoMo). **Neither was run here, so no LongMemEval/LoCoMo number in this project is ours.**
-ReMem uses its own seeded, controlled tasks (`remem/eval/world.py`) because it needs a downstream task-success signal.
+conversations; Mem0's evaluates on LoCoMo). ReMem is evaluated on LongMemEval (knowledge-update QA with a real LLM, and retrieval);
+LoCoMo was not run. See the README for the results.
 
 ## RMM in more detail (method sections read 2026-10-25)
 
@@ -37,16 +37,9 @@ From §6.1–6.3 and §7.1 of [arXiv 2503.08026](https://arxiv.org/html/2503.080
 |---|---|---|
 | What is learned | one global reranker (embedding adaptation) shared by all memories | per-memory statistics (Beta posteriors, per task class) fed to a small utility model |
 | Feedback signal | citation only (+1 / −1) | citation + value use, gated by task success; blame on failure; optional counterfactual replay |
-| Generalises to never-seen memories | yes, in principle (it adapts the embedding space) | no: a new memory starts at the prior (the `distractor_norecur` control shows no gain) |
+| Generalises to never-seen memories | yes, in principle (it adapts the embedding space) | no: a new memory starts at the prior |
 | Outdated facts | via summarisation (Prospective Reflection) | explicit supersession, validity intervals, `as_of` queries |
 | Retention / token budget | not described | explicit state machine; knapsack under a budget |
-
-**RMM-style baseline in this repository.** `remem/baselines/rmm.py` reimplements §6 (residual linear adaptation, Gumbel sampling,
-citation reward, REINFORCE). It is *our* reimplementation, not the authors' code, and approximates log P(selected) per item. Its gradient
-is checked against numerical differentiation (`tests/test_rmm.py`). Learning rate and temperature were chosen on dev seeds
-(`experiments/tune_rmm.py`). Prospective Reflection is not reimplemented. Results are in the README; on this benchmark more RMM-style
-learning made results *worse* on dev seeds (the best setting was the smallest learning rate), which may reflect our weak hash embeddings,
-the small amount of data per world, or our approximation, not RMM as published.
 
 ## What this means for ReMem's claims
 
@@ -56,5 +49,5 @@ the small amount of data per world, or our approximation, not RMM as published.
   both keep superseded facts for temporal reasoning. ReMem's version is rule-based with learned attribute cardinality and outcome-triggered
   invalidation; those specifics were not found in the papers, but that is a weak statement given the depth of this check.
 * What ReMem offers is the **combination** (outcome-derived utility, an explicit retention state machine, supersession, token-budgeted
-  selection) in one backend-agnostic layer, plus a controlled evaluation with ablations, a control family and failure analysis. Whether it
-  beats these systems with real LLM agents is **untested**.
+  selection) in one backend-agnostic layer. On real data (LongMemEval) it has not beaten plain search, and it has not been compared with
+  these systems.

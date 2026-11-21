@@ -22,12 +22,14 @@ ruff check .                   # style checks; CI runs the same command
 
 ## Reporting results honestly
 
-ReMem reports where it does **not** help as clearly as where it does. Changes to evaluation code should keep
-test seeds (0-14) untouched for tuning, and new results should be reported whatever they show.
+ReMem reports where it does **not** help as clearly as where it does. Report results only from public data and real
+models, and report them whatever they show.
 
 ## Where things live
 
 - `remem/`: the library (`api.py` is the main entry point; `cli.py` is the `remem` command)
 - `tests/`: unit and integration tests
-- `experiments/`: scripts that produce every number in the README
+- `experiments/`: scripts that produce every number in the README (real data only)
+- `dev/`: the development simulator (synthetic worlds, simulated reader). Useful for checking a mechanism; its numbers
+  are never reported as evidence. Tests: `python -m pytest dev/tests -q`
 - `docs/`: design notes, related work, figure and video generators

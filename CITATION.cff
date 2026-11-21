@@ -18,5 +18,5 @@ keywords:
 abstract: >-
   A memory layer for AI agents that learns from task outcomes which memories help,
   supersedes replaced facts, retires useless ones without deleting them, and selects
-  context under a token budget. Includes a controlled evaluation that reports its
-  negative results (no measurable gain with a small real LLM, none on LongMemEval).
+  context under a token budget. Evaluated on LongMemEval with a real LLM, where it does
+  not beat plain search; the negative results are reported.
