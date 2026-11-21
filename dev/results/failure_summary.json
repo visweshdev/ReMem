@@ -1,0 +1,260 @@
+{
+ "counts": {
+  "A_vector": {
+   "distractor": {
+    "fail_despite_gold": 697,
+    "irrelevant_retrieved": 837,
+    "gold_pooled_not_selected": 466,
+    "success_without_memory": 170,
+    "gold_not_in_pool": 203
+   },
+   "long_horizon": {
+    "gold_pooled_not_selected": 726,
+    "irrelevant_retrieved": 898,
+    "fail_despite_gold": 742,
+    "success_without_memory": 201,
+    "gold_not_in_pool": 4
+   },
+   "contradiction": {
+    "irrelevant_retrieved": 764,
+    "gold_pooled_not_selected": 447,
+    "success_without_memory": 111,
+    "fail_despite_gold": 1780,
+    "outdated_preferred": 1391,
+    "gold_not_in_pool": 18
+   },
+   "rare_critical": {
+    "irrelevant_retrieved": 907,
+    "fail_despite_gold": 796,
+    "gold_pooled_not_selected": 431,
+    "success_without_memory": 83,
+    "gold_not_in_pool": 45
+   },
+   "useless_frequent": {
+    "fail_despite_gold": 771,
+    "irrelevant_retrieved": 862,
+    "gold_pooled_not_selected": 376,
+    "success_without_memory": 102,
+    "gold_not_in_pool": 36
+   },
+   "budget_tight": {
+    "gold_pooled_not_selected": 2417,
+    "utility_demoted_gold": 129,
+    "success_without_memory": 456,
+    "irrelevant_retrieved": 779,
+    "gold_not_in_pool": 469,
+    "fail_despite_gold": 242
+   },
+   "state_change": {
+    "fail_despite_gold": 2048,
+    "irrelevant_retrieved": 687,
+    "gold_pooled_not_selected": 378,
+    "outdated_preferred": 1853,
+    "success_without_memory": 84,
+    "gold_not_in_pool": 60
+   },
+   "distractor_norecur": {
+    "fail_despite_gold": 134,
+    "irrelevant_retrieved": 185,
+    "gold_not_in_pool": 98,
+    "success_without_memory": 47,
+    "gold_pooled_not_selected": 143
+   },
+   "budget_medium": {
+    "gold_pooled_not_selected": 2061,
+    "irrelevant_retrieved": 1033,
+    "success_without_memory": 389,
+    "fail_despite_gold": 476,
+    "gold_not_in_pool": 251,
+    "utility_demoted_gold": 111
+   }
+  },
+  "B_static": {
+   "distractor": {
+    "fail_despite_gold": 697,
+    "irrelevant_retrieved": 837,
+    "gold_pooled_not_selected": 467,
+    "success_without_memory": 170,
+    "gold_not_in_pool": 203,
+    "utility_demoted_gold": 1
+   },
+   "long_horizon": {
+    "gold_pooled_not_selected": 728,
+    "irrelevant_retrieved": 898,
+    "fail_despite_gold": 742,
+    "success_without_memory": 202,
+    "utility_demoted_gold": 2,
+    "gold_not_in_pool": 4
+   },
+   "contradiction": {
+    "irrelevant_retrieved": 763,
+    "gold_pooled_not_selected": 432,
+    "success_without_memory": 111,
+    "fail_despite_gold": 1312,
+    "outdated_preferred": 914,
+    "utility_demoted_gold": 5,
+    "gold_not_in_pool": 18
+   },
+   "rare_critical": {
+    "irrelevant_retrieved": 907,
+    "fail_despite_gold": 796,
+    "gold_pooled_not_selected": 432,
+    "success_without_memory": 84,
+    "gold_not_in_pool": 45,
+    "utility_demoted_gold": 1
+   },
+   "useless_frequent": {
+    "fail_despite_gold": 770,
+    "irrelevant_retrieved": 862,
+    "gold_pooled_not_selected": 383,
+    "success_without_memory": 102,
+    "gold_not_in_pool": 36,
+    "utility_demoted_gold": 7
+   },
+   "budget_tight": {
+    "gold_pooled_not_selected": 2422,
+    "utility_demoted_gold": 134,
+    "success_without_memory": 456,
+    "irrelevant_retrieved": 779,
+    "gold_not_in_pool": 469,
+    "fail_despite_gold": 238
+   },
+   "state_change": {
+    "fail_despite_gold": 1519,
+    "irrelevant_retrieved": 682,
+    "gold_pooled_not_selected": 333,
+    "outdated_preferred": 1297,
+    "success_without_memory": 82,
+    "utility_demoted_gold": 11,
+    "gold_not_in_pool": 60
+   },
+   "distractor_norecur": {
+    "fail_despite_gold": 134,
+    "irrelevant_retrieved": 185,
+    "gold_not_in_pool": 98,
+    "success_without_memory": 47,
+    "gold_pooled_not_selected": 144,
+    "utility_demoted_gold": 2
+   },
+   "budget_medium": {
+    "gold_pooled_not_selected": 2047,
+    "irrelevant_retrieved": 1034,
+    "success_without_memory": 387,
+    "fail_despite_gold": 480,
+    "gold_not_in_pool": 251,
+    "utility_demoted_gold": 112
+   }
+  },
+  "C_remem": {
+   "distractor": {
+    "fail_despite_gold": 646,
+    "irrelevant_retrieved": 734,
+    "gold_pooled_not_selected": 208,
+    "utility_demoted_gold": 35,
+    "success_without_memory": 108,
+    "gold_not_in_pool": 203
+   },
+   "long_horizon": {
+    "gold_pooled_not_selected": 328,
+    "irrelevant_retrieved": 793,
+    "fail_despite_gold": 728,
+    "success_without_memory": 93,
+    "utility_demoted_gold": 38,
+    "gold_not_in_pool": 4
+   },
+   "contradiction": {
+    "irrelevant_retrieved": 690,
+    "gold_pooled_not_selected": 183,
+    "success_without_memory": 41,
+    "fail_despite_gold": 694,
+    "outdated_preferred": 48,
+    "utility_demoted_gold": 24,
+    "gold_not_in_pool": 18
+   },
+   "rare_critical": {
+    "irrelevant_retrieved": 759,
+    "fail_despite_gold": 711,
+    "gold_pooled_not_selected": 166,
+    "success_without_memory": 37,
+    "gold_not_in_pool": 45,
+    "utility_demoted_gold": 14
+   },
+   "useless_frequent": {
+    "fail_despite_gold": 727,
+    "irrelevant_retrieved": 773,
+    "gold_pooled_not_selected": 205,
+    "success_without_memory": 61,
+    "utility_demoted_gold": 36,
+    "gold_not_in_pool": 36
+   },
+   "budget_tight": {
+    "gold_pooled_not_selected": 1972,
+    "utility_demoted_gold": 71,
+    "success_without_memory": 371,
+    "irrelevant_retrieved": 696,
+    "gold_not_in_pool": 469,
+    "fail_despite_gold": 255
+   },
+   "state_change": {
+    "fail_despite_gold": 647,
+    "irrelevant_retrieved": 656,
+    "gold_pooled_not_selected": 261,
+    "outdated_preferred": 72,
+    "utility_demoted_gold": 38,
+    "success_without_memory": 69,
+    "gold_not_in_pool": 60
+   },
+   "distractor_norecur": {
+    "fail_despite_gold": 135,
+    "irrelevant_retrieved": 185,
+    "gold_not_in_pool": 98,
+    "success_without_memory": 45,
+    "gold_pooled_not_selected": 140,
+    "utility_demoted_gold": 5
+   },
+   "budget_medium": {
+    "gold_pooled_not_selected": 953,
+    "irrelevant_retrieved": 814,
+    "success_without_memory": 195,
+    "fail_despite_gold": 526,
+    "gold_not_in_pool": 251,
+    "utility_demoted_gold": 47
+   }
+  }
+ },
+ "n_tasks": {
+  "A_vector": {
+   "distractor": 4500,
+   "long_horizon": 4800,
+   "contradiction": 4500,
+   "rare_critical": 4740,
+   "useless_frequent": 4500,
+   "budget_tight": 4500,
+   "state_change": 4500,
+   "distractor_norecur": 1050,
+   "budget_medium": 4500
+  },
+  "B_static": {
+   "distractor": 4500,
+   "long_horizon": 4800,
+   "contradiction": 4500,
+   "rare_critical": 4740,
+   "useless_frequent": 4500,
+   "budget_tight": 4500,
+   "state_change": 4500,
+   "distractor_norecur": 1050,
+   "budget_medium": 4500
+  },
+  "C_remem": {
+   "distractor": 4500,
+   "long_horizon": 4800,
+   "contradiction": 4500,
+   "rare_critical": 4740,
+   "useless_frequent": 4500,
+   "budget_tight": 4500,
+   "state_change": 4500,
+   "distractor_norecur": 1050,
+   "budget_medium": 4500
+  }
+ }
+}

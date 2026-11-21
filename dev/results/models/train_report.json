@@ -1,0 +1,107 @@
+{
+ "n_rows": 42501,
+ "positive_rate": 0.40554339897884756,
+ "seeds": [
+  100,
+  101,
+  102,
+  103
+ ],
+ "families": [
+  "distractor",
+  "long_horizon",
+  "contradiction",
+  "rare_critical",
+  "useless_frequent",
+  "budget_tight",
+  "state_change",
+  "distractor_norecur"
+ ],
+ "models": {
+  "utility_static": {
+   "groups": [
+    "static",
+    "history"
+   ],
+   "chosen_l2": 100.0,
+   "cv": {
+    "0.1": {
+     "cv_logloss": 0.5686032251450053,
+     "cv_auc": 0.7542418129059854
+    },
+    "1.0": {
+     "cv_logloss": 0.5686015092578075,
+     "cv_auc": 0.7542426982868056
+    },
+    "10.0": {
+     "cv_logloss": 0.5685848941455531,
+     "cv_auc": 0.754253628815035
+    },
+    "100.0": {
+     "cv_logloss": 0.568467924885373,
+     "cv_auc": 0.7542883318128796
+    }
+   },
+   "train_logloss": 0.5623396866771608,
+   "converged": true,
+   "weights": {
+    "sim": 0.2517947176876805,
+    "sim_gap": 0.2906782685997699,
+    "rank_inv": 0.35886142139396465,
+    "recency": 0.21798565927420932,
+    "confidence": 0.1446213254932864,
+    "log_tokens": 0.10380045010109396,
+    "log_ctx": 0.7119102684557871,
+    "retr_recency": 0.12726632808751137
+   },
+   "bias": -0.43911205911169576
+  },
+  "utility_full": {
+   "groups": [
+    "static",
+    "history",
+    "outcome",
+    "contradiction"
+   ],
+   "chosen_l2": 1.0,
+   "cv": {
+    "0.1": {
+     "cv_logloss": 0.4486093084409577,
+     "cv_auc": 0.8600015929173372
+    },
+    "1.0": {
+     "cv_logloss": 0.44860445321426545,
+     "cv_auc": 0.85999984502042
+    },
+    "10.0": {
+     "cv_logloss": 0.44873074426959936,
+     "cv_auc": 0.8598823274253726
+    },
+    "100.0": {
+     "cv_logloss": 0.4515309963033401,
+     "cv_auc": 0.8580312965943729
+    }
+   },
+   "train_logloss": 0.44617718986165406,
+   "converged": true,
+   "weights": {
+    "sim": 0.11089080149263403,
+    "sim_gap": 0.14012548135549882,
+    "rank_inv": 0.6775677542957469,
+    "recency": -0.0667739538050711,
+    "confidence": -0.001690692502814105,
+    "log_tokens": -0.031188815088264685,
+    "log_ctx": 0.08456545988273605,
+    "retr_recency": 0.214649801927944,
+    "contrib_rate": -1.7737755289441348,
+    "class_rate": 1.8887645732004763,
+    "waste_rate": -1.498548798874619,
+    "blame_rate": 0.01665853366159992,
+    "post_std": -0.8232699078755705,
+    "stale": 0.0,
+    "log_contra": 0.02565790418924638
+   },
+   "bias": -0.5013981982177713
+  }
+ }
+}

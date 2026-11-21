@@ -1,0 +1,226 @@
+{
+ "first|task_success|C_remem - A_vector": {
+  "delta": 0.13090817761703838,
+  "ci95": 0.017873920068060305
+ },
+ "first|task_success|C_remem - B_static": {
+  "delta": 0.09773159031545105,
+  "ci95": 0.01829199624107949
+ },
+ "first|task_success|B_static - A_vector": {
+  "delta": 0.03317658730158731,
+  "ci95": 0.00918403799635674
+ },
+ "first|task_success|C_remem - A_newest_key": {
+  "delta": 0.05519389190275267,
+  "ci95": 0.013842200989585603
+ },
+ "first|task_success|C_remem - A_newest_key_schema": {
+  "delta": 0.05519389190275267,
+  "ci95": 0.013842200989585603
+ },
+ "first|task_success|A_newest_key - A_vector": {
+  "delta": 0.07571428571428568,
+  "ci95": 0.012082827950960691
+ },
+ "first|task_success|schema_given - A_vector": {
+  "delta": 0.13462246333132413,
+  "ci95": 0.018061812062192942
+ },
+ "first|tokens_per_task|C_remem - A_vector": {
+  "delta": -9.367347875226042,
+  "ci95": 0.8541189040708966
+ },
+ "first|tokens_per_task|C_remem - B_static": {
+  "delta": -9.386702104681536,
+  "ci95": 0.85056097293094
+ },
+ "first|tokens_per_task|B_static - A_vector": {
+  "delta": 0.019354229455494476,
+  "ci95": 0.06125733029443773
+ },
+ "first|tokens_per_task|C_remem - A_newest_key": {
+  "delta": -9.26455422443239,
+  "ci95": 0.8886130248119937
+ },
+ "first|tokens_per_task|C_remem - A_newest_key_schema": {
+  "delta": -9.263919303797469,
+  "ci95": 0.8890086024437844
+ },
+ "first|tokens_per_task|A_newest_key - A_vector": {
+  "delta": -0.102793650793654,
+  "ci95": 0.07744819535210354
+ },
+ "first|tokens_per_task|schema_given - A_vector": {
+  "delta": -9.510046287924455,
+  "ci95": 0.8495407481204529
+ },
+ "first|context_precision|C_remem - A_vector": {
+  "delta": 0.03961302266918751,
+  "ci95": 0.007316041307254342
+ },
+ "first|context_precision|C_remem - B_static": {
+  "delta": 0.039328983262864624,
+  "ci95": 0.007462251809712352
+ },
+ "first|context_precision|B_static - A_vector": {
+  "delta": 0.00028403940632288163,
+  "ci95": 0.00045990149482345714
+ },
+ "first|context_precision|C_remem - A_newest_key": {
+  "delta": 0.03919783204465107,
+  "ci95": 0.007476977933920297
+ },
+ "first|context_precision|C_remem - A_newest_key_schema": {
+  "delta": 0.03919783204465107,
+  "ci95": 0.007476977933920297
+ },
+ "first|context_precision|A_newest_key - A_vector": {
+  "delta": 0.00041519062453642677,
+  "ci95": 0.00038090104846508774
+ },
+ "first|context_precision|schema_given - A_vector": {
+  "delta": 0.040774120383180776,
+  "ci95": 0.007355529687464516
+ },
+ "first|gold_recall|C_remem - A_vector": {
+  "delta": 0.057198001576256645,
+  "ci95": 0.019931341655877198
+ },
+ "first|gold_recall|C_remem - B_static": {
+  "delta": 0.05580189707032881,
+  "ci95": 0.0207826565921596
+ },
+ "first|gold_recall|B_static - A_vector": {
+  "delta": 0.0013961045059278346,
+  "ci95": 0.002299930571314129
+ },
+ "first|gold_recall|C_remem - A_newest_key": {
+  "delta": 0.05516791534366981,
+  "ci95": 0.020289381252204076
+ },
+ "first|gold_recall|C_remem - A_newest_key_schema": {
+  "delta": 0.05516791534366981,
+  "ci95": 0.020289381252204076
+ },
+ "first|gold_recall|A_newest_key - A_vector": {
+  "delta": 0.0020300862325868326,
+  "ci95": 0.0018825217517706688
+ },
+ "first|gold_recall|schema_given - A_vector": {
+  "delta": 0.05809533497891073,
+  "ci95": 0.019979103058928114
+ },
+ "latest|task_success|C_remem - A_vector": {
+  "delta": 0.052241510950371696,
+  "ci95": 0.012966515863412511
+ },
+ "latest|task_success|C_remem - B_static": {
+  "delta": 0.05106492364878439,
+  "ci95": 0.013655826827725424
+ },
+ "latest|task_success|B_static - A_vector": {
+  "delta": 0.0011765873015873026,
+  "ci95": 0.0017936439246914416
+ },
+ "latest|task_success|C_remem - A_newest_key": {
+  "delta": 0.05789230460116535,
+  "ci95": 0.013956519811194794
+ },
+ "latest|task_success|C_remem - A_newest_key_schema": {
+  "delta": 0.05789230460116535,
+  "ci95": 0.013956519811194794
+ },
+ "latest|task_success|A_newest_key - A_vector": {
+  "delta": -0.0056507936507936545,
+  "ci95": 0.002015599328824307
+ },
+ "latest|task_success|schema_given - A_vector": {
+  "delta": 0.05325738396624479,
+  "ci95": 0.01303089257229
+ },
+ "latest|tokens_per_task|C_remem - A_vector": {
+  "delta": -9.153570097448263,
+  "ci95": 0.8186328171430793
+ },
+ "latest|tokens_per_task|C_remem - B_static": {
+  "delta": -9.17292432690376,
+  "ci95": 0.8119057155235009
+ },
+ "latest|tokens_per_task|B_static - A_vector": {
+  "delta": 0.019354229455494476,
+  "ci95": 0.06125733029443773
+ },
+ "latest|tokens_per_task|C_remem - A_newest_key": {
+  "delta": -9.050776446654611,
+  "ci95": 0.854115975526292
+ },
+ "latest|tokens_per_task|C_remem - A_newest_key_schema": {
+  "delta": -9.050141526019692,
+  "ci95": 0.8544783314348282
+ },
+ "latest|tokens_per_task|A_newest_key - A_vector": {
+  "delta": -0.102793650793654,
+  "ci95": 0.07744819535210354
+ },
+ "latest|tokens_per_task|schema_given - A_vector": {
+  "delta": -9.510046287924455,
+  "ci95": 0.8495407481204529
+ },
+ "latest|context_precision|C_remem - A_vector": {
+  "delta": 0.03738283002490344,
+  "ci95": 0.007021423081754876
+ },
+ "latest|context_precision|C_remem - B_static": {
+  "delta": 0.037098790618580554,
+  "ci95": 0.00715337010810128
+ },
+ "latest|context_precision|B_static - A_vector": {
+  "delta": 0.00028403940632288163,
+  "ci95": 0.00045990149482345714
+ },
+ "latest|context_precision|C_remem - A_newest_key": {
+  "delta": 0.03696763940036701,
+  "ci95": 0.007174707245757762
+ },
+ "latest|context_precision|C_remem - A_newest_key_schema": {
+  "delta": 0.03696763940036701,
+  "ci95": 0.007174707245757762
+ },
+ "latest|context_precision|A_newest_key - A_vector": {
+  "delta": 0.00041519062453642677,
+  "ci95": 0.00038090104846508774
+ },
+ "latest|context_precision|schema_given - A_vector": {
+  "delta": 0.040774120383180776,
+  "ci95": 0.007355529687464516
+ },
+ "latest|gold_recall|C_remem - A_vector": {
+  "delta": 0.056676362790488585,
+  "ci95": 0.019956302656809907
+ },
+ "latest|gold_recall|C_remem - B_static": {
+  "delta": 0.05528025828456075,
+  "ci95": 0.02079956367151568
+ },
+ "latest|gold_recall|B_static - A_vector": {
+  "delta": 0.0013961045059278346,
+  "ci95": 0.002299930571314129
+ },
+ "latest|gold_recall|C_remem - A_newest_key": {
+  "delta": 0.05464627655790175,
+  "ci95": 0.02029325892563543
+ },
+ "latest|gold_recall|C_remem - A_newest_key_schema": {
+  "delta": 0.05464627655790175,
+  "ci95": 0.02029325892563543
+ },
+ "latest|gold_recall|A_newest_key - A_vector": {
+  "delta": 0.0020300862325868326,
+  "ci95": 0.0018825217517706688
+ },
+ "latest|gold_recall|schema_given - A_vector": {
+  "delta": 0.05809533497891073,
+  "ci95": 0.019979103058928114
+ }
+}
