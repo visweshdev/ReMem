@@ -2,6 +2,8 @@
 
 Use Python 3.12 and a fresh environment. The release workflow builds a wheel and source distribution, checks metadata and hashes, and installs each artifact in separate Windows and Linux jobs. A version tag matching `pyproject.toml` publishes the tested artifacts on GitHub Releases. [Release workflow](../.github/workflows/release.yml)
 
+Download the wheel from the release and install it with `python -m pip install remem-0.3.0-py3-none-any.whl`. [ReMem v0.3.0](https://github.com/visweshdev/ReMem/releases/tag/v0.3.0)
+
 ```bash
 python -m venv .venv
 source .venv/bin/activate  # PowerShell: .venv\Scripts\Activate.ps1

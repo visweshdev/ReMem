@@ -232,7 +232,7 @@ to real BPE counts.
 <summary><b>Reproduce the experiments</b> (all free and local)</summary>
 
 ```bash
-pip install -e ".[dev,embeddings]"                          # tests, lint, MiniLM embeddings
+pip install -e ".[dev,embeddings,llm]"                      # tests, lint, MiniLM embeddings, local-model client
 python -m pytest tests -q                                   # unit tests, under a minute
 # LongMemEval data: longmemeval_s_cleaned.json from https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned, in data/
 python experiments/run_longmemeval.py --data data/longmemeval_s_cleaned.json        # retrieval, no LLM needed

@@ -2,13 +2,14 @@
 
 All notable changes are listed here. Versions follow [semantic versioning](https://semver.org/).
 
-## [Unreleased]
+## [0.3.0] - 2026-11-22
 
 ### Added
 - GitHub Actions jobs install and test the optional integrations. Release builds verify the wheel and source archive in clean
   Windows and Linux jobs before publishing checksummed assets to GitHub Releases.
 - The Python feedback API accepts an isolated replay callback for leave-one-out credit assignment. The support-routing example
   exercises persisted sessions and reports held-out task success, retrieval latency, context tokens, and storage growth.
+- The optional MCP server supports both major versions of the Python SDK and tests both in CI.
 - Real-data evaluation: `experiments/run_real_knowledge_update.py` runs LongMemEval's 72 knowledge-update questions end to end
   with a local LLM (fact extraction, answering) and a larger local judge. Results in `results/real_knowledge_update/`.
   ReMem 0.2 scored 45.8% vs 63.9% for plain search over raw chat because supersession on LLM-extracted keys retired correct facts.
