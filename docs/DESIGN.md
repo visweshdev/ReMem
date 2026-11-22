@@ -43,6 +43,10 @@ The seam is the candidate list: a backend returns candidates; ReMem re-ranks and
 | `remem/llm.py` | OpenAI-compatible embeddings |
 | `remem/viz/ledger_cli.py` | developer inspector |
 
+The high-level API resolves checks before writing a fact to the backend or ledger. Each appended fact records any confirmed
+older and newer fact IDs. On reopen, ReMem restores the latest ledger snapshot and replays later facts using the recorded
+decisions. Saved confirmations therefore survive an unavailable checker or a snapshot that predates the append.
+
 ## 3. Utility target and labels
 
 Target: `P(memory contributes to a successful outcome | features at retrieval time)`. Labels are *observed* (attributed credit ≥ 0.5 on
@@ -67,8 +71,9 @@ LongMemEval retrieval (README §9–§10). Learning from feedback has no real-da
 ## 7. Deviations found while building
 
 1. The contradiction detector must only consider state-asserting roles; otherwise a note ("Earlier question …") could supersede a fact.
-2. A token-level diff gave false conflicts on paraphrases and missed true ones: it now compares value-bearing tokens only, and for declared
-   single-valued attributes the key match suffices (the similarity guard applies only to the cue path).
+2. A token-level diff gave false conflicts on paraphrases and missed changes such as negation. The legacy automatic policy uses
+   value-bearing tokens. In the high-level API, explicit replacements and checker confirmations can retire a fact even when
+   the old and new text share the same value-bearing tokens.
 3. Leave-one-out's discount for "not necessary" memories equalled the contribution threshold; it is now 0.4 (< 0.5).
 4. Retention had to be class-conditional so a memory useless for one task class is not hidden from another.
 5. On real LongMemEval data, supersession on LLM-extracted keys retired correct facts and lowered answer accuracy (README §10).
