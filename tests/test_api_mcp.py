@@ -1,6 +1,7 @@
 """High-level API, persistence, MCP tool functions and vector-store backends."""
 
 import importlib.util
+import sys
 import time
 
 import pytest
@@ -91,6 +92,12 @@ def test_vector_store_backends_match_the_builtin_ranking(backend, embedder):
     module = {"FaissBackend": "faiss", "ChromaBackend": "chromadb"}[backend]
     if importlib.util.find_spec(module) is None:
         pytest.skip(f"{module} not installed")
+    try:
+        importlib.import_module(module)
+    except ImportError as exc:
+        if module == "faiss" and sys.platform == "win32" and "DLL load failed" in str(exc):
+            pytest.skip(f"Faiss native DLL unavailable: {exc}")
+        raise
     import remem.backends as b
     from remem.backends import StoredFact, VectorBackend
     facts = [StoredFact(f"fact_{i}", t, float(i)) for i, t in enumerate([
