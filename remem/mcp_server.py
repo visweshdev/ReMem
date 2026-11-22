@@ -130,9 +130,14 @@ def memory_stats() -> dict[str, Any]:
 
 
 def build_server():
-    from mcp.server.fastmcp import FastMCP
+    from mcp import server
 
-    mcp = FastMCP("remem")
+    server_type = getattr(server, "MCPServer", None)
+    if server_type is None:
+        from mcp.server.fastmcp import FastMCP
+
+        server_type = FastMCP
+    mcp = server_type("remem")
 
     @mcp.tool()
     def remember(text: str, entity: str | None = None, attribute: str | None = None, kind: str = "fact",

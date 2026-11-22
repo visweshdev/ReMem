@@ -47,6 +47,10 @@ jobs:
         include:
           - extras: mcp
             imports: mcp
+            mcp-version: latest
+          - extras: mcp
+            imports: mcp
+            mcp-version: v1
           - extras: langchain
             imports: langchain_core
           - extras: faiss
@@ -63,7 +67,10 @@ jobs:
         with:
           python-version: "3.12"
           cache: pip
-      - run: python -m pip install ".[${{ matrix.extras }}]" pytest
+      - if: matrix.mcp-version == 'v1'
+        run: python -m pip install ".[mcp]" "mcp<2" pytest
+      - if: matrix.mcp-version != 'v1'
+        run: python -m pip install ".[${{ matrix.extras }}]" pytest
       - run: python -m pip check
       - run: python -c "import ${{ matrix.imports }}"
       - run: python -m pytest tests/test_api_mcp.py tests/test_extensions.py -q -rs

@@ -10,7 +10,7 @@ from types import SimpleNamespace
 import pytest
 
 from remem import ReMem
-from remem.extract import UPDATE_PROMPT, LLMUpdateChecker
+from remem.extract import UPDATE_PROMPT, ExtractedFact, LLMUpdateChecker
 
 DAY = 86400.0
 BEST = "The user's personal best time in the charity 5K run is 25:50."
@@ -138,8 +138,23 @@ def test_sources_are_passed_for_out_of_order_insertion_and_strict_reply(embedder
     assert "Newer source: My new time is 25:50." in prompt
 
 
-def test_checked_updates_require_strictly_older_fact(embedder):
-    memory = ReMem(embedder=embedder, update_checker=lambda *_: pytest.fail("checked an equal timestamp"))
+def test_source_checks_require_strictly_older_fact(embedder):
+    client = FakeChat("Yes")
+    memory = ReMem(embedder=embedder, update_checker=LLMUpdateChecker(client, "m"))
     key = {"entity": "runner", "attribute": "record", "when": DAY}
     ids = [memory.add(text, **key) for text in (BEST, VAGUE)]
     assert all(memory.inspect(ident)["state"] == "ACTIVE" for ident in ids)
+    assert client.calls == []
+
+
+def test_facts_from_one_conversation_share_a_recorded_timestamp(embedder):
+    client = FakeChat("Yes")
+    memory = ReMem(embedder=embedder, update_checker=LLMUpdateChecker(client, "m"))
+    records = [ExtractedFact(text, "runner", "record", "state") for text in (BEST, VAGUE)]
+    extractor = SimpleNamespace(extract=lambda _: records)
+
+    ids = memory.add_conversation("My new record is 25:50.", extractor=extractor)
+
+    assert len({memory.inspect(ident)["valid_from"] for ident in ids}) == 1
+    assert all(memory.inspect(ident)["state"] == "ACTIVE" for ident in ids)
+    assert client.calls == []

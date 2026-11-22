@@ -81,7 +81,7 @@ class ContradictionDetector:
                     continue
                 old, new = pair
                 ids = (old.fact_id, new.fact_id)
-                if new.update_policy == "check" and old.time < new.time and ids not in decisions:
+                if new.update_policy == "check" and ids not in decisions:
                     decisions[ids] = confirm(old, new)
         return tuple(ids for ids, confirmed in decisions.items() if confirmed)
 

@@ -183,6 +183,8 @@ class ReMem:
         dependency-free SentenceSplitter, which stores each sentence as a note."""
         from remem.extract import SentenceSplitter
         ex = extractor or SentenceSplitter()
+        if when is None and callable(getattr(type(self.update_checker), "check_with_sources", None)):
+            when = time.time()
         return [self.add(f.text, entity=f.entity, attribute=f.attribute, role=f.role, when=when, update="check",
                          source=text)
                 for f in ex.extract(text)]
@@ -191,6 +193,8 @@ class ReMem:
         check_with_sources = getattr(type(self.update_checker), "check_with_sources", None)
         if check_with_sources is None:
             return bool(self.update_checker(old.original_text, new.original_text))
+        if old.time >= new.time:
+            return False
         old_fact = pending if pending is not None and pending.fact_id == old.fact_id else self._facts[old.fact_id]
         new_fact = pending if pending is not None and pending.fact_id == new.fact_id else self._facts[new.fact_id]
         return bool(self.update_checker.check_with_sources(old.original_text, new.original_text,

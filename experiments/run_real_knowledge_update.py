@@ -101,14 +101,14 @@ Is the model response correct? Answer yes or no only."""
 
 class CachedLLM:
     def __init__(self, client, model: str, cache: Path, serve_as: str | None = None, *, cache_only: bool = False,
-                 seed: int | None = None) -> None:
+                 seed: int | None = None, lock=None) -> None:
         # `model` names the weights (and keys the cache); `serve_as` is the Ollama tag actually called, e.g. a copy of
         # the same weights with a smaller context window (same outputs for prompts that fit, much less RAM)
         self.client, self.model, self.path, self.serve_as = client, model, cache, serve_as or model
         self.cache_only = cache_only
         self.seed = seed
         self.usage: Counter = Counter()
-        self.lock = threading.Lock()
+        self.lock = threading.Lock() if lock is None else lock
         self.cache: dict[str, str] = {}
         if cache.exists():
             for line in cache.read_text(encoding="utf-8").splitlines():
@@ -296,8 +296,9 @@ def main() -> None:
     a.out.mkdir(parents=True, exist_ok=True)
     a.cache.parent.mkdir(parents=True, exist_ok=True)
     client = OpenAI(base_url=a.url, api_key="ollama", timeout=180)
-    llm = CachedLLM(client, a.model, a.cache, a.serve_model, cache_only=a.cache_only, seed=a.seed)
-    extract_llm = (CachedLLM(client, a.extract_model, a.cache, a.serve_extract_model, cache_only=a.cache_only, seed=a.seed)
+    cache_lock = threading.Lock()
+    llm = CachedLLM(client, a.model, a.cache, a.serve_model, cache_only=a.cache_only, seed=a.seed, lock=cache_lock)
+    extract_llm = (CachedLLM(client, a.extract_model, a.cache, a.serve_extract_model, cache_only=a.cache_only, seed=a.seed, lock=cache_lock)
                    if a.extract_model else llm)
     generation = {"model": llm.model, "serve_model": llm.serve_as, "extract_model": extract_llm.model,
                   "serve_extract_model": extract_llm.serve_as, "question_type": a.question_type, "seed": a.seed,

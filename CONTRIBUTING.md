@@ -20,6 +20,8 @@ ruff check .                   # style checks; CI runs the same command
 4. If you change an experiment or a reported number, regenerate the result with the matching script in `experiments/` and
    update the corresponding table and report. For LoCoMo, use the documented split and refresh the reference review if the
    generated answers change. [LoCoMo reproduction steps](docs/FEEDBACK_ABLATION.md#reproduce)
+5. For distribution or evaluation changes, use a clean environment and record the package version and input fingerprints.
+   [Release and evaluation reproduction](docs/REPRODUCING.md)
 
 ## Reporting results honestly
 

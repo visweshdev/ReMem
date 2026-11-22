@@ -4,7 +4,7 @@ Broad keys from an extractor can group together a measured result, a plan, and a
 
 ## Replacement policy
 
-Checked replacement requires a strictly newer timestamp. When an original source turn is available, `LLMUpdateChecker` looks for a transition cue and asks the model to verify an explicit current change in the same property and scope. Ambiguous verdicts, plans, and additions preserve the previous fact. Fact-only checks remain available when source text is absent. A caller that knows an update has occurred can declare it with `update="replace"`.
+The built-in checker requires strictly ordered observations. When an original source turn is available, `LLMUpdateChecker` looks for a transition cue and asks the model to verify an explicit current change in the same property and scope. Ambiguous verdicts, plans, and additions preserve the previous fact. Fact-only checks remain available when source text is absent. A caller that knows an update has occurred can declare it with `update="replace"`.
 
 ReMem saves confirmed replacement IDs and reuses them on reopen. Historical queries can retrieve a superseded fact through its validity interval. This policy trades recall of implicit updates for protection against false replacement.
 
