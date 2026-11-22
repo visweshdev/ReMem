@@ -18,7 +18,7 @@ from dataclasses import dataclass
 
 from remem.attribution import Attribution, Attributor
 from remem.config import SystemConfig
-from remem.contradiction import ContradictionDetector
+from remem.contradiction import Conflict, ContradictionDetector
 from remem.features import FeatureBuilder
 from remem.ledger import MemoryLedger
 from remem.offline import ConceptHashEmbedder
@@ -28,6 +28,7 @@ from remem.types import (
     AgentTrace,
     Candidate,
     Context,
+    MemoryRecord,
     MemState,
     Outcome,
     ScoredCandidate,
@@ -107,13 +108,23 @@ class ReMemSystem:
         return v
 
     # ── ingestion ──────────────────────────────────────────────────────────────
-    def ingest(self, fact: IngestedFact) -> list:
-        rec = self.ledger.register(
+    def prepare_record(self, fact: IngestedFact) -> MemoryRecord:
+        return self.ledger.make_record(
             fact_id=fact.fact_id, text=fact.text, time=fact.time,
             entities=fact.entities, attribute_keys=fact.attribute_keys, confidence=fact.confidence,
             semantic_role=fact.semantic_role, update_policy=fact.update_policy,
         )
-        return self.detector.on_ingest(rec)
+
+    def ingest_record(self, rec: MemoryRecord, confirmed_updates: tuple[tuple[str, str], ...]) -> list[Conflict]:
+        self.ledger.add_record(rec)
+        return self.detector.on_ingest(rec, confirmed_updates)
+
+    def ingest(self, fact: IngestedFact) -> list[Conflict]:
+        rec = self.ledger.get(fact.fact_id)
+        if rec is not None:
+            return self.detector.on_ingest(rec)
+        rec = self.prepare_record(fact)
+        return self.ingest_record(rec, self.detector.confirmed_updates(rec))
 
     # ── retrieval ──────────────────────────────────────────────────────────────
     def retrieve(

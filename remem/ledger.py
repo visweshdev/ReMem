@@ -35,14 +35,21 @@ class MemoryLedger:
         fid = cand.fact_id if cand is not None else kw["fact_id"]
         if fid in self.records:
             return self.records[fid]
+        rec = self.make_record(cand, **kw)
+        self.add_record(rec)
+        return rec
+
+    def make_record(self, cand: Candidate | None = None, **kw) -> MemoryRecord:
+        """Build a record without changing the ledger."""
         src = cand if cand is not None else None
         text = src.text if src else kw["text"]
-        rec = MemoryRecord(
-            fact_id=fid,
+        tokens = src.tokens if src else count_tokens(text)
+        return MemoryRecord(
+            fact_id=src.fact_id if src else kw["fact_id"],
             text=text,
             original_text=text,
-            tokens=src.tokens if src else count_tokens(text),
-            original_tokens=src.tokens if src else count_tokens(text),
+            tokens=tokens,
+            original_tokens=tokens,
             created_step=self.step,
             time=src.time if src else kw["time"],
             confidence=src.confidence if src else kw.get("confidence", 1.0),
@@ -52,11 +59,12 @@ class MemoryLedger:
             update_policy=kw.get("update_policy", "auto"),
             valid_from=src.time if src else kw["time"],
         )
+
+    def add_record(self, rec: MemoryRecord) -> None:
         rec.last_updated_step = self.step
-        self.records[fid] = rec
-        self._df.update(set(content_tokens(text)))
+        self.records[rec.fact_id] = rec
+        self._df.update(set(content_tokens(rec.original_text)))
         self.log(rec, "CREATED", f"t={rec.time:.0f} tokens={rec.tokens}")
-        return rec
 
     def get(self, fact_id: str) -> MemoryRecord | None:
         return self.records.get(fact_id)

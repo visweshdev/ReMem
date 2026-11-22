@@ -28,7 +28,7 @@ import threading
 import time
 import uuid
 import warnings
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass, field, replace
 from pathlib import Path
 from typing import Any
 
@@ -58,8 +58,7 @@ def default_config(top_k: int = 5, budget_tokens: int | None = None) -> SystemCo
         outcome_feedback=True,
         pool_size=30,
         utility=UtilityConfig(kind="heuristic", explore_c=0.5),
-        # two "state" facts with the same (entity, attribute) and different values: the newer replaces the older.
-        # Store multi-valued things (likes, dependencies) with role="preference" or "note" to keep them all.
+        # Legacy facts using the automatic policy treat state attributes as single-valued.
         contradiction=ContradictionConfig(enabled=True, conf_half_life_days=120.0, exclusive_roles=("state",),
                                           learn_schema=True),
         retention=RetentionConfig(mode="adaptive"),
@@ -99,15 +98,14 @@ _ADDITIVE = re.compile(r"\b(also|another|additionally|as well|too|in addition|on
 
 
 def _warn_if_list_like(text: str, new: StoredFact, existing) -> None:
-    """Two "state" facts with the same entity+attribute replace each other. If the new one reads like an
-    additional value ("also uses Redis") rather than an update, the older value would be lost: warn."""
+    """Warn when a declared replacement reads like an additional value ("also uses Redis")."""
     if not _ADDITIVE.search(text):
         return
     if any(f.semantic_role == "state" and f.entities == new.entities and f.attribute_keys == new.attribute_keys
            for f in existing):
         warnings.warn(f"{text!r} looks like an additional value for {new.entities[0]}.{new.attribute_keys[0]}, but "
-                      "role='state' will supersede the existing fact. Use role='preference' or 'note' for "
-                      "multi-valued attributes.", UserWarning, stacklevel=3)
+                      "update='replace' can supersede the existing fact. Use update='keep' for an additional value.",
+                      UserWarning, stacklevel=3)
 
 
 class ReMem:
@@ -169,7 +167,7 @@ class ReMem:
                               update_policy=update if role == "state" else "keep", source=source)
             if role == "state" and entity and attribute and update == "replace":
                 _warn_if_list_like(text, fact, self._facts.values())
-            self._ingest(fact)
+            fact = self._ingest(fact)
             if self.path is not None:
                 with open(self.path / "facts.jsonl", "a", encoding="utf-8") as fh:
                     fh.write(json.dumps(asdict(fact)) + "\n")
@@ -186,11 +184,16 @@ class ReMem:
                          source=text)
                 for f in ex.extract(text)]
 
-    def _ingest(self, fact: StoredFact) -> None:
-        self._facts[fact.fact_id] = fact
+    def _ingest(self, fact: StoredFact, *, replay: bool = False) -> StoredFact:
+        record = self.system.prepare_record(IngestedFact(fact.fact_id, fact.text, fact.time, fact.entities,
+                                                            fact.attribute_keys, fact.confidence, fact.semantic_role,
+                                                            fact.update_policy))
+        if not replay:
+            fact = replace(fact, confirmed_updates=self.system.detector.confirmed_updates(record))
         self.backend.ingest([fact])
-        self.system.ingest(IngestedFact(fact.fact_id, fact.text, fact.time, fact.entities, fact.attribute_keys,
-                                        fact.confidence, fact.semantic_role, fact.update_policy))
+        self.system.ingest_record(record, fact.confirmed_updates)
+        self._facts[fact.fact_id] = fact
+        return fact
 
     # ── reading ────────────────────────────────────────────────────────────────
     def search(self, query: str, *, k: int | None = None, task: str = "default", as_of: float | None = None,
@@ -205,7 +208,6 @@ class ReMem:
             cfg = self.config
             if k is not None or budget_tokens is not None:
                 sel = cfg.selection
-                from dataclasses import replace
                 sel = replace(sel, top_k=k or sel.top_k, budget_tokens=budget_tokens if budget_tokens is not None else sel.budget_tokens)
                 self.system.cfg = replace(cfg, selection=sel)
             try:
@@ -295,22 +297,32 @@ class ReMem:
 
     def _load(self) -> None:
         facts_path = self.path / "facts.jsonl"
+        ledger_path = self.path / "ledger.json"
+        saved = MemoryLedger.load(ledger_path) if ledger_path.exists() else None
+        tail = []
         if facts_path.exists():
             for line in facts_path.read_text(encoding="utf-8").splitlines():
                 if line.strip():
                     d = json.loads(line)
                     d["entities"], d["attribute_keys"] = tuple(d["entities"]), tuple(d["attribute_keys"])
-                    self._ingest(StoredFact(**d))
-        ledger_path = self.path / "ledger.json"
-        if ledger_path.exists():
-            # replaying facts rebuilt keys and supersessions; the saved ledger restores what was learned from use
-            saved = MemoryLedger.load(ledger_path)
+                    d["confirmed_updates"] = tuple(tuple(pair) for pair in d.get("confirmed_updates", ()))
+                    fact = StoredFact(**d)
+                    if saved is not None and fact.fact_id in saved.records:
+                        self._ingest(fact, replay=True)
+                    else:
+                        tail.append(fact)
+        if saved is not None:
             live = self.system.ledger
             for fid, rec in saved.records.items():
                 if fid in live.records:
                     live.records[fid] = rec
+            self.system.detector.volatile_attrs = {attr.lower() for rec in live.records.values() if rec.superseded_by
+                                                   for attr in rec.attribute_keys}
             live.step = max(live.step, saved.step)
             self._task_counter = live.step
+        # Facts may have been appended after the last snapshot (e.g. with autosave disabled).
+        for fact in tail:
+            self._ingest(fact, replay=True)
         self.save()
 
 

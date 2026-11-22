@@ -26,6 +26,7 @@ class StoredFact:
     semantic_role: str = "state"
     update_policy: str = "auto"          # see remem.types.MemoryRecord.update_policy
     source: str | None = None            # original text the fact was extracted from, if any
+    confirmed_updates: tuple[tuple[str, str], ...] = ()  # (older ID, newer ID) approved when this fact was added
 
     @property
     def tokens(self) -> int:
