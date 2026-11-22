@@ -5,6 +5,10 @@ All notable changes are listed here. Versions follow [semantic versioning](https
 ## [Unreleased]
 
 ### Added
+- GitHub Actions jobs install and test the optional integrations. Release builds verify the wheel and source archive in clean
+  Windows and Linux jobs before publishing checksummed assets to GitHub Releases.
+- The Python feedback API accepts an isolated replay callback for leave-one-out credit assignment. The support-routing example
+  exercises persisted sessions and reports held-out task success, retrieval latency, context tokens, and storage growth.
 - Real-data evaluation: `experiments/run_real_knowledge_update.py` runs LongMemEval's 72 knowledge-update questions end to end
   with a local LLM (fact extraction, answering) and a larger local judge. Results in `results/real_knowledge_update/`.
   ReMem 0.2 scored 45.8% vs 63.9% for plain search over raw chat because supersession on LLM-extracted keys retired correct facts.
@@ -14,6 +18,8 @@ All notable changes are listed here. Versions follow [semantic versioning](https
 - "Newest fact per key" baselines (rule only, no learning) in the simulator configs.
 
 ### Changed
+- `LLMUpdateChecker` uses the original source turns when available and requires explicit evidence of a completed update.
+  Ambiguous or same-timestamp claims stay active.
 - `ReMem.add` keeps same-key facts unless a checker confirms the update or the caller sets `update="replace"`. The CLI uses
   `--replace` and the MCP `remember` tool uses `is_update=true` for explicit replacements.
 - The README reports public benchmark results from LongMemEval and LoCoMo. The in-repo simulator remains available for development.

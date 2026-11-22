@@ -64,9 +64,11 @@ class ContradictionDetector:
     def keys_of(self, rec: MemoryRecord) -> list[Key]:
         return [(e.lower(), a.lower()) for e in rec.entities for a in rec.attribute_keys]
 
-    def confirmed_updates(self, rec: MemoryRecord) -> tuple[tuple[str, str], ...]:
+    def confirmed_updates(self, rec: MemoryRecord, *, confirm: Callable[[MemoryRecord, MemoryRecord], bool] | None = None
+                          ) -> tuple[tuple[str, str], ...]:
         """Resolve checks before indexing the record or applying any conflicts."""
-        if self.confirm is None or not self.cfg.enabled or rec.semantic_role not in self.cfg.roles:
+        confirm = self.confirm if confirm is None else confirm
+        if confirm is None or not self.cfg.enabled or rec.semantic_role not in self.cfg.roles:
             return ()
         decisions: dict[tuple[str, str], bool] = {}
         for key in self.keys_of(rec):
@@ -79,8 +81,8 @@ class ContradictionDetector:
                     continue
                 old, new = pair
                 ids = (old.fact_id, new.fact_id)
-                if new.update_policy == "check" and ids not in decisions:
-                    decisions[ids] = self.confirm(old, new)
+                if new.update_policy == "check" and old.time < new.time and ids not in decisions:
+                    decisions[ids] = confirm(old, new)
         return tuple(ids for ids, confirmed in decisions.items() if confirmed)
 
     def on_ingest(self, rec: MemoryRecord,

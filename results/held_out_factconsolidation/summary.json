@@ -1,0 +1,3836 @@
+{
+  "source": "factconsolidation_sh_6k",
+  "records": 455,
+  "parsed_slots": 380,
+  "questions": 100,
+  "summary": {
+    "plain_search": {
+      "top1_value_match": 0.29,
+      "top5_value_hit": 0.81,
+      "retirements": 0
+    },
+    "newest_per_key": {
+      "top1_value_match": 0.8,
+      "top5_value_hit": 0.81,
+      "retirements": 133
+    },
+    "source_checked": {
+      "top1_value_match": 0.29,
+      "top5_value_hit": 0.81,
+      "retirements": 0
+    }
+  },
+  "rows": [
+    {
+      "id": "factconsolidation_sh_6k_no0",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "223",
+            "310",
+            "437",
+            "362",
+            "169"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "310",
+            "437",
+            "362",
+            "169",
+            "321"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "223",
+            "310",
+            "437",
+            "362",
+            "169"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no1",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "91",
+            "259",
+            "390",
+            "293",
+            "401"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "259",
+            "390",
+            "293",
+            "401",
+            "86"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "91",
+            "259",
+            "390",
+            "293",
+            "401"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no2",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "100",
+            "186",
+            "23",
+            "258",
+            "272"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "186",
+            "23",
+            "258",
+            "93",
+            "150"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "100",
+            "186",
+            "23",
+            "258",
+            "272"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no3",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "86",
+            "326",
+            "358",
+            "45",
+            "112"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "86",
+            "326",
+            "358",
+            "45",
+            "112"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "86",
+            "326",
+            "358",
+            "45",
+            "112"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no4",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "63",
+            "420",
+            "349",
+            "333",
+            "399"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "63",
+            "420",
+            "333",
+            "399",
+            "309"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "63",
+            "420",
+            "349",
+            "333",
+            "399"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no5",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "271",
+            "398",
+            "335",
+            "164",
+            "11"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "398",
+            "335",
+            "11",
+            "420",
+            "146"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "271",
+            "398",
+            "335",
+            "164",
+            "11"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no6",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "235",
+            "418",
+            "18",
+            "325",
+            "279"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "418",
+            "279",
+            "389",
+            "437",
+            "133"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "235",
+            "418",
+            "18",
+            "325",
+            "279"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no7",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "31",
+            "323",
+            "362",
+            "50",
+            "46"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "362",
+            "50",
+            "346",
+            "417",
+            "252"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "31",
+            "323",
+            "362",
+            "50",
+            "46"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no8",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "240",
+            "439",
+            "44",
+            "103",
+            "202"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "439",
+            "44",
+            "103",
+            "202",
+            "95"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "240",
+            "439",
+            "44",
+            "103",
+            "202"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no9",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "454",
+            "265",
+            "432",
+            "351",
+            "324"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "454",
+            "265",
+            "432",
+            "351",
+            "365"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "454",
+            "265",
+            "432",
+            "351",
+            "324"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no10",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "375",
+            "167",
+            "427",
+            "202",
+            "358"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "375",
+            "427",
+            "202",
+            "358",
+            "198"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "375",
+            "167",
+            "427",
+            "202",
+            "358"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no11",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "96",
+            "414",
+            "288",
+            "14",
+            "413"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "96",
+            "414",
+            "288",
+            "413",
+            "181"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "96",
+            "414",
+            "288",
+            "14",
+            "413"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no12",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "330",
+            "334",
+            "419",
+            "227",
+            "269"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "334",
+            "419",
+            "227",
+            "269",
+            "110"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "330",
+            "334",
+            "419",
+            "227",
+            "269"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no13",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "210",
+            "239",
+            "250",
+            "87",
+            "427"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "239",
+            "250",
+            "87",
+            "427",
+            "319"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "210",
+            "239",
+            "250",
+            "87",
+            "427"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no14",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "401",
+            "124",
+            "301",
+            "32",
+            "305"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "401",
+            "301",
+            "305",
+            "146",
+            "119"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "401",
+            "124",
+            "301",
+            "32",
+            "305"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no15",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "41",
+            "435",
+            "429",
+            "211",
+            "105"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "435",
+            "429",
+            "211",
+            "105",
+            "26"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "41",
+            "435",
+            "429",
+            "211",
+            "105"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no16",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "70",
+            "260",
+            "182",
+            "412",
+            "282"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "260",
+            "182",
+            "412",
+            "339",
+            "94"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "70",
+            "260",
+            "182",
+            "412",
+            "282"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no17",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "272",
+            "389",
+            "296",
+            "18",
+            "325"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "389",
+            "348",
+            "186",
+            "437",
+            "382"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "272",
+            "389",
+            "296",
+            "18",
+            "325"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no18",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "221",
+            "188",
+            "85",
+            "13",
+            "201"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "221",
+            "188",
+            "201",
+            "241",
+            "428"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "221",
+            "188",
+            "85",
+            "13",
+            "201"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no19",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "188",
+            "85",
+            "13",
+            "201",
+            "136"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "188",
+            "201",
+            "393",
+            "74",
+            "379"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "188",
+            "85",
+            "13",
+            "201",
+            "136"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no20",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "80",
+            "222",
+            "431",
+            "136",
+            "393"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "222",
+            "431",
+            "393",
+            "232",
+            "101"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "80",
+            "222",
+            "431",
+            "136",
+            "393"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no21",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "17",
+            "193",
+            "412",
+            "70",
+            "40"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "17",
+            "193",
+            "412",
+            "40",
+            "312"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "17",
+            "193",
+            "412",
+            "70",
+            "40"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no22",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "23",
+            "93",
+            "219",
+            "279",
+            "446"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "23",
+            "93",
+            "219",
+            "279",
+            "446"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "23",
+            "93",
+            "219",
+            "279",
+            "446"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no23",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "64",
+            "392",
+            "428",
+            "7",
+            "13"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "392",
+            "428",
+            "226",
+            "275",
+            "363"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "64",
+            "392",
+            "428",
+            "7",
+            "13"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no24",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "292",
+            "451",
+            "302",
+            "125",
+            "450"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "451",
+            "302",
+            "450",
+            "422",
+            "179"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "292",
+            "451",
+            "302",
+            "125",
+            "450"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no25",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "21",
+            "177",
+            "203",
+            "179",
+            "172"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "177",
+            "203",
+            "179",
+            "172",
+            "224"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "21",
+            "177",
+            "203",
+            "179",
+            "172"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no26",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "428",
+            "7",
+            "64",
+            "392",
+            "226"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "428",
+            "392",
+            "226",
+            "351",
+            "188"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "428",
+            "7",
+            "64",
+            "392",
+            "226"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no27",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "313",
+            "250",
+            "343",
+            "311",
+            "441"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "313",
+            "250",
+            "343",
+            "311",
+            "441"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "313",
+            "250",
+            "343",
+            "311",
+            "441"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no28",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "289",
+            "298",
+            "90",
+            "355",
+            "415"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "298",
+            "355",
+            "415",
+            "83",
+            "251"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "289",
+            "298",
+            "90",
+            "355",
+            "415"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no29",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "128",
+            "270",
+            "147",
+            "300",
+            "142"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "270",
+            "147",
+            "300",
+            "142",
+            "2"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "128",
+            "270",
+            "147",
+            "300",
+            "142"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no30",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "160",
+            "382",
+            "57",
+            "216",
+            "150"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "382",
+            "150",
+            "348",
+            "376",
+            "186"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "160",
+            "382",
+            "57",
+            "216",
+            "150"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no31",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "192",
+            "203",
+            "210",
+            "392",
+            "22"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "203",
+            "392",
+            "22",
+            "60",
+            "322"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "192",
+            "203",
+            "210",
+            "392",
+            "22"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no32",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "387",
+            "309",
+            "409",
+            "173",
+            "12"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "387",
+            "309",
+            "409",
+            "114",
+            "101"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "387",
+            "309",
+            "409",
+            "173",
+            "12"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no33",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "359",
+            "403",
+            "162",
+            "415",
+            "212"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "403",
+            "162",
+            "415",
+            "212",
+            "267"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "359",
+            "403",
+            "162",
+            "415",
+            "212"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no34",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "40",
+            "193",
+            "43",
+            "67",
+            "172"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "40",
+            "193",
+            "43",
+            "67",
+            "172"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "40",
+            "193",
+            "43",
+            "67",
+            "172"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no35",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "242",
+            "295",
+            "184",
+            "99",
+            "116"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "295",
+            "184",
+            "99",
+            "383",
+            "151"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "242",
+            "295",
+            "184",
+            "99",
+            "116"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no36",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "251",
+            "364",
+            "318",
+            "288",
+            "25"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "251",
+            "364",
+            "318",
+            "288",
+            "25"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "251",
+            "364",
+            "318",
+            "288",
+            "25"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no37",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "103",
+            "240",
+            "202",
+            "439",
+            "95"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "103",
+            "202",
+            "439",
+            "95",
+            "209"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "103",
+            "240",
+            "202",
+            "439",
+            "95"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no38",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "163",
+            "171",
+            "429",
+            "198",
+            "257"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "171",
+            "429",
+            "198",
+            "26",
+            "190"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "163",
+            "171",
+            "429",
+            "198",
+            "257"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no39",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "238",
+            "277",
+            "74",
+            "13",
+            "188"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "238",
+            "277",
+            "74",
+            "188",
+            "379"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "238",
+            "277",
+            "74",
+            "13",
+            "188"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no40",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "173",
+            "409",
+            "185",
+            "333",
+            "106"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "409",
+            "333",
+            "106",
+            "449",
+            "387"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "173",
+            "409",
+            "185",
+            "333",
+            "106"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no41",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "46",
+            "252",
+            "3",
+            "227",
+            "323"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "252",
+            "227",
+            "446",
+            "362",
+            "50"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "46",
+            "252",
+            "3",
+            "227",
+            "323"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no42",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "3",
+            "36",
+            "227",
+            "110",
+            "323"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "36",
+            "227",
+            "110",
+            "362",
+            "434"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "3",
+            "36",
+            "227",
+            "110",
+            "323"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no43",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "284",
+            "388",
+            "75",
+            "220",
+            "116"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "388",
+            "220",
+            "151",
+            "150",
+            "177"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "284",
+            "388",
+            "75",
+            "220",
+            "116"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no44",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "373",
+            "442",
+            "228",
+            "187",
+            "75"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "442",
+            "187",
+            "280",
+            "440",
+            "113"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "373",
+            "442",
+            "228",
+            "187",
+            "75"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no45",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "10",
+            "301",
+            "32",
+            "305",
+            "401"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "301",
+            "305",
+            "401",
+            "77",
+            "180"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "10",
+            "301",
+            "32",
+            "305",
+            "401"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no46",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "350",
+            "288",
+            "364",
+            "318",
+            "25"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "350",
+            "288",
+            "364",
+            "318",
+            "25"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "350",
+            "288",
+            "364",
+            "318",
+            "25"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no47",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "107",
+            "146",
+            "147",
+            "271",
+            "398"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "146",
+            "147",
+            "398",
+            "180",
+            "401"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "107",
+            "146",
+            "147",
+            "271",
+            "398"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no48",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "216",
+            "348",
+            "160",
+            "57",
+            "382"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "348",
+            "382",
+            "150",
+            "212",
+            "389"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "216",
+            "348",
+            "160",
+            "57",
+            "382"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no49",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "73",
+            "250",
+            "322",
+            "24",
+            "239"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "73",
+            "250",
+            "322",
+            "239",
+            "386"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "73",
+            "250",
+            "322",
+            "24",
+            "239"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no50",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "4",
+            "234",
+            "280",
+            "228",
+            "220"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "234",
+            "280",
+            "220",
+            "435",
+            "440"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "4",
+            "234",
+            "280",
+            "228",
+            "220"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no51",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "18",
+            "279",
+            "418",
+            "235",
+            "389"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "279",
+            "418",
+            "389",
+            "133",
+            "437"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "18",
+            "279",
+            "418",
+            "235",
+            "389"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no52",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "115",
+            "126",
+            "432",
+            "159",
+            "247"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "126",
+            "432",
+            "396",
+            "249",
+            "365"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "115",
+            "126",
+            "432",
+            "159",
+            "247"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no53",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "248",
+            "374",
+            "11",
+            "357",
+            "43"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "374",
+            "11",
+            "357",
+            "43",
+            "119"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "248",
+            "374",
+            "11",
+            "357",
+            "43"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no54",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "243",
+            "281",
+            "337",
+            "289",
+            "212"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "281",
+            "337",
+            "212",
+            "298",
+            "83"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "243",
+            "281",
+            "337",
+            "289",
+            "212"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no55",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "244",
+            "299",
+            "250",
+            "210",
+            "319"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "299",
+            "250",
+            "319",
+            "217",
+            "313"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "244",
+            "299",
+            "250",
+            "210",
+            "319"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no56",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "155",
+            "358",
+            "423",
+            "22",
+            "311"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "358",
+            "423",
+            "22",
+            "311",
+            "395"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "155",
+            "358",
+            "423",
+            "22",
+            "311"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no57",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "120",
+            "139",
+            "317",
+            "273",
+            "138"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "139",
+            "317",
+            "273",
+            "138",
+            "11"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "120",
+            "139",
+            "317",
+            "273",
+            "138"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no58",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "413",
+            "425",
+            "354",
+            "364",
+            "229"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "413",
+            "425",
+            "354",
+            "364",
+            "229"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "413",
+            "425",
+            "354",
+            "364",
+            "229"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no59",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "346",
+            "194",
+            "340",
+            "215",
+            "362"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "346",
+            "340",
+            "362",
+            "446",
+            "416"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "346",
+            "194",
+            "340",
+            "215",
+            "362"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no60",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "90",
+            "415",
+            "289",
+            "355",
+            "298"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "415",
+            "355",
+            "298",
+            "83",
+            "71"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "90",
+            "415",
+            "289",
+            "355",
+            "298"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no61",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "434",
+            "6",
+            "269",
+            "110",
+            "227"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "434",
+            "269",
+            "110",
+            "227",
+            "419"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "434",
+            "6",
+            "269",
+            "110",
+            "227"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no62",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "109",
+            "275",
+            "13",
+            "136",
+            "188"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "275",
+            "188",
+            "232",
+            "201",
+            "74"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "109",
+            "275",
+            "13",
+            "136",
+            "188"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no63",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "122",
+            "157",
+            "425",
+            "402",
+            "44"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "122",
+            "157",
+            "425",
+            "402",
+            "44"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "122",
+            "157",
+            "425",
+            "402",
+            "44"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no64",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "213",
+            "35",
+            "223",
+            "215",
+            "129"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "213",
+            "303",
+            "443",
+            "419",
+            "417"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "213",
+            "35",
+            "223",
+            "215",
+            "129"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no65",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "78",
+            "321",
+            "419",
+            "310",
+            "223"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "321",
+            "419",
+            "310",
+            "362",
+            "219"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "78",
+            "321",
+            "419",
+            "310",
+            "223"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no66",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "320",
+            "152",
+            "445",
+            "13",
+            "423"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "320",
+            "152",
+            "445",
+            "423",
+            "188"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "320",
+            "152",
+            "445",
+            "13",
+            "423"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no67",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "226",
+            "38",
+            "47",
+            "140",
+            "64"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "226",
+            "140",
+            "445",
+            "385",
+            "152"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "226",
+            "38",
+            "47",
+            "140",
+            "64"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no68",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "397",
+            "178",
+            "127",
+            "98",
+            "442"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "397",
+            "178",
+            "127",
+            "442",
+            "220"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "397",
+            "178",
+            "127",
+            "98",
+            "442"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no69",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "237",
+            "265",
+            "49",
+            "56",
+            "440"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "237",
+            "265",
+            "49",
+            "440",
+            "267"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "237",
+            "265",
+            "49",
+            "56",
+            "440"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no70",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "356",
+            "196",
+            "277",
+            "92",
+            "13"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "356",
+            "277",
+            "92",
+            "400",
+            "393"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "356",
+            "196",
+            "277",
+            "92",
+            "13"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no71",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "293",
+            "229",
+            "294",
+            "176",
+            "357"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "293",
+            "229",
+            "357",
+            "313",
+            "250"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "293",
+            "229",
+            "294",
+            "176",
+            "357"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no72",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "419",
+            "3",
+            "334",
+            "269",
+            "36"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "419",
+            "334",
+            "269",
+            "36",
+            "361"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "419",
+            "3",
+            "334",
+            "269",
+            "36"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no73",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "141",
+            "424",
+            "84",
+            "8",
+            "138"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "424",
+            "8",
+            "138",
+            "233",
+            "11"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "141",
+            "424",
+            "84",
+            "8",
+            "138"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no74",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "180",
+            "401",
+            "32",
+            "305",
+            "76"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "180",
+            "401",
+            "305",
+            "77",
+            "200"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "180",
+            "401",
+            "32",
+            "305",
+            "76"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no75",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "147",
+            "305",
+            "32",
+            "107",
+            "77"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "147",
+            "305",
+            "77",
+            "420",
+            "146"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "147",
+            "305",
+            "32",
+            "107",
+            "77"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no76",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "202",
+            "240",
+            "103",
+            "293",
+            "439"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "202",
+            "103",
+            "293",
+            "439",
+            "44"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "202",
+            "240",
+            "103",
+            "293",
+            "439"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no77",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "445",
+            "54",
+            "351",
+            "428",
+            "1"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "445",
+            "351",
+            "428",
+            "232",
+            "217"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "445",
+            "54",
+            "351",
+            "428",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no78",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "258",
+            "434",
+            "219",
+            "69",
+            "325"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "258",
+            "434",
+            "219",
+            "252",
+            "362"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "258",
+            "434",
+            "219",
+            "69",
+            "325"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no79",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "190",
+            "185",
+            "156",
+            "153",
+            "198"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "190",
+            "198",
+            "299",
+            "26",
+            "449"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "190",
+            "185",
+            "156",
+            "153",
+            "198"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no80",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "14",
+            "169",
+            "36",
+            "419",
+            "3"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "169",
+            "36",
+            "419",
+            "434",
+            "110"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "14",
+            "169",
+            "36",
+            "419",
+            "3"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no81",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "159",
+            "365",
+            "156",
+            "179",
+            "324"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "365",
+            "179",
+            "383",
+            "348",
+            "126"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "159",
+            "365",
+            "156",
+            "179",
+            "324"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no82",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "24",
+            "386",
+            "250",
+            "73",
+            "210"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "386",
+            "250",
+            "73",
+            "322",
+            "319"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "24",
+            "386",
+            "250",
+            "73",
+            "210"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no83",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "266",
+            "412",
+            "68",
+            "374",
+            "410"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "412",
+            "374",
+            "410",
+            "361",
+            "67"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "266",
+            "412",
+            "68",
+            "374",
+            "410"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no84",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "390",
+            "256",
+            "112",
+            "358",
+            "250"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "390",
+            "256",
+            "112",
+            "358",
+            "250"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "390",
+            "256",
+            "112",
+            "358",
+            "250"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no85",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "185",
+            "449",
+            "198",
+            "173",
+            "167"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "449",
+            "198",
+            "409",
+            "190",
+            "179"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "185",
+            "449",
+            "198",
+            "173",
+            "167"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no86",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "228",
+            "280",
+            "4",
+            "187",
+            "220"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "280",
+            "187",
+            "220",
+            "440",
+            "234"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "228",
+            "280",
+            "4",
+            "187",
+            "220"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no87",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "125",
+            "450",
+            "175",
+            "302",
+            "292"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "450",
+            "175",
+            "302",
+            "451",
+            "53"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "125",
+            "450",
+            "175",
+            "302",
+            "292"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no88",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "224",
+            "264",
+            "265",
+            "49",
+            "304"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "224",
+            "264",
+            "265",
+            "49",
+            "304"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "224",
+            "264",
+            "265",
+            "49",
+            "304"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no89",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "5",
+            "276",
+            "29",
+            "81",
+            "406"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "5",
+            "276",
+            "406",
+            "256",
+            "123"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "5",
+            "276",
+            "29",
+            "81",
+            "406"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no90",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "291",
+            "315",
+            "279",
+            "18",
+            "93"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "315",
+            "279",
+            "93",
+            "417",
+            "23"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "291",
+            "315",
+            "279",
+            "18",
+            "93"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no91",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "176",
+            "217",
+            "428",
+            "250",
+            "354"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "217",
+            "428",
+            "250",
+            "354",
+            "225"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "176",
+            "217",
+            "428",
+            "250",
+            "354"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no92",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "8",
+            "135",
+            "141",
+            "84",
+            "164"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "8",
+            "135",
+            "424",
+            "414",
+            "303"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "8",
+            "135",
+            "141",
+            "84",
+            "164"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no93",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "204",
+            "343",
+            "371",
+            "210",
+            "386"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "343",
+            "371",
+            "386",
+            "87",
+            "250"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "204",
+            "343",
+            "371",
+            "210",
+            "386"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no94",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "66",
+            "326",
+            "401",
+            "246",
+            "76"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "66",
+            "326",
+            "401",
+            "246",
+            "441"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": false,
+          "retrieved_ids": [
+            "66",
+            "326",
+            "401",
+            "246",
+            "76"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no95",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "110",
+            "269",
+            "227",
+            "434",
+            "330"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "110",
+            "269",
+            "227",
+            "434",
+            "419"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "110",
+            "269",
+            "227",
+            "434",
+            "330"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no96",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "55",
+            "441",
+            "217",
+            "311",
+            "225"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "441",
+            "217",
+            "311",
+            "225",
+            "444"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "55",
+            "441",
+            "217",
+            "311",
+            "225"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no97",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "61",
+            "231",
+            "264",
+            "27",
+            "311"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "231",
+            "264",
+            "311",
+            "433",
+            "22"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "61",
+            "231",
+            "264",
+            "27",
+            "311"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no98",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "164",
+            "335",
+            "146",
+            "131",
+            "8"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "335",
+            "146",
+            "131",
+            "8",
+            "139"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": false,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "164",
+            "335",
+            "146",
+            "131",
+            "8"
+          ]
+        }
+      }
+    },
+    {
+      "id": "factconsolidation_sh_6k_no99",
+      "systems": {
+        "plain_search": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "227",
+            "419",
+            "110",
+            "78",
+            "434"
+          ]
+        },
+        "newest_per_key": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "227",
+            "419",
+            "110",
+            "434",
+            "334"
+          ]
+        },
+        "source_checked": {
+          "top1_value_match": true,
+          "top5_value_hit": true,
+          "retrieved_ids": [
+            "227",
+            "419",
+            "110",
+            "78",
+            "434"
+          ]
+        }
+      }
+    }
+  ],
+  "data_sha256": "24d5c3f09ce0ce15625cb9f8a98f44f0d864ca6c94d7b4ad04eb697ca3a5ff45",
+  "model": "qwen2.5:3b",
+  "serve_model": "qwen2.5-3b-4k",
+  "embedder": "all-MiniLM-L6-v2",
+  "seed": 0,
+  "temperature": 0,
+  "usage": {
+    "model_calls": 1,
+    "prompt_tokens": 166,
+    "completion_tokens": 2
+  }
+}

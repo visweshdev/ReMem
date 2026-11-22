@@ -23,6 +23,7 @@ Metrics (abstention questions, whose ids end in `_abs`, are excluded because the
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import sys
@@ -113,6 +114,8 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--data", required=True, type=Path)
     ap.add_argument("--limit", type=int, default=None, help="evaluate only the first N questions")
+    ap.add_argument("--question-type", nargs="+", help="restrict evaluation to these LongMemEval question types")
+    ap.add_argument("--per-type-limit", type=int, help="cap each selected type by deterministic question-ID hash order")
     ap.add_argument("--embedder", choices=["hash", "st"], default="st")
     ap.add_argument("--st-model", default="all-MiniLM-L6-v2")
     ap.add_argument("--qa", action="store_true", help="also write QA hypotheses with an LLM (needs OPENAI_API_KEY)")
@@ -121,7 +124,21 @@ def main() -> None:
     ap.add_argument("--out", type=Path, default=ROOT / "results" / "longmemeval")
     a = ap.parse_args()
 
-    instances = json.loads(a.data.read_text(encoding="utf-8"))[: a.limit]
+    if a.per_type_limit is not None and a.per_type_limit < 1:
+        ap.error("--per-type-limit must be positive")
+    instances = json.loads(a.data.read_text(encoding="utf-8"))
+    if a.question_type:
+        instances = [item for item in instances if item["question_type"] in a.question_type]
+    if a.per_type_limit:
+        groups: dict[str, list[dict]] = {}
+        for item in instances:
+            if not item["question_id"].endswith("_abs"):
+                groups.setdefault(item["question_type"], []).append(item)
+        instances = [item for group in groups.values()
+                     for item in sorted(group, key=lambda row: hashlib.sha256(row["question_id"].encode()).digest())[:a.per_type_limit]]
+    instances = instances[:a.limit]
+    if not instances:
+        ap.error("selection contains no LongMemEval questions")
     if a.embedder == "st":
         from remem.embedders import SentenceTransformerEmbedder
         embedder = SentenceTransformerEmbedder(a.st_model)
@@ -147,7 +164,9 @@ def main() -> None:
 
     res = evaluate(instances, embedder, systems=tuple(a.systems.split(",")), qa_agent=qa_agent)
     a.out.mkdir(parents=True, exist_ok=True)
-    meta = {"data": a.data.name, "limit": a.limit, "embedder": a.embedder if a.embedder == "hash" else a.st_model}
+    meta = {"data": a.data.name, "limit": a.limit, "embedder": a.embedder if a.embedder == "hash" else a.st_model,
+            "question_types": a.question_type, "per_type_limit": a.per_type_limit,
+            "question_ids": [inst["question_id"] for inst in instances if not inst["question_id"].endswith("_abs")]}
     (a.out / "retrieval.json").write_text(json.dumps({**meta, **{k: v for k, v in res.items() if k != "hypotheses"}},
                                                      indent=1), encoding="utf-8")
     if a.qa:

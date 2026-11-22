@@ -3,10 +3,12 @@
 import importlib.util
 import sys
 import time
+from dataclasses import replace
 
 import pytest
 
 from remem import ReMem
+from remem.api import default_config
 
 DAY = 86400.0
 
@@ -50,6 +52,22 @@ def test_api_validates_input_and_feedback_ids(embedder):
         m.feedback(r.search_id, True)                             # each search gets one feedback
     with pytest.raises(KeyError):
         m.inspect("nope")
+
+
+def test_public_feedback_replay_corrects_a_noisy_citation(embedder):
+    config = default_config()
+    config = replace(config, attribution=replace(config.attribution, method="signals_loo"))
+    memory = ReMem(config=config, embedder=embedder)
+    policy = memory.add("Billing refund queue is oak.")
+    example = memory.add("Sample billing refund queue used in a training exercise is oak.")
+    result = memory.search("Billing refund queue")
+    assert {hit.id for hit in result.items} == {policy, example}
+
+    def replay(hits):
+        return any(hit.id == policy for hit in hits)
+
+    credit = memory.feedback(result.search_id, True, used_ids=[example], answer="oak", replay=replay)
+    assert credit == {policy: 1.0, example: 0.4}
 
 
 def test_historical_query_returns_superseded_fact(embedder):

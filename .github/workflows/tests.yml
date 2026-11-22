@@ -39,6 +39,35 @@ jobs:
       - name: Command-line tool
         run: remem demo
 
+  optional-integrations:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - extras: mcp
+            imports: mcp
+          - extras: langchain
+            imports: langchain_core
+          - extras: faiss
+            imports: faiss
+          - extras: chroma
+            imports: chromadb
+          - extras: "mcp,langchain,tokenizer,llm"
+            imports: "mcp, langchain_core, tiktoken, openai"
+          - extras: "faiss,chroma,embeddings"
+            imports: "faiss, chromadb, sentence_transformers"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install ".[${{ matrix.extras }}]" pytest
+      - run: python -m pip check
+      - run: python -c "import ${{ matrix.imports }}"
+      - run: python -m pytest tests/test_api_mcp.py tests/test_extensions.py -q -rs
+
   dev-simulator:
     runs-on: ubuntu-latest
     steps:

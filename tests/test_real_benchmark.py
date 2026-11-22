@@ -39,7 +39,7 @@ class FakeLLM:
             return json.dumps({"facts": [{"text": turn, "entity": "user", "attribute": "personal_best_time",
                                           "role": "state"}]})
         if prompt.startswith("Two memories"):
-            newer = prompt.split("Newer:", 1)[1]
+            newer = re.split(r"Newer(?: claim)?:", prompt, maxsplit=1)[1]
             return "yes" if re.search(r"\d+:\d+", newer.split("\n")[0]) else "no"
         times = [t for t in ("25:50", "27:12") if t in prompt]
         return times[0] if times else "I don't know"

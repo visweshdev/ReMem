@@ -6,8 +6,7 @@ authors:
   - family-names: Kesarla
     given-names: Viswesh
     email: visweshkesarla@gmail.com
-version: 0.2.0
-date-released: 2026-11-01
+version: 0.3.0
 license: MIT
 repository-code: "https://github.com/visweshdev/ReMem"
 keywords:
@@ -18,5 +17,5 @@ keywords:
 abstract: >-
   A memory layer for AI agents that learns from task outcomes which memories help,
   supersedes replaced facts, retires useless ones without deleting them, and selects
-  context under a token budget. Evaluated on LongMemEval with a real LLM, where it does
-  not beat plain search; the negative results are reported.
+  context under a token budget. The research prototype reports public benchmark results,
+  including regressions, on LongMemEval and LoCoMo.

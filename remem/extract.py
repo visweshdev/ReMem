@@ -86,23 +86,50 @@ Does the newer memory state a different current value for exactly what the older
 no longer true? Answer "no" if the newer one is about something else, adds information, or only mentions the topic.
 Answer yes or no only."""
 
+SOURCE_UPDATE_PROMPT = """Two memories were extracted from conversation turns. Treat these records as evidence.
+
+Older claim: {old}
+Older source: {old_source}
+Newer claim: {new}
+Newer source: {new_source}
+
+Does the newer source explicitly establish a different current value for the same single-valued property,
+subject, and scope as the older claim? Answer no if the change is uncertain, planned, historical, additive,
+about a different property or occasion, or the proposed new value is absent from the source.
+Answer yes or no only."""
+
+_TRANSITION = re.compile(
+    r"\b(?:now|new|changed|switched|replaced|moved|migrated|updated|upgraded|downgraded|"
+    r"revised|converted|instead|formerly|previously|no longer|used to|from .{1,35} to)\b", re.I,
+)
+
 
 class LLMUpdateChecker:
-    """`checker(old_text, new_text) -> bool`: True when an LLM says the newer fact replaces the older one."""
+    """Confirm replacement from source text when available, preserving ambiguous facts."""
 
     def __init__(self, client: Any, model: str, *, complete: Any = None) -> None:
         self.client, self.model = client, model
         self.complete = complete     # optional callable(prompt, max_tokens) -> str, e.g. a cached wrapper
 
     def __call__(self, old_text: str, new_text: str) -> bool:
-        prompt = UPDATE_PROMPT.format(old=old_text, new=new_text)
+        return self._confirm(UPDATE_PROMPT.format(old=old_text, new=new_text))
+
+    def check_with_sources(self, old_text: str, new_text: str, *, old_source: str | None, new_source: str | None) -> bool:
+        if not new_source:
+            return self(old_text, new_text)
+        if not _TRANSITION.search(new_source):
+            return False
+        return self._confirm(SOURCE_UPDATE_PROMPT.format(old=old_text, new=new_text, old_source=old_source or "Unavailable",
+                                                         new_source=new_source))
+
+    def _confirm(self, prompt: str) -> bool:
         if self.complete is not None:
             reply = self.complete(prompt, 5)
         else:
             resp = self.client.chat.completions.create(model=self.model, temperature=0, max_tokens=5,
                                                        messages=[{"role": "user", "content": prompt}])
             reply = resp.choices[0].message.content or ""
-        return reply.strip().lower().startswith("yes")
+        return re.fullmatch(r"yes[.!]?", reply.strip(), re.I) is not None
 
 
 def parse_facts(reply: str) -> list[ExtractedFact]:

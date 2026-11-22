@@ -133,6 +133,9 @@ ReMem minus plain search: **-18.1 pp (95% CI -31.9 to -4.2)**. Details and the r
 
 The [LoCoMo feedback ablation](docs/FEEDBACK_ABLATION.md) compares plain search with both ReMem feedback settings on 80 held-out questions.
 
+In a controlled support-routing workflow, feedback improved held-out routing from **73.85%** to **95.63%** under explicit task outcomes.
+The experiment used a deterministic reader and 20 unseen workload seeds. [Workflow, costs, and limits](docs/WORKFLOW_ASSISTANT.md)
+
 ## Use it with Claude (MCP)
 
 ReMem ships an MCP server, so Claude Code, Claude Desktop or any MCP client can use it as long-term memory:
@@ -432,6 +435,14 @@ run that ignores dates: 74.7 turn@5 for all three systems, `results/longmemeval_
 
 Feedback changed some rankings. Its single answer gain matched a reference with an apparent speaker attribution error.
 Both ReMem settings tied on answer accuracy after excluding that item. [Protocol, paired results, and failure analysis](docs/FEEDBACK_ABLATION.md)
+
+### Supersession and workflow follow-ups
+
+- Source-aware checking preserves ambiguous evidence. The separate FactConsolidation diagnostic shows the trade-off on implicit
+  changes, where newest-per-key matched the top value on 80% of questions and the guarded checker on 29%. [Supersession evaluation](docs/SUPERSESSION_EVALUATION.md)
+- With a side-effect-free replay callback, feedback can measure which retrieved memories affect an action. The support-routing experiment
+  reports held-out success, credit assigned to distractors, retrieval time, context tokens, and storage. [Support-routing example](docs/WORKFLOW_ASSISTANT.md)
+- Build and clean-install the versioned distribution before reproducing results. [Release and independent review guide](docs/REPRODUCING.md)
 
 ## 11. Limitations (read these)
 

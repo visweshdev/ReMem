@@ -114,3 +114,32 @@ def test_mcp_keeps_both_unless_the_model_says_it_is_an_update(tmp_path, monkeypa
 
 def test_update_prompt_mentions_both_facts():
     assert "{old}" in UPDATE_PROMPT and "{new}" in UPDATE_PROMPT
+
+
+def test_missing_source_evidence_blocks_hallucinated_update(embedder):
+    client = FakeChat("Yes")
+    memory = ReMem(embedder=embedder, update_checker=LLMUpdateChecker(client, "m"))
+    key = {"entity": "runner", "attribute": "record"}
+    old = memory.add(BEST, when=DAY, source="I finished in 25:50.", **key)
+    memory.add("The new record is 24:00.", when=2 * DAY, source="I hope to beat my record.", **key)
+    assert memory.inspect(old)["state"] == "ACTIVE"
+    assert client.calls == []
+
+
+def test_sources_are_passed_for_out_of_order_insertion_and_strict_reply(embedder):
+    client = FakeChat("Yes, but the race is still planned.")
+    memory = ReMem(embedder=embedder, update_checker=LLMUpdateChecker(client, "m"))
+    key = {"entity": "runner", "attribute": "record"}
+    memory.add(BEST, when=2 * DAY, source="My new time is 25:50.", **key)
+    old = memory.add("The previous time was 27:12.", when=DAY, source="I finished in 27:12.", **key)
+    assert memory.inspect(old)["state"] == "ACTIVE"
+    prompt = client.calls[0]["messages"][0]["content"]
+    assert "Older source: I finished in 27:12." in prompt
+    assert "Newer source: My new time is 25:50." in prompt
+
+
+def test_checked_updates_require_strictly_older_fact(embedder):
+    memory = ReMem(embedder=embedder, update_checker=lambda *_: pytest.fail("checked an equal timestamp"))
+    key = {"entity": "runner", "attribute": "record", "when": DAY}
+    ids = [memory.add(text, **key) for text in (BEST, VAGUE)]
+    assert all(memory.inspect(ident)["state"] == "ACTIVE" for ident in ids)

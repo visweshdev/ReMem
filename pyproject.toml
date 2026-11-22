@@ -1,14 +1,14 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "remem"
-version = "0.2.0"
+version = "0.3.0"
 description = "Outcome-aware adaptive memory for long-horizon AI agents: utility learned from use, supersession, retention and token-budgeted retrieval"
 readme = "README.md"
 requires-python = ">=3.10"
-license = { text = "MIT" }
+license = "MIT"
 authors = [{ name = "Viswesh Kesarla", email = "visweshkesarla@gmail.com" }]
 keywords = ["llm", "agents", "memory", "retrieval", "rag", "mcp"]
 classifiers = [

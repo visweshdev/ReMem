@@ -28,7 +28,9 @@ import threading
 import time
 import uuid
 import warnings
+from collections.abc import Callable
 from dataclasses import asdict, dataclass, field, replace
+from functools import partial
 from pathlib import Path
 from typing import Any
 
@@ -45,7 +47,7 @@ from remem.config import (
 from remem.ledger import MemoryLedger
 from remem.offline import ConceptHashEmbedder
 from remem.system import IngestedFact, ReMemSystem
-from remem.types import AgentTrace, Context, MemState, Outcome
+from remem.types import AgentTrace, Context, MemoryRecord, MemState, Outcome, ScoredCandidate
 
 
 def default_config(top_k: int = 5, budget_tokens: int | None = None) -> SystemConfig:
@@ -119,7 +121,8 @@ class ReMem:
                  config: SystemConfig | None = None, autosave: bool = True, update_checker: Any = None) -> None:
         """`update_checker(old_text, new_text) -> bool` confirms that a new fact replaces an older one on the same
         entity+attribute (e.g. remem.extract.LLMUpdateChecker). Facts added with update="check" (the default) only
-        retire older facts when it says yes; without a checker they never retire anything."""
+        retire older facts when it says yes; without a checker they never retire anything. Checkers can implement
+        `check_with_sources(old_text, new_text, *, old_source, new_source)` to receive the original turns."""
         self.path = Path(path).expanduser() if path is not None else None
         self.autosave = autosave and self.path is not None
         self._lock = threading.RLock()
@@ -132,7 +135,7 @@ class ReMem:
         self.system = ReMemSystem(self.config, self.embedder)
         self.update_checker = update_checker
         if update_checker is not None:
-            self.system.detector.confirm = lambda old, new: bool(update_checker(old.original_text, new.original_text))
+            self.system.detector.confirm = self._confirm_update
         self._facts: dict[str, StoredFact] = {}
         self._pending: dict[str, Context] = {}
         self._task_counter = 0
@@ -184,12 +187,22 @@ class ReMem:
                          source=text)
                 for f in ex.extract(text)]
 
+    def _confirm_update(self, old: MemoryRecord, new: MemoryRecord, *, pending: StoredFact | None = None) -> bool:
+        check_with_sources = getattr(type(self.update_checker), "check_with_sources", None)
+        if check_with_sources is None:
+            return bool(self.update_checker(old.original_text, new.original_text))
+        old_fact = pending if pending is not None and pending.fact_id == old.fact_id else self._facts[old.fact_id]
+        new_fact = pending if pending is not None and pending.fact_id == new.fact_id else self._facts[new.fact_id]
+        return bool(self.update_checker.check_with_sources(old.original_text, new.original_text,
+                                                           old_source=old_fact.source, new_source=new_fact.source))
+
     def _ingest(self, fact: StoredFact, *, replay: bool = False) -> StoredFact:
         record = self.system.prepare_record(IngestedFact(fact.fact_id, fact.text, fact.time, fact.entities,
                                                             fact.attribute_keys, fact.confidence, fact.semantic_role,
                                                             fact.update_policy))
         if not replay:
-            fact = replace(fact, confirmed_updates=self.system.detector.confirmed_updates(record))
+            confirm = partial(self._confirm_update, pending=fact) if self.update_checker is not None else None
+            fact = replace(fact, confirmed_updates=self.system.detector.confirmed_updates(record, confirm=confirm))
         self.backend.ingest([fact])
         self.system.ingest_record(record, fact.confirmed_updates)
         self._facts[fact.fact_id] = fact
@@ -221,32 +234,41 @@ class ReMem:
             self._pending[sid] = ctx
             if len(self._pending) > 1000:                 # bound memory if feedback is never given
                 self._pending.pop(next(iter(self._pending)))
-            items = []
-            for s in ctx.selected:
-                f = self._facts.get(s.cand.fact_id)
-                items.append(Hit(s.cand.fact_id, s.text, round(s.prob, 4), round(s.cand.sim, 4), s.state, s.reason,
-                                 f.source if f else None, f.time if f else None))
             self._maybe_save()
-            return SearchResult(sid, query, items, ctx.tokens_used)
+            return SearchResult(sid, query, [self._as_hit(s) for s in ctx.selected], ctx.tokens_used)
+
+    def _as_hit(self, candidate: ScoredCandidate) -> Hit:
+        fact = self._facts.get(candidate.cand.fact_id)
+        return Hit(candidate.cand.fact_id, candidate.text, round(candidate.prob, 4), round(candidate.cand.sim, 4),
+                   candidate.state, candidate.reason, fact.source if fact else None, fact.time if fact else None)
 
     # ── feedback ───────────────────────────────────────────────────────────────
     def feedback(self, search_id: str, success: bool, *, used_ids: list[str] | None = None,
-                 answer: str | None = None) -> dict[str, float]:
+                 answer: str | None = None, replay: Callable[[list[Hit]], bool] | None = None) -> dict[str, float]:
         """Report how the task that used `search_id` went. `used_ids`: the memories you actually relied on
         (the strongest signal). `answer`: optional final answer text; memories containing it count as used.
-        Returns the credit each served memory received.
+        Returns the credit each served memory received. With `attribution.method="signals_loo"`, `replay`
+        evaluates the same task with a reduced list of hits. Use an isolated, deterministic replay without
+        live side effects. ReMem runs it synchronously while processing feedback.
 
         This experimental feature was evaluated on LoCoMo with reference-graded outcomes and model citations over generated
         conversations. Performance with deployment outcomes is still an open question."""
         with self._lock:
-            ctx = self._pending.pop(search_id, None)
+            ctx = self._pending.get(search_id)
             if ctx is None:
                 raise KeyError(f"unknown or already-used search_id {search_id!r}")
+            if replay is not None and self.config.attribution.method != "signals_loo":
+                raise ValueError("replay requires attribution.method='signals_loo'")
             served = {s.cand.fact_id for s in ctx.selected}
             cited = [i for i in (used_ids or []) if i in served]
             answers = {"answer": answer} if answer else {}
+
+            def replay_hits(selected: list[ScoredCandidate]) -> bool:
+                return replay([self._as_hit(item) for item in selected])
+
             atts = self.system.observe(ctx, AgentTrace(answer=answers, cited_ids=cited, tool_args={}),
-                                       Outcome(success=bool(success)))
+                                       Outcome(success=bool(success)), replay=replay_hits if replay is not None else None)
+            del self._pending[search_id]
             self._maybe_save()
             return {fid: round(a.credit, 3) for fid, a in atts.items()}
 
