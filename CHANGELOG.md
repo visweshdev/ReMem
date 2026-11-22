@@ -7,15 +7,22 @@ All notable changes are listed here. Versions follow [semantic versioning](https
 ### Added
 - Real-data evaluation: `experiments/run_real_knowledge_update.py` runs LongMemEval's 72 knowledge-update questions end to end
   with a local LLM (fact extraction, answering) and a larger local judge. Results in `results/real_knowledge_update/`.
-  ReMem scores 45.8% vs 63.9% for plain search over raw chat: supersession on LLM-extracted keys retired correct facts.
+  ReMem 0.2 scored 45.8% vs 63.9% for plain search over raw chat because supersession on LLM-extracted keys retired correct facts.
 - "Newest fact per key" baselines (rule only, no learning) in the simulator configs.
 
 ### Changed
+- `ReMem.add` keeps same-key facts unless a checker confirms the update or the caller sets `update="replace"`. The CLI uses
+  `--replace` and the MCP `remember` tool uses `is_update=true` for explicit replacements.
 - The README reports only real-benchmark results (LongMemEval with a real LLM, LongMemEval retrieval). The synthetic simulator
   stays in the repository for development; its output is no longer presented as evidence.
 - The simulator no longer hands ReMem the benchmark's own single-valued attributes; ReMem must learn them (`schema_given` keeps the
   old setting as a comparison). The learned scoring model was retrained accordingly.
 - `docs/make_figures.py` reads its numbers from result files; the synthetic charts were removed from the README.
+
+### Fixed
+- A checker exception leaves the fact out of live and persisted storage so the caller can retry with the same ID.
+- Reopening a saved store uses the recorded update decisions without contacting the checker.
+- Replacements now handle changes such as negation, where the old and new facts can share the same value-bearing tokens.
 
 ## [0.2.0] - 2026-11-01
 
