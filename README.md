@@ -452,6 +452,9 @@ answered correctly and ReMem did not (18), 10 lost the newest evidence from the 
 newest-per-key rule, which ranks by similarity exactly like similarity-only, loses it at almost the same rate, so supersession (not ranking) removed it.
 Each row in the file has both contexts, both answers and the judge's reply, so every case can be read.
 
+The LoCoMo analysis traces how prior credit changed evidence rank and how distractors, candidate misses, and a suspect reference
+affected answers. [Representative cases](docs/FEEDBACK_ABLATION.md#representative-cases)
+
 ## 13. Future work
 
 Re-run knowledge-update QA with a larger extractor and the official judge. Check whether a newer fact actually supplies an updated value

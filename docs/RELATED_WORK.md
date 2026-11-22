@@ -14,9 +14,10 @@ Treat "not found" as "not seen in this check".
 
 ## Benchmarks (not memory systems)
 
-LongMemEval and LoCoMo are long-conversation memory benchmarks (Zep's paper evaluates on a LongMemEval variant with ~115k-token
-conversations; Mem0's evaluates on LoCoMo). ReMem is evaluated on LongMemEval (knowledge-update QA with a real LLM, and retrieval);
-LoCoMo was not run. See the README for the results.
+LongMemEval and LoCoMo are long-conversation memory benchmarks. Zep's paper uses a LongMemEval variant with roughly 115k-token
+conversations, and Mem0's paper uses LoCoMo. ReMem reports knowledge-update QA and retrieval on LongMemEval. Its LoCoMo experiment
+compares plain search and both feedback settings on 80 held-out questions, under a shared model and token budget. The results apply to
+that split and protocol. [LongMemEval results](../README.md#10-results) · [LoCoMo protocol and results](FEEDBACK_ABLATION.md)
 
 ## RMM in more detail (method sections read 2026-10-25)
 
@@ -48,6 +49,6 @@ From §6.1–6.3 and §7.1 of [arXiv 2503.08026](https://arxiv.org/html/2503.080
 * **Supersession without deletion is not new either.** Zep (edge invalidation) and Mem0's graph variant (marking relationships invalid)
   both keep superseded facts for temporal reasoning. ReMem's version is rule-based with learned attribute cardinality and outcome-triggered
   invalidation; those specifics were not found in the papers, but that is a weak statement given the depth of this check.
-* What ReMem offers is the **combination** (outcome-derived utility, an explicit retention state machine, supersession, token-budgeted
-  selection) in one backend-agnostic layer. On real data (LongMemEval) it has not beaten plain search, and it has not been compared with
-  these systems.
+* ReMem combines outcome-derived utility, an explicit retention state machine, supersession, and token-budgeted selection in one
+  backend-agnostic layer. Plain search scored higher on LongMemEval knowledge-update QA and led evidence retrieval in the LoCoMo
+  ablation. The LoCoMo comparison measures ReMem's feedback settings against a cosine baseline. [Benchmark results](../README.md#10-results)

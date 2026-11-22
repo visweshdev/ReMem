@@ -48,5 +48,8 @@ If the model forgets to call `feedback`, the server infers an outcome (`REMEM_AU
 A correction through `remember` with `is_update=true` counts as a failure for the memory it replaced. A later `recall` for
 the same task with no correction in between counts as a weak success. Set `REMEM_AUTO_FEEDBACK=0` to turn that off.
 
+The benchmark tested explicit feedback from reference-graded answers. The MCP server's inferred feedback remains unevaluated.
+[Feedback experiment](../docs/FEEDBACK_ABLATION.md)
+
 A prompt that works well: *"Use the remem tools. Recall before answering questions about my projects, remember new
 facts I tell you, and call feedback after each answer."*

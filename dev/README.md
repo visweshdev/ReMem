@@ -5,7 +5,9 @@ Everything in this folder is a **synthetic simulator** used while building ReMem
 mechanism does what it was written to do. Its numbers depend on assumptions chosen by the author, so they are
 **not evidence about real-world use** and are not reported in the main README.
 
-Real-data results (LongMemEval, a real LLM) are in the [main README](../README.md) and `results/` at the repository root.
+Public benchmark results and reproduction commands are in the [main README](../README.md#10-results). The
+[LoCoMo feedback report](../docs/FEEDBACK_ABLATION.md) compares three retrieval settings with a local answer model
+on held-out questions. The experiments and artifacts for LoCoMo and LongMemEval live at the repository root.
 
 | Path | What it is |
 |---|---|
