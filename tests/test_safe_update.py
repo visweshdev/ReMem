@@ -76,6 +76,17 @@ def test_declared_update_and_keep(embedder):
         m.add("x y z", update="sometimes")
 
 
+@pytest.mark.parametrize("policy", ["replace", "check"])
+def test_updates_can_reverse_a_fact_without_changing_its_value_tokens(embedder, policy):
+    m = ReMem(embedder=embedder, update_checker=lambda old, new: "not" in new)
+    key = {"entity": "server", "attribute": "status"}
+    old = m.add("The server is available.", when=DAY, **key)
+    new = m.add("The server is not available.", when=2 * DAY, update=policy, **key)
+    assert m.inspect(old)["superseded_by"] == new
+    assert [hit.id for hit in m.search("Is the server available?", as_of=DAY).items] == [old]
+    assert [hit.id for hit in m.search("Is the server available?", now=3 * DAY).items] == [new]
+
+
 def test_update_policy_and_source_survive_reload(tmp_path, embedder):
     m = ReMem(tmp_path, embedder=embedder)
     old, _ = _add_pair(m)

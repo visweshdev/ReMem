@@ -33,7 +33,7 @@ Key = tuple[str, str]
 class Conflict:
     old_id: str
     new_id: str
-    kind: str          # exclusive | cue | outcome
+    kind: str          # declared | confirmed | exclusive | cue | outcome | learned
     sim: float
 
 
@@ -64,19 +64,40 @@ class ContradictionDetector:
     def keys_of(self, rec: MemoryRecord) -> list[Key]:
         return [(e.lower(), a.lower()) for e in rec.entities for a in rec.attribute_keys]
 
-    def on_ingest(self, rec: MemoryRecord) -> list[Conflict]:
+    def confirmed_updates(self, rec: MemoryRecord) -> tuple[tuple[str, str], ...]:
+        """Resolve checks before indexing the record or applying any conflicts."""
+        if self.confirm is None or not self.cfg.enabled or rec.semantic_role not in self.cfg.roles:
+            return ()
+        decisions: dict[tuple[str, str], bool] = {}
+        for key in self.keys_of(rec):
+            for pid in self.by_key.get(key, []):
+                peer = self.ledger.get(pid)
+                if peer is None or peer.fact_id == rec.fact_id:
+                    continue
+                pair = self._ordered_pair(peer, rec)
+                if pair is None:
+                    continue
+                old, new = pair
+                ids = (old.fact_id, new.fact_id)
+                if new.update_policy == "check" and ids not in decisions:
+                    decisions[ids] = self.confirm(old, new)
+        return tuple(ids for ids, confirmed in decisions.items() if confirmed)
+
+    def on_ingest(self, rec: MemoryRecord,
+                  confirmed_updates: tuple[tuple[str, str], ...] | None = None) -> list[Conflict]:
         found: list[Conflict] = []
         if not self.cfg.enabled:
             return found
         if rec.semantic_role not in self.cfg.roles:
             return found
+        confirmed = set(self.confirmed_updates(rec) if confirmed_updates is None else confirmed_updates)
         for key in self.keys_of(rec):
             peers = self.by_key.setdefault(key, [])
             for pid in list(peers):
                 other = self.ledger.get(pid)
                 if other is None or other.fact_id == rec.fact_id:
                     continue
-                conflict = self._compare(other, rec, key)
+                conflict = self._compare(other, rec, key, confirmed)
                 if conflict is not None:
                     self._apply(conflict)
                     found.append(conflict)
@@ -96,23 +117,33 @@ class ContradictionDetector:
             return toks
         return {t for t in toks if any(c.isdigit() for c in t) or self.ledger.df_fraction(t) <= self.cfg.max_value_df}
 
-    def _compare(self, a: MemoryRecord, b: MemoryRecord, key: Key) -> Conflict | None:
-        """Decide if a and b conflict; the one with the later timestamp wins."""
+    @staticmethod
+    def _ordered_pair(a: MemoryRecord, b: MemoryRecord) -> tuple[MemoryRecord, MemoryRecord] | None:
         old, new = (a, b) if a.time <= b.time else (b, a)
         if old.state == MemState.INVALIDATED and old.valid_to is not None and old.valid_to <= new.time:
             return None
-        ov, nv = self._value_tokens(old.original_text), self._value_tokens(new.original_text)
-        if not (nv - ov) or not (ov - nv):
-            return None               # same value restated (or nothing value-like differs): reconfirmation
+        if old.original_text == new.original_text:
+            return None
+        return old, new
+
+    def _compare(self, a: MemoryRecord, b: MemoryRecord, key: Key,
+                 confirmed: set[tuple[str, str]]) -> Conflict | None:
+        pair = self._ordered_pair(a, b)
+        if pair is None:
+            return None
+        old, new = pair
         policy = new.update_policy
         if policy == "keep":
             return None
         if policy == "replace":       # the caller declared this fact an update of the same key
             return Conflict(old.fact_id, new.fact_id, "declared", self.text_sim(old.original_text, new.original_text))
         if policy == "check":         # same key is not enough: an update checker must confirm it
-            if self.confirm is not None and self.confirm(old, new):
+            if (old.fact_id, new.fact_id) in confirmed:
                 return Conflict(old.fact_id, new.fact_id, "confirmed", self.text_sim(old.original_text, new.original_text))
             return None
+        ov, nv = self._value_tokens(old.original_text), self._value_tokens(new.original_text)
+        if not (nv - ov) or not (ov - nv):
+            return None               # the automatic rules need evidence of a value change
         exclusive = self.is_exclusive(key[1]) or (
             old.semantic_role in self.cfg.exclusive_roles and new.semantic_role in self.cfg.exclusive_roles)
         if exclusive:                 # declared single-valued: same key + different value is enough
