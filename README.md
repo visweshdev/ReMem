@@ -33,12 +33,10 @@ tokens. Nothing is ever deleted, and every decision can be inspected.
 <p align="center"><sub>Real output of <a href="examples/basic_api.py"><code>examples/basic_api.py</code></a>: the outdated fact is retired, and the note that never helps is demoted to <code>LOW_VALUE</code>.</sub></p>
 
 > [!IMPORTANT]
-> **Research prototype. On real data it does not beat plain search yet.** All results reported here come from a public
-> benchmark (LongMemEval) and a real LLM, not from a simulation. On LongMemEval's knowledge-update questions (a fact changes
-> over time), ReMem 0.2 answered **45.8%** correctly vs **63.9%** for plain
-> search over the raw chat: worse, because rule-based fact replacement on LLM-extracted keys retired correct facts. On LongMemEval
-> retrieval it ties the recency baseline. The learning-from-feedback part has **no real-data test** yet. See
-> [Results](#results-at-a-glance) and [Limitations](#11-limitations-read-these).
+> **Research prototype.** On LongMemEval's knowledge-update questions, ReMem 0.2 answered **45.8%** correctly vs
+> **63.9%** for plain search over raw chat. Rule-based fact replacement on LLM-extracted keys retired correct facts.
+> On LongMemEval retrieval it ties the recency baseline. A separate [LoCoMo feedback ablation](docs/FEEDBACK_ABLATION.md)
+> measures whether prior outcomes help on held-out questions about the same conversations.
 
 ## Quickstart
 
@@ -132,6 +130,8 @@ later a new one (a 5K best of 27:12, later 25:50). A local model (qwen2.5:3b) ex
 | Extracted facts + **ReMem 0.2** | 45.8% | 58.3% | 12.5% |
 
 ReMem minus plain search: **-18.1 pp (95% CI -31.9 to -4.2)**. Details and the reason in [§10](#10-results).
+
+The [LoCoMo feedback ablation](docs/FEEDBACK_ABLATION.md) compares plain search with both ReMem feedback settings on 80 held-out questions.
 
 ## Use it with Claude (MCP)
 
@@ -235,6 +235,8 @@ python -m pytest tests -q                                   # unit tests, under 
 python experiments/run_longmemeval.py --data data/longmemeval_s_cleaned.json        # retrieval, no LLM needed
 # real LLM, free: install Ollama (https://ollama.com), then: ollama pull qwen2.5:3b && ollama pull qwen3-coder:30b
 python experiments/run_real_knowledge_update.py --data data/longmemeval_s_cleaned.json   # ~2 h on CPU, resumable
+# LoCoMo data: locomo10.json from https://github.com/snap-research/locomo/tree/main/data, in data/
+python experiments/run_feedback_ablation.py --data data/locomo10.json             # feedback ablation, resumable
 python docs/make_figures.py                                 # regenerate the README images
 ```
 </details>
@@ -353,7 +355,7 @@ None of these has been shown to help on real data; §10 has the real-data result
 
 ## 9. Evaluation methodology
 
-Only public data and real models are reported. Nothing in §10 comes from a simulator.
+The experiments use public benchmarks and local models. LongMemEval and LoCoMo use different history constructions and scoring protocols.
 
 * **Data.** LongMemEval (`longmemeval_s_cleaned.json`, ICLR 2025): ~50 chat sessions of history per question.
 * **Knowledge-update QA** (`experiments/run_real_knowledge_update.py`): the 72 non-abstention knowledge-update questions. Per question, the 15
@@ -366,8 +368,9 @@ Only public data and real models are reported. Nothing in §10 comes from a simu
   Judge-free metrics come from provenance: is the newest evidence turn in the context, and is only the outdated one there.
   Intervals are 95% paired bootstrap over questions. Hypotheses are saved for the official GPT-4o judge (`results/real_knowledge_update/hyp_*.jsonl`).
 * **Retrieval** (`experiments/run_longmemeval.py`): all 470 non-abstention questions, every turn stored as one memory, recall of evidence turns.
-* **Not testable on this data:** learning from feedback. Every LongMemEval question has its own history and is asked once, so ReMem never
-  receives an outcome. No public benchmark with repeated, outcome-labelled queries has been run.
+* The **outcome-feedback ablation** uses LoCoMo, which provides several questions over each of ten generated conversations.
+  All arms share the same warm-up and held-out questions, corpus, candidate pool, answer model, and budgets. Only feedback-on receives warm-up outcomes.
+  Each held-out search uses a frozen copy of its arm's warm-up state. [Full protocol and results](docs/FEEDBACK_ABLATION.md)
 
 ## 10. Results
 
@@ -417,15 +420,28 @@ ReMem ties the recency baseline: with no feedback and no entity/attribute keys o
 haystack sessions dated after the question; every system, as designed, does not serve them, so absolute numbers are lower than in a
 run that ignores dates: 74.7 turn@5 for all three systems, `results/longmemeval_clocknow/retrieval.json`.)
 
+### LoCoMo outcome-feedback ablation
+
+80 held-out questions across ten conversations with Qwen2.5 3B, the same five-turn cap, and the same token budgets.
+
+| System | Exact-match accuracy | Reference-equivalent accuracy | Evidence hit | Evidence recall |
+| --- | ---: | ---: | ---: | ---: |
+| Plain search | 7.50% | **15.00%** | **37.50%** | **28.99%** |
+| ReMem, feedback off | 6.25% | 12.50% | 31.25% | 24.63% |
+| ReMem, feedback on | 7.50% | 13.75% | 32.50% | 25.88% |
+
+Feedback changed some rankings. Its single answer gain matched a reference with an apparent speaker attribution error.
+Both ReMem settings tied on answer accuracy after excluding that item. [Protocol, paired results, and failure analysis](docs/FEEDBACK_ABLATION.md)
+
 ## 11. Limitations (read these)
 
 * **On real data ReMem has not shown a gain.** It is 18 points worse than plain search on LongMemEval knowledge-update
   questions and ties a recency baseline on LongMemEval retrieval.
 * **Supersession on LLM-extracted keys is risky.** In ReMem 0.2, key matching with a 3B extractor retired correct facts more often than
   it removed harmful stale ones. The current API requires either a declared replacement or a checker confirmation.
-* **Learning from feedback is untested on real data.** No public benchmark with repeated queries and outcomes was run; the MCP server's
-  inferred feedback has not been evaluated either.
-* **One small model, one dataset type.** qwen2.5:3b for extraction and answers, qwen3-coder:30b as judge (not the official GPT-4o judge),
+* **Feedback evidence is limited to LoCoMo's generated conversations.** The evaluation supplies a reference-graded outcome and uses
+  model-reported citations. Deployment outcomes and the MCP server's inferred feedback remain open questions.
+* **Knowledge-update QA uses a small model and one question type.** qwen2.5:3b for extraction and answers, qwen3-coder:30b as judge (not the official GPT-4o judge),
   72 questions; intervals are wide (±13–14 pp). Extraction ran only on each question's 15-turn candidate pool to keep CPU cost manageable.
 * **Credit assignment is not causal**; citations are self-reported and value use is lexical.
 
@@ -438,9 +454,8 @@ Each row in the file has both contexts, both answers and the judge's reply, so e
 
 ## 13. Future work
 
-Re-run knowledge-update QA with a larger extractor and the official judge; add a check before supersession (e.g. require the newer fact to
-state a value for the same question, or ask the LLM whether it is an update); find or build a public benchmark with repeated queries and
-outcomes so the feedback part can be tested on real data; LongMemEval QA over all question types.
+Re-run knowledge-update QA with a larger extractor and the official judge. Check whether a newer fact actually supplies an updated value
+before superseding an older one. Test feedback with observed user outcomes over longer sequences and expand LongMemEval QA to all question types.
 
 ## Repository map
 
@@ -450,10 +465,10 @@ remem/                 the library: api.py (ReMem), cli.py (`remem` command), mc
 remem/backends/        numpy vector, FAISS, Chroma            remem/embedders.py   sentence-transformers
 remem/extract.py       fact extraction                         remem/integrations/  LangChain retriever
 remem/viz/            dashboard (HTML), ledger_cli
-experiments/           run_real_knowledge_update.py and run_longmemeval.py (every reported number)
+experiments/           LongMemEval retrieval and knowledge updates, LoCoMo feedback ablation
 examples/              basic_api.py, quickstart.py, langchain_retriever.py, claude_desktop_mcp.md
 tests/                 unit tests
-results/               real_knowledge_update/, longmemeval/, longmemeval_clocknow/
+results/               real_knowledge_update/, longmemeval/, longmemeval_clocknow/, feedback_ablation/
 docs/                  DESIGN.md, RELATED_WORK.md, make_figures.py (README images), make_install_video.py, video/
 .github/               CI (lint, tests on Linux and Windows), issue and PR templates
 CHANGELOG.md, CONTRIBUTING.md, SECURITY.md, CITATION.cff

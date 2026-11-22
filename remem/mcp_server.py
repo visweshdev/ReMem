@@ -23,7 +23,7 @@ by default the server also infers outcomes for unreported recalls (implicit feed
     -> the earlier recall is recorded as a success, with no memory explicitly cited (weak, presence-only credit).
 Inferred outcomes are noisier than explicit ones; set REMEM_AUTO_FEEDBACK=0 to disable them.
 
-Learning from feedback is EXPERIMENTAL: it has not been tested on real data (no public benchmark repeats questions).
+Learning from feedback is EXPERIMENTAL. The LoCoMo ablation evaluates explicit outcomes on generated conversations.
 
 Replacing facts: an older fact with the same entity+attribute is retired only when `remember` is called with
 is_update=true, i.e. when the calling model confirms the new fact replaces it. Otherwise both are kept. On real data,

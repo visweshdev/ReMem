@@ -1,0 +1,314 @@
+{
+  "reviewer": "Codex, one reference-based reviewer",
+  "instructions": "Judge each distinct answer against the question and reference without seeing system labels. Accept paraphrases carrying the required facts without material contradictions. Reject incomplete or ambiguous answers.",
+  "held_out_questions": 80,
+  "distinct_answers_reviewed": 112,
+  "answer_correct_by_sha256": {
+    "conv-26/78": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-26/66": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false,
+      "e8d1b8c7c1cbb0ac24b06f05189c53a64d8868c0d6d8cde74d8105929232f814": false
+    },
+    "conv-26/119": {
+      "70291601ef8d3407f05ddfb74e701e47d9727febf6d7fd12370d4937d1173587": true
+    },
+    "conv-26/109": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false,
+      "c8d3025839d76df180f37170e07450fa451d467ac684b279768de92de45db6c9": true
+    },
+    "conv-26/127": {
+      "a93f6b7c5684a5507b461aa079ca8ec4046f1d3db614237e7ea95857aad2de55": false,
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-26/136": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-26/15": {
+      "71dec9c32b5f1be8f0d5a222059c0108d2d6d1fccf6067bf2af40084ffc094b4": false,
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-26/76": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-30/49": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-30/2": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-30/23": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-30/24": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-30/48": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false,
+      "e34f874561524d0966e8cc923dfb16256fe28e27630ff6869c4e34455373b1cb": false
+    },
+    "conv-30/78": {
+      "2602f55681c0196d04b655188cd39d39dd3248de70f6530355a54e3671b2760d": false,
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-30/18": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-30/25": {
+      "4da397b24e6b435b877d8f2f55f0639053a323a55bdc15448b6d89ceb431e493": false,
+      "4e1fa788f3193bb5f3935ff99da2646845373d450641494d00f5d8f4898c500b": false,
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-41/62": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-41/68": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-41/101": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-41/100": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-41/12": {
+      "11c9a12e8de9cc6d755b0f7fcb178d6a5c363be43c4eb3efee0a220dce970bed": false,
+      "cdee42306f0e35cd89801eb8b8851c423ec45993e8dd197cd7667809ad963569": false,
+      "fb8a99ac0ed410c80d292ab85578b992a940dd82602e59b99e552829dc092c55": false
+    },
+    "conv-41/97": {
+      "c8d036ea1b51a653020951863673399aaf69d1d164829e473ade01f3160e5009": true,
+      "d5210c5226792cf9fc0d26c5c83403324550f880dc13e590b89e2a35d0fa10c4": false
+    },
+    "conv-41/19": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-41/3": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-42/159": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-42/1": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-42/182": {
+      "4ecbe70f503c5193d7b777e790972aa752b0eae573a9dc3b69aa3c5047df379d": true,
+      "78ad2033ef120c433b1292db8355b3705cd59aef30199e137230060455faa272": true
+    },
+    "conv-42/144": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-42/162": {
+      "76bb8e22fbd4eb42e3f480d6df075198969719cd7bd7393cd7edc5eeeaf1e672": false
+    },
+    "conv-42/63": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-42/10": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false,
+      "c774173c3c217b3569111bbfe46c0264fa9fb47851bb8566abaf8c708ef09eb3": false
+    },
+    "conv-42/11": {
+      "c5edaf68bc4c3381cc60501024e4036a4296063393f8f5e7b04b1168e7ff7ac6": false,
+      "d7dd933d2ea5b362d0b5047fdf735af41d5bf27ddf516611c49d6b7571c1f89f": false
+    },
+    "conv-43/164": {
+      "3411059cb8e0660e29dd7a3737e65a28b08eb01524a8ebc3d4168932649f23e6": true,
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-43/167": {
+      "80139259f61acbe7e0a41c37fb943ebba8d0ad79929e82dbfbd3672eacab9af8": true
+    },
+    "conv-43/108": {
+      "075723a61db5d50f8389837a8880ec1df7cec12501c68ff63e5b9c3c9cf70702": false,
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-43/95": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-43/65": {
+      "37b08a03e00cdc0a4a4dfd93e98b2ce0f54666f33c59a009e60bd4a77b0423e2": false,
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-43/62": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-43/57": {
+      "00e3e584e242f926ff6b26bdd0cd26aac15b7ae023a7306c81a7d5708ce8459a": false,
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-43/49": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-44/35": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-44/23": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-44/90": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-44/118": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-44/79": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-44/76": {
+      "62822670002c1d1fa14596287da5c2215193fe6730b6e99bd655b617a0725980": false,
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-44/27": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-44/42": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-47/113": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-47/121": {
+      "15966311ddfb971ec4cbce862856679e8d04f2575111554b645ea502ec054f3a": true,
+      "56908d8a77026ed2e0612b71db159dc9ade82c94363bc1c9a3d8000ecd9eafea": true,
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-47/83": {
+      "23528ffaab54701d384ee693d361b789aebc3c7e4f7cc83b9bddf069c98f0006": true,
+      "9e50c15ebe8fa1960269bdcee038ea39db228afa09fe3e5a12a7be3c5f9bc0f0": true
+    },
+    "conv-47/144": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-47/24": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-47/18": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-47/54": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false,
+      "ee40b96aca2283c78e92cd87de8e828ff9a4916bbae68ebbd561a1a518f3010b": false
+    },
+    "conv-47/27": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-48/174": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-48/175": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-48/141": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-48/123": {
+      "933e40c9748166073d68f3af8799beeadab63ed85795a980777449803481a0a6": false,
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-48/86": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-48/14": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-48/85": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-48/20": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-49/106": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-49/121": {
+      "0d89c324c780e0553010772e864ba94f02b15215c5c6d3dfe5fc7cca3e710488": true
+    },
+    "conv-49/141": {
+      "68fa88d248cdd0869059ae5bc84d6eb1755b0913cb0fc02614999a48f48ae307": true
+    },
+    "conv-49/152": {
+      "54230802dfda0e8beeb5a86f02f85969d579ff8d6e237be0d167c83dde1cbafb": false,
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false,
+      "f3b88cab558aca6e4f779e851d6ef6554f33340619bc7b8f678daa42a7d1082a": false
+    },
+    "conv-49/28": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-49/36": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-49/15": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-49/50": {
+      "a2c6e3e85d6bc9108f062d2a3a9c495458355808ffbf0af83c53aab5d890354c": false,
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-50/74": {
+      "838c05a2874cad7da2a60b045cd0578379fc3c70c90a0cbab1546b159792c503": false,
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-50/59": {
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-50/30": {
+      "ae37828279370cf4c096f47a76b57f441a2093f3aa872ec661aa647e161d801a": false
+    },
+    "conv-50/99": {
+      "1b10e45355a351536afe9b9c8f852094259bd293fcf14e3dfb4089ceba02f42b": true,
+      "3f3abd7bb7b61d017047753f8484dc0cef7512ae98a1c47f1c4e001ea9a4268e": false
+    },
+    "conv-50/126": {
+      "bbf4fead64bbaad0e37de8b487d85b7b52574b52fe1df8b17a5eea48c7e19859": true
+    },
+    "conv-50/28": {
+      "883b607a9e7d2e02f32bf0ad420b358d670e79126bf472e425c26e89d01dd15b": false,
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    },
+    "conv-50/148": {
+      "21d32fb4027ca9287177c43c10afce96f3479d4c2e34fb0d88a6ec1d01a48824": true,
+      "6e1a18b0c74eb99c524665fcc4e114be487d3a4338f0b4bb20e7f6a5176accaa": true
+    },
+    "conv-50/15": {
+      "146d1f9d3feeeac90fa9860bf1fda1971120b16adb4e5bfa64d78cbbeed3389a": true,
+      "b764cdc0eab7137467211272fa539f1260d1bf2e71bcf6ff3bdc960f5c16aa14": false
+    }
+  },
+  "accuracy": {
+    "plain_search": 0.15,
+    "feedback_off": 0.125,
+    "feedback_on": 0.1375
+  },
+  "paired_accuracy": {
+    "feedback_off_minus_plain_search": {
+      "delta": -0.025,
+      "ci95": [
+        -0.075,
+        0.025
+      ],
+      "wins": 2,
+      "losses": 4
+    },
+    "feedback_on_minus_plain_search": {
+      "delta": -0.0125,
+      "ci95": [
+        -0.05,
+        0.025
+      ],
+      "wins": 2,
+      "losses": 3
+    },
+    "feedback_on_minus_feedback_off": {
+      "delta": 0.0125,
+      "ci95": [
+        0.0,
+        0.0375
+      ],
+      "wins": 1,
+      "losses": 0
+    }
+  }
+}

@@ -65,8 +65,8 @@ count alone. Demotions are class-conditional. Nothing is deleted. Credited use r
 
 ## 6. Evaluation
 
-Only public data and real models are used for reported results: LongMemEval knowledge-update questions answered by a real LLM, and
-LongMemEval retrieval (README §9–§10). Learning from feedback has no real-data test yet.
+The LongMemEval experiments cover knowledge-update QA and retrieval (README §9–§10). The
+[LoCoMo feedback ablation](FEEDBACK_ABLATION.md) uses generated conversations with separate warm-up and held-out questions.
 
 ## 7. Deviations found while building
 

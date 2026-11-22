@@ -1,0 +1,562 @@
+{
+  "dataset": "locomo10.json",
+  "dataset_sha256": "79fa87e90f04081343b8c8debecb80a9a6842b76a7aa537dc9fdf651ea698ff4",
+  "conversations": 10,
+  "held_out_questions": 80,
+  "warmup_questions": 120,
+  "warmup_correct": 11,
+  "model": "qwen2.5:3b",
+  "model_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+  "ollama_version": "0.40.16",
+  "model_options": {
+    "temperature": 0,
+    "seed": 0,
+    "num_ctx": 1024,
+    "num_predict": 48,
+    "num_thread": 8
+  },
+  "embedder": "sentence-transformers/all-MiniLM-L6-v2",
+  "split_seed": 42,
+  "memory_budget_proxy_tokens": 400,
+  "system_configs": {
+    "plain_search": {
+      "name": "remem",
+      "backend": "vector",
+      "ranker": "sim",
+      "outcome_feedback": false,
+      "pool_size": 30,
+      "utility": {
+        "kind": "heuristic",
+        "model_path": null,
+        "feature_groups": [
+          "static",
+          "history",
+          "outcome",
+          "contradiction"
+        ],
+        "explore_c": 0.5,
+        "explore_mode": "ucb",
+        "prior_a": 1.0,
+        "prior_b": 3.0,
+        "class_shrink": 4.0,
+        "recency_tau_days": 30.0,
+        "rank_weight": 0.0,
+        "rmm_lr": 0.01,
+        "rmm_tau": 0.05
+      },
+      "attribution": {
+        "method": "signals",
+        "credit_threshold": 0.5,
+        "w_cited": 0.5,
+        "w_used": 0.5,
+        "min_value_len": 1,
+        "loo_max_items": 8,
+        "loo_policy": "all",
+        "ignore_outcome": false
+      },
+      "contradiction": {
+        "enabled": false,
+        "exclusive_attributes": [],
+        "exclusive_roles": [
+          "state"
+        ],
+        "update_cues": [
+          "migrated",
+          "changed",
+          "switched",
+          "replaced",
+          "longer",
+          "moved",
+          "updated"
+        ],
+        "roles": [
+          "state",
+          "preference",
+          "constraint"
+        ],
+        "min_sim": 0.45,
+        "max_value_df": 0.2,
+        "min_corpus_for_df": 30,
+        "conf_half_life_days": 120.0,
+        "conf_floor": 0.3,
+        "outcome_invalidation": true,
+        "as_of_validity": true,
+        "learn_schema": true,
+        "schema_min_evidence": 2,
+        "schema_threshold": 0.6
+      },
+      "retention": {
+        "mode": "none",
+        "min_exposures_low": 5,
+        "low_rate": 0.15,
+        "recover_rate": 0.3,
+        "compress_exposures": 10,
+        "compress_rate": 0.1,
+        "archive_exposures": 16,
+        "archive_rate": 0.06,
+        "low_value_penalty": 0.5,
+        "min_class_evidence": 3,
+        "protect_credit": 3.0,
+        "compress_max_df": 0.2,
+        "prune_window": 150,
+        "prune_min_retrievals": 2
+      },
+      "selection": {
+        "mode": "rank_pack",
+        "top_k": 5,
+        "budget_tokens": 400,
+        "min_items": 1,
+        "p_floor": 0.12,
+        "cost_lambda": 0.0,
+        "min_sim": 0.0,
+        "guard_top": 0,
+        "guard_min_evidence": 3,
+        "guard_rate": 0.2,
+        "guard_min_rel_sim": 0.5
+      },
+      "collect_exploration": 0
+    },
+    "feedback_off": {
+      "name": "remem",
+      "backend": "vector",
+      "ranker": "heuristic",
+      "outcome_feedback": false,
+      "pool_size": 30,
+      "utility": {
+        "kind": "heuristic",
+        "model_path": null,
+        "feature_groups": [
+          "static",
+          "history",
+          "outcome",
+          "contradiction"
+        ],
+        "explore_c": 0.5,
+        "explore_mode": "ucb",
+        "prior_a": 1.0,
+        "prior_b": 3.0,
+        "class_shrink": 4.0,
+        "recency_tau_days": 30.0,
+        "rank_weight": 0.0,
+        "rmm_lr": 0.01,
+        "rmm_tau": 0.05
+      },
+      "attribution": {
+        "method": "signals",
+        "credit_threshold": 0.5,
+        "w_cited": 0.5,
+        "w_used": 0.5,
+        "min_value_len": 1,
+        "loo_max_items": 8,
+        "loo_policy": "all",
+        "ignore_outcome": false
+      },
+      "contradiction": {
+        "enabled": true,
+        "exclusive_attributes": [],
+        "exclusive_roles": [
+          "state"
+        ],
+        "update_cues": [
+          "migrated",
+          "changed",
+          "switched",
+          "replaced",
+          "longer",
+          "moved",
+          "updated"
+        ],
+        "roles": [
+          "state",
+          "preference",
+          "constraint"
+        ],
+        "min_sim": 0.45,
+        "max_value_df": 0.2,
+        "min_corpus_for_df": 30,
+        "conf_half_life_days": 120.0,
+        "conf_floor": 0.3,
+        "outcome_invalidation": true,
+        "as_of_validity": true,
+        "learn_schema": true,
+        "schema_min_evidence": 2,
+        "schema_threshold": 0.6
+      },
+      "retention": {
+        "mode": "adaptive",
+        "min_exposures_low": 5,
+        "low_rate": 0.15,
+        "recover_rate": 0.3,
+        "compress_exposures": 10,
+        "compress_rate": 0.1,
+        "archive_exposures": 16,
+        "archive_rate": 0.06,
+        "low_value_penalty": 0.5,
+        "min_class_evidence": 3,
+        "protect_credit": 3.0,
+        "compress_max_df": 0.2,
+        "prune_window": 150,
+        "prune_min_retrievals": 2
+      },
+      "selection": {
+        "mode": "cost_aware",
+        "top_k": 5,
+        "budget_tokens": 400,
+        "min_items": 1,
+        "p_floor": 0.12,
+        "cost_lambda": 0.0,
+        "min_sim": 0.1,
+        "guard_top": 3,
+        "guard_min_evidence": 3,
+        "guard_rate": 0.2,
+        "guard_min_rel_sim": 0.5
+      },
+      "collect_exploration": 0
+    },
+    "feedback_on": {
+      "name": "remem",
+      "backend": "vector",
+      "ranker": "heuristic",
+      "outcome_feedback": true,
+      "pool_size": 30,
+      "utility": {
+        "kind": "heuristic",
+        "model_path": null,
+        "feature_groups": [
+          "static",
+          "history",
+          "outcome",
+          "contradiction"
+        ],
+        "explore_c": 0.5,
+        "explore_mode": "ucb",
+        "prior_a": 1.0,
+        "prior_b": 3.0,
+        "class_shrink": 4.0,
+        "recency_tau_days": 30.0,
+        "rank_weight": 0.0,
+        "rmm_lr": 0.01,
+        "rmm_tau": 0.05
+      },
+      "attribution": {
+        "method": "signals",
+        "credit_threshold": 0.5,
+        "w_cited": 0.5,
+        "w_used": 0.5,
+        "min_value_len": 1,
+        "loo_max_items": 8,
+        "loo_policy": "all",
+        "ignore_outcome": false
+      },
+      "contradiction": {
+        "enabled": true,
+        "exclusive_attributes": [],
+        "exclusive_roles": [
+          "state"
+        ],
+        "update_cues": [
+          "migrated",
+          "changed",
+          "switched",
+          "replaced",
+          "longer",
+          "moved",
+          "updated"
+        ],
+        "roles": [
+          "state",
+          "preference",
+          "constraint"
+        ],
+        "min_sim": 0.45,
+        "max_value_df": 0.2,
+        "min_corpus_for_df": 30,
+        "conf_half_life_days": 120.0,
+        "conf_floor": 0.3,
+        "outcome_invalidation": true,
+        "as_of_validity": true,
+        "learn_schema": true,
+        "schema_min_evidence": 2,
+        "schema_threshold": 0.6
+      },
+      "retention": {
+        "mode": "adaptive",
+        "min_exposures_low": 5,
+        "low_rate": 0.15,
+        "recover_rate": 0.3,
+        "compress_exposures": 10,
+        "compress_rate": 0.1,
+        "archive_exposures": 16,
+        "archive_rate": 0.06,
+        "low_value_penalty": 0.5,
+        "min_class_evidence": 3,
+        "protect_credit": 3.0,
+        "compress_max_df": 0.2,
+        "prune_window": 150,
+        "prune_min_retrievals": 2
+      },
+      "selection": {
+        "mode": "cost_aware",
+        "top_k": 5,
+        "budget_tokens": 400,
+        "min_items": 1,
+        "p_floor": 0.12,
+        "cost_lambda": 0.0,
+        "min_sim": 0.1,
+        "guard_top": 3,
+        "guard_min_evidence": 3,
+        "guard_rate": 0.2,
+        "guard_min_rel_sim": 0.5
+      },
+      "collect_exploration": 0
+    }
+  },
+  "pool_evidence_hit": 0.6875,
+  "summary": {
+    "plain_search": {
+      "accuracy": 0.075,
+      "answer_f1": 0.14449993403158365,
+      "evidence_hit": 0.375,
+      "evidence_recall": 0.28989583333333335,
+      "evidence_mrr": 0.19208333333333333,
+      "memory_tokens": 133,
+      "prompt_tokens": 267.15,
+      "output_tokens": 23.6625
+    },
+    "feedback_off": {
+      "accuracy": 0.0625,
+      "answer_f1": 0.1201989923148094,
+      "evidence_hit": 0.3125,
+      "evidence_recall": 0.24625,
+      "evidence_mrr": 0.15270833333333333,
+      "memory_tokens": 129.95,
+      "prompt_tokens": 264.75,
+      "output_tokens": 23.6625
+    },
+    "feedback_on": {
+      "accuracy": 0.075,
+      "answer_f1": 0.12141704310182572,
+      "evidence_hit": 0.325,
+      "evidence_recall": 0.25875,
+      "evidence_mrr": 0.15520833333333334,
+      "memory_tokens": 131.825,
+      "prompt_tokens": 266.5875,
+      "output_tokens": 23.8125
+    }
+  },
+  "paired": {
+    "feedback_off_minus_plain_search": {
+      "accuracy": {
+        "delta": -0.0125,
+        "ci95": [
+          -0.0375,
+          0.0
+        ],
+        "wins": 0,
+        "losses": 1
+      },
+      "answer_f1": {
+        "delta": -0.02430094171677424,
+        "ci95": [
+          -0.06429604483048348,
+          0.013192026185786646
+        ],
+        "wins": 7,
+        "losses": 12
+      },
+      "evidence_hit": {
+        "delta": -0.0625,
+        "ci95": [
+          -0.1375,
+          0.0125
+        ],
+        "wins": 2,
+        "losses": 7
+      },
+      "evidence_recall": {
+        "delta": -0.043645833333333335,
+        "ci95": [
+          -0.1003125,
+          0.00574218749999981
+        ],
+        "wins": 2,
+        "losses": 8
+      },
+      "evidence_mrr": {
+        "delta": -0.039375,
+        "ci95": [
+          -0.065,
+          -0.015416666666666667
+        ],
+        "wins": 5,
+        "losses": 18
+      }
+    },
+    "feedback_on_minus_plain_search": {
+      "accuracy": {
+        "delta": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "wins": 0,
+        "losses": 0
+      },
+      "answer_f1": {
+        "delta": -0.023082890929757936,
+        "ci95": [
+          -0.0632607623088761,
+          0.012566977029612892
+        ],
+        "wins": 5,
+        "losses": 12
+      },
+      "evidence_hit": {
+        "delta": -0.05,
+        "ci95": [
+          -0.125,
+          0.025
+        ],
+        "wins": 2,
+        "losses": 6
+      },
+      "evidence_recall": {
+        "delta": -0.031145833333333334,
+        "ci95": [
+          -0.0765625,
+          0.007916666666666666
+        ],
+        "wins": 2,
+        "losses": 7
+      },
+      "evidence_mrr": {
+        "delta": -0.036875,
+        "ci95": [
+          -0.076671875,
+          0.009171874999999925
+        ],
+        "wins": 4,
+        "losses": 18
+      }
+    },
+    "feedback_on_minus_feedback_off": {
+      "accuracy": {
+        "delta": 0.0125,
+        "ci95": [
+          0.0,
+          0.0375
+        ],
+        "wins": 1,
+        "losses": 0
+      },
+      "answer_f1": {
+        "delta": 0.0012180507870163046,
+        "ci95": [
+          -0.026642673657759866,
+          0.025940273009238523
+        ],
+        "wins": 3,
+        "losses": 4
+      },
+      "evidence_hit": {
+        "delta": 0.0125,
+        "ci95": [
+          0.0,
+          0.0375
+        ],
+        "wins": 1,
+        "losses": 0
+      },
+      "evidence_recall": {
+        "delta": 0.0125,
+        "ci95": [
+          0.0,
+          0.0375
+        ],
+        "wins": 1,
+        "losses": 0
+      },
+      "evidence_mrr": {
+        "delta": 0.0025,
+        "ci95": [
+          -0.027500000000000004,
+          0.0325
+        ],
+        "wins": 2,
+        "losses": 1
+      }
+    }
+  },
+  "by_prior_evidence_credit": {
+    "credited_evidence": {
+      "n": 2,
+      "summary": {
+        "plain_search": {
+          "accuracy": 0,
+          "answer_f1": 0.23529411764705882,
+          "evidence_hit": 0.5,
+          "evidence_recall": 0.0625,
+          "evidence_mrr": 0.125,
+          "memory_tokens": 118.5,
+          "prompt_tokens": 246,
+          "output_tokens": 23.5
+        },
+        "feedback_off": {
+          "accuracy": 0,
+          "answer_f1": 0.3103448275862069,
+          "evidence_hit": 0.5,
+          "evidence_recall": 0.25,
+          "evidence_mrr": 0.1,
+          "memory_tokens": 112,
+          "prompt_tokens": 237.5,
+          "output_tokens": 29.5
+        },
+        "feedback_on": {
+          "accuracy": 0,
+          "answer_f1": 0.18181818181818182,
+          "evidence_hit": 0.5,
+          "evidence_recall": 0.25,
+          "evidence_mrr": 0.5,
+          "memory_tokens": 123.5,
+          "prompt_tokens": 249,
+          "output_tokens": 33.5
+        }
+      }
+    },
+    "no_credited_evidence": {
+      "n": 78,
+      "summary": {
+        "plain_search": {
+          "accuracy": 0.07692307692307693,
+          "answer_f1": 0.14217187804144327,
+          "evidence_hit": 0.3717948717948718,
+          "evidence_recall": 0.29572649572649573,
+          "evidence_mrr": 0.1938034188034188,
+          "memory_tokens": 133.37179487179486,
+          "prompt_tokens": 267.6923076923077,
+          "output_tokens": 23.666666666666668
+        },
+        "feedback_off": {
+          "accuracy": 0.0641025641025641,
+          "answer_f1": 0.11532345807708126,
+          "evidence_hit": 0.3076923076923077,
+          "evidence_recall": 0.24615384615384614,
+          "evidence_mrr": 0.15405982905982907,
+          "memory_tokens": 130.4102564102564,
+          "prompt_tokens": 265.44871794871796,
+          "output_tokens": 23.512820512820515
+        },
+        "feedback_on": {
+          "accuracy": 0.07692307692307693,
+          "answer_f1": 0.11986829595525247,
+          "evidence_hit": 0.32051282051282054,
+          "evidence_recall": 0.258974358974359,
+          "evidence_mrr": 0.14636752136752137,
+          "memory_tokens": 132.03846153846155,
+          "prompt_tokens": 267.03846153846155,
+          "output_tokens": 23.564102564102566
+        }
+      }
+    }
+  }
+}

@@ -16,8 +16,8 @@ State on disk (plain JSON, human-readable):
 
 Searches awaiting feedback are kept in memory only: give feedback in the same process that searched.
 
-Status: fact replacement (`add(update=...)`) was evaluated on real data (LongMemEval, README). Learning from feedback
-(`feedback`) is EXPERIMENTAL and untested on real data.
+Fact replacement (`add(update=...)`) was evaluated on LongMemEval. Learning from feedback (`feedback`)
+is experimental and was evaluated on LoCoMo's generated conversations (see README).
 """
 
 from __future__ import annotations
@@ -236,8 +236,8 @@ class ReMem:
         (the strongest signal). `answer`: optional final answer text; memories containing it count as used.
         Returns the credit each served memory received.
 
-        EXPERIMENTAL: learning from feedback has not been tested on real data (no public benchmark repeats
-        questions with outcomes). It is exercised only by unit tests and the development simulator in dev/."""
+        This experimental feature was evaluated on LoCoMo with reference-graded outcomes and model citations over generated
+        conversations. Performance with deployment outcomes is still an open question."""
         with self._lock:
             ctx = self._pending.pop(search_id, None)
             if ctx is None:
