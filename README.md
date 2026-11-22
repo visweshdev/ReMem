@@ -35,7 +35,7 @@ tokens. Nothing is ever deleted, and every decision can be inspected.
 > [!IMPORTANT]
 > **Research prototype. On real data it does not beat plain search yet.** All results reported here come from a public
 > benchmark (LongMemEval) and a real LLM, not from a simulation. On LongMemEval's knowledge-update questions (a fact changes
-> over time), ReMem answered **45.8%** correctly vs **63.9%** for plain
+> over time), ReMem 0.2 answered **45.8%** correctly vs **63.9%** for plain
 > search over the raw chat: worse, because rule-based fact replacement on LLM-extracted keys retired correct facts. On LongMemEval
 > retrieval it ties the recency baseline. The learning-from-feedback part has **no real-data test** yet. See
 > [Results](#results-at-a-glance) and [Limitations](#11-limitations-read-these).
@@ -57,7 +57,7 @@ from remem import ReMem
 
 mem = ReMem("my_memory")                                          # a folder; saved and reloaded automatically
 mem.add("Our server is in east-1.", entity="server", attribute="region")
-mem.add("Our server moved to west-2.", entity="server", attribute="region")   # retires the east-1 fact
+mem.add("Our server moved to west-2.", entity="server", attribute="region", update="replace")
 
 hits = mem.search("Where is our server?")
 print(hits.items[0].text)                                         # Our server moved to west-2.
@@ -68,11 +68,14 @@ mem.feedback(hits.search_id, success=True, used_ids=[hits.items[0].id])      # t
 
 Three calls: **add** facts, **search** before answering, **feedback** after. `mem.inspect(id)` shows any memory's state, credit
 and history, and `mem.search(..., as_of=timestamp)` asks about the past, when retired facts come back.
+By default, two facts sharing an entity and attribute stay active unless an update checker confirms a replacement.
+Use `update="replace"` when you already know the newer fact replaces the older one.
 
 ### No code? Use the `remem` command
 
 ```bash
 remem add "Our server is in east-1." --entity server --attribute region
+remem add "Our server moved to west-2." --entity server --attribute region --replace
 remem search "Where is our server?"
 remem list                       # every memory and its state
 remem shell                      # interactive: search, then type 'good 1' or 'bad' and watch the ranking change
@@ -126,7 +129,7 @@ later a new one (a 5K best of 27:12, later 25:50). A local model (qwen2.5:3b) ex
 | Plain search over raw chat turns | **63.9%** | 75.0% | 19.4% |
 | LLM-extracted facts, similarity only | 62.5% | 80.6% | 13.9% |
 | Extracted facts + keep newest fact per key (rule) | 45.8% | 55.6% | 13.9% |
-| Extracted facts + **ReMem** | 45.8% | 58.3% | 12.5% |
+| Extracted facts + **ReMem 0.2** | 45.8% | 58.3% | 12.5% |
 
 ReMem minus plain search: **-18.1 pp (95% CI -31.9 to -4.2)**. Details and the reason in [§10](#10-results).
 
@@ -139,9 +142,9 @@ pip install -e ".[mcp,embeddings]"
 claude mcp add remem --env REMEM_EMBEDDER=sentence-transformers -- remem-mcp     # Claude Code
 ```
 
-The model gets `remember`, `recall`, `feedback`, `inspect`, `list_memories` and `stats`. If it forgets to call `feedback`, the server
-infers outcomes: a correction counts as a failure, and moving on without one counts as a weak success. Claude Desktop setup:
-[`examples/claude_desktop_mcp.md`](examples/claude_desktop_mcp.md).
+The model gets `remember`, `recall`, `feedback`, `inspect`, `list_memories` and `stats`. A `remember` call with `is_update=true`
+declares a replacement for older facts with the same entity and attribute. With automatic feedback enabled, a correction counts
+as a failure, and moving on without one counts as a weak success. See the [Claude Desktop setup](examples/claude_desktop_mcp.md).
 
 ## More ways to use it
 
@@ -167,16 +170,17 @@ works as a backend.
 
 ```python
 from openai import OpenAI
-from remem.extract import LLMFactExtractor
-mem.add_conversation(transcript, extractor=LLMFactExtractor(OpenAI(), model="gpt-4o-mini"))
+from remem import ReMem
+from remem.extract import LLMFactExtractor, LLMUpdateChecker
+
+client = OpenAI()
+mem = ReMem("my_memory", update_checker=LLMUpdateChecker(client, model="gpt-4o-mini"))
+mem.add_conversation(transcript, extractor=LLMFactExtractor(client, model="gpt-4o-mini"))
 ```
 
-Without an extractor, `add_conversation` stores each sentence as a note (no automatic supersession). The LLM extractor is tested against a
-fake client only; its extraction quality with a real model has not been measured here.
-
-Facts with the same `entity` + `attribute` and role `"state"` (the default) replace each other. Store multi-valued things (likes,
-dependencies) with `role="preference"` or `"note"`; if a new `"state"` fact reads like an *additional* value ("also uses Memcached"),
-`add` emits a `UserWarning`.
+Without an extractor, `add_conversation` stores each sentence as a note. With an extractor, the update checker decides whether
+a newer state fact replaces an older fact with the same entity and attribute. Without a checker, both stay active.
+Use `update="keep"` with `add` when recording an additional value. Search hits from extracted facts include the source transcript.
 </details>
 
 <details>
@@ -417,14 +421,12 @@ run that ignores dates: 74.7 turn@5 for all three systems, `results/longmemeval_
 
 * **On real data ReMem has not shown a gain.** It is 18 points worse than plain search on LongMemEval knowledge-update
   questions and ties a recency baseline on LongMemEval retrieval.
-* **Supersession on LLM-extracted keys is risky.** With a 3B extractor it retired correct facts more often than it removed harmful stale
-  ones. Until keys are reliable, store extracted facts with `role="note"` (no supersession) or give explicit `entity`/`attribute` yourself.
+* **Supersession on LLM-extracted keys is risky.** In ReMem 0.2, key matching with a 3B extractor retired correct facts more often than
+  it removed harmful stale ones. The current API requires either a declared replacement or a checker confirmation.
 * **Learning from feedback is untested on real data.** No public benchmark with repeated queries and outcomes was run; the MCP server's
   inferred feedback has not been evaluated either.
 * **One small model, one dataset type.** qwen2.5:3b for extraction and answers, qwen3-coder:30b as judge (not the official GPT-4o judge),
   72 questions; intervals are wide (±13–14 pp). Extraction ran only on each question's 15-turn candidate pool to keep CPU cost manageable.
-* **Library supersession rule.** Through `ReMem.add`, two `"state"` facts with the same entity and attribute replace each other; a multi-valued
-  attribute stored as `"state"` loses values. Store those as `"preference"` or `"note"`.
 * **Credit assignment is not causal**; citations are self-reported and value use is lexical.
 
 ## 12. Failure analysis
