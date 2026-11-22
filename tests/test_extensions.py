@@ -2,6 +2,7 @@
 
 import importlib.util
 import json
+import sys
 from types import SimpleNamespace
 
 import pytest
@@ -53,17 +54,26 @@ def test_sentence_splitter_fallback(embedder):
     assert ReMem(None, embedder=embedder).add_conversation("The payments service runs in eu-west-1.")
 
 
-@pytest.mark.skipif(importlib.util.find_spec("tiktoken") is None, reason="tiktoken not installed")
-def test_tokenizer_switch():
+def test_tokenizer_switch(monkeypatch):
     from remem.offline import count_tokens, set_tokenizer
+
+    requested = []
+
+    def get_encoding(name):
+        requested.append(name)
+        return SimpleNamespace(encode=lambda _text: [1, 2, 3])
+
+    monkeypatch.setitem(sys.modules, "tiktoken", SimpleNamespace(get_encoding=get_encoding))
     text = "The payments service is hosted in eu-west-1."
     proxy = count_tokens(text)
     try:
         set_tokenizer("tiktoken")
-        real = count_tokens(text)
+        assert count_tokens(text) == 3
+        set_tokenizer("tiktoken:o200k_base")
+        assert requested == ["cl100k_base", "o200k_base"]
     finally:
         set_tokenizer(None)
-    assert real > 0 and count_tokens(text) == proxy
+    assert count_tokens(text) == proxy
     with pytest.raises(ValueError):
         set_tokenizer("nonsense")
 
