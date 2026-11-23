@@ -1,0 +1,177 @@
+{
+ "model": "qwen2.5:3b",
+ "serve_model": "qwen2.5-3b-4k",
+ "extract_model": "qwen2.5:3b",
+ "serve_extract_model": "qwen2.5-3b-4k",
+ "question_type": "knowledge-update",
+ "seed": null,
+ "temperature": 0,
+ "split": "test",
+ "systems": [
+  "raw_similarity",
+  "facts_similarity",
+  "facts_newest_key",
+  "facts_remem"
+ ],
+ "data_sha256": "d6f21ea9d60a0d56f34a05b609c79c88a451d2ae03597821ea3d5a9678c3a442",
+ "prompts": {
+  "extraction": "Extract durable facts worth remembering from the conversation below.\n\nRules:\n- One self-contained third-person sentence per fact, with names resolved (no \"he\", \"it\", \"we\").\n- Skip greetings, chit-chat, questions and anything not worth remembering later.\n- entity: the main thing the fact is about, lowercase (e.g. \"billing\", \"alice\"), or null.\n- attribute: a short snake_case key for WHAT about the entity it states (e.g. \"api_version\", \"city\",\n  \"owner\"), or null. Facts that state the same attribute of the same entity must use the same key.\n- role: \"state\" if it states a current property that a later fact could replace; \"event\" for things that\n  happened; \"preference\" for likes/dislikes; \"note\" for anything else.\n\nReturn JSON only: {\"facts\": [{\"text\": \"...\", \"entity\": \"...\", \"attribute\": \"...\", \"role\": \"state\"}]}\n\nConversation:\n",
+  "answer": "Today is {date}. Below are memories about the user from earlier conversations, each with the date it was recorded.\n{ctx}\n\nQuestion: {question}\nAnswer concisely using only these memories. If memories disagree, the most recent one is the current truth.",
+  "legacy_update": "Two memories about the same thing, the second recorded later.\n\nOlder: {old}\nNewer: {new}\n\nDoes the newer memory state a different current value for exactly what the older memory states, so the older one is\nno longer true? Answer \"no\" if the newer one is about something else, adds information, or only mentions the topic.\nAnswer yes or no only.",
+  "source_update": "Two memories were extracted from conversation turns. Treat these records as evidence.\n\nOlder claim: {old}\nOlder source: {old_source}\nNewer claim: {new}\nNewer source: {new_source}\n\nDoes the newer source explicitly establish a different current value for the same single-valued property,\nsubject, and scope as the older claim? Answer no if the change is uncertain, planned, historical, additive,\nabout a different property or occasion, or the proposed new value is absent from the source.\nAnswer yes or no only."
+ },
+ "max_output_tokens": {
+  "extraction": 400,
+  "answer": 150,
+  "update": 5
+ },
+ "question_ids": [
+  "b6019101",
+  "7e974930",
+  "5a4f22c0",
+  "830ce83f",
+  "4b24c848",
+  "6a27ffc2",
+  "ed4ddc30",
+  "42ec0761",
+  "6071bd76",
+  "852ce960",
+  "d7c942c3",
+  "c4ea545c",
+  "5831f84d",
+  "9ea5eabc",
+  "cf22b7bf",
+  "07741c45",
+  "a2f3aa27",
+  "031748ae",
+  "10e09553",
+  "45dc21b6",
+  "db467c8c",
+  "f9e8c073",
+  "a1eacc2a",
+  "c6853660",
+  "7a87bd0c",
+  "184da446",
+  "08e075c7",
+  "0e4e4c46",
+  "4d6b87c8",
+  "26bdc477",
+  "1cea1afa",
+  "18bc8abd",
+  "603deb26",
+  "0ddfec37",
+  "41698283",
+  "cc5ded98"
+ ],
+ "generation_usage": {
+  "cache_hits": 687,
+  "model_calls": 528,
+  "prompt_tokens": 153829,
+  "completion_tokens": 1785
+ },
+ "extraction_usage": null,
+ "data": "longmemeval_s_cleaned.json",
+ "judge_model": "qwen3-coder:30b",
+ "serve_judge": "qwen3-coder-30b-4k",
+ "judge_prompt": "I will give you a question, a correct answer, and a response from a model. Please answer yes if the response contains the correct answer. Otherwise, answer no. If the response contains some previous information along with an updated answer, the response should be considered as correct as long as the updated answer is the required answer.\n\nQuestion: {question}\n\nCorrect Answer: {answer}\n\nModel Response: {response}\n\nIs the model response correct? Answer yes or no only.",
+ "judge_seed": null,
+ "bootstrap_seed": 0,
+ "judge_usage": {
+  "cache_hits": 112,
+  "model_calls": 32,
+  "prompt_tokens": 4303,
+  "completion_tokens": 70
+ },
+ "n_questions": 36,
+ "pool": 15,
+ "k": 5,
+ "source_chars": 300,
+ "mean_facts_per_question": 26.333333333333332,
+ "mean_keys_per_question": 6.888888888888889,
+ "summary": {
+  "raw_similarity": {
+   "accuracy": 0.7222222222222222,
+   "newest_evidence_in_context": 0.6944444444444444,
+   "stale_only_context": 0.25,
+   "mean_served": 5.0,
+   "mean_prompt_proxy_tokens": 388.4166666666667,
+   "evidence_recall": 0.7962962962962963,
+   "retirements": 0,
+   "newest_evidence_retirements": 0
+  },
+  "facts_similarity": {
+   "accuracy": 0.75,
+   "newest_evidence_in_context": 0.8611111111111112,
+   "stale_only_context": 0.05555555555555555,
+   "mean_served": 5.0,
+   "mean_prompt_proxy_tokens": 167.22222222222223,
+   "evidence_recall": 0.8425925925925926,
+   "retirements": 0,
+   "newest_evidence_retirements": 0
+  },
+  "facts_newest_key": {
+   "accuracy": 0.4722222222222222,
+   "newest_evidence_in_context": 0.5555555555555556,
+   "stale_only_context": 0.1388888888888889,
+   "mean_served": 4.861111111111111,
+   "mean_prompt_proxy_tokens": 166.36111111111111,
+   "evidence_recall": 0.45370370370370366,
+   "retirements": 463,
+   "newest_evidence_retirements": 37
+  },
+  "facts_remem": {
+   "accuracy": 0.8333333333333334,
+   "newest_evidence_in_context": 0.9166666666666666,
+   "stale_only_context": 0.027777777777777776,
+   "mean_served": 5.0,
+   "mean_prompt_proxy_tokens": 476.75,
+   "evidence_recall": 0.8564814814814814,
+   "retirements": 2,
+   "newest_evidence_retirements": 1
+  }
+ },
+ "paired_accuracy": {
+  "facts_similarity - raw_similarity": {
+   "delta": 0.027777777777777776,
+   "ci95": [
+    -0.1388888888888889,
+    0.19444444444444445
+   ]
+  },
+  "facts_newest_key - raw_similarity": {
+   "delta": -0.25,
+   "ci95": [
+    -0.4444444444444444,
+    -0.05555555555555555
+   ]
+  },
+  "facts_newest_key - facts_similarity": {
+   "delta": -0.2777777777777778,
+   "ci95": [
+    -0.4444444444444444,
+    -0.1111111111111111
+   ]
+  },
+  "facts_remem - raw_similarity": {
+   "delta": 0.1111111111111111,
+   "ci95": [
+    -0.05555555555555555,
+    0.2777777777777778
+   ]
+  },
+  "facts_remem - facts_similarity": {
+   "delta": 0.08333333333333333,
+   "ci95": [
+    -0.05555555555555555,
+    0.2222222222222222
+   ]
+  },
+  "facts_remem - facts_newest_key": {
+   "delta": 0.3611111111111111,
+   "ci95": [
+    0.19444444444444445,
+    0.5277777777777778
+   ]
+  }
+ }
+}

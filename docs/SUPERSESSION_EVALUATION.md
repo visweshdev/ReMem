@@ -12,14 +12,39 @@ ReMem saves confirmed replacement IDs and reuses them on reopen. Historical quer
 
 The runner preserves the historical SHA-1 question-ID split of 36 development and 36 comparison questions. The replacement policy was chosen using the development cases. The historical ReMem 0.2 result used all 72 questions, so the second half is a retrospective comparison for this change. FactConsolidation provides a separate transfer dataset.
 
-The raw cosine, extracted-fact cosine, newest-per-key, text-only check, and source-checked arms share a 15-turn candidate pool and a five-memory cap. The latter two have the same source presentation in the answer prompt. The runner also retains a text-only presentation for the legacy checker. It records evidence coverage, retirements of labelled evidence, prompt size, paired accuracy intervals, prompts, model tags, token consumption for live calls, and cache use. Source labels identify the newest annotated evidence by timestamp. Historical questions may require older evidence.
+The raw cosine, extracted-fact cosine, newest-per-key, and source-checked arms share a 15-turn candidate pool and a five-memory cap. The development run also includes the text-only checker with and without sources displayed to the answer model. The runner records evidence coverage, retirements of labelled evidence, prompt size, paired accuracy intervals, prompts, model tags, token consumption for live calls, and cache use. Source labels identify the newest annotated evidence by timestamp. Historical questions may require older evidence.
 
 ```bash
 python experiments/run_real_knowledge_update.py --data data/longmemeval_s_cleaned.json --split dev --out results/supersession_regression/dev
-python experiments/run_real_knowledge_update.py --data data/longmemeval_s_cleaned.json --split test --out results/supersession_regression/test
+python experiments/run_real_knowledge_update.py --data data/longmemeval_s_cleaned.json --split test --systems raw_similarity facts_similarity facts_newest_key facts_remem --out results/supersession_regression/test
 ```
 
 The experiment separates generation and judging when needed. Use `--generate-only` to save hypotheses, and `--judge-from path/to/generated.jsonl` with the same split and system list to judge them later. `--extract-model` and `--model` allow distinct extractors and answer models. `--seed` records an explicit generator seed for a fresh run. The historical cache uses temperature zero with the runtime's default seed. [LongMemEval dataset and format](https://github.com/xiaowu0162/LongMemEval)
+
+## LongMemEval results
+
+| System | Development (36) | Retrospective comparison (36) | All 72 | Newest labelled evidence in context, all 72 |
+| --- | ---: | ---: | ---: | ---: |
+| Plain cosine on raw turns | 52.8% (19/36) | 72.2% (26/36) | 62.5% (45/72) | 75.0% |
+| Cosine on extracted facts | 52.8% (19/36) | 75.0% (27/36) | 63.9% (46/72) | 81.9% |
+| Newest per key | 44.4% (16/36) | 47.2% (17/36) | 45.8% (33/72) | 55.6% |
+| Source-checked ReMem | **55.6% (20/36)** | **83.3% (30/36)** | **69.4% (50/72)** | **84.7%** |
+
+Over all 72 questions, source-checked ReMem gained **23.6 percentage points** over newest-per-key (paired 95% interval **+11.1 to +36.1 pp**). The comparisons with plain cosine (**+6.9 pp**, 95% interval **−5.6 to +18.1**) and extracted-fact cosine (**+5.6 pp**, 95% interval **−4.2 to +15.3**) remain uncertain. The 36 retrospective comparison questions show the same pattern. [Development results](../results/supersession_regression/dev/summary.json) · [Comparison results](../results/supersession_regression/test/summary.json) · [Combined results](../results/supersession_regression/all72.json)
+
+The forced rule retired 944 extracted facts, including 74 from the newest labelled evidence turns. The guarded arm retired six, including two from those turns. These counts track provenance and can include several extracted facts from one turn. They measure which evidence became unavailable, and the question may also require earlier evidence.
+
+The strong difference is between end-to-end configurations. The guarded arm uses ReMem ranking and includes source excerpts, with a mean prompt size of 471 proxy tokens versus 390 for raw cosine, 167 for extracted-fact cosine, and 166 for newest-per-key. On development questions, the guarded checker and the previous text-only checker with the same source presentation made identical scored answer decisions. That matched comparison shows no observed answer gain from the checker change alone. The retrospective split compares the four main systems. It has no matched text-only-checker arm.
+
+The run used Qwen2.5 3B for extraction, checking, and answers, with Qwen3-Coder 30B judging both splits. It reused historical responses where the prompt and model matched. Fresh development generations ran on CPU. Most fresh comparison generations ran on the integrated GPU, with some cached CPU responses from an earlier attempt. The original ReMem 0.2 table still records its own raw-search score of 63.9%. [Model versions](../results/supersession_regression/model_versions.json) · [Original result](../results/real_knowledge_update/v0.2_all72/summary.json)
+
+### Representative cases
+
+- **Unrelated replacement.** On `6a1eabeb`, newest-per-key retired a record containing the 25:50 time when an interval-training note used the same key. Source-checked ReMem kept the evidence and answered 25:50.
+- **Wrong time frame despite retrieval.** On `10e09553`, ReMem retrieved both dated fishing trips and answered with nine bass from the later trip. The question asked about the earlier trip, when the user caught seven.
+- **Extraction and ranking gap.** On `c4ea545c`, ReMem's final context omitted both gym schedules and included unrelated fitness and meditation notes. Plain cosine retrieved enough of the raw statements to answer the frequency comparison.
+
+The scored traces include the contexts, hypotheses, judge verdicts, and old/new facts for each recorded retirement. [Development traces](../results/supersession_regression/dev/per_question.jsonl) · [Comparison traces](../results/supersession_regression/test/per_question.jsonl)
 
 ## External transfer check
 
@@ -39,3 +64,25 @@ python experiments/run_factconsolidation.py --data data/mab_conflicts.parquet --
 ```
 
 Use the dataset's `Conflict_Resolution-00000-of-00001.parquet` as `data/mab_conflicts.parquet`. The reference run uses the `qwen2.5-3b-4k` Ollama tag. Use `--serve-model qwen2.5:3b` for the stock tag if the local serving context accommodates the prompts.
+
+## Temporal and multi-session retrieval
+
+The breadth check uses the ten non-abstention questions with the smallest SHA-256 question-ID hashes in each category. The table reports whether at least one labelled turn reached the top five or ten. The comparison uses raw dialogue turns and a fresh store for each question, with MiniLM embeddings. It measures evidence retrieval. [Selected questions and results](../results/benchmark_breadth/retrieval.json)
+
+| Category | Cosine @5 | ReMem @5 | Cosine @10 | ReMem @10 |
+| --- | ---: | ---: | ---: | ---: |
+| Temporal reasoning | 40% | 40% | 60% | 60% |
+| Multi-session | 80% | 80% | 100% | 90% |
+
+```bash
+python experiments/run_longmemeval.py --data data/longmemeval_s_cleaned.json --question-type temporal-reasoning multi-session --per-type-limit 10 --out results/benchmark_breadth
+```
+
+## Alternate model pilot
+
+The two-question development pilot crosses Qwen2.5 3B and Llama 3.2 3B as extractors and answer models. Each extractor receives the same five dated excerpts and each reader uses the same prompt and output cap. All four combinations scored 0/2 under strict exact match. Qwen paired with itself scored 1/2 after also equating digit `4` with the reference `four`. Every combination returned `Unknown` for the question about a previous goal. The sample is for debugging extraction and answer behavior. [Pilot traces, prompts and reported token usage](../results/model_pilot/development.json) · [Model digests](../results/supersession_regression/model_versions.json)
+
+```bash
+ollama pull llama3.2:3b
+python experiments/run_model_pilot.py --out results/model_pilot/development.json
+```

@@ -17,7 +17,9 @@ To reproduce the clean install, install the built wheel into a second environmen
 ## Evaluation review
 
 1. Record the commit, Python version, OS, model tags and exact model digests, and SHA-256 of each dataset. For a new result, retain the generated responses and judge decisions.
-2. Reproduce the original LongMemEval baseline and check its per-question verdicts. The original 72-question table remains available. [Original artifacts](../results/real_knowledge_update/v0.2_all72/summary.json)
+2. Compare the source-checked LongMemEval run against its baselines and review the per-question decisions. The original 72-question table remains available. [Regression protocol](SUPERSESSION_EVALUATION.md) · [Original artifacts](../results/real_knowledge_update/v0.2_all72/summary.json)
 3. Run the [LoCoMo ablation](FEEDBACK_ABLATION.md) and confirm the speaker attribution issue accounting for its single answer flip.
 4. Run the [support-routing test](WORKFLOW_ASSISTANT.md) with 20 seeds. Compare the outcome and credit metrics, and record performance on the reviewer's machine separately.
 5. Report any version-specific installation or persistence discrepancy with the command, observed result, and environment. Replay tests should use a local evaluator with no live side effects.
+
+Independent reviewers can share their results and environment details in the public tracking issue. [Independent reproduction of ReMem 0.3.0](https://github.com/visweshdev/ReMem/issues/1)

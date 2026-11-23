@@ -258,6 +258,30 @@ def paired_ci(a: list[int], b: list[int], n_boot: int = 10000, seed: int = 0) ->
     return float(d.mean()), boots[int(0.025 * n_boot)], boots[int(0.975 * n_boot)]
 
 
+def summarize(rows: list[dict], systems) -> tuple[dict, dict]:
+    n = len(rows)
+    summary = {}
+    for system in systems:
+        col = [row["systems"][system] for row in rows]
+        summary[system] = {
+            "accuracy": sum(c["correct"] for c in col) / n,
+            "newest_evidence_in_context": sum(c["newest_evidence_in_context"] for c in col) / n,
+            "stale_only_context": sum(c["stale_only"] for c in col) / n,
+            "mean_served": float(np.mean([c["n_served"] for c in col])),
+            "mean_prompt_proxy_tokens": float(np.mean([c["prompt_proxy_tokens"] for c in col])),
+            "evidence_recall": float(np.mean([c["evidence_recall"] for c in col])),
+            "retirements": sum(len(c["retirements"]) for c in col),
+            "newest_evidence_retirements": sum(t["old_is_newest_evidence"] for c in col for t in c["retirements"]),
+        }
+    paired = {}
+    for i, system in enumerate(systems):
+        for baseline in systems[:i]:
+            delta, lo, hi = paired_ci([int(row["systems"][system]["correct"]) for row in rows],
+                                      [int(row["systems"][baseline]["correct"]) for row in rows])
+            paired[f"{system} - {baseline}"] = {"delta": delta, "ci95": [lo, hi]}
+    return summary, paired
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--data", required=True, type=Path)
@@ -356,29 +380,10 @@ def main() -> None:
         if i % 10 == 0:
             print(f"{i}/{len(rows)} judged", flush=True)
 
-    n = len(rows)
-    summary = {}
-    for s in a.systems:
-        col = [x["systems"][s] for x in rows]
-        summary[s] = {"accuracy": sum(c["correct"] for c in col) / n,
-                      "newest_evidence_in_context": sum(c["newest_evidence_in_context"] for c in col) / n,
-                      "stale_only_context": sum(c["stale_only"] for c in col) / n,
-                      "mean_served": float(np.mean([c["n_served"] for c in col])),
-                      "mean_prompt_proxy_tokens": float(np.mean([c["prompt_proxy_tokens"] for c in col])),
-                      "evidence_recall": float(np.mean([c["evidence_recall"] for c in col])),
-                      "retirements": sum(len(c["retirements"]) for c in col),
-                      "newest_evidence_retirements": sum(t["old_is_newest_evidence"] for c in col for t in c["retirements"])}
-    paired = {}
-    for s in a.systems[1:]:
-        for base in a.systems:
-            if a.systems.index(base) >= a.systems.index(s):
-                continue
-            m, lo, hi = paired_ci([int(x["systems"][s]["correct"]) for x in rows],
-                                  [int(x["systems"][base]["correct"]) for x in rows])
-            paired[f"{s} - {base}"] = {"delta": m, "ci95": [lo, hi]}
+    summary, paired = summarize(rows, a.systems)
     meta = {**generation, "data": a.data.name, "judge_model": a.judge_model, "serve_judge": judge.serve_as,
             "judge_prompt": judge_prompt, "judge_seed": a.seed, "bootstrap_seed": 0,
-            "judge_usage": dict(judge.usage), "n_questions": n,
+            "judge_usage": dict(judge.usage), "n_questions": len(rows),
             "pool": POOL, "k": K, "source_chars": SOURCE_CHARS,
             "question_ids": [x["question_id"] for x in rows],
             "mean_facts_per_question": float(np.mean([x["n_facts"] for x in rows])),

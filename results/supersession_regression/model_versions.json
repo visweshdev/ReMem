@@ -1,0 +1,22 @@
+{
+  "ollama_version": "0.40.17",
+  "models": {
+    "llama3.2:3b": {
+      "digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+      "format": "gguf",
+      "quantization": "Q4_K_M"
+    },
+    "qwen3-coder-30b-4k:latest": {
+      "digest": "153aa0dc70b88f73c452e962aa5179d921a2c7c904d886e5f28de28322fac807",
+      "format": "gguf",
+      "quantization": "Q4_K_M"
+    },
+    "qwen2.5-3b-4k:latest": {
+      "digest": "094d8770eed5c810693529d728e59280f91ee8e00c6e98d1c52ea4db71e06a1a",
+      "format": "gguf",
+      "quantization": "Q4_K_M"
+    }
+  },
+  "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
+}

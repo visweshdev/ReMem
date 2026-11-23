@@ -35,8 +35,8 @@ tokens. Nothing is ever deleted, and every decision can be inspected.
 > [!IMPORTANT]
 > **Research prototype.** On LongMemEval's knowledge-update questions, ReMem 0.2 answered **45.8%** correctly vs
 > **63.9%** for plain search over raw chat. Rule-based fact replacement on LLM-extracted keys retired correct facts.
-> On LongMemEval retrieval it ties the recency baseline. A separate [LoCoMo feedback ablation](docs/FEEDBACK_ABLATION.md)
-> measures whether prior outcomes help on held-out questions about the same conversations.
+> In a 72-question rerun, source-checked ReMem scored **69.4%**, raw cosine **62.5%**, and newest-per-key **45.8%**.
+> The paired difference against raw cosine remains uncertain. [Regression results](docs/SUPERSESSION_EVALUATION.md#longmemeval-results)
 
 ## Quickstart
 
@@ -436,25 +436,29 @@ run that ignores dates: 74.7 turn@5 for all three systems, `results/longmemeval_
 Feedback changed some rankings. Its single answer gain matched a reference with an apparent speaker attribution error.
 Both ReMem settings tied on answer accuracy after excluding that item. [Protocol, paired results, and failure analysis](docs/FEEDBACK_ABLATION.md)
 
-### Supersession and workflow follow-ups
+### Source-checked supersession and workflow follow-ups
 
-- Source-aware checking preserves ambiguous evidence. The separate FactConsolidation diagnostic shows the trade-off on implicit
-  changes, where newest-per-key matched the top value on 80% of questions and the guarded checker on 29%. [Supersession evaluation](docs/SUPERSESSION_EVALUATION.md)
+- The 72-question rerun found **69.4%** answer accuracy for source-checked ReMem, **62.5%** for raw cosine, **63.9%** for extracted-fact cosine,
+  and **45.8%** for newest-per-key. The gain over newest-per-key was **23.6 pp** (95% interval **+11.1 to +36.1 pp**). The gain over raw cosine
+  was **6.9 pp** (95% interval **−5.6 to +18.1 pp**). The report includes the two 36-question splits and the earlier text-only checker on the
+  development split. [Supersession evaluation](docs/SUPERSESSION_EVALUATION.md)
+- FactConsolidation defines implicit updates through record order. On that external slice, newest-per-key matched the top value on 80% of
+  questions and the guarded checker on 29%. [External transfer diagnostic](docs/SUPERSESSION_EVALUATION.md#external-transfer-check)
 - With a side-effect-free replay callback, feedback can measure which retrieved memories affect an action. The support-routing experiment
   reports held-out success, credit assigned to distractors, retrieval time, context tokens, and storage. [Support-routing example](docs/WORKFLOW_ASSISTANT.md)
 - Build and clean-install the versioned distribution before reproducing results. [Release and independent review guide](docs/REPRODUCING.md)
 
 ## 11. Limitations (read these)
 
-* **On real data ReMem has not shown a gain.** It is 18 points worse than plain search on LongMemEval knowledge-update
-  questions and ties a recency baseline on LongMemEval retrieval.
+* **The comparison with plain search remains uncertain.** The original LongMemEval knowledge-update run favored plain search by 18.1 pp.
+  The source-checked follow-up scored higher than the rerun cosine baseline, with a paired interval spanning zero. [Supersession results](docs/SUPERSESSION_EVALUATION.md#longmemeval-results)
 * **Supersession on LLM-extracted keys is risky.** In ReMem 0.2, key matching with a 3B extractor retired correct facts more often than
   it removed harmful stale ones. The current API requires either a declared replacement or a checker confirmation.
-* **Feedback evidence is limited to LoCoMo's generated conversations.** The evaluation supplies a reference-graded outcome and uses
-  model-reported citations. Deployment outcomes and the MCP server's inferred feedback remain open questions.
-* **Knowledge-update QA uses a small model and one question type.** qwen2.5:3b for extraction and answers, qwen3-coder:30b as judge (not the official GPT-4o judge),
-  72 questions; intervals are wide (±13–14 pp). Extraction ran only on each question's 15-turn candidate pool to keep CPU cost manageable.
-* **Credit assignment is not causal**; citations are self-reported and value use is lexical.
+* **Feedback evidence comes from controlled tasks.** LoCoMo uses reference-graded answers, and the support-routing workflow uses a simulated
+  dispatcher. Deployment outcomes and the MCP server's inferred feedback remain open questions.
+* **Knowledge-update QA uses small extraction and answer models.** It uses Qwen2.5 3B and a local Qwen3-Coder 30B judge for 72 questions.
+  Extraction runs on each question's 15-turn candidate pool. Temporal reasoning and multi-session results measure retrieval.
+* **Credit signals have limits.** Citations are self-reported, value use is lexical, and leave-one-out requires a replayable task.
 
 ## 12. Failure analysis
 
@@ -468,8 +472,8 @@ affected answers. [Representative cases](docs/FEEDBACK_ABLATION.md#representativ
 
 ## 13. Future work
 
-Re-run knowledge-update QA with a larger extractor and the official judge. Check whether a newer fact actually supplies an updated value
-before superseding an older one. Test feedback with observed user outcomes over longer sequences and expand LongMemEval QA to all question types.
+Re-run knowledge-update QA with a larger extractor and the official judge. Compare source-checked replacement with a matched no-retirement
+arm on fresh questions. Test feedback with observed deployment outcomes and expand end-to-end QA to temporal and multi-session questions.
 
 ## Repository map
 

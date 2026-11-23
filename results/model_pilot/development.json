@@ -1,0 +1,184 @@
+{
+  "data_sha256": "c94d09abc2e1992db703457257984e4a3311ed24695836714576184e38ead5b6",
+  "tags": {
+    "qwen2.5:3b": "qwen2.5-3b-4k",
+    "llama3.2:3b": "llama3.2:3b"
+  },
+  "temperature": 0,
+  "seed": 0,
+  "max_tokens": {
+    "extraction": 160,
+    "answer": 64
+  },
+  "prompts": {
+    "extraction": "Extract durable facts worth remembering from the conversation below.\n\nRules:\n- One self-contained third-person sentence per fact, with names resolved (no \"he\", \"it\", \"we\").\n- Skip greetings, chit-chat, questions and anything not worth remembering later.\n- entity: the main thing the fact is about, lowercase (e.g. \"billing\", \"alice\"), or null.\n- attribute: a short snake_case key for WHAT about the entity it states (e.g. \"api_version\", \"city\",\n  \"owner\"), or null. Facts that state the same attribute of the same entity must use the same key.\n- role: \"state\" if it states a current property that a later fact could replace; \"event\" for things that\n  happened; \"preference\" for likes/dislikes; \"note\" for anything else.\n\nReturn JSON only: {\"facts\": [{\"text\": \"...\", \"entity\": \"...\", \"attribute\": \"...\", \"role\": \"state\"}]}\n\nConversation:\n",
+    "answer": "Answer the question using the dated facts below. If a current fact changes, choose the latest value.\nReturn just the shortest answer. Use Unknown if needed.\n\n{facts}\n\nQuestion: {question}\nAnswer:"
+  },
+  "judge": "exact match ignoring case and articles, with a sensitivity check normalizing zero through ten",
+  "counts": {
+    "qwen2.5:3b -> qwen2.5:3b": 0,
+    "llama3.2:3b -> qwen2.5:3b": 0,
+    "qwen2.5:3b -> llama3.2:3b": 0,
+    "llama3.2:3b -> llama3.2:3b": 0
+  },
+  "number_normalized_counts": {
+    "qwen2.5:3b -> qwen2.5:3b": 1,
+    "llama3.2:3b -> qwen2.5:3b": 0,
+    "qwen2.5:3b -> llama3.2:3b": 0,
+    "llama3.2:3b -> llama3.2:3b": 0
+  },
+  "usage": {
+    "qwen2.5:3b": {
+      "cache_hits": 14
+    },
+    "llama3.2:3b": {
+      "cache_hits": 14
+    }
+  },
+  "rows": [
+    {
+      "id": "9bbe84a2",
+      "question": "What was my previous goal for my Apex Legends level before I updated my goal?",
+      "reference": "level 100",
+      "sources": [
+        [
+          "2023-06-16",
+          "I'm still thinking about getting the Cloud II, but I also want to make sure I'm focusing on my gameplay skills. Speaking of which, do you have any tips for improving my aim in Apex Legends?\n"
+        ],
+        [
+          "2023-09-30",
+          "I'm actually more interested in playing Apex Legends with my friends this weekend. Do you think it's a good idea to focus on ranking up to level 150, or should we just play for fun and not worry too much about leveling up?\n"
+        ],
+        [
+          "2023-09-30",
+          "I think we'll just play for fun and not worry too much about leveling up. But, I'm still aiming to hit level 150 eventually, it's just not the main focus this weekend. Do you have any tips on how to improve my overall gameplay and communication with my team?\n"
+        ],
+        [
+          "2023-09-30",
+          "I'll make sure to communicate with my team more effectively and focus on improving my overall gameplay. Thanks for the tips! Do you think I should also focus on completing my daily and weekly challenges to earn more experience points and level up faster?\n"
+        ],
+        [
+          "2023-09-30",
+          "I think I'll focus on completing my daily and weekly challenges to earn more experience points and level up faster. It'll be a great way to stay motivated and track my progress. Speaking of which, my current goal is to reach level 150, and I'm determined to get there eventually. Thanks for the tips and advice!"
+        ]
+      ],
+      "extractions": {
+        "qwen2.5:3b": [
+          "- [2023-06-16] The user is considering purchasing the Cloud II, but also wants to improve their gameplay skills.",
+          "- [2023-06-16] The user is seeking tips on how to improve their aim in Apex Legends.",
+          "- [2023-09-30] The user is interested in playing Apex Legends with friends this weekend.",
+          "- [2023-09-30] The user aims to hit level 150 eventually, but it is not the main focus this weekend.",
+          "- [2023-09-30] The user is not worried about leveling up but still has a goal of reaching level 150.",
+          "- [2023-09-30] The user plans to improve communication with their team and focus on gameplay.",
+          "- [2023-09-30] The user considers completing daily and weekly challenges to earn more experience points and level up faster.",
+          "- [2023-09-30] alice's current goal is to reach level 150"
+        ],
+        "llama3.2:3b": [
+          "- [2023-09-30] ResidentScape is a popular Apex Legends streamer with over 1.5 million followers.",
+          "- [2023-09-30] Alice is a gamer who plays for fun and aims to hit level 150 eventually.",
+          "- [2023-09-30] Alice's main focus this weekend is improving her gameplay and communication with her team.",
+          "- [2023-09-30] Alice recommends focusing on improving overall gameplay.",
+          "- [2023-09-30] Alice is focusing on completing daily and weekly challenges to earn more experience points."
+        ]
+      },
+      "answers": {
+        "qwen2.5:3b -> qwen2.5:3b": {
+          "answer": "Unknown",
+          "correct": false,
+          "number_normalized_correct": false
+        },
+        "llama3.2:3b -> qwen2.5:3b": {
+          "answer": "Unknown",
+          "correct": false,
+          "number_normalized_correct": false
+        },
+        "qwen2.5:3b -> llama3.2:3b": {
+          "answer": "Unknown",
+          "correct": false,
+          "number_normalized_correct": false
+        },
+        "llama3.2:3b -> llama3.2:3b": {
+          "answer": "Unknown",
+          "correct": false,
+          "number_normalized_correct": false
+        }
+      }
+    },
+    {
+      "id": "6aeb4375",
+      "question": "How many Korean restaurants have I tried in my city?",
+      "reference": "four",
+      "sources": [
+        [
+          "2023-08-11",
+          "I'm planning a dinner party and need some help with the menu. Can you suggest some popular Korean BBQ dishes that are easy to make in large quantities?\n"
+        ],
+        [
+          "2023-08-11",
+          "I'm thinking of serving a variety of dishes from different cuisines, so I'll take a few of these Korean BBQ options and pair them with some Indian and Middle Eastern dishes. Do you have any suggestions for Indian dishes that are easy to make in large quantities?\n"
+        ],
+        [
+          "2023-08-11",
+          "I've been experimenting with different types of noodles lately, and I was wondering if you could recommend some popular Korean noodle dishes that I could try making at home?\n"
+        ],
+        [
+          "2023-08-11",
+          "By the way, speaking of noodles, have you tried any good Korean restaurants in your city lately? I've tried three different ones recently, and each has its own unique flavor and style.\n"
+        ],
+        [
+          "2023-09-30",
+          "I think I'll go with kimchi and bokkeumbap. By the way, have you tried any good Korean restaurants in my city lately? I've tried four different ones so far, and I'm always looking for new recommendations."
+        ]
+      ],
+      "extractions": {
+        "qwen2.5:3b": [
+          "- [2023-08-11] popular Korean BBQ dishes include bulgogi, galbi, and samgyeopsal, which are easy to make in large quantities",
+          "- [2023-08-11] The user is planning to serve a variety of dishes from different cuisines, including Korean BBQ and Indian and Middle Eastern dishes.",
+          "- [2023-08-11] The user is experimenting with different types of noodles and is interested in Korean noodle dishes.",
+          "- [2023-08-11] The user has tried three different Korean restaurants recently.",
+          "- [2023-09-30] alice has tried four different Korean restaurants in her city."
+        ],
+        "llama3.2:3b": [
+          "- [2023-08-11] Korean BBQ is a popular choice for dinner parties.",
+          "- [2023-08-11] Indian dishes such as chana masala and saag paneer are popular choices for large gatherings.",
+          "- [2023-08-11] Korean noodle dishes are popular worldwide.",
+          "- [2023-08-11] Alice has tried three different Korean restaurants in her city recently."
+        ]
+      },
+      "answers": {
+        "qwen2.5:3b -> qwen2.5:3b": {
+          "answer": "4",
+          "correct": false,
+          "number_normalized_correct": true
+        },
+        "llama3.2:3b -> qwen2.5:3b": {
+          "answer": "3",
+          "correct": false,
+          "number_normalized_correct": false
+        },
+        "qwen2.5:3b -> llama3.2:3b": {
+          "answer": "Unknown",
+          "correct": false,
+          "number_normalized_correct": false
+        },
+        "llama3.2:3b -> llama3.2:3b": {
+          "answer": "Three.",
+          "correct": false,
+          "number_normalized_correct": false
+        }
+      }
+    }
+  ],
+  "initial_generation_usage": {
+    "qwen2.5:3b": {
+      "model_calls": 14,
+      "prompt_tokens": 3762,
+      "completion_tokens": 584
+    },
+    "llama3.2:3b": {
+      "model_calls": 14,
+      "prompt_tokens": 3604,
+      "completion_tokens": 622
+    }
+  }
+}
