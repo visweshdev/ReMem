@@ -68,8 +68,9 @@ count alone. Demotions are class-conditional. Nothing is deleted. Credited use r
 The LongMemEval experiments cover knowledge-update QA and retrieval (README §9–§10). The
 [LoCoMo feedback ablation](FEEDBACK_ABLATION.md) uses generated conversations with separate warm-up and held-out questions.
 
-The [supersession transfer check](SUPERSESSION_EVALUATION.md) measures how preserving ambiguous source turns affects implicit
-updates. The [support-routing test](WORKFLOW_ASSISTANT.md) measures observable task outcomes and replay-based credit in a controlled workflow.
+The [supersession report](SUPERSESSION_EVALUATION.md) compares source-checked replacement against the LongMemEval baselines
+and measures how preserving ambiguous source turns affects implicit updates in MemoryAgentBench. The
+[support-routing test](WORKFLOW_ASSISTANT.md) measures task outcomes and replay-based credit in a controlled workflow.
 
 ## 7. Deviations found while building
 

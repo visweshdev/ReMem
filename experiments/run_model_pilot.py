@@ -23,6 +23,7 @@ Return just the shortest answer. Use Unknown if needed.
 Question: {question}
 Answer:"""
 NUMBER_WORDS = ("zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten")
+REFERENCE_TAGS = {"qwen2.5:3b": "qwen2.5-3b-4k", "llama3.2:3b": "llama3.2:3b"}
 
 
 def normalize(text: str) -> tuple[str, ...]:
@@ -37,23 +38,29 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data", type=Path, default=ROOT / "results/real_knowledge_update/dev/per_question.jsonl")
     parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--questions", type=int, default=12, help="number of short-reference development questions")
     parser.add_argument("--url", default="http://127.0.0.1:11434/v1")
-    parser.add_argument("--qwen-tag", default="qwen2.5-3b-4k")
-    parser.add_argument("--llama-tag", default="llama3.2:3b")
+    parser.add_argument("--qwen-tag", default=REFERENCE_TAGS["qwen2.5:3b"])
+    parser.add_argument("--llama-tag", default=REFERENCE_TAGS["llama3.2:3b"])
+    parser.add_argument("--cache", type=Path, default=ROOT / "results/cache/reader_pilot.jsonl",
+                        help="use a new path to measure tokens for every model call")
     args = parser.parse_args()
 
     from openai import OpenAI
 
     data = args.data.read_bytes()
     cases = [json.loads(line) for line in data.splitlines()]
-    cases = [row for row in cases if 0 < len(normalize(str(row["answer"]))) <= 3][:2]
-    if len(cases) != 2:
-        parser.error("two short-reference development cases are required")
+    cases = [row for row in cases if 0 < len(normalize(str(row["answer"]))) <= 3]
+    if not 1 <= args.questions <= len(cases):
+        parser.error(f"--questions must be between 1 and {len(cases)} for this development file")
+    cases = cases[:args.questions]
     tags = {"qwen2.5:3b": args.qwen_tag, "llama3.2:3b": args.llama_tag}
     client = OpenAI(base_url=args.url, api_key="ollama", timeout=180)
-    cache = ROOT / "results/cache/reader_pilot.jsonl"
-    cache.parent.mkdir(parents=True, exist_ok=True)
-    models = {name: CachedLLM(client, name, cache, tag, seed=0) for name, tag in tags.items()}
+    args.cache.parent.mkdir(parents=True, exist_ok=True)
+    models = {}
+    for name, tag in tags.items():
+        cache_key = name if tag == REFERENCE_TAGS[name] else f"{name} served as {tag}"
+        models[name] = CachedLLM(client, cache_key, args.cache, tag, seed=0)
     output = []
     for row in cases:
         context = row["systems"]["raw_similarity"]["context"]
@@ -87,6 +94,7 @@ def main() -> None:
     summary = {arm: sum(row["answers"][arm]["correct"] for row in output) for arm in output[0]["answers"]}
     number_summary = {arm: sum(row["answers"][arm]["number_normalized_correct"] for row in output) for arm in summary}
     results = {"data_sha256": hashlib.sha256(data).hexdigest(), "tags": tags, "temperature": 0, "seed": 0,
+               "n_questions": len(output), "selection": "first development references of one to three normalized words",
                "max_tokens": {"extraction": 160, "answer": 64}, "prompts": {"extraction": PROMPT, "answer": ANSWER},
                "judge": "exact match ignoring case and articles, with a sensitivity check normalizing zero through ten",
                "counts": summary, "number_normalized_counts": number_summary,

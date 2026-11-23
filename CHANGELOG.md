@@ -2,6 +2,13 @@
 
 All notable changes are listed here. Versions follow [semantic versioning](https://semver.org/).
 
+## [Unreleased]
+
+- Published the 72-question LongMemEval supersession rerun, with paired intervals, scored traces, and the original
+  0.2 result. Added a conflict-resolution transfer check, temporal and multi-session retrieval results, and a development
+  comparison of two extraction and answer models. [Evaluation report](docs/SUPERSESSION_EVALUATION.md)
+- Opened a public request for independent installation and benchmark reproductions. [Reproduction guide](docs/REPRODUCING.md)
+
 ## [0.3.0] - 2026-11-22
 
 ### Added
@@ -59,6 +66,7 @@ First public release.
 - Controlled synthetic benchmark (15 test seeds), RMM-style baseline, real-embedding run, free local-LLM run
   (Ollama), LongMemEval retrieval run, and on-policy retraining experiment, with negative results reported.
 
-[Unreleased]: https://github.com/visweshdev/ReMem/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/visweshdev/ReMem/compare/v0.3.0...master
+[0.3.0]: https://github.com/visweshdev/ReMem/releases/tag/v0.3.0
 [0.2.0]: https://github.com/visweshdev/ReMem/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/visweshdev/ReMem/releases/tag/v0.1.0

@@ -15,11 +15,23 @@ The runner preserves the historical SHA-1 question-ID split of 36 development an
 The raw cosine, extracted-fact cosine, newest-per-key, and source-checked arms share a 15-turn candidate pool and a five-memory cap. The development run also includes the text-only checker with and without sources displayed to the answer model. The runner records evidence coverage, retirements of labelled evidence, prompt size, paired accuracy intervals, prompts, model tags, token consumption for live calls, and cache use. Source labels identify the newest annotated evidence by timestamp. Historical questions may require older evidence.
 
 ```bash
-python experiments/run_real_knowledge_update.py --data data/longmemeval_s_cleaned.json --split dev --out results/supersession_regression/dev
-python experiments/run_real_knowledge_update.py --data data/longmemeval_s_cleaned.json --split test --systems raw_similarity facts_similarity facts_newest_key facts_remem --out results/supersession_regression/test
+python -m pip install -e ".[embeddings,llm]"
+ollama pull qwen2.5:3b
+ollama pull qwen3-coder:30b
+mkdir -p data/repro
+printf 'FROM qwen2.5:3b\nPARAMETER num_ctx 4096\n' > data/repro/Modelfile.qwen25
+printf 'FROM qwen3-coder:30b\nPARAMETER num_ctx 4096\n' > data/repro/Modelfile.qwen3
+ollama create qwen2.5-3b-4k -f data/repro/Modelfile.qwen25
+ollama create qwen3-coder-30b-4k -f data/repro/Modelfile.qwen3
+python experiments/run_real_knowledge_update.py --data data/longmemeval_s_cleaned.json \
+  --serve-model qwen2.5-3b-4k --serve-judge qwen3-coder-30b-4k \
+  --split dev --out data/repro/longmemeval/dev
+python experiments/run_real_knowledge_update.py --data data/longmemeval_s_cleaned.json \
+  --serve-model qwen2.5-3b-4k --serve-judge qwen3-coder-30b-4k --split test \
+  --systems raw_similarity facts_similarity facts_newest_key facts_remem --out data/repro/longmemeval/test
 ```
 
-The experiment separates generation and judging when needed. Use `--generate-only` to save hypotheses, and `--judge-from path/to/generated.jsonl` with the same split and system list to judge them later. `--extract-model` and `--model` allow distinct extractors and answer models. `--seed` records an explicit generator seed for a fresh run. The historical cache uses temperature zero with the runtime's default seed. [LongMemEval dataset and format](https://github.com/xiaowu0162/LongMemEval)
+Place the cleaned `longmemeval_s_cleaned.json` in `data/` before running the commands. Use `--generate-only` to save hypotheses, and `--judge-from path/to/generated.jsonl` with the same split and system list to judge them later. `--extract-model` and `--model` allow distinct extractors and answer models. `--seed` records an explicit generator seed for a fresh run. The historical cache uses temperature zero with the runtime's default seed. [Cleaned dataset](https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/blob/main/longmemeval_s_cleaned.json) · [Dataset format](https://github.com/xiaowu0162/LongMemEval)
 
 ## LongMemEval results
 
@@ -60,7 +72,7 @@ The conservative checker preserved the implicit conflicts. Newest-per-key was us
 
 ```bash
 python -m pip install -e ".[embeddings,llm]" pyarrow
-python experiments/run_factconsolidation.py --data data/mab_conflicts.parquet --out results/held_out_factconsolidation/summary.json
+python experiments/run_factconsolidation.py --data data/mab_conflicts.parquet --out data/repro/factconsolidation.json
 ```
 
 Use the dataset's `Conflict_Resolution-00000-of-00001.parquet` as `data/mab_conflicts.parquet`. The reference run uses the `qwen2.5-3b-4k` Ollama tag. Use `--serve-model qwen2.5:3b` for the stock tag if the local serving context accommodates the prompts.
@@ -75,14 +87,25 @@ The breadth check uses the ten non-abstention questions with the smallest SHA-25
 | Multi-session | 80% | 80% | 100% | 90% |
 
 ```bash
-python experiments/run_longmemeval.py --data data/longmemeval_s_cleaned.json --question-type temporal-reasoning multi-session --per-type-limit 10 --out results/benchmark_breadth
+python experiments/run_longmemeval.py --data data/longmemeval_s_cleaned.json --question-type temporal-reasoning multi-session --per-type-limit 10 --out data/repro/benchmark_breadth
 ```
 
 ## Alternate model pilot
 
-The two-question development pilot crosses Qwen2.5 3B and Llama 3.2 3B as extractors and answer models. Each extractor receives the same five dated excerpts and each reader uses the same prompt and output cap. All four combinations scored 0/2 under strict exact match. Qwen paired with itself scored 1/2 after also equating digit `4` with the reference `four`. Every combination returned `Unknown` for the question about a previous goal. The sample is for debugging extraction and answer behavior. [Pilot traces, prompts and reported token usage](../results/model_pilot/development.json) · [Model digests](../results/supersession_regression/model_versions.json)
+The model pilot uses the first 12 development questions with references of one to three normalized words. Qwen2.5 3B and Llama 3.2 3B each extract facts from the same five dated excerpts. Each answer model receives both sets of facts under the same prompt and 64-token output cap. The seed is zero and extraction has a 160-token cap per excerpt.
+
+| Extractor | Answer model | Strict exact match | With digits and number words equated |
+| --- | --- | ---: | ---: |
+| Qwen2.5 3B | Qwen2.5 3B | 4/12 | 6/12 |
+| Qwen2.5 3B | Llama 3.2 3B | 4/12 | 5/12 |
+| Llama 3.2 3B | Qwen2.5 3B | 3/12 | 3/12 |
+| Llama 3.2 3B | Llama 3.2 3B | 2/12 | 2/12 |
+
+Every combination answered `Unknown` for the question about a previous goal. On `8fb83627`, both readers answered `5` from the Qwen extraction and `4` from the Llama extraction. The reference is `Five`, so the number-normalized review credits the answers based on the Qwen extraction. The short-reference development subset supports error analysis. The result records 129 fresh model calls, their input and output token counts, and 39 cache hits. [Twelve-question traces](../results/model_pilot/development_12.json) · [Initial two-question run](../results/model_pilot/development.json) · [Model digests](../results/supersession_regression/model_versions.json)
 
 ```bash
 ollama pull llama3.2:3b
-python experiments/run_model_pilot.py --out results/model_pilot/development.json
+python experiments/run_model_pilot.py --questions 12 --out data/repro/model_pilot.json
 ```
+
+Use the `qwen2.5-3b-4k` tag set up above. For a fresh token measurement, pass `--cache data/repro/model_pilot_cache.jsonl` with a new path.

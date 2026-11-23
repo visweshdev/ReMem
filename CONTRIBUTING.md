@@ -32,8 +32,8 @@ record the model and budget settings, and report gains and regressions with repr
 
 - `remem/`: the library (`api.py` is the main entry point; `cli.py` is the `remem` command)
 - `tests/`: unit and integration tests
-- `experiments/`: public benchmark runners for LongMemEval and LoCoMo
+- `experiments/`: public benchmark runners for LongMemEval, LoCoMo, and MemoryAgentBench
 - `results/`: published benchmark artifacts, including per-question results where available
 - `dev/`: the development simulator (synthetic worlds, simulated reader). Useful for checking a mechanism; its numbers
   are never reported as evidence. Tests: `python -m pytest dev/tests -q`
-- `docs/`: design notes, related work, the LoCoMo report, and figure and video generators
+- `docs/`: design notes, related work, evaluation reports, reproduction instructions, and figure and video generators

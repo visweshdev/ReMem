@@ -1,0 +1,851 @@
+{
+  "data_sha256": "c94d09abc2e1992db703457257984e4a3311ed24695836714576184e38ead5b6",
+  "tags": {
+    "qwen2.5:3b": "qwen2.5-3b-4k",
+    "llama3.2:3b": "llama3.2:3b"
+  },
+  "temperature": 0,
+  "seed": 0,
+  "n_questions": 12,
+  "selection": "first development references of one to three normalized words",
+  "max_tokens": {
+    "extraction": 160,
+    "answer": 64
+  },
+  "prompts": {
+    "extraction": "Extract durable facts worth remembering from the conversation below.\n\nRules:\n- One self-contained third-person sentence per fact, with names resolved (no \"he\", \"it\", \"we\").\n- Skip greetings, chit-chat, questions and anything not worth remembering later.\n- entity: the main thing the fact is about, lowercase (e.g. \"billing\", \"alice\"), or null.\n- attribute: a short snake_case key for WHAT about the entity it states (e.g. \"api_version\", \"city\",\n  \"owner\"), or null. Facts that state the same attribute of the same entity must use the same key.\n- role: \"state\" if it states a current property that a later fact could replace; \"event\" for things that\n  happened; \"preference\" for likes/dislikes; \"note\" for anything else.\n\nReturn JSON only: {\"facts\": [{\"text\": \"...\", \"entity\": \"...\", \"attribute\": \"...\", \"role\": \"state\"}]}\n\nConversation:\n",
+    "answer": "Answer the question using the dated facts below. If a current fact changes, choose the latest value.\nReturn just the shortest answer. Use Unknown if needed.\n\n{facts}\n\nQuestion: {question}\nAnswer:"
+  },
+  "judge": "exact match ignoring case and articles, with a sensitivity check normalizing zero through ten",
+  "counts": {
+    "qwen2.5:3b -> qwen2.5:3b": 4,
+    "llama3.2:3b -> qwen2.5:3b": 3,
+    "qwen2.5:3b -> llama3.2:3b": 4,
+    "llama3.2:3b -> llama3.2:3b": 2
+  },
+  "number_normalized_counts": {
+    "qwen2.5:3b -> qwen2.5:3b": 6,
+    "llama3.2:3b -> qwen2.5:3b": 3,
+    "qwen2.5:3b -> llama3.2:3b": 5,
+    "llama3.2:3b -> llama3.2:3b": 2
+  },
+  "usage": {
+    "qwen2.5:3b": {
+      "cache_hits": 25,
+      "model_calls": 59,
+      "prompt_tokens": 16598,
+      "completion_tokens": 2944
+    },
+    "llama3.2:3b": {
+      "cache_hits": 14,
+      "model_calls": 70,
+      "prompt_tokens": 18916,
+      "completion_tokens": 3900
+    }
+  },
+  "rows": [
+    {
+      "id": "9bbe84a2",
+      "question": "What was my previous goal for my Apex Legends level before I updated my goal?",
+      "reference": "level 100",
+      "sources": [
+        [
+          "2023-06-16",
+          "I'm still thinking about getting the Cloud II, but I also want to make sure I'm focusing on my gameplay skills. Speaking of which, do you have any tips for improving my aim in Apex Legends?\n"
+        ],
+        [
+          "2023-09-30",
+          "I'm actually more interested in playing Apex Legends with my friends this weekend. Do you think it's a good idea to focus on ranking up to level 150, or should we just play for fun and not worry too much about leveling up?\n"
+        ],
+        [
+          "2023-09-30",
+          "I think we'll just play for fun and not worry too much about leveling up. But, I'm still aiming to hit level 150 eventually, it's just not the main focus this weekend. Do you have any tips on how to improve my overall gameplay and communication with my team?\n"
+        ],
+        [
+          "2023-09-30",
+          "I'll make sure to communicate with my team more effectively and focus on improving my overall gameplay. Thanks for the tips! Do you think I should also focus on completing my daily and weekly challenges to earn more experience points and level up faster?\n"
+        ],
+        [
+          "2023-09-30",
+          "I think I'll focus on completing my daily and weekly challenges to earn more experience points and level up faster. It'll be a great way to stay motivated and track my progress. Speaking of which, my current goal is to reach level 150, and I'm determined to get there eventually. Thanks for the tips and advice!"
+        ]
+      ],
+      "extractions": {
+        "qwen2.5:3b": [
+          "- [2023-06-16] The user is considering purchasing the Cloud II, but also wants to improve their gameplay skills.",
+          "- [2023-06-16] The user is seeking tips on how to improve their aim in Apex Legends.",
+          "- [2023-09-30] The user is interested in playing Apex Legends with friends this weekend.",
+          "- [2023-09-30] The user aims to hit level 150 eventually, but it is not the main focus this weekend.",
+          "- [2023-09-30] The user is not worried about leveling up but still has a goal of reaching level 150.",
+          "- [2023-09-30] The user plans to improve communication with their team and focus on gameplay.",
+          "- [2023-09-30] The user considers completing daily and weekly challenges to earn more experience points and level up faster.",
+          "- [2023-09-30] alice's current goal is to reach level 150"
+        ],
+        "llama3.2:3b": [
+          "- [2023-09-30] ResidentScape is a popular Apex Legends streamer with over 1.5 million followers.",
+          "- [2023-09-30] Alice is a gamer who plays for fun and aims to hit level 150 eventually.",
+          "- [2023-09-30] Alice's main focus this weekend is improving her gameplay and communication with her team.",
+          "- [2023-09-30] Alice recommends focusing on improving overall gameplay.",
+          "- [2023-09-30] Alice is focusing on completing daily and weekly challenges to earn more experience points."
+        ]
+      },
+      "answers": {
+        "qwen2.5:3b -> qwen2.5:3b": {
+          "answer": "Unknown",
+          "correct": false,
+          "number_normalized_correct": false
+        },
+        "llama3.2:3b -> qwen2.5:3b": {
+          "answer": "Unknown",
+          "correct": false,
+          "number_normalized_correct": false
+        },
+        "qwen2.5:3b -> llama3.2:3b": {
+          "answer": "Unknown",
+          "correct": false,
+          "number_normalized_correct": false
+        },
+        "llama3.2:3b -> llama3.2:3b": {
+          "answer": "Unknown",
+          "correct": false,
+          "number_normalized_correct": false
+        }
+      }
+    },
+    {
+      "id": "6aeb4375",
+      "question": "How many Korean restaurants have I tried in my city?",
+      "reference": "four",
+      "sources": [
+        [
+          "2023-08-11",
+          "I'm planning a dinner party and need some help with the menu. Can you suggest some popular Korean BBQ dishes that are easy to make in large quantities?\n"
+        ],
+        [
+          "2023-08-11",
+          "I'm thinking of serving a variety of dishes from different cuisines, so I'll take a few of these Korean BBQ options and pair them with some Indian and Middle Eastern dishes. Do you have any suggestions for Indian dishes that are easy to make in large quantities?\n"
+        ],
+        [
+          "2023-08-11",
+          "I've been experimenting with different types of noodles lately, and I was wondering if you could recommend some popular Korean noodle dishes that I could try making at home?\n"
+        ],
+        [
+          "2023-08-11",
+          "By the way, speaking of noodles, have you tried any good Korean restaurants in your city lately? I've tried three different ones recently, and each has its own unique flavor and style.\n"
+        ],
+        [
+          "2023-09-30",
+          "I think I'll go with kimchi and bokkeumbap. By the way, have you tried any good Korean restaurants in my city lately? I've tried four different ones so far, and I'm always looking for new recommendations."
+        ]
+      ],
+      "extractions": {
+        "qwen2.5:3b": [
+          "- [2023-08-11] popular Korean BBQ dishes include bulgogi, galbi, and samgyeopsal, which are easy to make in large quantities",
+          "- [2023-08-11] The user is planning to serve a variety of dishes from different cuisines, including Korean BBQ and Indian and Middle Eastern dishes.",
+          "- [2023-08-11] The user is experimenting with different types of noodles and is interested in Korean noodle dishes.",
+          "- [2023-08-11] The user has tried three different Korean restaurants recently.",
+          "- [2023-09-30] alice has tried four different Korean restaurants in her city."
+        ],
+        "llama3.2:3b": [
+          "- [2023-08-11] Korean BBQ is a popular choice for dinner parties.",
+          "- [2023-08-11] Indian dishes such as chana masala and saag paneer are popular choices for large gatherings.",
+          "- [2023-08-11] Korean noodle dishes are popular worldwide.",
+          "- [2023-08-11] Alice has tried three different Korean restaurants in her city recently."
+        ]
+      },
+      "answers": {
+        "qwen2.5:3b -> qwen2.5:3b": {
+          "answer": "4",
+          "correct": false,
+          "number_normalized_correct": true
+        },
+        "llama3.2:3b -> qwen2.5:3b": {
+          "answer": "3",
+          "correct": false,
+          "number_normalized_correct": false
+        },
+        "qwen2.5:3b -> llama3.2:3b": {
+          "answer": "Unknown",
+          "correct": false,
+          "number_normalized_correct": false
+        },
+        "llama3.2:3b -> llama3.2:3b": {
+          "answer": "Three.",
+          "correct": false,
+          "number_normalized_correct": false
+        }
+      }
+    },
+    {
+      "id": "618f13b2",
+      "question": "How many times have I worn my new black Converse Chuck Taylor All Star sneakers?",
+      "reference": "six",
+      "sources": [
+        [
+          "2023-05-30",
+          "I need help finding a good cobbler to fix my brown leather boots. Do you have any recommendations? Also, I was thinking of getting a shoe cleaning kit to make cleaning my shoes easier, do you have any suggestions? By the way, I just wore my new black Converse to run some errands yesterday, so that's six times now that I've worn them.\n"
+        ],
+        [
+          "2023-05-30",
+          "I'll check out those cobbler options and shoe cleaning kits. By the way, do you think I should get a waterproofing spray for my new Converse to protect them from mud and rain?\n"
+        ],
+        [
+          "2023-05-30",
+          "That's a great idea! I think I'll get a leather shoe cleaning kit to keep my brown leather boots looking their best. By the way, I was thinking of getting a new pair of Vans Old Skool sneakers. Do you think they're comfortable and worth the investment?\n"
+        ],
+        [
+          "2023-05-30",
+          "I think I'll sort them by type and color to make it easier to find what I need. Speaking of shoes, I've been loving my new black Converse Chuck Taylor All Star sneakers, I've worn them four times already, including to my friend's birthday party last Saturday. Do you have any tips on how to clean them?\n"
+        ],
+        [
+          "2023-05-30",
+          "I'm glad I could help with the cleaning tips. I think I'll also sort my shoes by type and color, it'll make it easier to find what I need. And, I'm happy to report that I've worn my new black Converse Chuck Taylor All Star sneakers four times already, including to my friend's birthday party last Saturday. They're so comfortable and I love how they go with my jeans and dresses."
+        ]
+      ],
+      "extractions": {
+        "qwen2.5:3b": [
+          "- [2023-05-30] The user needs recommendations for a cobbler to fix brown leather boots.",
+          "- [2023-05-30] The user is considering getting a shoe cleaning kit to clean their shoes.",
+          "- [2023-05-30] The user considers getting a waterproofing spray for their new Converse shoes.",
+          "- [2023-05-30] The user is considering getting a new pair of Vans Old Skool sneakers.",
+          "- [2023-05-30] The user has been wearing their new black Converse Chuck Taylor All Star sneakers four times, including to a friend's birthday party."
+        ],
+        "llama3.2:3b": [
+          "- [2023-05-30] Alice recommends visiting Joe's Shoe Repair for excellent cobbler services.",
+          "- [2023-05-30] Alice suggests using a shoe cleaning kit from Shoe Shine Pro for easy shoe maintenance.",
+          "- [2023-05-30] Alice recommends checking out cobbler options and shoe cleaning kits.",
+          "- [2023-05-30] Alice thinks waterproofing spray is a good idea for protecting Converse from mud and rain.",
+          "- [2023-05-30] Alice thinks Vans Old Skool sneakers are comfortable.",
+          "- [2023-05-30] Alice thinks Vans Old Skool sneakers are worth the investment.",
+          "- [2023-05-30] Converse Chuck Taylor All Star sneakers",
+          "- [2023-05-30] Alice has worn her new black Converse Chuck Taylor All Star sneakers four times already.",
+          "- [2023-05-30] Alice likes her new black Converse Chuck Taylor All Star sneakers."
+        ]
+      },
+      "answers": {
+        "qwen2.5:3b -> qwen2.5:3b": {
+          "answer": "4",
+          "correct": false,
+          "number_normalized_correct": false
+        },
+        "llama3.2:3b -> qwen2.5:3b": {
+          "answer": "4",
+          "correct": false,
+          "number_normalized_correct": false
+        },
+        "qwen2.5:3b -> llama3.2:3b": {
+          "answer": "Four.",
+          "correct": false,
+          "number_normalized_correct": false
+        },
+        "llama3.2:3b -> llama3.2:3b": {
+          "answer": "Four.",
+          "correct": false,
+          "number_normalized_correct": false
+        }
+      }
+    },
+    {
+      "id": "50635ada",
+      "question": "What was my previous frequent flyer status on United Airlines before I got the current status?",
+      "reference": "Premier Silver",
+      "sources": [
+        [
+          "2022-09-16",
+          "I'm thinking of using my United miles to book a flight to LA, but I'm not sure how many miles I need. Can you tell me what my current frequent flyer status is on United Airlines?\n"
+        ],
+        [
+          "2022-09-16",
+          "I actually just hit 20,000 miles on United Airlines, which means I'm finally eligible for Premier Silver status. Can you tell me how many miles I need to book a one-way economy ticket to LA from DC?\n"
+        ],
+        [
+          "2022-09-16",
+          "I'd like to know more about transferring miles from other loyalty programs to United. Can you tell me which programs allow transfers to United MileagePlus and what the transfer ratios are?\n"
+        ],
+        [
+          "2023-05-30",
+          "I'm planning a trip to San Francisco in a few weeks and I'm considering flying with United Airlines. Can you help me find the best deals on round-trip tickets?\n"
+        ],
+        [
+          "2023-05-30",
+          "I'm flying from DC, and I'm flexible with my travel dates. I'm looking for Economy tickets and my budget is around $400. Oh, and I do have a United Airlines MileagePlus account - I just reached Premier Gold status."
+        ]
+      ],
+      "extractions": {
+        "qwen2.5:3b": [
+          "- [2022-09-16] The user is unsure about the number of United miles needed for a flight to LA.",
+          "- [2022-09-16] The user is seeking information about their current frequent flyer status on United Airlines.",
+          "- [2022-09-16] To book a one-way economy ticket to LA from DC, you need to have 20,000 miles on United Airlines.",
+          "- [2022-09-16] transferring miles from other loyalty programs to United MileagePlus is possible, but the transfer ratios vary among programs.",
+          "- [2023-05-30] The user is planning a trip to San Francisco and is considering flying with United Airlines."
+        ],
+        "llama3.2:3b": [
+          "- [2022-09-16] United Airlines does not provide real-time frequent flyer status information.",
+          "- [2022-09-16] United Airlines offers a one-way economy ticket from DC to LA for 25,000 miles.",
+          "- [2023-05-30] United Airlines offers a variety of flight routes and schedules.",
+          "- [2023-05-30] San Francisco International Airport is the primary airport serving the city.",
+          "- [2023-05-30] Alice is flying from DC to an unknown destination.",
+          "- [2023-05-30] Alice is looking for Economy tickets."
+        ]
+      },
+      "answers": {
+        "qwen2.5:3b -> qwen2.5:3b": {
+          "answer": "Unknown",
+          "correct": false,
+          "number_normalized_correct": false
+        },
+        "llama3.2:3b -> qwen2.5:3b": {
+          "answer": "Unknown",
+          "correct": false,
+          "number_normalized_correct": false
+        },
+        "qwen2.5:3b -> llama3.2:3b": {
+          "answer": "Unknown",
+          "correct": false,
+          "number_normalized_correct": false
+        },
+        "llama3.2:3b -> llama3.2:3b": {
+          "answer": "Unknown",
+          "correct": false,
+          "number_normalized_correct": false
+        }
+      }
+    },
+    {
+      "id": "e493bb7c",
+      "question": "Where is the painting 'Ethereal Dreams' by Emma Taylor currently hanging?",
+      "reference": "in my bedroom",
+      "sources": [
+        [
+          "2023-07-19",
+          "How does the pacing of the story contribute to the magical realism in Beauty and the Beast?\n"
+        ],
+        [
+          "2023-10-30",
+          "I'm looking for some inspiration for my next art project. Can you suggest some contemporary artists or styles that might spark some creativity? By the way, I just rearranged my bedroom and I'm really loving how the \"Moonlit Ocean\" print looks on my wall, and I just moved the \"Ethereal Dreams\" painting to my bedroom, it adds a nice touch to the space.\n"
+        ],
+        [
+          "2023-10-30",
+          "I'm actually planning to work on a piece that incorporates a figure in a dreamlike environment. I've been inspired by the \"Moonlit Ocean\" print in my bedroom, and I think I can use some of the techniques you mentioned to create a sense of atmosphere and mood. By the way, speaking of my bedroom, I recently moved the \"Ethereal Dreams\" painting by Emma Taylor above my bed, and it adds a nice touch to the space.\n"
+        ],
+        [
+          "2023-10-30",
+          "I'm excited to share more about my piece. I want to create a dreamlike scene with a figure floating in a misty, ethereal environment. I'm thinking of using soft, pastel colors to evoke a sense of calmness and serenity. I'd like to experiment with layering and blending techniques to achieve a sense of depth and atmosphere. Do you have any tips on how to create a sense of mistiness or fog in my artwork?\n"
+        ],
+        [
+          "2023-11-14",
+          "We're creating an inspiring blurb about Mirage. It should follow the example of Apple's blurb: \"Apple revolutionized personal technology with the Macintosh in 1984. It has repeatedly transformed the way humans interact with computers with the iPhone, iPod, MacBook, iMac and other products. Today it is the largest publicly traded company and one of the world's most recognizable brands. Its forays into the worlds of cloud storage, wearables, music streaming and electric vehicles have proven the company continues to innovate.\"\n\nHere is a hodgepodge of information about Mirage: Anyone can create with Mirage. Mirage is a platform democratizing content creation and allowing creatives to harness the power of AI while retaining complete creative control. The 3D canvas makes it easy to visualize 3D concepts and create stunning 2D renders. Mirage is committed to helping creatives realize their most ambitious ideas at the intersection of human creativity and machine learning. Mirage democratizes content creation by empowering everyone to unleash their creativity with the power of AI. Our platform provides complete creative control and an intuitive 3D canvas to easily visualize 3D concepts and create stunning 2D renders. At Mirage, we're committed to helping creatives realize their most ambitious ideas by harnessing the intersection of human creativity and machine learning. With our platform, anyone can create without the need for complex software, unlocking the full potential of their i"
+        ]
+      ],
+      "extractions": {
+        "qwen2.5:3b": [
+          "- [2023-07-19] The pacing of the story in Beauty and the Beast contributes to the magical realism by creating a sense of wonder and disbelief.",
+          "- [2023-10-30] The user is planning to work on a piece that incorporates a figure in a dreamlike environment.",
+          "- [2023-10-30] The user recently moved the 'Ethereal Dreams' painting by Emma Taylor above their bed.",
+          "- [2023-10-30] The artist wants to create a dreamlike scene with a figure floating in a misty, ethereal environment.",
+          "- [2023-10-30] The artist plans to use soft, pastel colors to evoke a sense of calmness and serenity.",
+          "- [2023-11-14] Mirage democratizes content creation by empowering everyone to unleash their creativity with the power of AI.",
+          "- [2023-11-14] Mirage provides an intuitive 3D canvas to easily visualize 3D concepts and create stunning 2D renders."
+        ],
+        "llama3.2:3b": [
+          "- [2023-10-30] Emma Taylor is an artist."
+        ]
+      },
+      "answers": {
+        "qwen2.5:3b -> qwen2.5:3b": {
+          "answer": "Above their bed.",
+          "correct": false,
+          "number_normalized_correct": false
+        },
+        "llama3.2:3b -> qwen2.5:3b": {
+          "answer": "Unknown",
+          "correct": false,
+          "number_normalized_correct": false
+        },
+        "qwen2.5:3b -> llama3.2:3b": {
+          "answer": "Above the artist's bed.",
+          "correct": false,
+          "number_normalized_correct": false
+        },
+        "llama3.2:3b -> llama3.2:3b": {
+          "answer": "Unknown",
+          "correct": false,
+          "number_normalized_correct": false
+        }
+      }
+    },
+    {
+      "id": "69fee5aa",
+      "question": "How many pre-1920 American coins do I have in my collection?",
+      "reference": "38",
+      "sources": [
+        [
+          "2023-05-27",
+          "I've got another question about my coin collection. I've been meaning to get my 1913 Liberty Head nickel appraised, but I'm not sure where to start. Can you recommend any reputable coin appraisal services or experts in the field?\n"
+        ],
+        [
+          "2023-05-27",
+          "By the way, I was thinking of organizing my pre-1920 American coins by denomination and mint mark. I have a total of 37 coins in that collection, and I think it would be cool to see them all displayed together. Do you have any tips on how to properly store and display them?\n"
+        ],
+        [
+          "2023-05-27",
+          "I'm excited to start organizing and displaying my coins. Do you have any recommendations for coin display cases or albums that can hold all the coins?\n"
+        ],
+        [
+          "2023-05-29",
+          "I'm looking to learn more about error coins, specifically ones with misprinted dates. Can you tell me about some notable examples, and how I can identify them? By the way, I just added a new coin to my collection of pre-1920 American coins - a 1915-S Barber quarter.\n"
+        ],
+        [
+          "2023-05-29",
+          "I'll definitely check out those resources to find upcoming coin shows in my area. It would be great to meet other collectors and learn more about error coins. By the way, do you think I could find any good deals on vintage cameras at these shows? I've been looking to add a few more cameras to my collection."
+        ]
+      ],
+      "extractions": {
+        "qwen2.5:3b": [
+          "- [2023-05-27] The user is looking for a reputable coin appraisal service or expert for appraising a 1913 Liberty Head nickel.",
+          "- [2023-05-27] The user has a collection of 37 pre-1920 American coins.",
+          "- [2023-05-27] The user is excited about organizing and displaying their coins.",
+          "- [2023-05-29] The user is interested in error coins, particularly those with misprinted dates.",
+          "- [2023-05-29] The user added a 1915-S Barber quarter to their collection of pre-1920 American coins.",
+          "- [2023-05-29] The user plans to check out resources for upcoming coin shows to meet other collectors and learn about error coins.",
+          "- [2023-05-29] The user is also interested in finding good deals on vintage cameras at coin shows."
+        ],
+        "llama3.2:3b": [
+          "- [2023-05-27] The Professional Coin Grading Service (PCGS) is a reputable coin appraisal service.",
+          "- [2023-05-27] Alice has a collection of 37 pre-1920 American coins.",
+          "- [2023-05-27] The Coin Album is a popular choice for coin collectors.",
+          "- [2023-05-29] Alice is a collector of error coins.",
+          "- [2023-05-29] Bob is a collector of vintage cameras."
+        ]
+      },
+      "answers": {
+        "qwen2.5:3b -> qwen2.5:3b": {
+          "answer": "37",
+          "correct": false,
+          "number_normalized_correct": false
+        },
+        "llama3.2:3b -> qwen2.5:3b": {
+          "answer": "37",
+          "correct": false,
+          "number_normalized_correct": false
+        },
+        "qwen2.5:3b -> llama3.2:3b": {
+          "answer": "37",
+          "correct": false,
+          "number_normalized_correct": false
+        },
+        "llama3.2:3b -> llama3.2:3b": {
+          "answer": "37",
+          "correct": false,
+          "number_normalized_correct": false
+        }
+      }
+    },
+    {
+      "id": "06db6396",
+      "question": "How many projects have I completed since starting painting classes?",
+      "reference": "5",
+      "sources": [
+        [
+          "2023-08-16",
+          "I'm also thinking of working on some gift ideas for my sister's birthday next month. Do you have any ideas for paintings that would make good gifts?\n"
+        ],
+        [
+          "2023-08-16",
+          "I'm actually working on a painting right now that I think my sister will love - it's a sunset scene. I've completed 4 projects since starting painting classes, and I'm feeling pretty confident about my skills. Do you have any tips on how to properly varnish and protect a painting?\n"
+        ],
+        [
+          "2023-08-16",
+          "I'm glad I got some helpful tips on varnishing and signing my painting. Since I've completed 4 projects since starting painting classes, I feel more confident in my skills. Speaking of which, I've been following a few artists on Instagram who inspire me with their work. Do you have any advice on how to reach out to them or engage with their content in a meaningful way?\n"
+        ],
+        [
+          "2023-09-12",
+          "add to the second part the sentence that this fear didn't allow me finish the 3d motion design video which I was doing on course in 2020. But anyway I learned all the skills I needed in pipeline - idea, moodboard, work with references, blocking, lighinth and work with materials, compositing\n"
+        ],
+        [
+          "2023-10-09",
+          "I'm looking for some inspiration for my next painting project. I've been stuck on what to paint next and was wondering if you could suggest some ideas or themes. By the way, I just finished my 5th project since starting painting classes, and I'm feeling pretty accomplished!"
+        ]
+      ],
+      "extractions": {
+        "qwen2.5:3b": [
+          "- [2023-08-16] The user is considering painting ideas for a gift for their sister's birthday.",
+          "- [2023-08-16] The user is currently working on a sunset-themed painting for their sister.",
+          "- [2023-08-16] The user has completed 4 painting projects since starting classes.",
+          "- [2023-08-16] Since starting painting classes, the user has completed 4 projects.",
+          "- [2023-08-16] The user feels more confident in their painting skills after completing 4 projects.",
+          "- [2023-09-12] The fear prevented the person from finishing the 3D motion design video in 2020.",
+          "- [2023-10-09] The user is looking for inspiration for their next painting project.",
+          "- [2023-10-09] The user has completed 5 painting projects since starting classes."
+        ],
+        "llama3.2:3b": [
+          "- [2023-08-16] Alice is a painter.",
+          "- [2023-08-16] Alice has completed 4 painting projects since starting painting classes.",
+          "- [2023-08-16] Alice has been following a few artists on Instagram.",
+          "- [2023-09-12] Alice didn't finish the 3D motion design video she was doing on Course in 2020 due to her fear.",
+          "- [2023-10-09] Alice has completed five painting projects since starting painting classes."
+        ]
+      },
+      "answers": {
+        "qwen2.5:3b -> qwen2.5:3b": {
+          "answer": "5",
+          "correct": true,
+          "number_normalized_correct": true
+        },
+        "llama3.2:3b -> qwen2.5:3b": {
+          "answer": "5",
+          "correct": true,
+          "number_normalized_correct": true
+        },
+        "qwen2.5:3b -> llama3.2:3b": {
+          "answer": "5",
+          "correct": true,
+          "number_normalized_correct": true
+        },
+        "llama3.2:3b -> llama3.2:3b": {
+          "answer": "5",
+          "correct": true,
+          "number_normalized_correct": true
+        }
+      }
+    },
+    {
+      "id": "affe2881",
+      "question": "How many different species of birds have I seen in my local park?",
+      "reference": "32",
+      "sources": [
+        [
+          "2023-04-29",
+          "I'm planning a birding trip to a nearby sanctuary and I was wondering if you could help me with some information on the best time of year to visit and what species I might see there. By the way, I've been getting some great use out of my new spotting scope, which has been a game-changer for me - I've been using it to observe the nesting habits of a pair of American Robins in my backyard.\n"
+        ],
+        [
+          "2023-05-24",
+          "That's really helpful, thanks! By the way, speaking of bird identification, I've been keeping track of the species I've seen in my local park, and I've managed to spot 27 different species so far. It's amazing how diverse the bird life is in such a small area!\n"
+        ],
+        [
+          "2023-05-24",
+          "That's a great idea about sharing my findings with others! I've actually been using the eBird app to track my sightings and submit my data. It's been really helpful in keeping my records organized and seeing what other birders have spotted in the area.\n\nSpeaking of which, I've been wanting to explore more birding spots in my area. Do you have any recommendations for nearby nature reserves or parks that are known for their bird diversity? I'd love to venture out and see what other species I can spot!\n"
+        ],
+        [
+          "2023-05-29",
+          "I'm planning a picnic in my local park this weekend and I'm wondering if you can suggest some bird-friendly food that I can bring to attract some of the birds I've been seeing lately.\n"
+        ],
+        [
+          "2023-05-29",
+          "I'm also planning to bring my binoculars to get a closer look at the birds. Do you think I'll be able to spot any warblers or sparrows with them?"
+        ]
+      ],
+      "extractions": {
+        "qwen2.5:3b": [
+          "- [2023-04-29] The user is planning a birding trip to a nearby sanctuary.",
+          "- [2023-04-29] The user has been using a new spotting scope to observe American Robins in their backyard.",
+          "- [2023-05-24] The user has identified 27 different bird species in their local park.",
+          "- [2023-05-24] alice has been using the eBird app to track her sightings and submit her data.",
+          "- [2023-05-24] alice has been wanting to explore more birding spots in her area.",
+          "- [2023-05-29] The user is planning a picnic in a local park and wants to attract birds with bird-friendly food.",
+          "- [2023-05-29] The user plans to bring binoculars to spot birds."
+        ],
+        "llama3.2:3b": [
+          "- [2023-04-29] The best time to visit the sanctuary is during the spring and fall migrations.",
+          "- [2023-04-29] The sanctuary is home to over 100 species of birds.",
+          "- [2023-05-24] Alice has spotted 27 different bird species in her local park.",
+          "- [2023-05-24] Alice has been using the eBird app to track her bird sightings and submit her data.",
+          "- [2023-05-24] Alice is looking for nearby nature reserves or parks with high bird diversity.",
+          "- [2023-05-29] The park's website has a section on wildlife-friendly foods that can be brought to the park.",
+          "- [2023-05-29] Alice is an avid birdwatcher."
+        ]
+      },
+      "answers": {
+        "qwen2.5:3b -> qwen2.5:3b": {
+          "answer": "27",
+          "correct": false,
+          "number_normalized_correct": false
+        },
+        "llama3.2:3b -> qwen2.5:3b": {
+          "answer": "27",
+          "correct": false,
+          "number_normalized_correct": false
+        },
+        "qwen2.5:3b -> llama3.2:3b": {
+          "answer": "27",
+          "correct": false,
+          "number_normalized_correct": false
+        },
+        "llama3.2:3b -> llama3.2:3b": {
+          "answer": "27",
+          "correct": false,
+          "number_normalized_correct": false
+        }
+      }
+    },
+    {
+      "id": "ce6d2d27",
+      "question": "What day of the week do I take a cocktail-making class?",
+      "reference": "Friday",
+      "sources": [
+        [
+          "2023-06-16",
+          "I love these ideas! I think I'll go with the grilled pineapple and prosciutto skewers and the spicy shrimp ceviche. Do you have any recommendations for a main course that would pair well with the spicy mango margaritas?\n"
+        ],
+        [
+          "2023-06-18",
+          "I think I'll call ahead to check the wait times at Smokey's. By the way, it's been three weeks since I last went to a barbecue party at Alex's house.\n"
+        ],
+        [
+          "2023-06-30",
+          "I'm looking for some inspiration for a new cocktail recipe. Do you have any ideas for a refreshing summer drink that incorporates tequila? By the way, I have a cocktail-making class on Fridays, so maybe something I can experiment with then.\n"
+        ],
+        [
+          "2023-06-30",
+          "I'm really excited to try out this recipe. Speaking of cocktails, I have a cocktail-making class on Friday, and I'm thinking of experimenting with some new recipes. Do you have any other ideas for tequila-based cocktails that I could try out?\n"
+        ],
+        [
+          "2023-06-30",
+          "That sounds like a lot of fun! Thanks for the suggestions. I think I'll try out the Paloma and the Tequila Sour during my class on Friday. I've been wanting to experiment with grapefruit juice in cocktails, and the Paloma sounds like a great opportunity to do so. And the Tequila Sour sounds like a unique twist on the classic margarita."
+        ]
+      ],
+      "extractions": {
+        "qwen2.5:3b": [
+          "- [2023-06-16] the user recommends grilled pineapple and prosciutto skewers and spicy shrimp ceviche as appetizers for spicy mango margaritas",
+          "- [2023-06-18] The last barbecue party at Alex's house was three weeks ago.",
+          "- [2023-06-30] The user is looking for inspiration for a new cocktail recipe that incorporates tequila for a refreshing summer drink.",
+          "- [2023-06-30] The user has a cocktail-making class on Fridays.",
+          "- [2023-06-30] The user is excited to try a recipe and is planning to experiment with new tequila-based cocktails for a cocktail-making class on Friday.",
+          "- [2023-06-30] the user plans to try the Paloma and Tequila Sour during their class on Friday"
+        ],
+        "llama3.2:3b": [
+          "- [2023-06-16] Alice recommends grilled chicken with chipotle sauce as a main course that pairs well with spicy mango margaritas.",
+          "- [2023-06-18] Smokey's has an api_version of 2.0.",
+          "- [2023-06-18] Alex's house is located in Austin.",
+          "- [2023-06-30] Alice is a mixologist.",
+          "- [2023-06-30] Alice is taking a cocktail-making class on Friday.",
+          "- [2023-06-30] Alice is experimenting with grapefruit juice in cocktails."
+        ]
+      },
+      "answers": {
+        "qwen2.5:3b -> qwen2.5:3b": {
+          "answer": "Friday",
+          "correct": true,
+          "number_normalized_correct": true
+        },
+        "llama3.2:3b -> qwen2.5:3b": {
+          "answer": "Friday",
+          "correct": true,
+          "number_normalized_correct": true
+        },
+        "qwen2.5:3b -> llama3.2:3b": {
+          "answer": "Friday.",
+          "correct": true,
+          "number_normalized_correct": true
+        },
+        "llama3.2:3b -> llama3.2:3b": {
+          "answer": "Friday.",
+          "correct": true,
+          "number_normalized_correct": true
+        }
+      }
+    },
+    {
+      "id": "b01defab",
+      "question": "Did I finish reading 'The Nightingale' by Kristin Hannah?",
+      "reference": "Yes",
+      "sources": [
+        [
+          "2023-01-21",
+          "I'm glad I picked up \"The Song of Achilles\" based on the staff recommendation; now I'm even more excited to dive into these new titles. By the way, I've been meaning to get back to \"The Nightingale\" by Kristin Hannah, which I put down temporarily because it was getting too emotional - do you think I'll be able to finish it in time for our next book club discussion if I dedicate my daily commute to it?\n"
+        ],
+        [
+          "2023-01-21",
+          "I'll definitely ask those questions and see what recommendations they have. Maybe they can suggest some books that will help me get back into \"The Nightingale\" too.\n"
+        ],
+        [
+          "2023-03-30",
+          "I'm looking for some book recommendations. I've been into historical fiction lately, and I just finished reading \"The Seven Husbands of Evelyn Hugo\". I also recently finished \"The Nightingale\" by Kristin Hannah, which was amazing, by the way. Do you have any suggestions for something similar?\n"
+        ],
+        [
+          "2023-03-30",
+          "I'll definitely check out those online communities and book clubs. I'm excited to connect with more readers who share my interests. By the way, I was thinking about \"The Nightingale\" by Kristin Hannah, which I finished reading recently. It was such a powerful and emotional read.\n"
+        ],
+        [
+          "2023-03-30",
+          "I loved \"The Nightingale\"! Yes, the ending was emotional, but it was also a perfect conclusion to the story. I think what resonated with me the most was the sisterly bond between Vianne and Isabelle. The way they supported each other, despite their differences, was so powerful. And the way the novel highlighted the daily struggles and sacrifices of ordinary people during wartime was eye-opening.\n\nI also appreciated how the novel didn't shy away from the harsh realities of war, but still managed to convey a sense of hope and resilience. It's a truly unforgettable read."
+        ]
+      ],
+      "extractions": {
+        "qwen2.5:3b": [
+          "- [2023-01-21] The user is excited about reading 'The Song of Achilles' based on a staff recommendation.",
+          "- [2023-01-21] The user plans to finish 'The Nightingale' by Kristin Hannah for their next book club discussion.",
+          "- [2023-01-21] The user plans to ask questions and seek recommendations about books.",
+          "- [2023-03-30] The user has been into historical fiction and has recently finished reading 'The Seven Husbands of Evelyn Hugo' and 'The Nightingale' by Kristin Hannah.",
+          "- [2023-03-30] The user plans to check out online communities and book clubs.",
+          "- [2023-03-30] The user recently finished reading 'The Nightingale' by Kristin Hannah.",
+          "- [2023-03-30] the novel 'The Nightingale' emphasized the support between sisters Vianne and Isabelle.",
+          "- [2023-03-30] the novel 'The Nightingale' highlighted the daily struggles and sacrifices of ordinary people during wartime."
+        ],
+        "llama3.2:3b": [
+          "- [2023-01-21] Kristin Hannah is the author of The Nightingale.",
+          "- [2023-01-21] The Nightingale is a novel.",
+          "- [2023-01-21] Alice will ask questions and see recommendations",
+          "- [2023-03-30] Kristin Hannah is an American author.",
+          "- [2023-03-30] Kristin Hannah finished reading The Nightingale",
+          "- [2023-03-30] The novel highlighted the daily struggles and sacrifices of ordinary people during wartime."
+        ]
+      },
+      "answers": {
+        "qwen2.5:3b -> qwen2.5:3b": {
+          "answer": "Yes",
+          "correct": true,
+          "number_normalized_correct": true
+        },
+        "llama3.2:3b -> qwen2.5:3b": {
+          "answer": "Yes",
+          "correct": true,
+          "number_normalized_correct": true
+        },
+        "qwen2.5:3b -> llama3.2:3b": {
+          "answer": "Yes.",
+          "correct": true,
+          "number_normalized_correct": true
+        },
+        "llama3.2:3b -> llama3.2:3b": {
+          "answer": "Unknown",
+          "correct": false,
+          "number_normalized_correct": false
+        }
+      }
+    },
+    {
+      "id": "e61a7584",
+      "question": "How long have I had my cat, Luna?",
+      "reference": "9 months",
+      "sources": [
+        [
+          "2023-08-11",
+          "I'm trying to keep my cat, Luna, healthy and happy. Can you give me some general tips on how to maintain her weight?\n"
+        ],
+        [
+          "2023-08-11",
+          "I've had Luna for about 6 months now, and I've been meaning to get her microchipped for a while. I've heard horror stories about pets getting lost, and I don't want to take any chances. I've already scheduled an appointment for next Friday to get it done.\n"
+        ],
+        [
+          "2023-11-30",
+          "I'm thinking of getting a pet camera that can dispense treats, so I can reward Luna when she's being good. Do you think that would help with training her to stay off the furniture?\n"
+        ],
+        [
+          "2023-11-30",
+          "I've had my cat, Luna, for about 9 months now, and I've been trying to keep her active and engaged. I've set up her cat tree, and she loves climbing up and down it. I've also been rotating her toys every week to keep things fresh for her. Do you think the interactive toys you recommended would be a good addition to her playtime routine?\n"
+        ],
+        [
+          "2023-11-30",
+          "I'll check out those brands and products, thanks! I think Luna would love the Petcube Interactive Wall Toy, it sounds like so much fun!"
+        ]
+      ],
+      "extractions": {
+        "qwen2.5:3b": [
+          "- [2023-08-11] Maintaining a cat's weight is important for their overall health and happiness.",
+          "- [2023-08-11] Luna, the pet, has been owned for about 6 months.",
+          "- [2023-08-11] Luna, the pet, has already scheduled an appointment for microchipping next Friday.",
+          "- [2023-11-30] The pet camera can be used to dispense treats to reward Luna for good behavior.",
+          "- [2023-11-30] Luna, the cat, has been with the owner for about 9 months.",
+          "- [2023-11-30] The owner rotates Luna's toys every week to keep them fresh.",
+          "- [2023-11-30] The user plans to check out brands and products.",
+          "- [2023-11-30] The user believes Luna would love the Petcube Interactive Wall Toy."
+        ],
+        "llama3.2:3b": [
+          "- [2023-08-11] Maintaining a healthy weight is crucial for your cat's overall well-being.",
+          "- [2023-08-11] Alice has scheduled an appointment for Luna's microchipping next Friday.",
+          "- [2023-11-30] Pet cameras with treat dispensing capabilities can be an effective tool for training pets.",
+          "- [2023-11-30] Alice recommends interactive toys for Luna",
+          "- [2023-11-30] Luna will receive the Petcube Interactive Wall Toy"
+        ]
+      },
+      "answers": {
+        "qwen2.5:3b -> qwen2.5:3b": {
+          "answer": "9 months",
+          "correct": true,
+          "number_normalized_correct": true
+        },
+        "llama3.2:3b -> qwen2.5:3b": {
+          "answer": "Unknown",
+          "correct": false,
+          "number_normalized_correct": false
+        },
+        "qwen2.5:3b -> llama3.2:3b": {
+          "answer": "9 months.",
+          "correct": true,
+          "number_normalized_correct": true
+        },
+        "llama3.2:3b -> llama3.2:3b": {
+          "answer": "Unknown",
+          "correct": false,
+          "number_normalized_correct": false
+        }
+      }
+    },
+    {
+      "id": "8fb83627",
+      "question": "How many issues of National Geographic have I finished reading?",
+      "reference": "Five",
+      "sources": [
+        [
+          "2023-04-20",
+          "I'm trying to get more organized with my reading list. Can you help me create a list of all the magazines and newspapers I've been reading lately?\n"
+        ],
+        [
+          "2023-04-20",
+          "I usually read news, science, and entertainment magazines. For newspapers, I've been reading The New York Times and The Daily News regularly. I've been enjoying The New Yorker for their fiction and National Geographic for their in-depth articles on science and nature - I just finished my third issue, and I'm currently on my fourth.\n"
+        ],
+        [
+          "2023-04-20",
+          "I also regularly read The Atlantic and Medium online.\n"
+        ],
+        [
+          "2023-04-20",
+          "Can you help me fill in the National Geographic section of the spreadsheet? I remember finishing three issues and I'm currently on my fourth.\n"
+        ],
+        [
+          "2023-07-15",
+          "That's really helpful, thanks for the suggestions! I've actually been reading a lot about the Amazon rainforest lately, especially in National Geographic - I've finished five issues so far and they've all had great articles on the region. Do you have any recommendations for documentaries or films about the Amazon that I can watch to supplement my reading?"
+        ]
+      ],
+      "extractions": {
+        "qwen2.5:3b": [
+          "- [2023-04-20] The user is trying to get more organized with their reading list.",
+          "- [2023-04-20] The user reads The Atlantic and Medium online regularly.",
+          "- [2023-04-20] The user is currently on their fourth National Geographic issue.",
+          "- [2023-07-15] The user has been reading a lot about the Amazon rainforest in National Geographic.",
+          "- [2023-07-15] The user has finished five issues of National Geographic articles on the Amazon."
+        ],
+        "llama3.2:3b": [
+          "- [2023-04-20] Alice is a personal assistant.",
+          "- [2023-04-20] Alice enjoys reading news, science, and entertainment magazines.",
+          "- [2023-04-20] Alice regularly reads The Atlantic and Medium online.",
+          "- [2023-04-20] Alice is currently on her fourth issue of National Geographic.",
+          "- [2023-07-15] The Amazon rainforest is a vast region of tropical rainforest covering over 5.5 million square kilometers."
+        ]
+      },
+      "answers": {
+        "qwen2.5:3b -> qwen2.5:3b": {
+          "answer": "5",
+          "correct": false,
+          "number_normalized_correct": true
+        },
+        "llama3.2:3b -> qwen2.5:3b": {
+          "answer": "4",
+          "correct": false,
+          "number_normalized_correct": false
+        },
+        "qwen2.5:3b -> llama3.2:3b": {
+          "answer": "5",
+          "correct": false,
+          "number_normalized_correct": true
+        },
+        "llama3.2:3b -> llama3.2:3b": {
+          "answer": "4",
+          "correct": false,
+          "number_normalized_correct": false
+        }
+      }
+    }
+  ]
+}
