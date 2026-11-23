@@ -41,7 +41,7 @@ Install the embedding dependencies, download `locomo10.json` to `data/`, and mak
 ```bash
 python -m pip install -e ".[embeddings]"
 ollama pull qwen2.5:3b
-python experiments/run_feedback_ablation.py --data data/locomo10.json
+python experiments/run_feedback_ablation.py --data data/locomo10.json --out data/repro/feedback_ablation
 ```
 
 Use `--url` for an Ollama instance on a different local port. `--embedder` accepts a Sentence Transformers snapshot path. The reference run used MiniLM revision `1110a243fdf4706b3f48f1d95db1a4f5529b4d41`. The runner records the dataset SHA-256, Ollama version, exact model digest, generation options, and effective system configurations. Cached model calls are reusable under the same inputs and options.

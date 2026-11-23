@@ -40,8 +40,13 @@ tokens. Nothing is ever deleted, and every decision can be inspected.
 
 ## Quickstart
 
+Download the v0.3.0 wheel and install it with `python -m pip install remem-0.3.0-py3-none-any.whl`, then run `remem demo`.
+[Release downloads and checksums](https://github.com/visweshdev/ReMem/releases/tag/v0.3.0)
+
 ▶ **New to this? Watch the install video (under 1½ minutes):** [`docs/video/install_and_run.mp4`](docs/video/install_and_run.mp4)
 (clone, install, run the demo, try the `remem` shell, use it in your own code, run the tests; every output in it is from a real run).
+
+Run the examples from a source checkout.
 
 ```bash
 git clone https://github.com/visweshdev/ReMem.git
@@ -208,9 +213,9 @@ Claude Desktop, `claude_desktop_config.json`:
 {"mcpServers": {"remem": {"command": "remem-mcp", "env": {"REMEM_PATH": "C:/Users/you/.remem/work", "REMEM_EMBEDDER": "sentence-transformers"}}}}
 ```
 
-If `remember` corrects a served `"state"` memory (same entity and attribute, different text), that recall counts as a failure blamed on the
-corrected memory. If a later `recall` for the same `task` arrives with no correction in between, the earlier recall counts as a weak success,
-with no memory explicitly cited. Inferred outcomes are noisier than explicit ones and have not been benchmarked separately.
+If `remember` declares a replacement with `is_update=true` for a served state memory, the server blames the corrected memory on
+unreported recalls. A later `recall` for the same `task` marks earlier unreported recalls as weak successes without explicit citations.
+Inferred outcomes are noisier than explicit ones and have not been benchmarked separately.
 
 Environment: `REMEM_PATH` (store directory, default `~/.remem/default`), `REMEM_EMBEDDER` (`hash` default, or `sentence-transformers`),
 `REMEM_ST_MODEL`, `REMEM_AUTO_FEEDBACK` (`0` turns inference off).
@@ -224,24 +229,21 @@ python -m remem.viz.dashboard ~/.remem/myproject -o memory.html          # self-
 python -m remem.viz.ledger_cli ~/.remem/myproject/ledger.json --list --state LOW_VALUE
 ```
 
-Token budgets use a word+punctuation proxy by default; `remem.offline.set_tokenizer("tiktoken")` (or `REMEM_TOKENIZER=tiktoken`) switches
-to real BPE counts.
+Token budgets use a word-and-punctuation proxy by default. Install `.[tokenizer]`, then use `remem.offline.set_tokenizer("tiktoken")`
+or set `REMEM_TOKENIZER=tiktoken` before storing memories to count tokens with `cl100k_base`.
 </details>
 
 <details>
 <summary><b>Reproduce the experiments</b> (all free and local)</summary>
 
 ```bash
-pip install -e ".[dev,embeddings,llm]"                      # tests, lint, MiniLM embeddings, local-model client
-python -m pytest tests -q                                   # unit tests, under a minute
-# LongMemEval data: longmemeval_s_cleaned.json from https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned, in data/
-python experiments/run_longmemeval.py --data data/longmemeval_s_cleaned.json        # retrieval, no LLM needed
-# real LLM, free: install Ollama (https://ollama.com), then: ollama pull qwen2.5:3b && ollama pull qwen3-coder:30b
-python experiments/run_real_knowledge_update.py --data data/longmemeval_s_cleaned.json   # ~2 h on CPU, resumable
-# LoCoMo data: locomo10.json from https://github.com/snap-research/locomo/tree/main/data, in data/
-python experiments/run_feedback_ablation.py --data data/locomo10.json             # feedback ablation, resumable
-python docs/make_figures.py                                 # regenerate the README images
+python -m pip install -e ".[dev]"
+python -m pytest tests -q
+python examples/workflow_assistant.py --split test
 ```
+
+Use the evaluation reports for model setup, dataset versions, and exact run commands.
+[Reproduction guide](docs/REPRODUCING.md) · [LongMemEval and MemoryAgentBench](docs/SUPERSESSION_EVALUATION.md) · [LoCoMo](docs/FEEDBACK_ABLATION.md)
 </details>
 
 ## What's new compared with prior work
@@ -462,10 +464,12 @@ Both ReMem settings tied on answer accuracy after excluding that item. [Protocol
 
 ## 12. Failure analysis
 
-Per question (`results/real_knowledge_update/per_question.jsonl`, extracted facts similarity-only vs ReMem): of the questions similarity-only
-answered correctly and ReMem did not (18), 10 lost the newest evidence from the context, which similarity-only had served; the
-newest-per-key rule, which ranks by similarity exactly like similarity-only, loses it at almost the same rate, so supersession (not ranking) removed it.
-Each row in the file has both contexts, both answers and the judge's reply, so every case can be read.
+In the original 0.2 run, ReMem lost the newest evidence on 10 of the 18 questions that extracted-fact similarity answered correctly and
+ReMem missed. Newest-per-key removed that evidence at a similar rate while retaining the same similarity ranking. The archived traces
+include each system's context, answer, and judge verdict. [Original per-question traces](results/real_knowledge_update/v0.2_all72/per_question.jsonl)
+
+The rerun traces show when source checking preserved a correct measurement and when the answer model still chose the wrong time frame.
+[Supersession cases](docs/SUPERSESSION_EVALUATION.md#representative-cases)
 
 The LoCoMo analysis traces how prior credit changed evidence rank and how distractors, candidate misses, and a suspect reference
 affected answers. [Representative cases](docs/FEEDBACK_ABLATION.md#representative-cases)
@@ -483,12 +487,13 @@ remem/                 the library: api.py (ReMem), cli.py (`remem` command), mc
 remem/backends/        numpy vector, FAISS, Chroma            remem/embedders.py   sentence-transformers
 remem/extract.py       fact extraction                         remem/integrations/  LangChain retriever
 remem/viz/            dashboard (HTML), ledger_cli
-experiments/           LongMemEval retrieval and knowledge updates, LoCoMo feedback ablation
-examples/              basic_api.py, quickstart.py, langchain_retriever.py, claude_desktop_mcp.md
+experiments/           LongMemEval, LoCoMo, MemoryAgentBench, and the alternate-model pilot
+examples/              Python and LangChain examples, support-routing workflow, and MCP setup
 tests/                 unit tests
-results/               real_knowledge_update/, longmemeval/, longmemeval_clocknow/, feedback_ablation/
-docs/                  DESIGN.md, RELATED_WORK.md, make_figures.py (README images), make_install_video.py, video/
-.github/               CI (lint, tests on Linux and Windows), issue and PR templates
+results/               published configurations, scores, and per-question traces
+docs/                  design, research reports, reproduction guide, and demo media
+dev/                   development simulator, tests, and archived results
+.github/               CI, optional integration checks, release workflow, and templates
 CHANGELOG.md, CONTRIBUTING.md, SECURITY.md, CITATION.cff
 ```
 

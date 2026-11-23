@@ -4,7 +4,7 @@ The assistant reads retrieved ticket-routing memories, proposes a queue, and rep
 
 ```bash
 python examples/workflow_assistant.py --split dev
-python examples/workflow_assistant.py --split test --out results/workflow_assistant/held_out.json
+python examples/workflow_assistant.py --split test --out data/repro/workflow_assistant.json
 ```
 
 ## Held-out results

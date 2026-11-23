@@ -47,8 +47,9 @@ From §6.1–6.3 and §7.1 of [arXiv 2503.08026](https://arxiv.org/html/2503.080
 * **Citation-based feedback on retrieval is not new.** RMM's abstract describes online-RL refinement of retrieval from the LLM's cited
   evidence, which is the same family of idea as ReMem's citation signal. ReMem should not be presented as introducing it. See the section above for how they differ.
 * **Supersession without deletion is not new either.** Zep (edge invalidation) and Mem0's graph variant (marking relationships invalid)
-  both keep superseded facts for temporal reasoning. ReMem's version is rule-based with learned attribute cardinality and outcome-triggered
-  invalidation; those specifics were not found in the papers, but that is a weak statement given the depth of this check.
+  both keep superseded facts for temporal reasoning. In the current ReMem API, the caller can declare a replacement or configure an update
+  checker. The lower-level detector includes schema learning and outcome-triggered invalidation. [Replacement policy](SUPERSESSION_EVALUATION.md#replacement-policy)
 * ReMem combines outcome-derived utility, an explicit retention state machine, supersession, and token-budgeted selection in one
-  backend-agnostic layer. Plain search scored higher on LongMemEval knowledge-update QA and led evidence retrieval in the LoCoMo
-  ablation. The LoCoMo comparison measures ReMem's feedback settings against a cosine baseline. [Benchmark results](../README.md#10-results)
+  backend-agnostic layer. Plain search led the original LongMemEval run and LoCoMo evidence retrieval. In the LongMemEval rerun,
+  source-checked ReMem scored 69.4% and plain cosine scored 62.5%, with a paired confidence interval spanning zero.
+  [LongMemEval rerun](SUPERSESSION_EVALUATION.md#longmemeval-results) · [LoCoMo ablation](FEEDBACK_ABLATION.md)

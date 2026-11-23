@@ -5,9 +5,9 @@ Everything in this folder is a **synthetic simulator** used while building ReMem
 mechanism does what it was written to do. Its numbers depend on assumptions chosen by the author, so they are
 **not evidence about real-world use** and are not reported in the main README.
 
-Public benchmark results and reproduction commands are in the [main README](../README.md#10-results). The
-[LoCoMo feedback report](../docs/FEEDBACK_ABLATION.md) compares three retrieval settings with a local answer model
-on held-out questions. The experiments and artifacts for LoCoMo and LongMemEval live at the repository root.
+The public benchmark results are summarized in the [main README](../README.md#10-results). The
+[reproduction guide](../docs/REPRODUCING.md) links the LongMemEval and LoCoMo protocols and the separate
+[support-routing example](../docs/WORKFLOW_ASSISTANT.md).
 
 | Path | What it is |
 |---|---|
@@ -26,6 +26,6 @@ python dev/experiments/run_benchmark.py --quick     # smoke run (~20 s)
 python dev/experiments/run_benchmark.py             # full run, 15 seeds (~10 min, resumable)
 ```
 
-What the simulator showed, for the record (ReMem 0.3 configs, 15 seeds, simulated reader): more than half of ReMem's
-gain over plain similarity came from the simple "keep the newest fact per key" rule, which needs no learning. On real
-data that rule *hurt* (see the main README), which is why the library no longer replaces facts on key match alone.
+In the 15-seed simulator run, the newest-per-key rule accounted for more than half of ReMem's gain over plain similarity.
+The rule retired useful evidence on LongMemEval. It helped on the MemoryAgentBench slice where the data guarantees that later
+records replace earlier ones. [Supersession and transfer results](../docs/SUPERSESSION_EVALUATION.md)

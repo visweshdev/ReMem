@@ -23,7 +23,8 @@ query ─►│ Backend (flat vector, or any Backend) → over-fetched pool     
         ContradictionDetector (at ingest; and when a failed action used a stale memory) ◄── schema learner
 ```
 
-The seam is the candidate list: a backend returns candidates; ReMem re-ranks and filters them. It never writes into a backend.
+The Python API writes facts through the backend and records their lifecycle in the ledger. During retrieval the backend returns
+candidates, and `ReMemSystem` filters and reranks them.
 
 ## 2. Modules
 

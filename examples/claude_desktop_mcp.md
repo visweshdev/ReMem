@@ -1,6 +1,7 @@
 # ReMem as an MCP memory server
 
-Install it once (free, everything runs locally):
+Run this from a clone of ReMem. The embedding model runs locally after its initial download. The MCP integration is tested with
+both major versions of the Python SDK used by this release. [Integration checks](../.github/workflows/tests.yml)
 
 ```bash
 pip install -e ".[mcp,embeddings]"
@@ -30,7 +31,8 @@ Add this to `claude_desktop_config.json` (Settings → Developer → Edit Config
 }
 ```
 
-If `remem-mcp` is not on the PATH Claude Desktop sees, use `"command": "python", "args": ["-m", "remem.mcp_server"]`.
+If Claude Desktop cannot locate `remem-mcp`, set `command` to the absolute path of the Python interpreter where you installed ReMem
+and set `args` to `["-m", "remem.mcp_server"]`. For a Windows virtual environment this interpreter is `.venv/Scripts/python.exe`.
 
 ## What the model gets
 
@@ -44,9 +46,9 @@ If `remem-mcp` is not on the PATH Claude Desktop sees, use `"command": "python",
 For example, if the server moves from `east-1` to `west-2`, call `remember` with `entity="server"`, `attribute="region"`,
 and `is_update=true`. Leave `is_update` at its default `false` when the new fact adds information.
 
-If the model forgets to call `feedback`, the server infers an outcome (`REMEM_AUTO_FEEDBACK=1`, the default).
-A correction through `remember` with `is_update=true` counts as a failure for the memory it replaced. A later `recall` for
-the same task with no correction in between counts as a weak success. Set `REMEM_AUTO_FEEDBACK=0` to turn that off.
+With `REMEM_AUTO_FEEDBACK=1` (the default), the server infers outcomes for unreported recalls. A correction through `remember`
+with `is_update=true` blames a served state memory with the same entity and attribute when its text differs. A later `recall` for
+the same task marks the earlier unreported recall as a weak success. Set `REMEM_AUTO_FEEDBACK=0` to disable inference.
 
 The benchmark tested explicit feedback from reference-graded answers. The MCP server's inferred feedback remains unevaluated.
 [Feedback experiment](../docs/FEEDBACK_ABLATION.md)
